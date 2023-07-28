@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/home/header/header.component';
 import { BuscadorComponent } from './components/home/buscador/buscador.component';
 import { OfertaComponent } from './utils/oferta/oferta.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { OfertaComponent } from './utils/oferta/oferta.component';
     HomeComponent,
     HeaderComponent,
     BuscadorComponent,
-    OfertaComponent
+    OfertaComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
