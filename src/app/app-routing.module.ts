@@ -15,6 +15,8 @@ const routes: Routes = [
   {path:"home", component: HomeComponent},
   {path:"about", component: AboutComponent},
   {path:"oferta/:id", component: OfertaDetalleComponent},
+  {path:"favorito/:id", component: OfertaDetalleComponent},
+  {path:"reserva/:id", component: OfertaDetalleComponent},
   {path:"checkout", component:CheckoutComponent},
   {path:"", redirectTo:"/home", pathMatch:"full"},
   {path:"**", component: PageNotFoundComponent},

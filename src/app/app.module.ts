@@ -16,6 +16,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { AboutComponent } from './components/about/about.component';
 import { OfertaDetalleComponent } from './components/oferta-detalle/oferta-detalle.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { FavoritosComponent } from './components/favoritos/favoritos.component';
+import { ReservasComponent } from './components/reservas/reservas.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     PageNotFoundComponent,
     AboutComponent,
     OfertaDetalleComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    FavoritosComponent,
+    ReservasComponent
   ],
   imports: [
     BrowserModule,
