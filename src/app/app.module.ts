@@ -15,6 +15,7 @@ import { OfertaComponent } from './utils/oferta/oferta.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AboutComponent } from './components/about/about.component';
 import { OfertaDetalleComponent } from './components/oferta-detalle/oferta-detalle.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { OfertaDetalleComponent } from './components/oferta-detalle/oferta-detal
     OfertaComponent,
     PageNotFoundComponent,
     AboutComponent,
-    OfertaDetalleComponent
+    OfertaDetalleComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
