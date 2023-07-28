@@ -14,6 +14,7 @@ import { BuscadorComponent } from './components/home/buscador/buscador.component
 import { OfertaComponent } from './utils/oferta/oferta.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AboutComponent } from './components/about/about.component';
+import { OfertaDetalleComponent } from './components/oferta-detalle/oferta-detalle.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AboutComponent } from './components/about/about.component';
     BuscadorComponent,
     OfertaComponent,
     PageNotFoundComponent,
-    AboutComponent
+    AboutComponent,
+    OfertaDetalleComponent
   ],
   imports: [
     BrowserModule,
