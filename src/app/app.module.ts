@@ -8,13 +8,21 @@ import { FormsModule } from '@angular/forms';
 import { NavbarHComponent } from './utils/navbar-h/navbar-h.component';
 import { NavbarVComponent } from './utils/navbar-v/navbar-v.component';
 import { FooterComponent } from './utils/footer/footer.component';
+import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './components/home/header/header.component';
+import { BuscadorComponent } from './components/home/buscador/buscador.component';
+import { OfertaComponent } from './utils/oferta/oferta.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarHComponent,
     NavbarVComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent,
+    HeaderComponent,
+    BuscadorComponent,
+    OfertaComponent
   ],
   imports: [
     BrowserModule,
