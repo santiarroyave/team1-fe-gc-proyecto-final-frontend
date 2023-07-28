@@ -25,6 +25,7 @@ import { CrearHotelComponent } from './components/admin/hoteles/crear-hotel/crea
 import { CrearActividadComponent } from './components/admin/actividades/crear-actividad/crear-actividad.component';
 import { EditarActividadComponent } from './components/admin/actividades/editar-actividad/editar-actividad.component';
 import { EditarHotelComponent } from './components/admin/hoteles/editar-hotel/editar-hotel.component';
+import { ActividadesListaComponent } from './utils/actividades-lista/actividades-lista.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { EditarHotelComponent } from './components/admin/hoteles/editar-hotel/ed
     CrearHotelComponent,
     CrearActividadComponent,
     EditarActividadComponent,
-    EditarHotelComponent
+    EditarHotelComponent,
+    ActividadesListaComponent
   ],
   imports: [
     BrowserModule,
