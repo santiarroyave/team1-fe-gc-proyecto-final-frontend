@@ -18,6 +18,13 @@ import { OfertaDetalleComponent } from './components/oferta-detalle/oferta-detal
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FavoritosComponent } from './components/favoritos/favoritos.component';
 import { ReservasComponent } from './components/reservas/reservas.component';
+import { CrearOfertaComponent } from './components/admin/crear-oferta/crear-oferta.component';
+import { HotelesComponent } from './components/admin/hoteles/hoteles.component';
+import { ActividadesComponent } from './components/admin/actividades/actividades.component';
+import { CrearHotelComponent } from './components/admin/hoteles/crear-hotel/crear-hotel.component';
+import { CrearActividadComponent } from './components/admin/actividades/crear-actividad/crear-actividad.component';
+import { EditarActividadComponent } from './components/admin/actividades/editar-actividad/editar-actividad.component';
+import { EditarHotelComponent } from './components/admin/hoteles/editar-hotel/editar-hotel.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +41,14 @@ import { ReservasComponent } from './components/reservas/reservas.component';
     OfertaDetalleComponent,
     CheckoutComponent,
     FavoritosComponent,
-    ReservasComponent
+    ReservasComponent,
+    CrearOfertaComponent,
+    HotelesComponent,
+    ActividadesComponent,
+    CrearHotelComponent,
+    CrearActividadComponent,
+    EditarActividadComponent,
+    EditarHotelComponent
   ],
   imports: [
     BrowserModule,
