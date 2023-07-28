@@ -5,10 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { NavbarHComponent } from './utils/navbar-h/navbar-h.component';
+import { NavbarVComponent } from './utils/navbar-v/navbar-v.component';
+import { FooterComponent } from './utils/footer/footer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarHComponent,
+    NavbarVComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
