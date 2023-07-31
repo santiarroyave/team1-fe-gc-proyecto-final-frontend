@@ -26,6 +26,7 @@ import { CrearActividadComponent } from './components/admin/actividades/crear-ac
 import { EditarActividadComponent } from './components/admin/actividades/editar-actividad/editar-actividad.component';
 import { EditarHotelComponent } from './components/admin/hoteles/editar-hotel/editar-hotel.component';
 import { ActividadesListaComponent } from './utils/actividades-lista/actividades-lista.component';
+import { PasoUnoComponent } from './components/pasarela-pago/paso-uno/paso-uno.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ActividadesListaComponent } from './utils/actividades-lista/actividades
     CrearActividadComponent,
     EditarActividadComponent,
     EditarHotelComponent,
-    ActividadesListaComponent
+    ActividadesListaComponent,
+    PasoUnoComponent
   ],
   imports: [
     BrowserModule,
