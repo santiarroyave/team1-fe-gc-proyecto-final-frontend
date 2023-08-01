@@ -1,9 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule,LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
-import {MatNativeDateModule} from '@angular/material/core';
+import {MatNativeDateModule,MAT_DATE_FORMATS} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +34,18 @@ import { EditarHotelComponent } from './components/admin/hoteles/editar-hotel/ed
 import { ActividadesListaComponent } from './utils/actividades-lista/actividades-lista.component';
 import { PasoUnoComponent } from './components/pasarela-pago/paso-uno/paso-uno.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -69,9 +83,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatDatepickerModule,
     MatCardModule,
     MatNativeDateModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatButtonModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

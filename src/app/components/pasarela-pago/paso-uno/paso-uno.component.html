@@ -1,9 +1,10 @@
+<app-navbar-h></app-navbar-h>
 <p>paso-uno works!</p>
-<div class="row">
-  <div class="col center-elem">
-    <label class="form-label">Selecciona el número de personas
-    </label>
-    <select class="form-select">
+<div class="container-fluid size-elem">
+  <div class="row">
+    <div class="col center-elem">
+      <label class="form-label">Selecciona el número de personas </label>
+      <select class="form-select">
         <option value="1">1</option>
         <option value="2" selected>2</option>
         <option value="3">3</option>
@@ -25,28 +26,48 @@
         <option value="19">19</option>
         <option value="20">20</option>
       </select>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col center-elem">
-    <label class="form-label">¿Cuándo quieres viajar?
-    </label>
-    <mat-form-field class="example-form-field">
-        <mat-label>First campaign</mat-label>
+  <div class="row">
+    <div class="col center-elem">
+      <label class="form-label">¿Cuándo quieres viajar? </label>
+      <mat-form-field class="example-form-field">
         <mat-date-range-input
           [formGroup]="campaignOne"
           [rangePicker]="campaignOnePicker"
-          [comparisonStart]="campaignTwo.value.start"
-          [comparisonEnd]="campaignTwo.value.end">
-          <input matStartDate placeholder="Start date" formControlName="start">
-          <input matEndDate placeholder="End date" formControlName="end">
+          [max]="max"
+          [min]="min"
+        >
+          <input
+            matStartDate
+            placeholder="Start date"
+            formControlName="start"
+          />
+          <input matEndDate placeholder="End date" formControlName="end" />
         </mat-date-range-input>
-        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker" opened="true"></mat-datepicker-toggle>
-        <mat-date-range-picker #campaignOnePicker touchUi="true" ></mat-date-range-picker>
+        <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="campaignOnePicker"
+        ></mat-datepicker-toggle>
+        <mat-date-range-picker
+          #campaignOnePicker
+          touchUi="true"
+        >
+        <mat-date-range-picker-actions>
+            <button mat-button matDateRangePickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+          </mat-date-range-picker-actions></mat-date-range-picker>
       </mat-form-field>
-      <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
-      <p>{{campaignOne.value.start}}</p>
-      <p>{{campaignOne.value.end}}</p>
+      <mat-date-range-picker #campaignOnePicker matCalendarStartOfWeek="1" ></mat-date-range-picker>
+      <p>{{ campaignOne.value.start }}</p>
+      <p>{{ campaignOne.value.end }}</p>
+    </div>
+  </div>
+  <div class="row rw-1">
+    <div class="col btn-settings">
+        <button type="button" class="btn btn-primary">volver</button>
+        <button type="button" class="btn btn-danger">{{precio}}€/persona</button>
+    </div>
   </div>
 </div>
