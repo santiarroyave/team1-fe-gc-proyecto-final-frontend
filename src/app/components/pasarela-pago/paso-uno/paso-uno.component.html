@@ -1,1 +1,52 @@
 <p>paso-uno works!</p>
+<div class="row">
+  <div class="col center-elem">
+    <label class="form-label">Selecciona el número de personas
+    </label>
+    <select class="form-select">
+        <option value="1">1</option>
+        <option value="2" selected>2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+      </select>
+  </div>
+</div>
+<div class="row">
+  <div class="col center-elem">
+    <label class="form-label">¿Cuándo quieres viajar?
+    </label>
+    <mat-form-field class="example-form-field">
+        <mat-label>First campaign</mat-label>
+        <mat-date-range-input
+          [formGroup]="campaignOne"
+          [rangePicker]="campaignOnePicker"
+          [comparisonStart]="campaignTwo.value.start"
+          [comparisonEnd]="campaignTwo.value.end">
+          <input matStartDate placeholder="Start date" formControlName="start">
+          <input matEndDate placeholder="End date" formControlName="end">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker" opened="true"></mat-datepicker-toggle>
+        <mat-date-range-picker #campaignOnePicker touchUi="true" ></mat-date-range-picker>
+      </mat-form-field>
+      <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+      <p>{{campaignOne.value.start}}</p>
+      <p>{{campaignOne.value.end}}</p>
+  </div>
+</div>

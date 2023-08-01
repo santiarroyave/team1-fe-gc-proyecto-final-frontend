@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from '@angular/material/card';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarHComponent } from './utils/navbar-h/navbar-h.component';
 import { NavbarVComponent } from './utils/navbar-v/navbar-v.component';
 import { FooterComponent } from './utils/footer/footer.component';
@@ -27,6 +31,7 @@ import { EditarActividadComponent } from './components/admin/actividades/editar-
 import { EditarHotelComponent } from './components/admin/hoteles/editar-hotel/editar-hotel.component';
 import { ActividadesListaComponent } from './utils/actividades-lista/actividades-lista.component';
 import { PasoUnoComponent } from './components/pasarela-pago/paso-uno/paso-uno.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -58,7 +63,13 @@ import { PasoUnoComponent } from './components/pasarela-pago/paso-uno/paso-uno.c
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatNativeDateModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
