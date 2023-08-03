@@ -46,8 +46,8 @@
         </div>
     </div>
   <div class="row m-3">
-    <div class="col center-elem">
-      <label class="form-label">Selecciona el número de personas </label>
+    <div class="col cl-1">
+      <label class="form-label lbl-1">Selecciona el número de personas</label>
       <select class="form-select" [(ngModel)]="num_personas">
         <option value="1">1</option>
         <option value="2" selected>2</option>
@@ -73,8 +73,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col center-elem">
-      <label class="form-label">¿Cuándo quieres viajar? </label>
+    <div class="col cl-1">
+      <label class="form-label lbl-1">¿Cuándo quieres viajar?</label>
       <mat-form-field class="example-form-field">
         <mat-date-range-input
           [formGroup]="campaignOne"
@@ -124,25 +124,19 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
-      <table class="table table-striped table-hover">
-        <thead>
-          <tr class="table-active">
-            <th>Personas</th>
-            <th>Precio/persona</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <tr>
-            <td scope="row">{{num_personas}}</td>
-            <td colspan="2" class="table-active">{{precio_actual}}€</td>
-          </tr>
-          <tr>
-            <th>Total</th>
-            <td class="table-active">{{precio_actual*num_personas}}€</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col cl-2">
+      <div class="tb-1">
+        <label class="lbl-2">Personas</label>
+        <label class="lbl-2">Precio/persona</label>
+      </div>
+      <div class="tb-1">
+        <label class="lbl-2">{{num_personas}}</label>
+        <label class="lbl-2">{{precio_actual}}€</label>
+      </div>
+      <div class="tb-1">
+        <label class="lbl-2">Total</label>
+        <label class="lbl-2">{{precio_actual*num_personas}}€</label>
+      </div>
     </div>
   </div>
   <div class="row rw-1 m-3">

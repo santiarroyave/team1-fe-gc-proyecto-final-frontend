@@ -19,7 +19,15 @@
     flex-direction: column;
 }
 
-.center-elem{
+.cl-1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 500px;
+}
+
+.cl-2{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,3 +39,26 @@
     display: flex;
     justify-content: space-between;
 }
+
+.lbl-1{
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 100%;
+    text-align: center;
+}
+ .lbl-2{
+    height: 50px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+ .tb-1{
+    display: flex;
+    width: 500px;
+    margin: 0;
+    padding: 0;
+ }
