@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-oferta-detalle',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./oferta-detalle.component.css']
 })
 export class OfertaDetalleComponent {
+  @ViewChild('liveToast', { static: true })
+  toastLiveExampleRef!: ElementRef<HTMLElement>;
 
+  toastTrigger(): void {
+    const toastLiveExample = document.getElementById('liveToast');
+
+    const toastBootstrap = new bootstrap.Toast(toastLiveExample);
+    toastBootstrap.show();
+  }
 }

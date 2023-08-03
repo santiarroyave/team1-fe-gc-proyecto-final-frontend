@@ -1,0 +1,23 @@
+img{
+    object-fit: cover;
+}
+
+.text-style{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lbl-1{
+    border: 1px ridge;
+    border-radius: 5px;
+    width: 100px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-s{
+    height: 38px;
+}
