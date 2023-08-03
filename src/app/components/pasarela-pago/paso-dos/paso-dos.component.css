@@ -1,0 +1,17 @@
+.cnt-settings{
+    border: 1px ridge;
+    border-radius: 5px;
+}
+
+.card-style{
+    color: red;
+    font-size: 40px;
+}
+
+.btn-settings{
+    width: 300px;
+    height: 50px;
+    border-radius: 30px;
+    background-color: rgb(32, 173, 32);
+    border: solid rgb(32, 173, 32);
+}

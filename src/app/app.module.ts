@@ -34,6 +34,7 @@ import { EditarHotelComponent } from './components/admin/hoteles/editar-hotel/ed
 import { ActividadesListaComponent } from './utils/actividades-lista/actividades-lista.component';
 import { PasoUnoComponent } from './components/pasarela-pago/paso-uno/paso-uno.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PasoDosComponent } from './components/pasarela-pago/paso-dos/paso-dos.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -71,7 +72,8 @@ export const MY_DATE_FORMATS = {
     EditarActividadComponent,
     EditarHotelComponent,
     ActividadesListaComponent,
-    PasoUnoComponent
+    PasoUnoComponent,
+    PasoDosComponent
   ],
   imports: [
     BrowserModule,
