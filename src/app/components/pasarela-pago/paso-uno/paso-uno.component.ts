@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+
 declare var bootstrap: any;
+
 @Component({
   selector: 'app-paso-uno',
   templateUrl: './paso-uno.component.html',

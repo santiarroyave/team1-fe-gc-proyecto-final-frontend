@@ -1,24 +1,79 @@
 <!-- Esto es el menu horizontal -->
 <app-navbar-h></app-navbar-h>
-
-<div class="container">
+<!-- Escribir código aqui -->
+<div class="h-50 w-100 d-flex justify-content-center">
+    <img src="https://casadelpoeta.es/wp-content/uploads/2019/09/Casa-del-Poeta-Hoteles-con-encanto.jpg" class="img-fluid w-100 img-thumbnail" alt="...">
+    <img src="https://casadelpoeta.es/wp-content/uploads/2019/09/Aire-de-Bardena-hoteles-con-encanto.jpg" class="img-fluid w-100 img-thumbnail" alt="...">
+    <button type="button" class="btn" (click)="toastTrigger()">
+      <img width="30" height="30" src="https://img.icons8.com/flat-round/64/hearts.png" alt="hearts"/>
+    </button>
+</div>
+<div class="container-fluid w-75">
     <div class="row">
-        <!-- Aqui va el menu vertical -->
-        <app-navbar-v class="col col-12 col-lg-3"></app-navbar-v>
-        
-        <div class="col col-9 p-3">
-            <div>
-                <!-- Escribir código aqui -->
-                <h1>Detalles de la oferta</h1>
-
-
-
-
-                <!-- fin zona de codigo -->
-            </div> 
+        <div class="col mt-3 d-flex justify-content-center align-items-center flex-column">
+            <h1 class="text-style">Titulo Oferta</h1>
+            <p class="text-style">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque facere aperiam voluptatibus quam inventore odit doloribus ad, dolor delectus possimus magni accusamus, ullam vero recusandae aliquam necessitatibus dolorem nisi debitis!</p>
         </div>
     </div>
+    <div class="row">
+        <div class="col-8 mt-3">
+            <h2>Alojamiento</h2>
+            <ul>
+                <li>Detalle</li>
+                <li>Detalle</li>
+                <li>Detalle</li>
+                <li>Detalle</li>
+            </ul>
+            <h2 class="mt-4">Actividad</h2>
+            <ul>
+                <li>Detalle</li>
+                <li>Detalle</li>
+                <li>Detalle</li>
+                <li>Detalle</li>
+            </ul>
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-danger" routerLink="/paso-1">100 €/persona</button>
+            </div>
+        </div>
+        <div class="col-4 mt-3">
+            <h3>Configurar viaje</h3>
+            <div class="d-flex">
+                <label class="form-label lbl-1">Noches</label>
+                <select class="form-select f-s">
+                    <option selected>Todas las noches</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="d-flex">
+                <label class="form-label lbl-1">Régimen</label>
+                <select class="form-select f-s">
+                    <option selected>Todos los regímenes</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row m-3">
+        <div class="col">
+          <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="toast-header">
+                <img width="20" height="20" src="https://img.icons8.com/color/48/filled-like.png" alt="filled-like"/>
+                <strong class="me-auto">Oferta X</strong>
+                <small>now</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                Oferta añadida a favoritos
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
-
 <!-- Aqui va el footer -->
 <app-footer></app-footer>
