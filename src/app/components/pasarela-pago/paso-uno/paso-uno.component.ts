@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 declare var bootstrap: any;
 @Component({
@@ -13,7 +13,7 @@ export class PasoUnoComponent implements OnInit {
   num_personas: number = 2;
 
   precio_inicial: number = 100;
-  precio_actual: number = this.precio_inicial;
+  precio_persona: number = this.precio_inicial;
   today: Date = new Date();
   month: number = this.today.getMonth();
   year: number = this.today.getFullYear();
@@ -44,6 +44,6 @@ export class PasoUnoComponent implements OnInit {
 
   calcularNoches():void {
     this.noches = Number(this.campaignOne.value.end?.getDate()) - Number(this.campaignOne.value.start?.getDate());
-    this.precio_actual = this.precio_inicial*this.noches;
+    this.precio_persona = this.precio_inicial*this.noches;
   }
 }

@@ -1,6 +1,6 @@
 <app-navbar-h></app-navbar-h>
-<div class="container-fluid size-elem">
-    <div class="row">
+<div class="container-fluid w-50 d-flex align-items-center justify-content-center flex-column">
+  <div class="row">
         <div class="col">
             <div id="carouselExampleIndicators" class="carousel slide">
                 <div class="carousel-indicators">
@@ -44,8 +44,8 @@
                 </button>
               </div>
         </div>
-    </div>
-  <div class="row m-3">
+  </div>
+  <div class="row mt-4 w-100">
     <div class="col cl-1">
       <label class="form-label lbl-1">Selecciona el número de personas</label>
       <select class="form-select" [(ngModel)]="num_personas">
@@ -72,10 +72,10 @@
       </select>
     </div>
   </div>
-  <div class="row">
+  <div class="row mt-4 w-100">
     <div class="col cl-1">
       <label class="form-label lbl-1">¿Cuándo quieres viajar?</label>
-      <mat-form-field class="example-form-field">
+      <mat-form-field class="date-picker-form">
         <mat-date-range-input
           [formGroup]="campaignOne"
           [rangePicker]="campaignOnePicker"
@@ -106,6 +106,28 @@
       <mat-date-range-picker #campaignOnePicker matCalendarStartOfWeek="1" ></mat-date-range-picker>
     </div>
   </div>
+  <div class="row mt-4">
+    <div class="col cl-2">
+      <div class="tb-1">
+        <label class="lbl-2">Personas</label>
+        <label class="lbl-2">Precio/persona</label>
+      </div>
+      <div class="tb-1">
+        <label class="lbl-2">{{num_personas}}</label>
+        <label class="lbl-2">{{precio_persona}} €</label>
+      </div>
+      <div class="tb-1">
+        <label class="lbl-2">Total</label>
+        <label class="lbl-2">{{precio_persona*num_personas}} €</label>
+      </div>
+    </div>
+  </div>
+  <div class="row rw-1 mt-3">
+    <div class="col btn-settings">
+        <button type="button" class="btn btn-primary">volver</button>
+        <button type="button" class="btn btn-danger" routerLink="/paso-2">{{precio_persona}} €/persona</button>
+    </div>
+  </div>
   <div class="row m-3">
     <div class="col">
       <div class="toast-container position-fixed bottom-0 end-0 p-3">
@@ -121,28 +143,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col cl-2">
-      <div class="tb-1">
-        <label class="lbl-2">Personas</label>
-        <label class="lbl-2">Precio/persona</label>
-      </div>
-      <div class="tb-1">
-        <label class="lbl-2">{{num_personas}}</label>
-        <label class="lbl-2">{{precio_actual}}€</label>
-      </div>
-      <div class="tb-1">
-        <label class="lbl-2">Total</label>
-        <label class="lbl-2">{{precio_actual*num_personas}}€</label>
-      </div>
-    </div>
-  </div>
-  <div class="row rw-1 m-3">
-    <div class="col btn-settings">
-        <button type="button" class="btn btn-primary">volver</button>
-        <button type="button" class="btn btn-danger">{{precio_actual}}€/persona</button>
     </div>
   </div>
 </div>

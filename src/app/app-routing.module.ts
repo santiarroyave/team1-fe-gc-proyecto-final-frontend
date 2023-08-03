@@ -17,6 +17,7 @@ import { CrearActividadComponent } from './components/admin/actividades/crear-ac
 import { EditarActividadComponent } from './components/admin/actividades/editar-actividad/editar-actividad.component';
 import { EditarHotelComponent } from './components/admin/hoteles/editar-hotel/editar-hotel.component';
 import { PasoUnoComponent } from './components/pasarela-pago/paso-uno/paso-uno.component';
+import { PasoDosComponent } from './components/pasarela-pago/paso-dos/paso-dos.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path:"reservas/:id", component: OfertaDetalleComponent},
   {path:"checkout", component:CheckoutComponent},
   {path:"paso-1", component:PasoUnoComponent},
+  {path:"paso-2", component:PasoDosComponent},
   {path:"", redirectTo:"/home", pathMatch:"full"},
   // ADMIN
   {path:"admin/crear-oferta", component: CrearOfertaComponent},

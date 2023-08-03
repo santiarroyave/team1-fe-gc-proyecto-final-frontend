@@ -1,10 +1,5 @@
-.example-form-field {
+.date-picker-form {
     width: 300px;
-}
-
-.cc-size{
-    height: 50%;
-    align-items: center;
 }
 
 .rw-1{
@@ -24,7 +19,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 500px;
+    width: 100%;
 }
 
 .cl-2{
@@ -32,12 +27,13 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 500px;
+    width: 100%;
 }
 
 .btn-settings{
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 
 .lbl-1{
@@ -46,7 +42,8 @@
     width: 100%;
     text-align: center;
 }
- .lbl-2{
+
+.lbl-2{
     height: 50px;
     width: 100%;
     border-radius: 5px;
@@ -54,11 +51,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
- }
+}
 
- .tb-1{
+.tb-1{
     display: flex;
     width: 500px;
     margin: 0;
     padding: 0;
- }
+}
