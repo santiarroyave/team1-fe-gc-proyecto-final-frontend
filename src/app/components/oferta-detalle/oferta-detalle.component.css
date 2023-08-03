@@ -2,6 +2,27 @@ img{
     object-fit: cover;
 }
 
+*::before{
+    box-sizing: border-box;
+}
+
+li{
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    list-style: none;
+    text-align: left;
+}
+
+ul li:before {
+    content: "";
+    border: 1px solid #5191fa;
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
 .text-style{
     display: flex;
     justify-content: center;
