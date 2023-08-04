@@ -1,1 +1,21 @@
-<p>oferta works!</p>
+<div *ngFor="let oferta of listaOfertas" class="card card-style mb-3" id="{{oferta.id}}">
+    <img src="{{oferta.imagen}}" class="card-img-top img-style" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{oferta.titulo}}</h5>
+      <p class="card-text">{{oferta.descripcion}}</p>
+      <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-danger">{{oferta.precio}} €/persona</button>
+      </div>
+    </div>
+</div>
+<!-- 
+        "id": 1,
+        "titulo": "Praesent blandit.",
+        "precio": 251.92,
+        "max_personas": 16,
+        "fecha_inicio": "12/08/2022",
+        "fecha_fin": "19/11/2022",
+        "cantidad": 9,
+        "descripcion": "In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.",
+        "imagen": "74.93.178.101"    -->
