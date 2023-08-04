@@ -37,6 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PasoDosComponent } from './components/pasarela-pago/paso-dos/paso-dos.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { HotelItemComponent } from './components/admin/hoteles/hotel-item/hotel-item.component';
+import { ActividadItemComponent } from './components/admin/actividades/actividad-item/actividad-item.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -77,7 +79,9 @@ export const MY_DATE_FORMATS = {
     PasoUnoComponent,
     PasoDosComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HotelItemComponent,
+    ActividadItemComponent
   ],
   imports: [
     BrowserModule,

@@ -10,10 +10,10 @@
             <div>
                 <!-- Escribir código aqui -->
                 <h1>Hoteles</h1>
-                <button type="button" class="btn btn-primary" routerLink="/admin/crear-hotel">Crear hotel</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-primary" routerLink="/admin/editar-hotel/aqui-va-el-id">Editar hotel</button>
+                <div class="d-flex mt-3 mb-3">
+                    <button type="button" class="btn btn-primary" routerLink="/admin/crear-hotel">Crear hotel</button>
+                </div>
+                <app-hotel-item [listaHoteles]="hoteles"></app-hotel-item>
 
 
 

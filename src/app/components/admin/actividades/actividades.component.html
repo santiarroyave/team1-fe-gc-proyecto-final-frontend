@@ -10,12 +10,11 @@
             <div>
                 <!-- Escribir código aqui -->
                 <h1>Actividades</h1>
-                <button type="button" class="btn btn-primary" routerLink="/admin/crear-actividad">Crear actividad</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-primary" routerLink="/admin/editar-actividad/aqui-va-el-id">Editar actividad</button>
+                <div class="d-flex mt-3 mb-3">
+                    <button type="button" class="btn btn-primary" routerLink="/admin/crear-actividad">Crear actividad</button>
+                </div>
 
-
+                <app-actividad-item [listaActividades]="actividades"></app-actividad-item>
 
 
 

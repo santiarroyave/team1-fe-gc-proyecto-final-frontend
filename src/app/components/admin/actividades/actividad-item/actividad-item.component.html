@@ -1,0 +1,10 @@
+<div *ngFor="let actividad of listaActividades" class="card card-style mb-3" id="{{actividad.id}}">
+    <img src="{{actividad.imagen}}" class="card-img-top img-style img-size" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{actividad.nombre}}</h5>
+        <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-danger" routerLink="/actividades/editar/{{actividad.id}}">Editar</button>
+    </div>
+    </div>
+</div>
+
