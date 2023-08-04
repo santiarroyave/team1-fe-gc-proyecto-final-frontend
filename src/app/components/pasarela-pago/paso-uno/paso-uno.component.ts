@@ -25,32 +25,36 @@ export class PasoUnoComponent implements OnInit {
   ts_max: number | any;
   max: Date | any;
   min: Date = new Date(this.today);
-  noches:number = 1;
-  
-  campaignOne = new FormGroup({
-    start: new FormControl(
-      new Date(this.year, this.month, this.today.getDate())
-    ),
-    end: new FormControl(new Date(this.year, this.month, this.today.getDate())),
-  });
-
+  noches:number = 0;
+  campaignOne: FormGroup | any;
   constructor(private route: ActivatedRoute, private ofertasService: OfertasService){}
 
   ngOnInit(): void {
     this.ts_max = this.today.setMonth(this.today.getMonth() + 2);
-    this.ts_max = this.today.setDate(0);
+    //this.ts_max = this.today.setDate(0);
     this.max = new Date(this.ts_max);
+
     this.route.params.subscribe((params) => {
       const elementId: number = Number(params['id']);
       this.oferta = this.ofertasService.getOfertaById(elementId);
     });
     this.precio_inicial = this.oferta.precio;
     this.precio_persona = this.precio_inicial;
+    this.noches = this.ofertasService.noches;
+    let date1 = new Date();
+    let date2 = date1.setDate(date1.getDate() + this.noches);
+    date1 = new Date(date2);
+    
+    this.campaignOne = new FormGroup({
+      start: new FormControl(
+        new Date(this.year, this.month, this.today.getDate())
+      ),
+      end: new FormControl(new Date(this.year, this.month, date1.getDate())),
+    });
   }
 
   toastTrigger(): void {
     const toastLiveExample = document.getElementById('liveToast');
-
     const toastBootstrap = new bootstrap.Toast(toastLiveExample);
     toastBootstrap.show();
   }
@@ -58,5 +62,10 @@ export class PasoUnoComponent implements OnInit {
   calcularNoches():void {
     this.noches = Number(this.campaignOne.value.end?.getDate()) - Number(this.campaignOne.value.start?.getDate());
     this.precio_persona = this.precio_inicial*this.noches;
+  }
+
+  change(): void{
+    console.log(this.campaignOne.value.start);
+    console.log(this.campaignOne.value.end);
   }
 }

@@ -8,6 +8,8 @@ import db from '../../assets/db.json'
 })
 export class OfertasService {
 
+  noches: number = 0;
+
   // constructor(private http:HttpClient) { }
 
   getAllOfertas(): any[]{

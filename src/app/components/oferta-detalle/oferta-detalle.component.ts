@@ -13,6 +13,7 @@ declare var bootstrap: any;
 })
 export class OfertaDetalleComponent implements OnInit {
   @ViewChild('liveToast', { static: true })
+  num_noches: number = 14;
   toastLiveExampleRef!: ElementRef<HTMLElement>;
   oferta: any = {};
   alojamiento: any = {};
@@ -32,6 +33,10 @@ export class OfertaDetalleComponent implements OnInit {
       this.alojamiento = this.alojamientosService.getOfertaById(elementId);
       this.actividad = this.actividadesService.getActividadById(elementId);
     });
+  }
+
+  updateNoches(): void{
+    this.ofertasService.noches = Number(this.num_noches);
   }
 
   toastTrigger(): void {

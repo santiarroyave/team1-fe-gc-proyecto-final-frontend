@@ -48,6 +48,7 @@
             matStartDate
             placeholder="Start date"
             formControlName="start"
+            (dateChange)="change()"
           />
           <input matEndDate placeholder="End date" formControlName="end" />
         </mat-date-range-input>
@@ -59,13 +60,14 @@
         <mat-date-range-picker
           #campaignOnePicker
           touchUi="true"
+          matCalendarStartOfWeek="1"
         >
         <mat-date-range-picker-actions>
-            <button mat-button matDateRangePickerCancel>Cancel</button>
-            <button mat-raised-button color="primary" matDateRangePickerApply (click)="calcularNoches()">Apply</button>
-          </mat-date-range-picker-actions></mat-date-range-picker>
+          <button mat-button matDateRangePickerCancel>Cancel</button>
+          <button mat-raised-button color="primary" matDateRangePickerApply (click)="calcularNoches()">Apply</button>
+        </mat-date-range-picker-actions>
+        </mat-date-range-picker>
       </mat-form-field>
-      <mat-date-range-picker #campaignOnePicker matCalendarStartOfWeek="1" ></mat-date-range-picker>
     </div>
   </div>
   <div class="row mt-4">
