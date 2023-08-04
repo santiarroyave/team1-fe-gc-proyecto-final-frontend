@@ -10,11 +10,11 @@ export class AlojamientosService {
 
   // constructor(private http:HttpClient) { }
 
-  getAllOfertas(): any[]{
-    return db.ofertas;
+  getAllAlojamientos(): any[]{
+    return db.alojamientos;
   }
 
   getOfertaById(id:number): Object{
-    return db.ofertas[id-1];
+    return db.alojamientos[id-1];
   }
 }

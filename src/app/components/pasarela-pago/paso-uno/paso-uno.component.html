@@ -1,7 +1,7 @@
 <app-navbar-h></app-navbar-h>
 <div class="h-50 w-100 d-flex justify-content-center">
-  <img src="https://casadelpoeta.es/wp-content/uploads/2019/09/Casa-del-Poeta-Hoteles-con-encanto.jpg" class="img-fluid w-100 img-thumbnail" alt="...">
-  <img src="https://casadelpoeta.es/wp-content/uploads/2019/09/Aire-de-Bardena-hoteles-con-encanto.jpg" class="img-fluid w-100 img-thumbnail" alt="...">
+  <img src={{oferta.imagen}} class="img-fluid w-100 img-thumbnail" alt="...">
+  <img src={{oferta.imagen}} class="img-fluid w-100 img-thumbnail" alt="...">
   <button type="button" class="btn" (click)="toastTrigger()">
     <img width="30" height="30" src="https://img.icons8.com/flat-round/64/hearts.png" alt="hearts"/>
   </button>
@@ -86,8 +86,8 @@
   </div>
   <div class="row rw-1 mt-3">
     <div class="col btn-settings">
-        <button type="button" class="btn btn-primary">volver</button>
-        <button type="button" class="btn btn-danger" routerLink="/paso-2">{{precio_persona}} €/persona</button>
+        <button type="button" class="btn btn-primary" routerLink="/oferta/{{oferta.id}}">volver</button>
+        <button type="button" class="btn btn-danger" routerLink="/paso-2/{{oferta.id}}">{{precio_persona}} €/persona</button>
     </div>
   </div>
   <div class="row m-3">

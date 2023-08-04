@@ -31,8 +31,8 @@ const routes: Routes = [
   {path:"reservas", component: ReservasComponent},
   {path:"reservas/:id", component: OfertaDetalleComponent},
   {path:"checkout", component:CheckoutComponent},
-  {path:"paso-1", component:PasoUnoComponent},
-  {path:"paso-2", component:PasoDosComponent},
+  {path:"paso-1/:id", component:PasoUnoComponent},
+  {path:"paso-2/:id", component:PasoDosComponent},
   {path:"", redirectTo:"/home", pathMatch:"full"},
   // ADMIN
   {path:"admin/crear-oferta", component: CrearOfertaComponent},

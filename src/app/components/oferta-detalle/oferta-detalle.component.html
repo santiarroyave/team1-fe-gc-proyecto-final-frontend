@@ -7,15 +7,6 @@
     <button type="button" class="btn" (click)="toastTrigger()">
       <img width="30" height="30" src="https://img.icons8.com/flat-round/64/hearts.png" alt="hearts"/>
     </button>
-    <!-- "id": 1,
-        "titulo": "Praesent blandit.",
-        "precio": 251.92,
-        "max_personas": 16,
-        "fecha_inicio": "12/08/2022",
-        "fecha_fin": "19/11/2022",
-        "cantidad": 9,
-        "descripcion": "In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.",
-        "imagen": "74.93.178.101" -->
 </div>
 <div class="container-fluid w-75">
     <div class="row">
@@ -26,14 +17,14 @@
     </div>
     <div class="row">
         <div class="col-8 mt-3">
-            <h2>Alojamiento</h2>
+            <h2>Alojamiento: {{alojamiento.nombre}}</h2>
             <ul>
                 <li>Detalle</li>
                 <li>Detalle</li>
                 <li>Detalle</li>
                 <li>Detalle</li>
             </ul>
-            <h2 class="mt-4">Actividad</h2>
+            <h2 class="mt-4">Actividad: {{actividad.titulo}}</h2>
             <ul>
                 <li>Detalle</li>
                 <li>Detalle</li>
@@ -41,7 +32,7 @@
                 <li>Detalle</li>
             </ul>
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-danger" routerLink="/paso-1">{{oferta.precio}} €/persona</button>
+                <button type="button" class="btn btn-danger" routerLink="/paso-1/{{oferta.id}}">{{oferta.precio}} €/persona</button>
             </div>
         </div>
         <div class="col-4 mt-3">
