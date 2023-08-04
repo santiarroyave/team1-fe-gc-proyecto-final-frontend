@@ -6,7 +6,7 @@ import db from '../../assets/db.json'
 @Injectable({
   providedIn: 'root'
 })
-export class OfertasService {
+export class AlojamientosService {
 
   // constructor(private http:HttpClient) { }
 
