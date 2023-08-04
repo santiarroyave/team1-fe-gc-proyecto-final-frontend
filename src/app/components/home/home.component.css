@@ -1,7 +1,3 @@
 .ocultar{
     display: none;
 }
-
-.fondoTransparente > div{
-    background-color: red !important;
-}
