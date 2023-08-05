@@ -12,10 +12,16 @@
         
         <div class="col col-12 col-lg-9 p-3">
             <div>
-                <div class="galeriaCrearOferta">
-                    <!-- Escribir código aqui -->
+                <!-- Escribir código aqui -->
+                <div class="titulo d-flex justify-content-between mt-3">
+                    <h1 class="">Crear oferta</h1>
+                    <button class="btn btn-primary">Crear oferta</button>
+                </div>
+                <hr>
 
-                    <!-- GALERIA DE FOTOS -->
+                <!-- GALERIA DE FOTOS -->
+                <!-- ------------------------------------------------------------------------------------------------ -->
+                <div class="galeriaCrearOferta mb-3">
                     <div class="btnGaleria btnIz align-self-center">
                         <i class="bi bi-caret-left"></i>
                     </div>
@@ -30,8 +36,53 @@
                     <div class="foto foto6" style="background-image: url({{fotos[5]}});"></div>
                     <div class="foto foto7" style="background-image: url({{fotos[6]}});"></div>
                 </div>
-                <h1 class="mt-3 mb-5">Crear oferta</h1>
 
+                
+                
+                <!-- APARTADO INFORMACION DE LA OFERTA -->
+                <!-- ------------------------------------------------------------------------------------------------ -->
+                <div class="contenedorInfoOferta rounded-3 p-3">
+                    <h2>Oferta</h2>
+                    <hr>
+                    <!-- Titulo -->
+                    <label class="form-label">Titulo</label>
+                    <input class="form-control" type="text">
+
+                    <!-- Precio y Max de personas -->
+                    <div class="d-flex gap-2">
+                        <label class="form-label column-6 w-50">Precio
+                            <input class="form-control" type="text">
+                        </label>
+
+                        <label class="form-label column-6 w-50">Máximo de personas
+                            <input class="form-control" type="text">
+                        </label>
+                    </div>
+
+                    <!-- Fecha inicio y Fecha fin -->
+                    <div class="d-flex gap-2">
+                        <label class="form-label column-6 w-50">Fecha inicio
+                            <input class="form-control" type="date">
+                        </label>
+
+                        <label class="form-label column-6 w-50">Fecha fin
+                            <input class="form-control" type="date">
+                        </label>
+                    </div>
+
+                    <!-- Ofertas disponibles -->
+                    <label class="form-label">Ofertas disponibles</label>
+                    <input class="form-control" type="text">
+
+                    <!-- Descripción -->
+                    <label class="form-label">Descripción</label>
+                    <!-- <input class="form-control" type="text"> -->
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+
+
+                <!-- APARTADO ALOJAMIENTOS -->
+                <!-- ------------------------------------------------------------------------------------------------ -->
 
 
 
