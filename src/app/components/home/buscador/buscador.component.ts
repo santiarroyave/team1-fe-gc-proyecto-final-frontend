@@ -37,7 +37,6 @@ export class BuscadorComponent {
   }
 
   sendEvent(event: any):void{
-    console.log(event);
     this.nombre_oferta.emit(event);
   }
   
