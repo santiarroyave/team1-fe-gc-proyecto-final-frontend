@@ -45,6 +45,17 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; ba
     box-shadow:  0 0 0;
 }
 
+.botonNaranja{
+    background-color: var(--naranja-aventura);
+    border: transparent;
+}
+.botonNaranja:hover{
+    background-color: var(--naranja-aventura-1);
+}
+.botonNaranja:active{
+    background-color: var(--naranja-aventura-0) !important;
+}
+
 .botonAzul{
     background-color: var(--turquesa-brillante);
     border: transparent;
