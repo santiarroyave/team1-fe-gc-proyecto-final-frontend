@@ -7,4 +7,14 @@ import { Component, Input } from '@angular/core';
 })
 export class OfertaComponent {
   @Input() listaOfertas: any = [];
+  
+  favoritoActivo:boolean = false;
+  
+  saluda(){
+    if (this.favoritoActivo == false){
+      this.favoritoActivo = true;
+    }else{
+      this.favoritoActivo = false;
+    }
+  }
 }

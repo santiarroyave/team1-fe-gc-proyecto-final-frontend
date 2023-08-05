@@ -22,8 +22,11 @@ export class HomeComponent implements OnInit{
   constructor(private ofertasService: OfertasService) {}
 
   ngOnInit(): void {
+    // Obtiene todas las ofertas del servicio
+    this.ofertas = this.ofertasService.getAllOfertas();
+
+    // Detecta el tamaño de la pantalla para colapsar el menu
     this.detectScreenSize();
-      this.ofertas = this.ofertasService.getAllOfertas();
   }
 
   // Esta función detecta cuando la pantalla llega al limite de colapsamiento del menu
