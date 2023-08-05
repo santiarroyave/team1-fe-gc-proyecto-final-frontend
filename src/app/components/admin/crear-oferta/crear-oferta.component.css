@@ -100,3 +100,6 @@
 .contenedorInfoOferta label{
     margin-top: 1em;
 }
+.form-check label{
+    margin-top: 0;
+}

@@ -83,8 +83,93 @@
 
                 <!-- APARTADO ALOJAMIENTOS -->
                 <!-- ------------------------------------------------------------------------------------------------ -->
+                <div class="contenedorInfoOferta rounded-3 p-3 mt-3">
+                    <!-- Titulo y Boton agenda -->
+                    <div class="titulo d-flex justify-content-between align-items-center">
+                        <h2>Alojamiento</h2>
+                        <button class="btn btn-primary btn-lg botonAzul"><i class="bi bi-journal-bookmark-fill"></i> Agenda</button>
+                    </div>
+                    <hr>
 
+                    <!-- Nombre -->
+                    <label class="form-label">Nombre</label>
+                    <input class="form-control" type="text">
+                    
+                    <!-- País -->
+                    <label class="form-label">País</label>
+                    <input class="form-control" type="text">
 
+                    <!-- Dirección y Numero -->
+                    <div class="d-flex gap-2">
+                        <label class="form-label w-75">Dirección
+                            <input class="form-control" type="text">
+                        </label>
+
+                        <label class="form-label w-25">Nº
+                            <input class="form-control" type="text">
+                        </label>
+                    </div>
+
+                    <!-- C.P. y Provincia -->
+                    <div class="d-flex gap-2">
+                        <label class="form-label w-25">C.P.
+                            <input class="form-control" type="text">
+                        </label>
+
+                        <label class="form-label w-75">Provincia
+                            <input class="form-control" type="text">
+                        </label>
+                    </div>
+
+                    <!-- Localidad -->
+                    <label class="form-label">Localidad</label>
+                    <input class="form-control" type="text">
+
+                    <!-- Wen y Telefono -->
+                    <div class="d-flex gap-2">
+                        <label class="form-label w-75">Página web
+                            <input class="form-control" type="text">
+                        </label>
+
+                        <label class="form-label w-25">Telefono
+                            <input class="form-control" type="text">
+                        </label>
+                    </div>
+
+                    <!-- Categoría -->
+                    <label class="form-label">Categoría</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected default disabled>Elegir categoría</option>
+                        <option value="5">★★★★★</option>
+                        <option value="4">★★★★</option>
+                        <option value="3">★★★</option>
+                        <option value="2">★★</option>
+                        <option value="1">★</option>
+                        <option value="0">Apartamentos y cámpings</option>
+
+                    </select>
+                    
+                    <button class="btn btn-primary btn-lg botonAzul mt-4">Guardar alojamiento</button>
+                </div>
+
+                <!-- Servicios ALOJAMIENTOS -->
+                <!-- ----------------------------------------------- -->
+                <div class="contenedorInfoOferta rounded-3 p-3 mt-3">
+                    <!-- Titulo -->
+                    <div class="titulo d-flex justify-content-between align-items-center">
+                        <h2>¿Qué hay en este alojamiento?</h2>
+                    </div>
+                    <hr>
+
+                    <!-- Servicios -->
+                    <div class="row px-3">
+                        <div class="form-check col-6 col-md-3" *ngFor="let servicio of serviciosAlojamiento">
+                            <input class="form-check-input" type="checkbox" id="uno">
+                            <label class="form-check-label" for="uno">{{servicio}}</label>
+                        </div>
+                    </div>
+                    
+                </div>
 
                 <!-- fin zona de codigo -->
             </div> 
