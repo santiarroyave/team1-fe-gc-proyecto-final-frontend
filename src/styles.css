@@ -2,3 +2,51 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; background-color: #2222;}
+
+/* COLORE */
+:root{
+    --naranja-aventura: #FF5722;
+    --naranja-aventura-0: #AA2900;
+    --naranja-aventura-1: #D93602;
+    --naranja-aventura-2: #FF774C;
+    --naranja-aventura-3: #FF9675;
+
+    --amarillo-sol: #FFEB3B;
+    --amarillo-sol-0: #B6A403;
+    --amarillo-sol-1: #B6A403;
+    --amarillo-sol-2: #FFEF5F;
+    --amarillo-sol-3: #FFF389;
+
+    --verde-selva: #4CAF52;
+    --verde-selva-0: #15781B; 
+    --verde-selva-1: #2D9434;
+    --verde-selva-2: #77CC7D;
+    --verde-selva-3: #A9E2AD;
+
+    --turquesa-brillante: #00BAD4;
+    --turquesa-brillante-0: #006775;
+    --turquesa-brillante-1: #008395;
+    --turquesa-brillante-2: #02E0FF;
+    --turquesa-brillante-3: #17DFFB;
+}
+
+/* BOTONES */
+.botonOferta{
+    background-color: var(--naranja-aventura);
+    border: transparent;
+    transition: all .3s;
+}
+.botonOferta:hover{
+    background-color: var(--naranja-aventura-2);
+    box-shadow:  .1em .1em .4em rgba(0, 0, 0, 0.25);
+}
+
+.botonOferta:active{
+    background-color: var(--naranja-aventura-1) !important;
+    box-shadow:  0 0 0;
+}
+
+/* OTROS */
+.ruedaCarga{
+    color: var(--naranja-aventura);
+}
