@@ -11,6 +11,7 @@
 .imgOferta{
     aspect-ratio: 21/9;
     object-fit: cover;
+    position: relative;
 }
 
 /* Clases del tiempo restante */

@@ -45,3 +45,8 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; ba
     background-color: var(--naranja-aventura-1) !important;
     box-shadow:  0 0 0;
 }
+
+/* OTROS */
+.ruedaCarga{
+    color: var(--naranja-aventura);
+}
