@@ -1,15 +1,36 @@
 <!-- Esto es el menu horizontal -->
 <app-navbar-h></app-navbar-h>
 
+<!-- Galeria de imagenes de la oferta -->
+
 <div class="container">
+    
     <div class="row">
+
         <!-- Aqui va el menu vertical -->
         <app-navbar-v class="col col-12 col-lg-3"></app-navbar-v>
         
-        <div class="col col-9 p-3">
+        <div class="col col-12 col-lg-9 p-3">
             <div>
-                <!-- Escribir código aqui -->
-                <h1>Crear oferta</h1>
+                <div class="galeriaCrearOferta">
+                    <!-- Escribir código aqui -->
+
+                    <!-- GALERIA DE FOTOS -->
+                    <div class="btnGaleria btnIz align-self-center">
+                        <i class="bi bi-caret-left"></i>
+                    </div>
+                    <div class="btnGaleria btnDer align-self-center">
+                        <i class="bi bi-caret-right"></i>
+                    </div>
+                    <div class="foto foto1" style="background-image: url({{fotos[0]}});"></div>
+                    <div class="foto foto3" style="background-image: url({{fotos[1]}});"></div>
+                    <div class="foto foto2" style="background-image: url({{fotos[2]}});"></div>
+                    <div class="foto foto4" style="background-image: url({{fotos[3]}});"></div>
+                    <div class="foto foto5" style="background-image: url({{fotos[4]}});"></div>
+                    <div class="foto foto6" style="background-image: url({{fotos[5]}});"></div>
+                    <div class="foto foto7" style="background-image: url({{fotos[6]}});"></div>
+                </div>
+                <h1 class="mt-3 mb-5">Crear oferta</h1>
 
 
 
