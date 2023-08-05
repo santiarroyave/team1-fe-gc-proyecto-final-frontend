@@ -8,7 +8,7 @@
 <!-- Aqui va la foto de la pantalla de inicio -->
 <app-header></app-header>
 <!-- Aqui va el buscador -->
-<app-buscador></app-buscador>
+<app-buscador (nombre_oferta)="actualizarListaOfertas($event)"></app-buscador>
 
 <div class="container">
     <!-- Aqui va el menu vertical -->
@@ -19,7 +19,7 @@
         </ng-container>
         
         <div class="col col-9">
-            <app-oferta [listaOfertas]="ofertas"></app-oferta>
+            <app-oferta [listaOfertas]="ofertas_mostradas"></app-oferta>
         </div>
     </div>
 </div>

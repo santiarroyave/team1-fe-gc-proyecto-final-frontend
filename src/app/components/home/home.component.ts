@@ -8,6 +8,8 @@ import { OfertasService } from 'src/app/services/ofertas.service';
 })
 export class HomeComponent implements OnInit{
   ofertas: any = [];
+  ofertas_mostradas: any = [];
+  nombre: string = '';
 
   menuColapsado = false;
   // Escucha el evento 'resize' en la ventana del navegador (host).
@@ -23,7 +25,8 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void {
     this.detectScreenSize();
-      this.ofertas = this.ofertasService.getAllOfertas();
+    this.ofertas = this.ofertasService.getAllOfertas();
+    this.ofertas_mostradas = this.ofertas;
   }
 
   // Esta función detecta cuando la pantalla llega al limite de colapsamiento del menu
@@ -36,5 +39,10 @@ export class HomeComponent implements OnInit{
     }else{
       this.menuColapsado = false;
     }
+  }
+
+  actualizarListaOfertas(nombre_oferta: any):void {    
+    this.nombre = nombre_oferta;
+    this.ofertas_mostradas = this.ofertas.filter((oferta:any) => oferta.titulo.toLowerCase().includes(this.nombre.toLowerCase()))
   }
 }
