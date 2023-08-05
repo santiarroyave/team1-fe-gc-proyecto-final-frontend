@@ -56,6 +56,21 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; ba
     background-color: var(--turquesa-brillante-0) !important;
 }
 
+.botonAzulVacio{
+    background-color: #fff;
+    border: .1em solid var(--turquesa-brillante);
+    color: var(--turquesa-brillante);
+}
+.botonAzulVacio:hover{
+    background-color: var(--turquesa-brillante);
+    border: .1em solid transparent;
+    color: #fff;
+}
+.botonAzulVacio:active{
+    background-color: var(--turquesa-brillante-1) !important;
+    border: .1em solid transparent !important;
+}
+
 /* OTROS */
 .ruedaCarga{
     color: var(--naranja-aventura);
