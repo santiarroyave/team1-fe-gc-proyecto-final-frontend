@@ -1,7 +1,54 @@
 .header{
-    background-color: red;
+    /* background-color: red; */
     /* aspect-ratio: 4/1; */
     /* aspect-ratio: 16/8; */
     min-height: 100vh;
+    position: relative;
+
+    background-image: url(../../../../assets/portada/portada-1.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    display: grid;
+    place-items: center;
 }
 
+.fondoOscuro{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.eslogan{
+    z-index: 10;
+    color: #fff;
+    padding: 2em 1em;
+}
+.eslogan .logo{
+    max-width: 100%;
+}
+.eslogan .logo img{
+    width: 100%;
+    max-width: 800px;
+}
+
+.eslogan h1{
+    font-size: 5em;
+}
+.eslogan h2{
+    font-size: 2.5em;
+}
+
+/* Media */
+@media (max-width: 991px){
+    .eslogan h1{
+        font-size: 3em;
+    }
+    .eslogan h2{
+        font-size: 1.5em;
+    }
+}
