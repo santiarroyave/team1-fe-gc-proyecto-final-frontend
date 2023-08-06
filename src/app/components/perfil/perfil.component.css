@@ -1,0 +1,41 @@
+.profile-photo{
+    width: 300px;
+    height: 300px;
+}
+
+.user-form-settings {
+    height: 100%;
+    padding: 15px 10px;
+}
+
+.form-title {
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.form-control {
+    height: 35px;
+    padding: 0 15px;
+    padding-left: 30px;
+    border: 1px solid #dae1e7;
+    border-radius: 3px;
+    box-shadow: none;
+    font-size: 14px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.input-icon {
+    position: relative;
+    left: 8px;
+    bottom: 29px;
+    text-align: center;
+    color: #b3b3b3;
+}
