@@ -213,13 +213,19 @@
                                     <h5 class="card-title">{{actividad.titulo}}</h5>
                                     <p class="card-text">{{actividad.descripcion}}</p>
                                     <div class="botonesActividades d-flex gap-2 p-3 position-absolute bottom-0 end-0 start-0">
-                                        <button class="btn btn-primary botonAzul mt-4 w-50" (click)="editarActividad(actividad.id)">Editar</button>
-                                        <button class="btn btn-primary botonNaranja mt-4 w-50" (click)="borrarActividad(actividad.id)">Eliminar</button>
+                                        <button class="btn btn-primary btn-sm botonAzul mt-4 w-50" (click)="editarActividad(actividad.id)">Editar</button>
+                                        <button class="btn btn-primary btn-sm botonNaranja mt-4 w-50" (click)="borrarActividad(actividad.id)">Eliminar</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- BOTON PARA GUARDAR LA OFERTA -->
+                <!-- ------------------------------------------------------------------------------------------------ -->
+                <div class="d-flex justify-content-end mb-5 py-4 mt-3">
+                    <button class="btn btn-primary btn-lg botonAzul col-12 col-lg-12">Crear oferta</button>
                 </div>
 
 
