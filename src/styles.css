@@ -40,13 +40,57 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; ba
     background-color: var(--naranja-aventura-2);
     box-shadow:  .1em .1em .4em rgba(0, 0, 0, 0.25);
 }
-
 .botonOferta:active{
     background-color: var(--naranja-aventura-1) !important;
     box-shadow:  0 0 0;
 }
 
-/* OTROS */
+.botonNaranja{
+    background-color: var(--naranja-aventura);
+    border: transparent;
+}
+.botonNaranja:hover{
+    background-color: var(--naranja-aventura-1);
+}
+.botonNaranja:active{
+    background-color: var(--naranja-aventura-0) !important;
+}
+
+.botonAzul{
+    background-color: var(--turquesa-brillante);
+    border: transparent;
+}
+.botonAzul:hover{
+    background-color: var(--turquesa-brillante-1);
+}
+.botonAzul:active{
+    background-color: var(--turquesa-brillante-0) !important;
+}
+
+.botonAzulVacio{
+    background-color: #fff;
+    border: .1em solid var(--turquesa-brillante);
+    color: var(--turquesa-brillante);
+}
+.botonAzulVacio:hover{
+    background-color: var(--turquesa-brillante);
+    border: .1em solid transparent;
+    color: #fff;
+}
+.botonAzulVacio:active{
+    background-color: var(--turquesa-brillante-1) !important;
+    border: .1em solid transparent !important;
+}
+
+/* Cambia el color de la rueda de carga a naranja */
 .ruedaCarga{
     color: var(--naranja-aventura);
+}
+
+/* Crea una sombra al pasar el cursor por encima */
+.sombraHover{
+    transition: all .3s;
+}
+.sombraHover:hover{
+    box-shadow: .2em .2em .7em rgba(0, 0, 0, 0.15);
 }
