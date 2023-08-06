@@ -103,3 +103,13 @@
 .form-check label{
     margin-top: 0;
 }
+
+
+/* Lista de actividades */
+.imagenActividad{
+    background-color: #f1f1f1;
+    object-fit: cover;
+}
+.botonesActividades{
+    background-image: linear-gradient(to bottom, transparent, #fff 35%, #fff 50%);
+}
