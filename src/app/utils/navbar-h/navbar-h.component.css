@@ -3,6 +3,13 @@ img{
     height: 50px;
 }
 
+.logotipo{
+    width: 10em;
+}
+.logotipo > img{
+    width: 100%;
+}
+
 .navHorizontal{
     background-color: var(--turquesa-brillante) !important;
 }
