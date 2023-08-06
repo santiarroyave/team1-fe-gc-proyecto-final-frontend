@@ -18,6 +18,7 @@ import { EditarActividadComponent } from './components/admin/actividades/editar-
 import { EditarHotelComponent } from './components/admin/hoteles/editar-hotel/editar-hotel.component';
 import { PasoUnoComponent } from './components/pasarela-pago/paso-uno/paso-uno.component';
 import { PasoDosComponent } from './components/pasarela-pago/paso-dos/paso-dos.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path:"register", component: RegisterComponent},
   {path:"home", component: HomeComponent},
   {path:"about", component: AboutComponent},
+  {path:"perfil", component: PerfilComponent},
   {path:"oferta/:id", component: OfertaDetalleComponent},
   {path:"favoritos", component: FavoritosComponent},
   {path:"favoritos/:id", component: OfertaDetalleComponent},
