@@ -39,3 +39,7 @@ img{
     color: #fff;
     border-color: #fff;
 }
+
+.dropdown-menu a.active{
+    background-color: transparent;
+}
