@@ -199,7 +199,7 @@
                     </div>
                     <!-- Boton -->
                     <div class="d-flex d-md-grid justify-content-end">
-                        <button class="btn btn-primary btn-lg botonAzulVacio mt-4 col-12" (click)="btnAddActividad()">Añadir actividad</button>
+                        <button class="btn btn-primary btn-lg botonAzulVacio mt-4 col-12" (click)="btnAddActividad()">Guardar</button>
                     </div>
                     
                     <!-- Lista de actividades -->
@@ -214,7 +214,7 @@
                                     <h5 class="card-title">{{actividad.titulo}}</h5>
                                     <p class="card-text">{{actividad.descripcion}}</p>
                                     <div class="botonesActividades d-flex gap-2 p-3 position-absolute bottom-0 end-0 start-0">
-                                        <button class="btn btn-primary botonAzul mt-4 w-50">Editar</button>
+                                        <button class="btn btn-primary botonAzul mt-4 w-50" (click)="editarActividad(actividad.id)">Editar</button>
                                         <button class="btn btn-primary botonNaranja mt-4 w-50">Eliminar</button>
                                     </div>
                                 </div>

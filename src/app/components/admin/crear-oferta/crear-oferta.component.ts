@@ -14,6 +14,9 @@ export class CrearOfertaComponent implements OnInit{
   nombreActividad:string="";
   descripcionActividad:string="";
 
+  idAutoIncrementalActividades:number = 0;
+  idActividadSeleccionada:number = -1;
+
   constructor(){ }
   
   ngOnInit(): void {
@@ -35,16 +38,58 @@ export class CrearOfertaComponent implements OnInit{
   // Recoge los datos del formulario y los envia a la funcion que los agrega y resetea el formulario
   btnAddActividad(){
     this.agregarActividad(this.nombreActividad, this.descripcionActividad, "");
-    this.nombreActividad="";
-    this.descripcionActividad="";
   }
 
   // Añade una actividad a la lista de actividades
   agregarActividad(titulo:string, descripcion:string, imagen:string){
-    this.listaActividades.unshift({
-      titulo: titulo,
-      descripcion: descripcion,
-      imagen: imagen
-    })
+
+    
+    // Nueva actividad: si no hay un ID seleccionada se usa el ID auto incremental
+    // Editar actividad: si hay un ID seleccionada se usa ese id
+    if(this.idActividadSeleccionada == -1){
+      this.idAutoIncrementalActividades += 1;
+      this.idActividadSeleccionada = this.idAutoIncrementalActividades;
+      
+      // Añade nuevas actividades a la lista
+      this.listaActividades.unshift({
+        id: this.idActividadSeleccionada,
+        titulo: titulo,
+        descripcion: descripcion,
+        imagen: imagen
+      });
+      
+    }else{
+      // Edita los datos de la Actividad seleccionada
+      this.listaActividades.splice(this.idActividadSeleccionada, 1, {
+        id: this.idActividadSeleccionada,
+        titulo: titulo,
+        descripcion: descripcion,
+        imagen: imagen
+      });
+
+    }
+
+    // Resetea el formulario y lo deja vacio
+    this.nombreActividad="";
+    this.descripcionActividad="";
+    this.idActividadSeleccionada = -1;
+  }
+
+  editarActividad(id:number){
+    console.log(id);
+    // 1. Encuentra su posición dentro de la lista
+    let posicion = this.listaActividades.findIndex((busqueda:any) => busqueda.id == id);
+
+    // 2. Muestra los datos en el formulario y guarda el ID
+    if(posicion != -1){
+      this.nombreActividad = this.listaActividades[posicion].titulo;
+      this.descripcionActividad = this.listaActividades[posicion].descripcion;
+      this.idActividadSeleccionada = posicion;
+    }
   }
 }
+
+
+// ¿Cómo funcionan las ID de las actividades?
+// Estas id se usan de manera local para editar las actividades, si se obtuvieran actividades de la base de datos, esas id no se usarian aqui.
+// Al crear la oferta se guardan las actividades en la base de datos, el id auto incremental lo pone la propia base de datos.
