@@ -82,7 +82,15 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; ba
     border: .1em solid transparent !important;
 }
 
-/* OTROS */
+/* Cambia el color de la rueda de carga a naranja */
 .ruedaCarga{
     color: var(--naranja-aventura);
+}
+
+/* Crea una sombra al pasar el cursor por encima */
+.sombraHover{
+    transition: all .3s;
+}
+.sombraHover:hover{
+    box-shadow: .2em .2em .7em rgba(0, 0, 0, 0.15);
 }
