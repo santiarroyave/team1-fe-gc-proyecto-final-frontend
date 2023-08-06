@@ -82,6 +82,24 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; ba
     border: .1em solid transparent !important;
 }
 
+.botonAmarillo{
+    color: #000;
+    background-color: var(--amarillo-sol);
+    border: transparent;
+    transition: all 0.3s;
+}
+.botonAmarillo:hover{
+    color: #000;
+    background-color: var(--amarillo-sol);
+    filter: brightness(110%);
+}
+.botonAmarillo:active{
+    color: #000 !important;
+    background-color: var(--amarillo-sol) !important;
+    filter: brightness(100%);
+    
+}
+
 /* Cambia el color de la rueda de carga a naranja */
 .ruedaCarga{
     color: var(--naranja-aventura);
