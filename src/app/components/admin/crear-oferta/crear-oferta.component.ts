@@ -85,6 +85,12 @@ export class CrearOfertaComponent implements OnInit{
       this.descripcionActividad = this.listaActividades[posicion].descripcion;
       this.idActividadSeleccionada = posicion;
     }
+
+    // Funcionalidad para hacer scroll automático hasta la zona de edición
+    let elemento = document.getElementById("crearActividad");
+    if (elemento) {
+      elemento.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   borrarActividad(id:number){
