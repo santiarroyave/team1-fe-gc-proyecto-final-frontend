@@ -76,7 +76,6 @@ export class CrearOfertaComponent implements OnInit{
   }
 
   editarActividad(id:number){
-    console.log(id);
     // 1. Encuentra su posición dentro de la lista
     let posicion = this.listaActividades.findIndex((busqueda:any) => busqueda.id == id);
 
@@ -86,6 +85,14 @@ export class CrearOfertaComponent implements OnInit{
       this.descripcionActividad = this.listaActividades[posicion].descripcion;
       this.idActividadSeleccionada = posicion;
     }
+  }
+
+  borrarActividad(id:number){
+    // 1. Encuentra su posición dentro de la lista
+    let posicion = this.listaActividades.findIndex((busqueda:any) => busqueda.id == id);
+
+    // 2. Borra la actividad
+    this.listaActividades.splice(posicion, 1);
   }
 }
 

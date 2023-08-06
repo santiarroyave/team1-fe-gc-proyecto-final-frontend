@@ -207,7 +207,6 @@
                         <hr>
                         <h3>Actividades incluidas</h3>
                         <div class="contenedorListaActividades d-flex flex-nowrap overflow-x-auto gap-2" style="height: 400px;">
-
                             <div class="card sombraHover overflow-hidden" style="width: 18rem; min-width: 18rem;" *ngFor="let actividad of listaActividades">
                                 <img src="{{actividad.imagen}}" class="card-img-top imagenActividad" alt="..." style="aspect-ratio: 16/9; background-color: #f1f1f1;">
                                 <div class="card-body">
@@ -215,26 +214,14 @@
                                     <p class="card-text">{{actividad.descripcion}}</p>
                                     <div class="botonesActividades d-flex gap-2 p-3 position-absolute bottom-0 end-0 start-0">
                                         <button class="btn btn-primary botonAzul mt-4 w-50" (click)="editarActividad(actividad.id)">Editar</button>
-                                        <button class="btn btn-primary botonNaranja mt-4 w-50">Eliminar</button>
+                                        <button class="btn btn-primary botonNaranja mt-4 w-50" (click)="borrarActividad(actividad.id)">Eliminar</button>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
 
-                <!-- LISTA DE ACTIVIDADES -->
-                <!-- ----------------------------------------------- -->
-                <!-- <div class="contenedorInfoOferta rounded-3 p-3 mt-3">
-                    Actividades
-                    <div class="titulo d-flex justify-content-between align-items-center">
-                        <h2>Actividades</h2>
-                    </div>
-                    <hr>
-
-                </div> -->
 
                 <!-- fin zona de codigo -->
             </div> 
