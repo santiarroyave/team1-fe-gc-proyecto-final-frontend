@@ -7,3 +7,10 @@
     background-color: #fff;
     /* box-shadow:  .1em .1em .4em rgba(0, 0, 0, 0.25); */
 }
+
+/* Pone los bordes rectos cuando el menú vertical está colapsado */
+@media (max-width: 991px){
+	.navbarContenedor{
+        border-radius: 0 !important;
+    }
+}
