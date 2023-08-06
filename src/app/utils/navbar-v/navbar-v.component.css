@@ -1,0 +1,9 @@
+.quitarFondo{
+    background-color: transparent !important;
+    padding: 0;
+}
+
+.navbarContenedor{
+    background-color: #fff;
+    /* box-shadow:  .1em .1em .4em rgba(0, 0, 0, 0.25); */
+}
