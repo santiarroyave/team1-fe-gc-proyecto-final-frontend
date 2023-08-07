@@ -1,11 +1,5 @@
-<div class="fixed-top h-100 overflow-auto">
     <!-- Esto es el menu horizontal -->
     <app-navbar-h></app-navbar-h>
-    <!-- Este es el menu vertical que se activa en esta ubicacion cuando colapsa para los moviles y se oculta en la ubicacion anterior -->
-    <ng-container *ngIf="menuColapsado">
-        <app-navbar-v id="menuV-2" class="col col-12 col-lg-3 ocultar" style="max-height: 100vh;"></app-navbar-v>
-    </ng-container>
-</div>
 
 <!-- Aqui va la foto de la pantalla de inicio -->
 <app-header></app-header>
@@ -15,7 +9,6 @@
 <div class="container">
     <!-- Aqui va el menu vertical -->
     <div class="row">
-        <!-- Falta arreglar esto, para que al colapsar aparezca mas arriba junto al otro menu y no haya la separacion del header y del buscador -->
         <ng-container *ngIf="!menuColapsado">
             <app-navbar-v id="menuV-2" class="col col-12 col-lg-3"></app-navbar-v>
         </ng-container>

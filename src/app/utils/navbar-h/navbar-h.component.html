@@ -1,60 +1,65 @@
+<div id="contenedorFix" class="fixed-top">
 
-<nav class="navHorizontal navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navHorizontal navbar navbar-expand-lg bg-body-tertiary ">
+        <div class="container-fluid container">
+            <a class="navbar-brand" routerLink="">
+                <!-- <img src="../../../assets/logo-app-2000.png" alt=""> -->
+                <div class="logotipo">
+                    <img id="" src="../../../assets/vivaviajes-logo-blanco.svg" alt="">
+                </div>
+            </a>
     
-    <div class="container-fluid container">
-        <a class="navbar-brand" routerLink="">
-            <!-- <img src="../../../assets/logo-app-2000.png" alt=""> -->
-            <div class="logotipo">
-                <img id="" src="../../../assets/vivaviajes-logo-blanco.svg" alt="">
+            <!-- Desplegar menus con TypeScript -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" (click)="activarMenu()">
+                <i class="bi bi-list"></i>
+            </button>
+    
+            <!-- Menu pc -->
+            <div class="collapse navbar-collapse " id="navbarHorizontal">
+                <!-- Botones izquierda -->
+                <div class="navbar-nav">
+                    <a class="nav-link" aria-current="page" routerLink="/home" routerLinkActive="active">Ofertas</a>
+                    <a class="nav-link" routerLink="/about" routerLinkActive="active">Sobre nosotros</a>
+                </div>
+    
+                <!-- Botones derecha -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex col justify-content-end">
+                    <!-- Login (desaparece cuando inicias sesión) -->
+                    <a class="nav-link" aria-current="page" routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
+                    
+                    <!-- Admin (descaparece si cierras sesion) -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Admin
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" routerLink="/admin/crear-oferta" routerLinkActive="active">Crear oferta</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" routerLink="/admin/hoteles" routerLinkActive="active">Hoteles</a></li>
+                            <li><a class="dropdown-item" routerLink="/admin/actividades" routerLinkActive="active">Actividades</a></li>
+                        </ul>
+                    </li>
+    
+                    <!-- Perfil (descaparece si cierras sesion) -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Perfil
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" routerLink="/perfil" routerLinkActive="active">Mi perfil</a></li>
+                            <li><a class="dropdown-item" routerLink="/reservas" routerLinkActive="active">Mis reservas</a></li>
+                            <li><a class="dropdown-item" routerLink="/favoritos" routerLinkActive="active">Favoritos</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Menu vertical -->
+                <app-navbar-v id="menuV-2" class="col col-12 col-lg-3 ocultar d-lg-none"></app-navbar-v>
             </div>
-        </a>
-
-        <!-- Desplegar menus con TypeScript -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" (click)="activarMenu()">
-            <i class="bi bi-list"></i>
-        </button>
-
-        <!-- Menu pc -->
-        <div class="collapse navbar-collapse" id="navbarHorizontal">
-            <!-- Botones izquierda -->
-            <div class="navbar-nav">
-                <a class="nav-link" aria-current="page" routerLink="/home" routerLinkActive="active">Ofertas</a>
-                <a class="nav-link" routerLink="/about" routerLinkActive="active">Sobre nosotros</a>
-            </div>
-
-            <!-- Botones derecha -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex col justify-content-end">
-                <!-- Login (desaparece cuando inicias sesión) -->
-                <a class="nav-link" aria-current="page" routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
-                
-                <!-- Admin (descaparece si cierras sesion) -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Admin
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" routerLink="/admin/crear-oferta" routerLinkActive="active">Crear oferta</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" routerLink="/admin/hoteles" routerLinkActive="active">Hoteles</a></li>
-                        <li><a class="dropdown-item" routerLink="/admin/actividades" routerLinkActive="active">Actividades</a></li>
-                    </ul>
-                </li>
-
-                <!-- Perfil (descaparece si cierras sesion) -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Perfil
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" routerLink="/perfil" routerLinkActive="active">Mi perfil</a></li>
-                        <li><a class="dropdown-item" routerLink="/reservas" routerLinkActive="active">Mis reservas</a></li>
-                        <li><a class="dropdown-item" routerLink="/favoritos" routerLinkActive="active">Favoritos</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item">Cerrar sesión</a></li>
-                    </ul>
-                </li>
-            </ul>
+    
         </div>
-
-    </div>
-</nav>
+    
+    </nav>
+    
+</div>
