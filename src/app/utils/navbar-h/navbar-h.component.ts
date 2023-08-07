@@ -1,25 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-navbar-h',
   templateUrl: './navbar-h.component.html',
   styleUrls: ['./navbar-h.component.css']
 })
-export class NavbarHComponent {
+export class NavbarHComponent implements OnInit{
   
   // Lista donde se mostrará el navbar-v dentro del menu horizontal
   whiteList:any = [
     "home",
     "reservas",
-    "favoritos"
+    "favoritos",
+    "admin/hoteles"
   ];
   // Indica si el menú-V debe ser mostrado dentro del menú-H
-  mostrarMenu:boolean = this.mostrarNavbarV();
+  mostrarMenu:boolean = false;
 
   constructor(private route: ActivatedRoute) { }
 
+  ngOnInit(): void {
+    // Obtiene la ruta actual y la coteja con la WhiteList para mostrar el menu o no
+    this.route.url.subscribe(segments => {
+      let rutaActual = segments.map(segment => segment.path).join('/');
+      this.mostrarMenu = this.whiteList.includes(rutaActual);
+    });
+  }
 
   // Activa los dos navbar desplegables al hacer click en el boton de menu de los moviles
   activarMenu():void{
@@ -29,24 +36,26 @@ export class NavbarHComponent {
     // Al hacer click en el boton de menu añade la clase h-100 y overflow-scroll
     let contenedorFix:any = document.getElementById("contenedorFix");
 
-    
-    if (menuV.classList.contains("show") || menuH.classList.contains("show")) {
-      menuV.classList.remove("show");
+    // Muestra el menu h colapsado
+    if (menuH.classList.contains("show")) {
       menuH.classList.remove("show");
-      contenedorFix.classList.remove("h-100", "overflow-scroll");
+      contenedorFix.classList.remove("h-100", "overflow-auto");
     } else {
-      menuV.classList.add("show");
       menuH.classList.add("show");
-      contenedorFix.classList.add("h-100", "overflow-scroll");
+      contenedorFix.classList.add("h-100", "overflow-auto");
     }
     
-  }
+    // Muestra el menuV colapsado al hacer click
+    // Tiene un condicional nulo porque en algunas paginas se muestra y en otras no y sino daria error
+    if(menuV != null){
+      if(menuV.classList.contains("show")){
+        menuV.classList.remove("show");
+      }else{
+        menuV.classList.add("show");
+      }
+    }
 
-  
-  // Devuelve true si el menu debe ser mostrado
-  mostrarNavbarV():boolean{
-    let rutaActual = this.route.snapshot.url[0].path;
-    return this.whiteList.includes(rutaActual);
+    
   }
 
 }
