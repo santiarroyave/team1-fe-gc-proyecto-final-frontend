@@ -19,6 +19,7 @@ import { EditarHotelComponent } from './components/admin/hoteles/editar-hotel/ed
 import { PasoUnoComponent } from './components/pasarela-pago/paso-uno/paso-uno.component';
 import { PasoDosComponent } from './components/pasarela-pago/paso-dos/paso-dos.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { RecompensasComponent } from './components/recompensas/recompensas.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path:"favoritos", component: FavoritosComponent},
   {path:"favoritos/:id", component: OfertaDetalleComponent},
   {path:"reservas", component: ReservasComponent},
+  {path:"recompensas", component: RecompensasComponent},
   {path:"reservas/:id", component: OfertaDetalleComponent},
   {path:"checkout", component:CheckoutComponent},
   {path:"paso-1/:id", component:PasoUnoComponent},
