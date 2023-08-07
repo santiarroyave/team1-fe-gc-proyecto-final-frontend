@@ -112,3 +112,103 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; ba
 .sombraHover:hover{
     box-shadow: .2em .2em .7em rgba(0, 0, 0, 0.15);
 }
+/* ------------------------------------------------------------------------------------------------------------------------- */
+/* Animaciones */
+/* ------------------------------------------------------------------------------------------------------------------------- */
+/* --------------------------- Clases de animaciones*/
+.mostrarHaciaArriba{
+	animation: mostrarHaciaArriba 1s;
+}
+.mostrarHaciaIzquierda{
+	animation: mostrarHaciaIzquierda 1s;
+}
+.mostrarHaciaDerecha{
+	animation: mostrarHaciaDerecha 1s;
+}
+.efectoZoom{
+	animation: efectoZoom 1s;
+}
+
+.efectoZoomOut{
+	animation: efectoZoomOut 1s;
+}
+
+.efectoZoomIn{
+	animation: efectoZoomIn 1s;
+}
+
+
+/* --------------------------- Keyframes*/
+@keyframes mostrarHaciaArriba{
+	0%{
+		-webkit-transform: translateY(100px);
+		transform: translateY(100px);
+	}
+	100%{
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+}
+
+@keyframes mostrarHaciaIzquierda{
+	0%{
+		-webkit-transform: translateX(-100px);
+		transform: translateX(-100px);
+	}
+	100%{
+		-webkit-transform: translateX(0);
+		transform: translateX(0);
+	}
+}
+
+@keyframes mostrarHaciaDerecha{
+	0%{
+		-webkit-transform: translateX(100px);
+		transform: translateX(100px);
+	}
+	100%{
+		-webkit-transform: translateX(0);
+		transform: translateX(0);
+	}
+}
+
+@keyframes efectoZoom{
+	0%{
+		-webkit-transform: scale(.2);
+		transform: scale(.2);
+	}
+	50%{
+		-webkit-transform: scale(1.1);
+		transform: scale(1.1);
+	}
+	100%{
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+
+@keyframes efectoZoomOut{
+	0%{
+		-webkit-transform: scale(1.2);
+		transform: scale(1.2);
+	}
+	100%{
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+
+@keyframes efectoZoomIn{
+	0%{
+		-webkit-transform: scale(0.8);
+		transform: scale(0.8);
+	}
+	100%{
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------- */
+/* Fin Animaciones */
+/* ------------------------------------------------------------------------------------------------------------------------- */
