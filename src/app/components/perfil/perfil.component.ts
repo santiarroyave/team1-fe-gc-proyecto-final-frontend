@@ -28,4 +28,18 @@ export class PerfilComponent {
       this.menuColapsado = false;
     }
   }
+
+  openFileInput() {
+    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
+    fileInput.click();
+  }
+
+  handleFileChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const file = inputElement.files?.[0];
+    if (file) {
+      // Aquí puedes hacer lo que necesites con el archivo seleccionado.
+      console.log('Archivo seleccionado:', file.name);
+    }
+  }
 }

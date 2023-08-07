@@ -3,6 +3,23 @@
     height: 300px;
 }
 
+.text-center {
+    text-align: center;
+}
+
+.relative {
+    position: relative;
+}
+
+.color-secondary-darker {
+    color: #222;
+}
+
+a{
+    cursor: pointer;
+    text-decoration: none;
+}
+
 .user-form-settings {
     height: 100%;
     padding: 15px 10px;
