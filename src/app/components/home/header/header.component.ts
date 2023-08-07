@@ -36,5 +36,12 @@ export class HeaderComponent implements OnInit{
       this.navbarH.classList.remove("d-none");
     }
   }
+
+  scrollClick(){
+    let elemento = document.getElementById("buscador");
+    if (elemento){
+      elemento.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
   
 }

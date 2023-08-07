@@ -23,6 +23,7 @@
     background-color: rgba(0, 0, 0, 0.3);
 }
 
+/* Eslogan */
 .eslogan{
     z-index: 10;
     color: #fff;
@@ -43,6 +44,25 @@
     font-size: 2.5em;
 }
 
+/* Flecha */
+.flechaContainer{
+    z-index: 10;
+    font-size: 6em;
+    
+    background: linear-gradient(transparent, #000);
+    height: 1.5em;
+}
+.flechaContainer:hover{
+    cursor: pointer;
+}
+.flechaAnimada{
+    animation: movimiento 1s infinite ease-out alternate;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 /* Media */
 @media (max-width: 991px){
     .eslogan h1{
@@ -51,4 +71,16 @@
     .eslogan h2{
         font-size: 1.5em;
     }
+}
+
+/* Animacion */
+@keyframes movimiento{
+    0%{
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+	}
+	100%{
+        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px);
+	}
 }
