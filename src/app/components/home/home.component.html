@@ -9,9 +9,8 @@
 <div class="container">
     <!-- Aqui va el menu vertical -->
     <div class="row">
-        <ng-container *ngIf="!menuColapsado">
-            <app-navbar-v id="menuV-2" class="col col-12 col-lg-3"></app-navbar-v>
-        </ng-container>
+        
+        <app-navbar-v class="col col-12 col-lg-3"></app-navbar-v>
         
         <div class="col col-12 col-lg-9">
             <app-oferta *ngFor="let oferta of ofertas_mostradas" [ofertaId]="oferta.id"></app-oferta>

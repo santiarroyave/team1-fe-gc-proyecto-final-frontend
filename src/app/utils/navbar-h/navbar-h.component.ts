@@ -12,8 +12,8 @@ export class NavbarHComponent {
     activarMenu():void{
       let menuV:any = document.getElementById("navbarVertical");
       let menuH:any = document.getElementById("navbarHorizontal");
-      let menuV2:any = document.getElementById("menuV-2");
       // Variable que permite hacer scroll en el menu ya que es position absolute
+      // Al hacer click en el boton de menu añade la clase h-100 y overflow-scroll
       let contenedorFix:any = document.getElementById("contenedorFix");
   
       
@@ -25,13 +25,6 @@ export class NavbarHComponent {
         menuV.classList.add("show");
         menuH.classList.add("show");
         contenedorFix.classList.add("h-100", "overflow-scroll");
-      }
-
-      // Oculta la barra blanca que aparecia en los moviles
-      if (menuV2.classList.contains("ocultar")){
-        menuV2.classList.remove("ocultar");
-      }else{
-        menuV2.classList.add("ocultar");
       }
       
     }
