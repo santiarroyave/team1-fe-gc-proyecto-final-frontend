@@ -26,6 +26,10 @@ export class NavbarHComponent implements OnInit{
       let rutaActual = segments.map(segment => segment.path).join('/');
       this.mostrarMenu = this.whiteList.includes(rutaActual);
     });
+
+    // Hace scroll hacia arriba
+    window.scrollTo(0, 0);
+    
   }
 
   // Activa los dos navbar desplegables al hacer click en el boton de menu de los moviles
