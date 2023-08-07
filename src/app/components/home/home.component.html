@@ -14,6 +14,33 @@
         
         <div class="col col-12 col-lg-9">
             <app-oferta *ngFor="let oferta of ofertas_mostradas" [ofertaId]="oferta.id"></app-oferta>
+            <div class="d-flex align-items-center justify-content-center mt-3">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item">
+                        <button class="page-link" aria-label="Previous" (click)="goToPage(0)">
+                          <span aria-hidden="true">&laquo;</span>
+                        </button>
+                      </li>
+                      <li class="page-item">
+                        <button class="page-link" aria-label="Previous" (click)="previousPage()">
+                            Anterior
+                        </button>
+                      </li>
+                      <li class="page-item"><button class="page-link">{{pagina_actual+1}}</button></li>
+                      <li class="page-item">
+                        <button class="page-link" aria-label="Previous" (click)="previousPage()">
+                            Siguiente
+                        </button>
+                      </li>
+                      <li class="page-item">
+                        <button class="page-link" aria-label="Next" (click)="goToPage(total_paginas)">
+                          <span aria-hidden="true">&raquo;</span>
+                        </button>
+                      </li>
+                    </ul>
+                  </nav>
+            </div>
         </div>
     </div>
 </div>
