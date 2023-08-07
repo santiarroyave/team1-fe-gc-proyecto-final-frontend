@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, Renderer2 } from '@angular/core';
 import { OfertasService } from 'src/app/services/ofertas.service';
 
 @Component({
@@ -9,6 +9,9 @@ import { OfertasService } from 'src/app/services/ofertas.service';
 export class HomeComponent implements OnInit{
   ofertas: any = [];
   ofertas_mostradas: any = [];
+  ofertas_por_pagina: number = 6;
+  pagina_actual: number = 0;
+  total_paginas: number | any;
 
   menuColapsado = false;
   // Escucha el evento 'resize' en la ventana del navegador (host).
@@ -20,7 +23,7 @@ export class HomeComponent implements OnInit{
     this.detectScreenSize();
   }
 
-  constructor(private ofertasService: OfertasService) {}
+  constructor(private ofertasService: OfertasService, private elementRef: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit(): void {
     // Obtiene todas las ofertas del servicio
@@ -28,8 +31,11 @@ export class HomeComponent implements OnInit{
 
     // Detecta el tamaño de la pantalla para colapsar el menu
     this.detectScreenSize();
+    this.total_paginas = Math.floor(this.ofertas.length/this.ofertas_por_pagina);
 
-    this.ofertas_mostradas = this.ofertas;
+    for (let index = 0; index < this.ofertas_por_pagina; index++) {
+      this.ofertas_mostradas.push(this.ofertas[index]);
+    }
   }
 
   // Esta función detecta cuando la pantalla llega al limite de colapsamiento del menu
@@ -46,5 +52,28 @@ export class HomeComponent implements OnInit{
 
   actualizarListaOfertas(nombre_oferta: any):void {  
     this.ofertas_mostradas = this.ofertas.filter((oferta:any) => oferta.titulo.toLowerCase().includes(nombre_oferta.toLowerCase()))
+  }
+
+  goToPage(page:number):void{
+    this.pagina_actual = page;
+    this.actualizarPagina();
+  }
+
+  nextPage():void{
+    if(this.pagina_actual<this.total_paginas) this.pagina_actual++;
+    this.actualizarPagina();
+  }
+  previousPage():void{
+    if(this.pagina_actual>0) this.pagina_actual--;
+    this.actualizarPagina();
+  }
+
+  private actualizarPagina():void{
+    this.ofertas_mostradas = [];
+    for (let index = 0; index < this.ofertas_por_pagina; index++) {
+      if(this.ofertas[index+this.ofertas_por_pagina*this.pagina_actual] != null){
+        this.ofertas_mostradas.push(this.ofertas[index+this.ofertas_por_pagina*this.pagina_actual]);
+      }
+    }
   }
 }
