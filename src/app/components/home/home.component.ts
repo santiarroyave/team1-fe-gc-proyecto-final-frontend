@@ -76,4 +76,11 @@ export class HomeComponent implements OnInit{
       }
     }
   }
+
+  scrollClick(){
+    let flecha = document.getElementById("buscador");
+    if (flecha){
+      flecha.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }
