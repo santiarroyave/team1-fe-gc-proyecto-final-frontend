@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class NavbarVComponent {
 
+  listaServicios:any = [];
+
+  constructor(){
+    this.listaServicios = ["Wifi", "Lavadora", "Aire acondicionado", "Cocina", "Secadora", "Calefacción", "Zona para trabajar", "Televisión", "Piscina", "Desayuno", "Gimnasio"];
+  }
 }
