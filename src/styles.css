@@ -30,6 +30,11 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; ba
     --turquesa-brillante-3: #17DFFB;
 }
 
+hr{
+    color: var(--turquesa-brillante-0);
+    margin: 1.5em 0em;
+}
+
 /* BOTONES */
 .botonOferta{
     background-color: var(--naranja-aventura);
