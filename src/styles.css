@@ -102,7 +102,19 @@ hr{
     color: #000 !important;
     background-color: var(--amarillo-sol) !important;
     filter: brightness(100%);
-    
+}
+
+.botonesPaginacion button{
+	background-color: var(--turquesa-brillante); 
+	color: #fff;
+}
+.botonesPaginacion button:hover{
+	background-color: var(--turquesa-brillante-1); 
+	color: #fff;
+}
+.botonesPaginacion button:focus{
+	background-color: var(--turquesa-brillante-1);
+	color: #fff;
 }
 
 /* Cambia el color de la rueda de carga a naranja */
