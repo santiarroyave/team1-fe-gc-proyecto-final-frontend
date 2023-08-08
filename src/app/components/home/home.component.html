@@ -7,13 +7,18 @@
 <app-buscador id="buscador" (nombre_oferta)="actualizarListaOfertas($event)"></app-buscador>
 
 <div class="container">
-    <!-- Aqui va el menu vertical -->
-    <div class="row">
-        
+  <div class="row">
+    
+        <!-- Aqui va el menu vertical -->
         <app-navbar-v class="col col-12 col-lg-3"></app-navbar-v>
         
+        <!-- Aqui va el contenido -->
         <div class="col col-12 col-lg-9">
+
+            <!-- Ofertas -->
             <app-oferta *ngFor="let oferta of ofertas_mostradas" [ofertaId]="oferta.id"></app-oferta>
+
+            <!-- Paginación -->
             <div class="d-flex align-items-center justify-content-center mt-3">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination botonesPaginacion">
@@ -41,6 +46,7 @@
                     </ul>
                   </nav>
             </div>
+            
         </div>
     </div>
 </div>
