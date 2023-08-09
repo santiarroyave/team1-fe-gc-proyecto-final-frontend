@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OfertasService } from 'src/app/services/ofertas.service';
 
 declare var bootstrap: any;
@@ -17,7 +17,7 @@ export class PasoUnoComponent implements OnInit {
   num_personas: number = 2;
   oferta: any = {};
 
-  precio_inicial: number | any;
+  precio_noche: number | any;
   precio_persona: number | any;
   today: Date = new Date();
   month: number = this.today.getMonth();
@@ -25,9 +25,10 @@ export class PasoUnoComponent implements OnInit {
   ts_max: number | any;
   max: Date | any;
   min: Date = new Date(this.today);
-  noches:number = 0;
+  noches:number = 1;
   campaignOne: FormGroup | any;
-  constructor(private route: ActivatedRoute, private ofertasService: OfertasService){}
+
+  constructor(private route: ActivatedRoute, private ofertasService: OfertasService, private router: Router){}
 
   ngOnInit(): void {
     this.ts_max = this.today.setMonth(this.today.getMonth() + 2);
@@ -38,9 +39,8 @@ export class PasoUnoComponent implements OnInit {
       const elementId: number = Number(params['id']);
       this.oferta = this.ofertasService.getOfertaById(elementId);
     });
-    this.precio_inicial = this.oferta.precio;
-    this.precio_persona = this.precio_inicial;
-    this.noches = this.ofertasService.noches;
+    this.precio_noche = this.oferta.precio;
+    this.precio_persona = this.precio_noche/this.num_personas;
     let date1 = new Date();
     let date2 = date1.setDate(date1.getDate() + this.noches);
     date1 = new Date(date2);
@@ -61,11 +61,11 @@ export class PasoUnoComponent implements OnInit {
 
   calcularNoches():void {
     this.noches = Number(this.campaignOne.value.end?.getDate()) - Number(this.campaignOne.value.start?.getDate());
-    this.precio_persona = this.precio_inicial*this.noches;
+    this.precio_persona = (this.precio_noche*this.noches)/this.num_personas;
   }
 
-  change(): void{
-    console.log(this.campaignOne.value.start);
-    console.log(this.campaignOne.value.end);
+  actualizarOferta():void {
+    this.ofertasService.oferta = this.precio_noche*this.noches;
+    this.router.navigate([`/paso-2/${this.oferta.id}`]);
   }
 }

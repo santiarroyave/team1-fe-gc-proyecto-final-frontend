@@ -3,6 +3,10 @@ img{
     height: 50px;
 }
 
+.barra-progreso{
+    width: 100px;
+}
+
 .logotipo{
     width: 10em;
 }

@@ -24,6 +24,12 @@
     
                 <!-- Botones derecha -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex col justify-content-end">
+                    <a class="nav-link d-flex align-items-center justify-content-center" routerLink="/recompensas">
+                        <img width="80" height="80" src="https://img.icons8.com/office/80/filled-star--v1.png" alt="filled-star--v1"/>                        
+                        <div class="progress barra-progreso" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width: 25%">25%</div>
+                        </div>
+                    </a>
                     <!-- Login (desaparece cuando inicias sesión) -->
                     <a class="nav-link" aria-current="page" routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
                     
@@ -49,6 +55,7 @@
                             <li><a class="dropdown-item" routerLink="/perfil" routerLinkActive="active">Mi perfil</a></li>
                             <li><a class="dropdown-item" routerLink="/reservas" routerLinkActive="active">Mis reservas</a></li>
                             <li><a class="dropdown-item" routerLink="/favoritos" routerLinkActive="active">Favoritos</a></li>
+                            <li><a class="dropdown-item" routerLink="/recompensas" routerLinkActive="active">Recompensas</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item">Cerrar sesión</a></li>
                         </ul>
