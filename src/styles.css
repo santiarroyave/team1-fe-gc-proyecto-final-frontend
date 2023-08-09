@@ -1,4 +1,231 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; background-color: #2222;}
+body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; background-color: #f1f1f1;}
+
+/* COLORE */
+:root{
+    --naranja-aventura: #FF5722;
+    --naranja-aventura-0: #AA2900;
+    --naranja-aventura-1: #D93602;
+    --naranja-aventura-2: #FF774C;
+    --naranja-aventura-3: #FF9675;
+
+    --amarillo-sol: #FFEB3B;
+    --amarillo-sol-0: #B6A403;
+    --amarillo-sol-1: #B6A403;
+    --amarillo-sol-2: #FFEF5F;
+    --amarillo-sol-3: #FFF389;
+
+    --verde-selva: #4CAF52;
+    --verde-selva-0: #15781B; 
+    --verde-selva-1: #2D9434;
+    --verde-selva-2: #77CC7D;
+    --verde-selva-3: #A9E2AD;
+
+    --turquesa-brillante: #00BAD4;
+    --turquesa-brillante-0: #006775;
+    --turquesa-brillante-1: #008395;
+    --turquesa-brillante-2: #02E0FF;
+    --turquesa-brillante-3: #17DFFB;
+}
+
+hr{
+    color: var(--turquesa-brillante-0);
+    margin: 1.5em 0em;
+}
+
+/* BOTONES */
+.botonOferta{
+    background-color: var(--naranja-aventura);
+    border: transparent;
+    transition: all .3s;
+}
+.botonOferta:hover{
+    background-color: var(--naranja-aventura-2);
+    box-shadow:  .1em .1em .4em rgba(0, 0, 0, 0.25);
+}
+.botonOferta:active{
+    background-color: var(--naranja-aventura-1) !important;
+    box-shadow:  0 0 0;
+}
+
+.botonNaranja{
+    background-color: var(--naranja-aventura);
+    border: transparent;
+}
+.botonNaranja:hover{
+    background-color: var(--naranja-aventura-1);
+}
+.botonNaranja:active{
+    background-color: var(--naranja-aventura-0) !important;
+}
+
+.botonAzul{
+    background-color: var(--turquesa-brillante);
+    border: transparent;
+}
+.botonAzul:hover{
+    background-color: var(--turquesa-brillante-1);
+}
+.botonAzul:active{
+    background-color: var(--turquesa-brillante-0) !important;
+}
+
+.botonAzulVacio{
+    background-color: #fff;
+    border: .1em solid var(--turquesa-brillante);
+    color: var(--turquesa-brillante);
+}
+.botonAzulVacio:hover{
+    background-color: var(--turquesa-brillante);
+    border: .1em solid transparent;
+    color: #fff;
+}
+.botonAzulVacio:active{
+    background-color: var(--turquesa-brillante-1) !important;
+    border: .1em solid transparent !important;
+}
+
+.botonAmarillo{
+    color: #000;
+    background-color: var(--amarillo-sol);
+    border: transparent;
+    transition: all 0.3s;
+}
+.botonAmarillo:hover{
+    color: #000;
+    background-color: var(--amarillo-sol);
+    filter: brightness(110%);
+}
+.botonAmarillo:active{
+    color: #000 !important;
+    background-color: var(--amarillo-sol) !important;
+    filter: brightness(100%);
+}
+
+.botonesPaginacion button{
+	background-color: var(--turquesa-brillante); 
+	color: #fff;
+}
+.botonesPaginacion button:hover{
+	background-color: var(--turquesa-brillante-1); 
+	color: #fff;
+}
+.botonesPaginacion button:focus{
+	background-color: var(--turquesa-brillante-1);
+	color: #fff;
+}
+
+/* Cambia el color de la rueda de carga a naranja */
+.ruedaCarga{
+    color: var(--naranja-aventura);
+}
+
+/* Crea una sombra al pasar el cursor por encima */
+.sombraHover{
+    transition: all .3s;
+}
+.sombraHover:hover{
+    box-shadow: .2em .2em .7em rgba(0, 0, 0, 0.15);
+}
+/* ------------------------------------------------------------------------------------------------------------------------- */
+/* Animaciones */
+/* ------------------------------------------------------------------------------------------------------------------------- */
+/* --------------------------- Clases de animaciones*/
+.mostrarHaciaArriba{
+	animation: mostrarHaciaArriba 1s;
+}
+.mostrarHaciaIzquierda{
+	animation: mostrarHaciaIzquierda 1s;
+}
+.mostrarHaciaDerecha{
+	animation: mostrarHaciaDerecha 1s;
+}
+.efectoZoom{
+	animation: efectoZoom 1s;
+}
+
+.efectoZoomOut{
+	animation: efectoZoomOut 1s;
+}
+
+.efectoZoomIn{
+	animation: efectoZoomIn 1s;
+}
+
+
+/* --------------------------- Keyframes*/
+@keyframes mostrarHaciaArriba{
+	0%{
+		-webkit-transform: translateY(100px);
+		transform: translateY(100px);
+	}
+	100%{
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
+	}
+}
+
+@keyframes mostrarHaciaIzquierda{
+	0%{
+		-webkit-transform: translateX(-100px);
+		transform: translateX(-100px);
+	}
+	100%{
+		-webkit-transform: translateX(0);
+		transform: translateX(0);
+	}
+}
+
+@keyframes mostrarHaciaDerecha{
+	0%{
+		-webkit-transform: translateX(100px);
+		transform: translateX(100px);
+	}
+	100%{
+		-webkit-transform: translateX(0);
+		transform: translateX(0);
+	}
+}
+
+@keyframes efectoZoom{
+	0%{
+		-webkit-transform: scale(.2);
+		transform: scale(.2);
+	}
+	50%{
+		-webkit-transform: scale(1.1);
+		transform: scale(1.1);
+	}
+	100%{
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+
+@keyframes efectoZoomOut{
+	0%{
+		-webkit-transform: scale(1.2);
+		transform: scale(1.2);
+	}
+	100%{
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+
+@keyframes efectoZoomIn{
+	0%{
+		-webkit-transform: scale(0.8);
+		transform: scale(0.8);
+	}
+	100%{
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------- */
+/* Fin Animaciones */
+/* ------------------------------------------------------------------------------------------------------------------------- */

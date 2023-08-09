@@ -40,6 +40,9 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { HotelItemComponent } from './components/admin/hoteles/hotel-item/hotel-item.component';
 import { ActividadItemComponent } from './components/admin/actividades/actividad-item/actividad-item.component';
 import { EditarCampoComponent } from './utils/editar-campo/editar-campo.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { RecompensasComponent } from './components/recompensas/recompensas.component';
+
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -84,6 +87,8 @@ export const MY_DATE_FORMATS = {
     HotelItemComponent,
     ActividadItemComponent,
     EditarCampoComponent
+    PerfilComponent,
+    RecompensasComponent
   ],
   imports: [
     BrowserModule,
