@@ -1,0 +1,37 @@
+.contenedorOferta{
+    overflow: hidden;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.contenedorOferta:hover{
+    box-shadow: .2em .2em .7em rgba(0, 0, 0, 0.15);
+}
+
+.imgOferta{
+    aspect-ratio: 21/9;
+    object-fit: cover;
+    position: relative;
+}
+
+/* Clases del tiempo restante */
+.tiempoRestante{
+    background-color: var(--naranja-aventura);
+    padding: .5em 1em;
+    color: #fff;
+    font-size: 1.2em;
+}
+.tiempoRestante i{
+    margin-right: .5em;
+}
+.tiempoRestante p{
+    margin: 0;
+}
+
+/* Clases de favoritos */
+.favs{
+    padding: .8em;
+    color: #fff;
+    font-size: 1.5em;
+    z-index: 10;
+}

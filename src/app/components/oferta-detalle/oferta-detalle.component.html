@@ -1,24 +1,92 @@
 <!-- Esto es el menu horizontal -->
 <app-navbar-h></app-navbar-h>
-
-<div class="container">
+<!-- Escribir código aqui -->
+<div class="h-50 w-100 d-flex justify-content-center">
+    <img src={{oferta.imagen}} class="img-fluid w-100 img-thumbnail" alt="...">
+    <img src={{oferta.imagen}} class="img-fluid w-100 img-thumbnail" alt="...">
+    <button type="button" class="btn" (click)="toastTrigger()">
+      <img width="30" height="30" src="https://img.icons8.com/flat-round/64/hearts.png" alt="hearts"/>
+    </button>
+</div>
+<div class="container-fluid w-75">
     <div class="row">
-        <!-- Aqui va el menu vertical -->
-        <app-navbar-v class="col col-12 col-lg-3"></app-navbar-v>
-        
-        <div class="col col-9 p-3">
-            <div>
-                <!-- Escribir código aqui -->
-                <h1>Detalles de la oferta</h1>
-
-
-
-
-                <!-- fin zona de codigo -->
-            </div> 
+        <div class="col mt-3 d-flex justify-content-center align-items-center flex-column">
+            <h1 class="text-style">{{oferta.titulo}}</h1>
+            <p class="text-style">{{oferta.descripcion}}</p>
         </div>
     </div>
+    <div class="row">
+        <div class="col-8 mt-3">
+            <h2>Alojamiento: {{alojamiento.nombre}}</h2>
+            <ul>
+                <li>Detalle</li>
+                <li>Detalle</li>
+                <li>Detalle</li>
+                <li>Detalle</li>
+            </ul>
+            <h2 class="mt-4">Actividad: {{actividad.titulo}}</h2>
+            <ul>
+                <li>Detalle</li>
+                <li>Detalle</li>
+                <li>Detalle</li>
+                <li>Detalle</li>
+            </ul>
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-danger" routerLink="/paso-1/{{oferta.id}}">{{oferta.precio}} €/persona</button>
+            </div>
+        </div>
+        <div class="col-4 mt-3">
+            <h3>Configurar viaje</h3>
+            <div class="d-flex">
+                <label class="form-label lbl-1">Noches</label>
+                <select class="form-select f-s" [(ngModel)]="num_noches" (ngModelChange)="updateNoches()">
+                    <option selected value="14">Todas las noches</option>
+                    <option value="1">1 noche</option>
+                    <option value="2">2 noches</option>
+                    <option value="3">3 noches</option>
+                    <option value="4">4 noches</option>
+                    <option value="5">5 noches</option>
+                    <option value="6">6 noches</option>
+                    <option value="7">7 noches</option>
+                    <option value="8">8 noches</option>
+                    <option value="9">9 noches</option>
+                    <option value="10">10 noches</option>
+                    <option value="11">11 noches</option>
+                    <option value="12">12 noches</option>
+                    <option value="13">13 noches</option>
+                    <option value="14">14 noches</option>
+                </select>
+            </div>
+            <div class="d-flex">
+                <label class="form-label lbl-1">Régimen</label>
+                <select class="form-select f-s">
+                    <option selected value="0">Todos los servicios</option>
+                    <option value="1">Wifi</option>
+                    <option value="2">Desayuno</option>
+                    <option value="3">Mascotas</option>
+                    <option value="4">Piscina</option>
+                    <option value="5">Lavadora</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row m-3">
+        <div class="col">
+          <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+              <div class="toast-header">
+                <img width="20" height="20" src="https://img.icons8.com/color/48/filled-like.png" alt="filled-like"/>
+                <strong class="me-auto">Oferta X</strong>
+                <small>now</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+                Oferta añadida a favoritos
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
-
 <!-- Aqui va el footer -->
 <app-footer></app-footer>

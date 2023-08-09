@@ -1,0 +1,79 @@
+<app-navbar-h></app-navbar-h>
+<div class="container-fluid w-50 cnt-settings mt-3">
+    <div class="row">
+        <div class="col d-flex justify-content-center mt-3">
+            <div class="form-floating m-1 w-100">
+                <input type="text" class="form-control" placeholder="Password">
+                <label for="floatingPassword">Nombre</label>
+            </div>
+            <div class="form-floating m-1 w-100">
+                <input type="text" class="form-control" placeholder="Password">
+                <label for="floatingPassword">Apellidos</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="form-floating m-1 w-100">
+                <input type="text" class="form-control" placeholder="Password">
+                <label for="floatingPassword">Input</label>
+            </div>
+            <div class="form-floating m-1 w-100">
+                <input type="text" class="form-control" placeholder="Password">
+                <label for="floatingPassword">Documento de identidad</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="form-floating m-1 w-100">
+                <input type="text" class="form-control" placeholder="Password">
+                <label for="floatingPassword">Correo electrónico</label>
+            </div>
+            <div class="form-floating m-1 w-100">
+                <input type="text" class="form-control" placeholder="Password">
+                <label for="floatingPassword">Teléfono</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex mt-1">
+            <span class="material-symbols-outlined card-style">
+                credit_card
+            </span>
+            <p class="d-flex align-items-center justify-content-center m-0 p-0">Tarjeta de crédito o débito</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-1 mt-1">
+            <img width="48" height="48" src="https://img.icons8.com/color/48/visa.png" alt="visa"/>
+            <img width="48" height="48" src="https://img.icons8.com/color/48/maestro.png" alt="maestro"/>
+            <img width="48" height="48" src="https://img.icons8.com/color/48/mastercard.png" alt="mastercard"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="mb-3">
+                <label class="form-label">Número de tarjeta</label>
+                <input type="text" class="form-control" placeholder="Número de tarjeta">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label class="form-label">Caducidad</label>
+                <input type="text" class="form-control" placeholder="MM/AA">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label class="form-label">CVV</label>
+                <input type="text" class="form-control" placeholder="CVV">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex align-items-center justify-content-center">
+            <button type="button" class="btn btn-success mb-3 btn-settings">Pagar {{oferta.precio}} €</button>
+        </div>
+    </div>
+</div>

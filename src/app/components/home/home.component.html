@@ -1,20 +1,60 @@
-<!-- Esto es el menu horizontal -->
-<app-navbar-h></app-navbar-h>
+    <!-- Esto es el menu horizontal -->
+    <app-navbar-h></app-navbar-h>
+
 <!-- Aqui va la foto de la pantalla de inicio -->
 <app-header></app-header>
 <!-- Aqui va el buscador -->
-<app-buscador></app-buscador>
+<app-buscador id="buscador" (nombre_oferta)="actualizarListaOfertas($event)"></app-buscador>
 
 <div class="container">
+  <div class="row">
+    
     <!-- Aqui va el menu vertical -->
-    <div class="row">
-        <!-- Falta arreglar esto, para que al colapsar aparezca mas arriba junto al otro menu y no haya la separacion del header y del buscador -->
-        <app-navbar-v class="col col-12 col-lg-3"></app-navbar-v>
-        
-        <div class="col col-9">
-            <h1>Ofertas</h1>
+    <app-navbar-v class="col col-12 col-lg-3"></app-navbar-v>
+    
+    <!-- Aqui va el contenido -->
+    <div class="col col-12 col-lg-9">
+
+        <!-- Ofertas -->
+        <app-oferta *ngFor="let oferta of ofertas_mostradas" [ofertaId]="oferta.id"></app-oferta>
+
+        <!-- Paginación -->
+        <div class="d-flex align-items-center justify-content-center mt-3">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination botonesPaginacion">
+                  <li class="page-item">
+                    <button class="page-link" aria-label="Previous" (click)="goToPage(0)">
+                      <span aria-hidden="true">&laquo;</span>
+                    </button>
+                  </li>
+                  <li class="page-item">
+                    <button class="page-link" aria-label="Previous" (click)="previousPage()">
+                        Anterior
+                    </button>
+                  </li>
+                  <li class="page-item"><button class="page-link">{{pagina_actual+1}}</button></li>
+                  <li class="page-item">
+                    <button class="page-link" aria-label="Previous" (click)="nextPage()">
+                        Siguiente
+                    </button>
+                  </li>
+                  <li class="page-item">
+                    <button class="page-link" aria-label="Next" (click)="goToPage(total_paginas)">
+                      <span aria-hidden="true">&raquo;</span>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
         </div>
+        
+      </div>
     </div>
+
+    <!-- Botón subir hacia arriba -->
+    <div id="flechaSubir" class="position-fixed" (click)="scrollClick()">
+      <i class="bi bi-arrow-up-circle-fill"></i>
+    </div>
+    
 </div>
 
 <!-- Aqui va el footer -->

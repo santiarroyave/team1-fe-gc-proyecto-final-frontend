@@ -1,0 +1,81 @@
+.quitarFondo{
+    background-color: transparent !important;
+    padding: 0;
+}
+
+.navbarContenedor{
+    background-color: #fff;
+    /* box-shadow:  .1em .1em .4em rgba(0, 0, 0, 0.25); */
+}
+
+/* Estrellitas */
+/* ---------------------------------------------------------------------------- */
+/* Contenedor */
+.categoriaAlojamiento .form-check{
+    display: flex;
+    /* background-color: red; */
+}
+
+/* Casilla de verificacion */
+.categoriaAlojamiento .form-check-input{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.categoriaAlojamiento .form-check-input:checked{
+    background-color: var(--turquesa-brillante);
+    border-color: var(--turquesa-brillante);
+}
+
+/* Contenedor Estrella */
+.categoriaAlojamiento .form-check-label{
+    margin-left: .3em;
+}
+
+/* Estrella */
+.categoriaAlojamiento .bi-star-fill{
+    color: var(--amarillo-sol);
+    font-size: 1.3em;
+    padding: 0 .1em;
+}
+
+
+/* COLORES DE LA BARRA DE PRECIO */
+/* ---------------------------------------------------------------------------- */
+/* Cambia el color del thumb en navegadores Webkit (Chrome, Safari) */
+.preciosFiltro .form-range::-webkit-slider-thumb {
+    background-color: var(--turquesa-brillante-1);
+}
+
+/* Cambia el color del thumb en navegadores Firefox */
+.preciosFiltro .form-range::-moz-range-thumb {
+    background-color: var(--turquesa-brillante-1); 
+}
+
+/* Cambia el color del thumb en navegadores Microsoft Edge */
+.preciosFiltro .form-range::-ms-thumb {
+    background-color: var(--turquesa-brillante-1); 
+}
+
+/* Cambia el color de la pista en navegadores Webkit (Chrome, Safari) */
+.preciosFiltro .form-range::-webkit-slider-runnable-track {
+    background-color: var(--turquesa-brillante-2);
+}
+
+/* Cambia el color de la pista en navegadores Firefox */
+.preciosFiltro .form-range::-moz-range-track {
+    background-color: var(--turquesa-brillante-2);
+}
+
+/* Cambia el color de la pista en navegadores Microsoft Edge */
+.preciosFiltro .form-range::-ms-track {
+    background-color: var(--turquesa-brillante-2);
+}
+/* ---------------------------------------------------------------------------- */
+
+
+/* Pone los bordes rectos cuando el menú vertical está colapsado */
+@media (max-width: 991px){
+	.navbarContenedor{
+        border-radius: 0 !important;
+    }
+}
