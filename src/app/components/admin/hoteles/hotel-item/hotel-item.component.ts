@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-hotel-item',
@@ -6,5 +6,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./hotel-item.component.css']
 })
 export class HotelItemComponent {
-  @Input() listaHoteles: any = [];
+  // @Input() listaHoteles: any = [];
+  @Input() hotel: any;
+  @Output() editar = new EventEmitter<string>();
+
+  onEditar() {
+    this.editar.emit(this.hotel.id);
+  }
 }

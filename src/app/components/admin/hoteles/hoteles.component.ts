@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
-import { OfertasService } from 'src/app/services/ofertas.service';
 
 @Component({
   selector: 'app-hoteles',
@@ -10,9 +9,9 @@ import { OfertasService } from 'src/app/services/ofertas.service';
 export class HotelesComponent {
   hoteles: any = [];
 
-  constructor(private ofertasService: AlojamientosService) {}
+  constructor(private alojamientoService: AlojamientosService) {}
 
   ngOnInit(): void {
-      this.hoteles = this.ofertasService.getAllAlojamientos();
+      this.hoteles = this.alojamientoService.getAllAlojamientos();
   }
 }
