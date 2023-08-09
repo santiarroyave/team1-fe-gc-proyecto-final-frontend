@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit{
     }
   }
   mostrarFlecha(){
-    if (this.scroll == true){
+    if (this.scroll == true && window.scrollY > 1500){
       let flecha:any;
       flecha = document.getElementById("flechaSubir");
       flecha.classList.remove("ocultarFlecha");
