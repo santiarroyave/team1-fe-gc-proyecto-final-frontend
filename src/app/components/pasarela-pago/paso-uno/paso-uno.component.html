@@ -1,5 +1,5 @@
 <app-navbar-h></app-navbar-h>
-<div class="h-50 w-100 d-flex justify-content-center">
+<div class="h-50 d-flex">
   <img src={{oferta.imagen}} class="img-fluid w-100 img-thumbnail" alt="...">
   <img src={{oferta.imagen}} class="img-fluid w-100 img-thumbnail" alt="...">
   <button type="button" class="btn" (click)="toastTrigger()">
@@ -10,7 +10,7 @@
   <div class="row mt-4 w-100">
     <div class="col cl-1">
       <label class="form-label lbl-1">Selecciona el número de personas</label>
-      <select class="form-select" [(ngModel)]="num_personas">
+      <select class="form-select" [(ngModel)]="num_personas" (ngModelChange)="calcularNoches()">
         <option value="1">1</option>
         <option value="2" selected>2</option>
         <option value="3">3</option>
@@ -48,7 +48,6 @@
             matStartDate
             placeholder="Start date"
             formControlName="start"
-            (dateChange)="change()"
           />
           <input matEndDate placeholder="End date" formControlName="end" />
         </mat-date-range-input>
@@ -78,18 +77,18 @@
       </div>
       <div class="tb-1">
         <label class="lbl-2">{{num_personas}}</label>
-        <label class="lbl-2">{{precio_persona}} €</label>
+        <label class="lbl-2">{{precio_persona | number: '1.2-2' }} €</label>
       </div>
       <div class="tb-1">
         <label class="lbl-2">Total</label>
-        <label class="lbl-2">{{precio_persona*num_personas}} €</label>
+        <label class="lbl-2">{{noches*precio_noche | number: '1.2-2' }} €</label>
       </div>
     </div>
   </div>
   <div class="row rw-1 mt-3">
     <div class="col btn-settings">
         <button type="button" class="btn btn-primary" routerLink="/oferta/{{oferta.id}}">volver</button>
-        <button type="button" class="btn btn-danger" routerLink="/paso-2/{{oferta.id}}">{{precio_persona}} €/persona</button>
+        <button type="button" class="btn btn-danger" (click)="actualizarOferta()">{{precio_persona | number: '1.2-2' }} €/persona</button>
     </div>
   </div>
   <div class="row m-3">
