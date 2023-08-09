@@ -14,7 +14,15 @@ export class AlojamientosService {
     return db.alojamientos;
   }
 
-  getOfertaById(id:number): Object{
+  getAlojamientoById(id:number): Object{
     return db.alojamientos[id-1];
+  }
+
+  updateAlojamiento(alojamiento: any){
+    db.alojamientos[alojamiento.id-1] = alojamiento;
+  }
+
+  addAlojamiento(alojamiento: any){
+    console.log("alojamiento añadido" + JSON.stringify(alojamiento));
   }
 }

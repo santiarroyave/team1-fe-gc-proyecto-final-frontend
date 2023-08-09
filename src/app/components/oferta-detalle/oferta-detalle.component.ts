@@ -30,13 +30,9 @@ export class OfertaDetalleComponent implements OnInit {
     this.route.params.subscribe((params) => {
       const elementId: number = Number(params['id']);
       this.oferta = this.ofertasService.getOfertaById(elementId);
-      this.alojamiento = this.alojamientosService.getOfertaById(elementId);
+      this.alojamiento = this.alojamientosService.getAlojamientoById(elementId);
       this.actividad = this.actividadesService.getActividadById(elementId);
     });
-  }
-
-  updateNoches(): void{
-    this.ofertasService.noches = Number(this.num_noches);
   }
 
   toastTrigger(): void {

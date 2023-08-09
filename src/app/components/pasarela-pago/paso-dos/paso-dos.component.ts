@@ -9,6 +9,7 @@ import { OfertasService } from 'src/app/services/ofertas.service';
 })
 export class PasoDosComponent {
   oferta: any;
+  precio: any;
 
   constructor(private route: ActivatedRoute, private ofertasService: OfertasService){}
 
@@ -17,5 +18,6 @@ export class PasoDosComponent {
       const elementId: number = Number(params['id']);
       this.oferta = this.ofertasService.getOfertaById(elementId);
     });
+    this.precio = this.ofertasService.oferta;
   }
 }

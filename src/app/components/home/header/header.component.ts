@@ -16,6 +16,8 @@ export class HeaderComponent implements OnInit{
   doSomethingOnWindowScroll($event:Event){
     this.navegarABuscador();
     this.scroll = true;
+    
+    this.ocultarFlecha();
   }
   
   ngOnInit(){
@@ -23,6 +25,8 @@ export class HeaderComponent implements OnInit{
     if (this.scroll == false){
       this.navbarH = document.querySelector("app-navbar-h");
       this.navbarH.classList.add("d-none");
+
+      this.ocultarFlecha();
     }
   }
   
@@ -44,4 +48,14 @@ export class HeaderComponent implements OnInit{
     }
   }
   
+  ocultarFlecha(){
+    let flecha:any;
+    flecha = document.getElementById("flechaSubir");
+
+    if(window.scrollY > 1500){
+      flecha.classList.remove("ocultarFlecha");
+    }else{
+      flecha.classList.add("ocultarFlecha");
+    }
+  }
 }

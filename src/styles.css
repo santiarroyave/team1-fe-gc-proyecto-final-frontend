@@ -30,6 +30,11 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; ba
     --turquesa-brillante-3: #17DFFB;
 }
 
+hr{
+    color: var(--turquesa-brillante-0);
+    margin: 1.5em 0em;
+}
+
 /* BOTONES */
 .botonOferta{
     background-color: var(--naranja-aventura);
@@ -97,7 +102,19 @@ body { margin: 0; font-family: Poppins, Roboto, "Helvetica Neue", sans-serif; ba
     color: #000 !important;
     background-color: var(--amarillo-sol) !important;
     filter: brightness(100%);
-    
+}
+
+.botonesPaginacion button{
+	background-color: var(--turquesa-brillante); 
+	color: #fff;
+}
+.botonesPaginacion button:hover{
+	background-color: var(--turquesa-brillante-1); 
+	color: #fff;
+}
+.botonesPaginacion button:focus{
+	background-color: var(--turquesa-brillante-1);
+	color: #fff;
 }
 
 /* Cambia el color de la rueda de carga a naranja */

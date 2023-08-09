@@ -17,4 +17,12 @@ export class ActividadesService {
   getActividadById(id:number): Object{
     return db.actividades[id-1];
   }
+
+  updateActividad(actividad: any){
+    db.alojamientos[actividad.id-1] = actividad;
+  }
+
+  addActividad(actividad: any){
+    console.log("actividad añadida" + JSON.stringify(actividad));
+  }
 }
