@@ -1,0 +1,14 @@
+<div class="mb-3">
+    <label for="telefono" class="form-label fw-bold">{{nombreCampo}}</label>
+    <div class="d-flex">
+        <input *ngIf="editSeleccionado; else bloqueado" type="text" class="form-control me-4" id="{{nombreCampo}}" [(ngModel)]="nombreCampo" name="{{nombreCampo}}">
+        <ng-template class="w-100" #bloqueado>
+            <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
+                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ valor }}</p>
+            </div>
+        </ng-template>
+        <button class="btn btn-secondary material-symbols-outlined" (click)="activadoEdit()">
+            {{ editSeleccionado ? 'save' : 'edit' }}
+        </button>
+    </div>
+</div>
