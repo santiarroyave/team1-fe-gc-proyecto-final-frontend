@@ -6,26 +6,47 @@
         <!-- Aqui va el menu vertical -->
         <app-navbar-v class="col col-12 col-lg-3"></app-navbar-v>
         
-        <div class="col col-9 p-3">
+        <div class="col col-12 col-lg-9 p-3">
             <div>
                 <!-- Escribir código aqui -->
                 <div class="container col-9 mt-4">
                     <h1>Editar actividad</h1>
                     <form>
+                        
                         <div class="mb-3">
-                            <label for="titulo" class="form-label">Título</label>
-                            <input type="text" class="form-control" id="titulo" name="titulo" required>
+                            <label for="titulo" class="form-label fw-bold">Titulo</label>
+                            <div class="d-flex">
+                                <input *ngIf="tituloEditSeleccionado; else tituloBloqueado" type="text" class="form-control me-4" id="titulo" [(ngModel)]="actividad.titulo" name="titulo">
+                                <ng-template class="w-100" #tituloBloqueado>
+                                    <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
+                                        <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ actividad.titulo }}</p>
+                                    </div>
+                                </ng-template>
+                                <button class="btn btn-secondary material-symbols-outlined" (click)="activadoTituloEdit()">
+                                    {{ tituloEditSeleccionado ? 'save' : 'edit' }}
+                                </button>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="descripcion" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required></textarea>
+                            <label for="descripcion" class="form-label fw-bold">Descripción</label>
+                            <div class="d-flex">
+                                <textarea *ngIf="descripcionEditSeleccionado; else descripcionBloqueado" type="text" rows="10" required class="form-control me-4" id="descripcion" [(ngModel)]="actividad.descripcion" name="descripcion"></textarea>
+                                <ng-template class="w-100" #descripcionBloqueado>
+                                    <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
+                                        <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ actividad.descripcion }}</p>
+                                    </div>
+                                </ng-template>
+                                <button class="btn btn-secondary material-symbols-outlined" (click)="activadoDescripcionEdit()">
+                                    {{ descripcionEditSeleccionado ? 'save' : 'edit' }}
+                                </button>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="imagen" class="form-label">Imagen</label>
                             <input type="file" class="form-control" id="imagen" name="imagen">
                             <small class="form-text text-muted">Puedes cargar una imagen desde tu ordenador.</small>
                         </div>
-                        <button type="submit" class="btn btn-primary">Añadir Actividad</button>
+                        <button type="submit" class="btn btn-primary" (click)="confirmarEdit()">Confirmar</button>
                     </form>
                 </div>
 
