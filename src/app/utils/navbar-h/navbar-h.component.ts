@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-navbar-h',
@@ -7,7 +8,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./navbar-h.component.css']
 })
 export class NavbarHComponent implements OnInit{
-  
+  // Ruta actual
+  rutaActual:any;
   // Lista donde se mostrará el navbar-v dentro del menu horizontal
   whiteList:any = [
     "home",
@@ -18,18 +20,20 @@ export class NavbarHComponent implements OnInit{
   // Indica si el menú-V debe ser mostrado dentro del menú-H
   mostrarMenu:boolean = false;
 
-  constructor(private route: ActivatedRoute) { }
+  // Alterna entre navbar fixed o no en funcion de si estas arriba de la pagina o no
+  @HostListener("window:scroll", [])
+  onWindowScroll(){
+    this.posicionNavbar();
+  }
+  
+  constructor(private route: ActivatedRoute, private router: Router, private viewportScroller: ViewportScroller) { }
 
   ngOnInit(): void {
     // Obtiene la ruta actual y la coteja con la WhiteList para mostrar el menu o no
     this.route.url.subscribe(segments => {
-      let rutaActual = segments.map(segment => segment.path).join('/');
-      this.mostrarMenu = this.whiteList.includes(rutaActual);
+      this.rutaActual = segments.map(segment => segment.path).join('/');
+      this.mostrarMenu = this.whiteList.includes(this.rutaActual);
     });
-
-    // Hace scroll hacia arriba
-    window.scrollTo(0, 0);
-    
   }
 
   // Activa los dos navbar desplegables al hacer click en el boton de menu de los moviles
@@ -58,8 +62,30 @@ export class NavbarHComponent implements OnInit{
         menuV.classList.add("show");
       }
     }
+  }
 
-    
+  posicionNavbar(){
+    // 1. Si está en el home la posicion es Fixed
+    // 2. Si esta fuera del home la posición varia:
+    //    - scroll < 500 es Sticky
+    //    - scroll > 500 es Fixed
+    //    Esto es para que no se note tanto el cambio
+    let navbarFixed:any = document.getElementById("contenedorFix");
+
+    if(this.rutaActual == "home"){
+      navbarFixed.classList.add("fixed-top");
+      
+    }else{
+      if(window.scrollY < 500){
+        navbarFixed.classList.remove("fixed-top");
+        navbarFixed.classList.add("sticky-top");
+        
+      }
+      if(window.scrollY > 500){
+        navbarFixed.classList.add("fixed-top");
+        navbarFixed.classList.remove("sticky-top");
+      }
+    }
   }
 
 }
