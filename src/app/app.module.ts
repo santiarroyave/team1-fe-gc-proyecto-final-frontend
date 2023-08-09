@@ -86,7 +86,7 @@ export const MY_DATE_FORMATS = {
     RegisterComponent,
     HotelItemComponent,
     ActividadItemComponent,
-    EditarCampoComponent
+    EditarCampoComponent,
     PerfilComponent,
     RecompensasComponent
   ],
