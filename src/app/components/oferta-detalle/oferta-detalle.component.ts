@@ -35,10 +35,6 @@ export class OfertaDetalleComponent implements OnInit {
     });
   }
 
-  updateNoches(): void{
-    this.ofertasService.noches = Number(this.num_noches);
-  }
-
   toastTrigger(): void {
     const toastLiveExample = document.getElementById('liveToast');
 
