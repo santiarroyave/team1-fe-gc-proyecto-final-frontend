@@ -4,8 +4,9 @@
 <!-- Aqui va la foto de la pantalla de inicio -->
 <app-header></app-header>
 <!-- Aqui va el buscador -->
-<app-buscador id="buscador" (nombre_oferta)="actualizarListaOfertas($event)"></app-buscador>
-
+<div class="container">
+  <app-buscador id="buscador" (nombre_oferta)="actualizarListaOfertas($event)"></app-buscador>
+</div>
 <div class="container">
   <div class="row">
     
