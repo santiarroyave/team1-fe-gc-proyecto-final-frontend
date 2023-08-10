@@ -42,6 +42,8 @@ import { ActividadItemComponent } from './components/admin/actividades/actividad
 import { EditarCampoComponent } from './utils/editar-campo/editar-campo.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { RecompensasComponent } from './components/recompensas/recompensas.component';
+import { ReservaItemComponent } from './components/reservas/reserva-item/reserva-item.component';
+import { ReservaDetalleComponent } from './components/reservas/reserva-detalle/reserva-detalle.component';
 
 
 export const MY_DATE_FORMATS = {
@@ -88,7 +90,9 @@ export const MY_DATE_FORMATS = {
     ActividadItemComponent,
     EditarCampoComponent,
     PerfilComponent,
-    RecompensasComponent
+    RecompensasComponent,
+    ReservaItemComponent,
+    ReservaDetalleComponent
   ],
   imports: [
     BrowserModule,

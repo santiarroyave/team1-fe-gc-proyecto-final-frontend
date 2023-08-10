@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OfertasService } from 'src/app/services/ofertas.service';
 
 @Component({
   selector: 'app-reservas',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./reservas.component.css']
 })
 export class ReservasComponent {
+  listaReservas: any[] = [];
 
+  constructor(private ofertasService: OfertasService) {
+    this.listaReservas = this.ofertasService.getAllReservas();
+  }
 }

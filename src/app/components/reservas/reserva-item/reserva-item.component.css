@@ -1,0 +1,29 @@
+.contenedorReserva{
+    overflow: hidden;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.contenedorReserva:hover{
+    box-shadow: .2em .2em .7em rgba(0, 0, 0, 0.15);
+}
+
+.textoPrecio{
+    font-size: 1.4em;
+    color: rgb(102, 102, 102);
+    font-weight: 500;
+}
+
+/* Clases del tiempo restante */
+.tiempoRestante{
+    background-color: var(--naranja-aventura);
+    padding: .5em 1em;
+    color: #fff;
+    font-size: 1.2em;
+}
+.tiempoRestante i{
+    margin-right: .5em;
+}
+.tiempoRestante p{
+    margin: 0;
+}
