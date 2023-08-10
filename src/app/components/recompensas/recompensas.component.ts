@@ -1,5 +1,8 @@
 import { Component, HostListener } from '@angular/core';
 
+declare var bootstrap: any;
+
+
 @Component({
   selector: 'app-recompensas',
   templateUrl: './recompensas.component.html',
@@ -32,5 +35,12 @@ export class RecompensasComponent {
     }else{
       this.menuColapsado = false;
     }
+  }
+
+  modalTrigger(): void {
+    const modalLiveExample = document.getElementById('liveModal');
+
+    const modalBootstrap = new bootstrap.Toast(modalLiveExample);
+    modalBootstrap.show();
   }
 }
