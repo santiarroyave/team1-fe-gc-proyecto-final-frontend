@@ -1,10 +1,9 @@
 <app-navbar-h></app-navbar-h>
-<p>perfil works!</p>
-<div class="container">
-    <!-- Aqui va el menu vertical -->
-    <div class="row">
+
+<div class="container py-4">
+    <div class="row justify-content-center">
         <!-- Falta arreglar esto, para que al colapsar aparezca mas arriba junto al otro menu y no haya la separacion del header y del buscador -->
-        <div class="d-flex flex-column col col-12 col-lg-3">
+        <div class="d-flex flex-column d-none d-lg-block col-lg-4 col-xxl-3">
             <ng-container *ngIf="!menuColapsado">
                 <img src="../../../assets/user-icons-default.jpg" class="profile-photo rounded-circle mb-3" alt="...">
                 <div class="text-center relative mb-3">
@@ -14,11 +13,11 @@
                     </a>
                     <input type="file" class="form-control" id="fileInput" style="display: none" (change)="handleFileChange($event)">
                 </div>
-                <app-navbar-v id="menuV-2"></app-navbar-v>
             </ng-container>
         </div>
-        <div class="user-form-settings col col-12 col-lg-9">
+        <div class="user-form-settings col-12 col-lg-12 col-xxl-9">
             <h2>Datos personales</h2>
+            <hr>
             <form class="input-has-icon">
                 <div class="row">
                     <div class="col-md-6">

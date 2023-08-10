@@ -44,6 +44,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { RecompensasComponent } from './components/recompensas/recompensas.component';
 import { ReservaItemComponent } from './components/reservas/reserva-item/reserva-item.component';
 import { ReservaDetalleComponent } from './components/reservas/reserva-detalle/reserva-detalle.component';
+import { MenuComponent } from './components/admin/menu/menu.component';
+import { MenuPerfilComponent } from './utils/menu-perfil/menu-perfil.component';
 
 
 export const MY_DATE_FORMATS = {
@@ -92,7 +94,9 @@ export const MY_DATE_FORMATS = {
     PerfilComponent,
     RecompensasComponent,
     ReservaItemComponent,
-    ReservaDetalleComponent
+    ReservaDetalleComponent,
+    MenuComponent,
+    MenuPerfilComponent
   ],
   imports: [
     BrowserModule,
