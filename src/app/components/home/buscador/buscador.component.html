@@ -1,70 +1,73 @@
-<div class="container">
-    <div class="row mt-3 d-flex align-items-center justify-content-center">
-        <div class="col">
-            <h2>¿Quieres buscar tu viaje?</h2>
-        </div>
+<h2>¿Quieres buscar tu viaje?</h2>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <button class="navbar-toggler w-100" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      Buscador
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <ul class="row w-100 navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item col">
+              <input type="text" class="form-control p-3" placeholder="Nombre de la oferta" [(ngModel)]="nombre" (keyup)="sendEvent(nombre)">
+          </li>
+          <li class="nav-item col">
+              <div class="d-flex align-items-center justify-content-center form-control p-1">
+                  <mat-date-range-input
+                    [formGroup]="campaignOne"
+                    [rangePicker]="campaignOnePicker"
+                    [max]="max"
+                    [min]="min"
+                  >
+                    <input
+                      matStartDate
+                      placeholder="Start date"
+                      formControlName="start"
+                      />
+                    <input matEndDate placeholder="End date" formControlName="end"/>
+                  </mat-date-range-input>
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="campaignOnePicker"
+                  ></mat-datepicker-toggle>
+                  <mat-date-range-picker
+                    #campaignOnePicker
+                    touchUi="true"
+                    matCalendarStartOfWeek="1"
+                  >
+                  <mat-date-range-picker-actions>
+                    <button mat-button matDateRangePickerCancel>Cancel</button>
+                    <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+                  </mat-date-range-picker-actions>
+                  </mat-date-range-picker>
+              </div>
+          </li>
+          <li class="nav-item col">
+              <select class="form-select w-100 h-100 p-3" [(ngModel)]="num_personas">
+                  <option value="1">1 persona</option>
+                  <option value="2" selected>2 personas</option>
+                  <option value="3">3 personas</option>
+                  <option value="4">4 personas</option>
+                  <option value="5">5 personas</option>
+                  <option value="6">6 personas</option>
+                  <option value="7">7 personas</option>
+                  <option value="8">8 personas</option>
+                  <option value="9">9 personas</option>
+                  <option value="10">10 personas</option>
+                  <option value="11">11 personas</option>
+                  <option value="12">12 personas</option>
+                  <option value="13">13 personas</option>
+                  <option value="14">14 personas</option>
+                  <option value="15">15 personas</option>
+                  <option value="16">16 personas</option>
+                  <option value="17">17 personas</option>
+                  <option value="18">18 personas</option>
+                  <option value="19">19 personas</option>
+                  <option value="20">20 personas</option>
+              </select>
+          </li>
+          <li class="nav-item col">
+              <button type="button" class="btn btn-primary botonAzul w-100 h-100 p-3">Buscar</button>
+          </li>
+      </ul>
     </div>
-    <div class="row mb-3 d-flex align-items-center justify-content-center">
-        <div class="col-3 d-flex align-items-center justify-content-center">
-            <input type="text" class="form-control w-100 h-100 p-3" placeholder="Nombre de la oferta" [(ngModel)]="nombre" (keyup)="sendEvent(nombre)">
-        </div>
-        <div class="col-3 d-flex align-items-center justify-content-center">
-            <div class="d-flex align-items-center justify-content-center form-control p-1">
-                <mat-date-range-input
-                  [formGroup]="campaignOne"
-                  [rangePicker]="campaignOnePicker"
-                  [max]="max"
-                  [min]="min"
-                >
-                  <input
-                    matStartDate
-                    placeholder="Start date"
-                    formControlName="start"
-                    />
-                  <input matEndDate placeholder="End date" formControlName="end"/>
-                </mat-date-range-input>
-                <mat-datepicker-toggle
-                  matIconSuffix
-                  [for]="campaignOnePicker"
-                ></mat-datepicker-toggle>
-                <mat-date-range-picker
-                  #campaignOnePicker
-                  touchUi="true"
-                  matCalendarStartOfWeek="1"
-                >
-                <mat-date-range-picker-actions>
-                  <button mat-button matDateRangePickerCancel>Cancel</button>
-                  <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
-                </mat-date-range-picker-actions>
-                </mat-date-range-picker>
-            </div>
-        </div>
-        <div class="col-3 d-flex align-items-center justify-content-center">
-            <select class="form-select w-100 h-100 p-3" [(ngModel)]="num_personas">
-                <option value="1">1 persona</option>
-                <option value="2" selected>2 personas</option>
-                <option value="3">3 personas</option>
-                <option value="4">4 personas</option>
-                <option value="5">5 personas</option>
-                <option value="6">6 personas</option>
-                <option value="7">7 personas</option>
-                <option value="8">8 personas</option>
-                <option value="9">9 personas</option>
-                <option value="10">10 personas</option>
-                <option value="11">11 personas</option>
-                <option value="12">12 personas</option>
-                <option value="13">13 personas</option>
-                <option value="14">14 personas</option>
-                <option value="15">15 personas</option>
-                <option value="16">16 personas</option>
-                <option value="17">17 personas</option>
-                <option value="18">18 personas</option>
-                <option value="19">19 personas</option>
-                <option value="20">20 personas</option>
-            </select>
-        </div>
-        <div class="col-3 d-flex align-items-center justify-content-center">
-            <button type="button" class="btn btn-primary botonAzul w-100 h-100 p-3">Buscar</button>
-        </div>
-    </div>    
-</div>
+  </div>
+</nav>
