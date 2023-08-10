@@ -33,7 +33,7 @@
 }
 
 .copy-right {
-    border-top: 1px solid #eaeef3;
+    border-top: 1px solid #474747;
 }
 
 .copy-right .context {
@@ -66,6 +66,10 @@
 
 p{
     text-align:justify;
+}
+
+.footer{
+    background-color: #dbdbdb;
 }
 
 @media only screen and (min-width: 1030px) {

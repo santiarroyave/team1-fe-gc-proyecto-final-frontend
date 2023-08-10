@@ -10,7 +10,9 @@
             <div>
                 <!-- Escribir código aqui -->
                 <h1>Mis reservas</h1>
-
+                <div *ngFor="let reserva of listaReservas">
+                    <app-reserva-item [reserva]="reserva"></app-reserva-item>
+                </div>
 
 
 

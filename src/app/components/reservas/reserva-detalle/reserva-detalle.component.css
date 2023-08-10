@@ -1,0 +1,16 @@
+.textoCargosAdicionales{
+    color: rgb(87, 87, 87);
+}
+
+.custom-container{
+    margin-top: 10vh;
+    margin-bottom: 20vh;
+    background-color: rgb(228, 228, 228);
+    border-radius: 2px;
+    border: 2px solid black;
+}
+.precio{
+    font-size: 2em;
+    font-weight: 300;
+    color: rgb(0, 0, 0);
+}

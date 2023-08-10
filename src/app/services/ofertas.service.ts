@@ -17,4 +17,13 @@ export class OfertasService {
   getOfertaById(id:number): Object{
     return db.ofertas[id-1];
   }
+
+  //reservas
+  getAllReservas(): any[]{
+    return db.reservas;
+  }
+
+  getReservaById(id:number): Object{
+    return db.reservas[id-1];
+  }
 }
