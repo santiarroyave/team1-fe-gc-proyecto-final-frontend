@@ -1,6 +1,6 @@
 <app-navbar-h></app-navbar-h>
-<div class="container-fluid w-50 cnt-settings mt-3">
-    <div class="row">
+<div class="container py-3 w-75 cnt-settings mt-3">
+    <div class="row d-flex align-items-center justify-content-center">
         <div class="col d-flex justify-content-center mt-3">
             <div class="form-floating m-1 w-100">
                 <input type="text" class="form-control" placeholder="Password">
@@ -12,23 +12,26 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row d-flex align-items-center justify-content-center">
         <div class="col d-flex justify-content-center">
             <div class="form-floating m-1 w-100">
-                <input type="text" class="form-control" placeholder="Password">
-                <label for="floatingPassword">Input</label>
+                <select class="form-select p-3">
+                    <option value="1" selected>DNI</option>
+                    <option value="2">Pasaporte</option>
+                    <option value="3">NIE</option>
+                  </select>
             </div>
             <div class="form-floating m-1 w-100">
                 <input type="text" class="form-control" placeholder="Password">
-                <label for="floatingPassword">Documento de identidad</label>
+                <label for="floatingPassword">Documento</label>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row d-flex align-items-center justify-content-center">
         <div class="col d-flex justify-content-center">
             <div class="form-floating m-1 w-100">
                 <input type="text" class="form-control" placeholder="Password">
-                <label for="floatingPassword">Correo electrónico</label>
+                <label for="floatingPassword">Email</label>
             </div>
             <div class="form-floating m-1 w-100">
                 <input type="text" class="form-control" placeholder="Password">
@@ -36,7 +39,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row d-flex align-items-center justify-content-center">
         <div class="col d-flex mt-1">
             <span class="material-symbols-outlined card-style">
                 credit_card
@@ -44,14 +47,14 @@
             <p class="d-flex align-items-center justify-content-center m-0 p-0">Tarjeta de crédito o débito</p>
         </div>
     </div>
-    <div class="row">
+    <div class="row d-flex align-items-center justify-content-center">
         <div class="col mb-1 mt-1">
             <img width="48" height="48" src="https://img.icons8.com/color/48/visa.png" alt="visa"/>
             <img width="48" height="48" src="https://img.icons8.com/color/48/maestro.png" alt="maestro"/>
             <img width="48" height="48" src="https://img.icons8.com/color/48/mastercard.png" alt="mastercard"/>
         </div>
     </div>
-    <div class="row">
+    <div class="row d-flex align-items-center justify-content-center">
         <div class="col-6">
             <div class="mb-3">
                 <label class="form-label">Número de tarjeta</label>
