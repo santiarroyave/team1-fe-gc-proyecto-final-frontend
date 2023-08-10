@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit{
   
   // Hace scroll hasta el buscador
   navegarABuscador() {
-    let elemento = document.getElementById("buscador");
+    let elemento = document.getElementById("auxiliarBuscador");
     if (elemento && this.scroll == false) {
       elemento.scrollIntoView({ behavior: 'smooth' });
       
@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit{
   }
 
   scrollClick(){
-    let elemento = document.getElementById("buscador");
+    let elemento = document.getElementById("auxiliarBuscador");
     if (elemento){
       elemento.scrollIntoView({ behavior: 'smooth' });
     }

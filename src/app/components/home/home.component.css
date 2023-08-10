@@ -28,3 +28,8 @@
 #flechaSubir i:active{
     color: var(--turquesa-brillante-0);
 }
+
+#auxiliarBuscador{
+    width: 100%;
+    height: 90px;
+}
