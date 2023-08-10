@@ -9,6 +9,9 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    background-attachment: fixed;
+    -webkit-background-attachment: fixed; /* Para navegadores basados en WebKit (como Safari) */
+    -moz-background-attachment: fixed; /* Para navegadores basados en Gecko (como Firefox) */
 
     display: grid;
     place-items: center;

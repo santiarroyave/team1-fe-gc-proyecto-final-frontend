@@ -20,6 +20,7 @@ import { PasoUnoComponent } from './components/pasarela-pago/paso-uno/paso-uno.c
 import { PasoDosComponent } from './components/pasarela-pago/paso-dos/paso-dos.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { RecompensasComponent } from './components/recompensas/recompensas.component';
+import { ReservaDetalleComponent } from './components/reservas/reserva-detalle/reserva-detalle.component';
 
 
 const routes: Routes = [
@@ -33,7 +34,7 @@ const routes: Routes = [
   {path:"favoritos/:id", component: OfertaDetalleComponent},
   {path:"reservas", component: ReservasComponent},
   {path:"recompensas", component: RecompensasComponent},
-  {path:"reservas/:id", component: OfertaDetalleComponent},
+  {path:"reservas/:id", component: ReservaDetalleComponent},
   {path:"checkout", component:CheckoutComponent},
   {path:"paso-1/:id", component:PasoUnoComponent},
   {path:"paso-2/:id", component:PasoDosComponent},
@@ -52,7 +53,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
