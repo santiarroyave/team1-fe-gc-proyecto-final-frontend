@@ -1,44 +1,66 @@
-img{
+.fondoBlanco{
+    background-color: #fff;
+}
+/* Banner */
+/* -------------------------------- */
+#bannerOferta{
+    color: #fff;
+    height: 40vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.filtroBannerOscuro{
+    height: 100%;
+    background-color: rgba(28,30,32,.45);
+}
+
+/* Lista de actividades */
+.imagenActividad{
+    background-color: #f1f1f1;
     object-fit: cover;
 }
-
-*::before{
-    box-sizing: border-box;
+.botonesActividades{
+    background-image: linear-gradient(to bottom, transparent, #fff 35%, #fff 50%);
 }
 
-li{
-    box-sizing: border-box;
-    margin-bottom: 20px;
-    list-style: none;
-    text-align: left;
+/* ------------------------------------------------------------------------------------------------ */
+/* GALERIA DE FOTOS */
+/* ------------------------------------------------------------------------------------------------ */
+
+.fotoPrincipalGaleria{
+    height: 500px;
+    position: relative;
 }
 
-ul li:before {
-    content: "";
-    border: 1px solid #5191fa;
-    width: 8px;
-    height: 8px;
-    display: inline-block;
-    border-radius: 50%;
-    margin-right: 20px;
+/* Botones galeria */
+/* -------------------------------------------------- */
+.fotoPrincipalGaleria .botones{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    font-size: 4em;
+}
+.fotoPrincipalGaleria .botones > div{
+    width: 100%;
+    opacity: 0;
+    transition: all .3s;
+}
+.fotoPrincipalGaleria .botones > div:hover{
+    cursor: pointer;
+    opacity: 0.5;
+    color: var(--turquesa-brillante);
 }
 
-.text-style{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.lbl-1{
-    border: 1px ridge;
-    border-radius: 5px;
+/* Mini carrusel */
+/* -------------------------------------------------- */
+.carruselGaleria  img{
+    object-fit: cover;
     width: 100px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 100px;
 }
-
-.f-s{
-    height: 38px;
+.carruselGaleria  img:hover{
+    cursor: pointer;
+    border: 5px solid var(--turquesa-brillante);
 }

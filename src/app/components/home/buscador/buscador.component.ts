@@ -39,5 +39,17 @@ export class BuscadorComponent {
   sendEvent(event: any):void{
     this.nombre_oferta.emit(event);
   }
+
+  increasePersonCount() {
+    if (this.num_personas < 18) {
+      this.num_personas++;
+    }
+  }
+
+  decreasePersonCount() {
+    if (this.num_personas > 1) {
+      this.num_personas--;
+    }
+  }
   
 }

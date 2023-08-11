@@ -38,7 +38,7 @@ export class NavbarHComponent implements OnInit{
 
   // Activa los dos navbar desplegables al hacer click en el boton de menu de los moviles
   activarMenu():void{
-    let menuV:any = document.getElementById("navbarVertical");
+    // let menuV:any = document.getElementById("navbarVertical");
     let menuH:any = document.getElementById("navbarHorizontal");
     // Variable que permite hacer scroll en el menu ya que es position absolute
     // Al hacer click en el boton de menu añade la clase h-100 y overflow-scroll
@@ -55,13 +55,13 @@ export class NavbarHComponent implements OnInit{
     
     // Muestra el menuV colapsado al hacer click
     // Tiene un condicional nulo porque en algunas paginas se muestra y en otras no y sino daria error
-    if(menuV != null){
-      if(menuV.classList.contains("show")){
-        menuV.classList.remove("show");
-      }else{
-        menuV.classList.add("show");
-      }
-    }
+    // if(menuV != null){
+    //   if(menuV.classList.contains("show")){
+    //     menuV.classList.remove("show");
+    //   }else{
+    //     menuV.classList.add("show");
+    //   }
+    // }
   }
 
   posicionNavbar(){

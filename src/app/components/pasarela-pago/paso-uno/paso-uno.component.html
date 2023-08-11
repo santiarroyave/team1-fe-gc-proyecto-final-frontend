@@ -1,8 +1,15 @@
 <app-navbar-h></app-navbar-h>
-<div class="h-50 d-flex">
+<!-- <div class="h-50 d-flex">
   <img src={{oferta.imagen}} class="img-fluid w-100 img-thumbnail" alt="...">
   <img src={{oferta.imagen}} class="img-fluid w-100 img-thumbnail" alt="...">
   <button type="button" class="btn" (click)="toastTrigger()">
+    <img width="30" height="30" src="https://img.icons8.com/flat-round/64/hearts.png" alt="hearts"/>
+  </button>
+</div> -->
+<div class="col-12 position-relative">
+  <img src={{oferta.imagen}} class="img-fluid col-6 img-thumbnail" alt="...">
+  <img src={{oferta.imagen}} class="img-fluid col-6 img-thumbnail" alt="...">
+  <button type="button" class="btn position-absolute top-0 end-0 p-3" (click)="toastTrigger()">
     <img width="30" height="30" src="https://img.icons8.com/flat-round/64/hearts.png" alt="hearts"/>
   </button>
 </div>
@@ -69,43 +76,49 @@
       </mat-form-field>
     </div>
   </div>
-  <div class="row mt-4">
-    <div class="col cl-2">
-      <div class="tb-1">
-        <label class="lbl-2">Personas</label>
-        <label class="lbl-2">Precio/persona</label>
+
+  <!-- Botones personas - precio/persona -->
+  <div class="col-12">
+    <div class="row mt-4 d-flex justify-content-center gap-1">
+      <!-- <div class="col cl-2"> -->
+        <div class="tb-1 gap-1">
+          <label class="lbl-2">Personas</label>
+          <label class="lbl-2">Precio/persona</label>
+        </div>
+        <div class="tb-1 gap-1">
+          <label class="lbl-2">{{num_personas}}</label>
+          <label class="lbl-2">{{precio_persona | number: '1.2-2' }} €</label>
+        </div>
+        <div class="tb-1 gap-1">
+          <label class="lbl-2">Total</label>
+          <label class="lbl-2">{{noches*precio_noche | number: '1.2-2' }} €</label>
+        </div>
       </div>
-      <div class="tb-1">
-        <label class="lbl-2">{{num_personas}}</label>
-        <label class="lbl-2">{{precio_persona | number: '1.2-2' }} €</label>
-      </div>
-      <div class="tb-1">
-        <label class="lbl-2">Total</label>
-        <label class="lbl-2">{{noches*precio_noche | number: '1.2-2' }} €</label>
+    <!-- </div> -->
+  </div>
+
+    <div class="row rw-1 mt-3">
+      <div class="col btn-settings">
+          <button type="button" class="btn btn-primary" routerLink="/oferta/{{oferta.id}}">volver</button>
+          <button type="button" class="btn btn-danger" (click)="actualizarOferta()">{{precio_persona | number: '1.2-2' }} €/persona</button>
       </div>
     </div>
-  </div>
-  <div class="row rw-1 mt-3">
-    <div class="col btn-settings">
-        <button type="button" class="btn btn-primary" routerLink="/oferta/{{oferta.id}}">volver</button>
-        <button type="button" class="btn btn-danger" (click)="actualizarOferta()">{{precio_persona | number: '1.2-2' }} €/persona</button>
-    </div>
-  </div>
-  <div class="row m-3">
-    <div class="col">
-      <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header">
-            <img width="20" height="20" src="https://img.icons8.com/color/48/filled-like.png" alt="filled-like"/>
-            <strong class="me-auto">Oferta X</strong>
-            <small>now</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-          <div class="toast-body">
-            Oferta añadida a favoritos
+    <div class="row m-3">
+      <div class="col">
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <img width="20" height="20" src="https://img.icons8.com/color/48/filled-like.png" alt="filled-like"/>
+              <strong class="me-auto">Oferta X</strong>
+              <small>now</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              Oferta añadida a favoritos
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+
 </div>
