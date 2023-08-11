@@ -19,6 +19,8 @@ export class OfertaDetalleComponent implements OnInit {
   alojamiento: any = {};
   actividad: any = {};
 
+  listaActividades:any = [];
+
   constructor(
     private route: ActivatedRoute,
     private ofertasService: OfertasService,
@@ -33,6 +35,9 @@ export class OfertaDetalleComponent implements OnInit {
       this.alojamiento = this.alojamientosService.getAlojamientoById(elementId);
       this.actividad = this.actividadesService.getActividadById(elementId);
     });
+
+    // Genera actividades de ejemplo
+    this.generadorListaActividades();
   }
 
   toastTrigger(): void {
@@ -40,5 +45,19 @@ export class OfertaDetalleComponent implements OnInit {
 
     const toastBootstrap = new bootstrap.Toast(toastLiveExample);
     toastBootstrap.show();
+  }
+
+  generadorListaActividades(){
+    // Genera 10 iguales de ejemplo
+    for (let i = 0; i < 10; i++) {
+      this.listaActividades.push({
+        id: i,
+        titulo: "Portaventura " + i,
+        descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto suscipit totam quam fugiat nemo magnam et perferendis distinctio cum? Quae earum ipsum aperiam, dolores quod iste non nisi mollitia eaque tempora rerum dolorum! Sunt optio amet repellat fuga quos aspernatur eum at impedit suscipit, quisquam voluptate est! Dolores, nam saepe.",
+        imagen: "https://applications-media.feverup.com/image/upload/f_auto,w_550,h_550/fever2/plan/photo/0f30f6f2-d251-11ea-bf03-06551cb39bc6.jpg"
+      })
+      
+      
+    }
   }
 }

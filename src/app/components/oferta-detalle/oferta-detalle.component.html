@@ -1,7 +1,81 @@
 <!-- Esto es el menu horizontal -->
 <app-navbar-h></app-navbar-h>
 <!-- Escribir código aqui -->
-<div class="h-50 d-flex">
+
+<div id="bannerOferta" style="background-image: url({{oferta.imagen}});">
+  <div class="filtroBannerOscuro d-flex justify-content-center align-items-center">
+    <h1>{{oferta.titulo}}</h1>
+  </div>
+</div>
+
+<div class="container py-4">
+  <!-- Descripcion -->
+  <div class="fondoBlanco rounded-3 p-3">
+    <h2>Titulo oferta</h2>
+    {{oferta | json}}
+    <ul>
+      <li>Precio/noche/persona</li>
+    </ul>
+    <hr>
+    <!-- Info hotel -->
+    <h3>Hotel</h3>
+    <ul>
+      <li>Nombre hotel</li>
+      <li>Pais</li>
+      <li>Dirección</li>
+      <li>Categoría</li>
+      <li>Actividades incluidas</li>
+      <li>Si tiene foto, mostrar</li>
+    </ul>
+    
+  </div>
+
+  <!-- Galeria -->
+  <div class="fondoBlanco rounded-3 p-3 mt-4">
+    <h2>Galería</h2>
+  </div>
+
+  <!-- Lista de Actividades -->
+  <div class="fondoBlanco rounded-3 p-3 mt-4" *ngIf="listaActividades != ''"> <!-- Condicional en función de si hay actividades o no-->
+    
+    <h3>Actividades incluidas</h3>
+    <hr>
+    <div class="d-flex flex-nowrap overflow-x-auto gap-2 pb-3" style="height: 400px;">
+      <div class="card sombraHover overflow-hidden" style="width: 18rem; min-width: 18rem;" *ngFor="let actividad of listaActividades"> <!-- Bucle For que muestra las listas-->
+        <img src="{{actividad.imagen}}" class="card-img-top imagenActividad" alt="..." style="aspect-ratio: 16/9; background-color: #f1f1f1;">
+        <div class="card-body">
+          <h5 class="card-title">{{actividad.titulo}}</h5>
+          <p class="card-text">{{actividad.descripcion}}</p>
+          <div class="botonesActividades d-flex gap-2 p-3 position-absolute bottom-0 end-0 start-0">
+              <button class="btn btn-primary btn-sm botonAzulVacio mt-4 w-100">Más info</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Descripcion extensa -->
+  <div class="fondoBlanco rounded-3 p-3 mt-4">
+    <h2>Descripción</h2>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi reprehenderit mollitia quibusdam ducimus cum odio iste ex illo? Itaque cupiditate impedit minus reprehenderit expedita perferendis? Atque officia ratione ducimus eum hic eaque quam quod unde itaque nobis consectetur, nam nostrum temporibus nihil architecto. Optio dignissimos architecto est? Reiciendis, culpa deleniti. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam est, vel vero nam qui quasi reiciendis odio quam deleniti ipsam voluptatibus minus debitis, rem necessitatibus ut error hic magni! Ipsam, accusamus, facilis in doloribus rem voluptates culpa quaerat quod ipsa excepturi corrupti maiores voluptatum nemo, harum ex dicta cupiditate impedit dolores architecto facere. Deserunt atque at corporis, laudantium velit officia placeat excepturi sint debitis ea. Et odit pariatur dolor distinctio iusto quae soluta, aliquam iure blanditiis ipsa, dolorum consequatur consectetur maiores enim nemo illo? Illum a quaerat velit ad, adipisci dignissimos odit. Ipsa aliquam alias est corporis incidunt blanditiis dolores natus autem numquam dolorum dolore tempora odit voluptatibus illo quasi minus sed veniam, consequatur quibusdam nostrum cumque eos! Maiores provident tempora sapiente repellendus voluptatum dolor cumque veniam sed ratione incidunt excepturi, consequuntur eaque, culpa atque blanditiis reiciendis suscipit aut sint, facilis libero similique nemo natus qui. Aliquid labore similique commodi magni quos earum exercitationem atque. Vitae, quaerat iusto possimus enim dolore minus ea id numquam? Voluptatem expedita corrupti repellat cupiditate iure vitae sunt earum officia! Ipsa error aspernatur voluptatibus et quasi vel excepturi suscipit facere, perferendis nihil est. Architecto recusandae quas provident porro! Est minima necessitatibus rerum, voluptates saepe vel sapiente molestias illo accusantium dolorum, reprehenderit nihil aperiam repellendus laudantium? Veritatis, autem pariatur quidem error sit possimus velit dolore reprehenderit, minima saepe, praesentium repellat quaerat nihil hic cumque eaque maxime odit est id laborum tempore sed ipsum quas! Perferendis amet ullam vel, sunt officiis, sed dolorum, est libero optio accusantium quaerat modi tempora minus recusandae esse natus nulla dolore reiciendis quas consectetur quos necessitatibus deserunt? Tempore eum deleniti doloremque architecto quo in error laboriosam, asperiores optio quae? At vel veniam, asperiores veritatis maxime culpa repudiandae fuga sint quos, consectetur libero, architecto commodi nesciunt. Id ipsam voluptatibus est consectetur! Saepe modi doloremque natus voluptate maiores corrupti non, rem veniam earum ipsam facere quasi libero dolorem voluptatem odio et laboriosam officiis aperiam expedita? Deleniti, aliquam ratione hic quos optio alias, rem minima veritatis incidunt odit sit cum placeat consequatur officiis commodi libero. Vel facilis, neque quae repellat maiores earum nostrum iure magni asperiores reiciendis molestiae obcaecati quibusdam consequatur omnis amet perferendis veniam quisquam nobis aliquam voluptatibus ut ipsum excepturi autem numquam? Recusandae asperiores iusto, mollitia, esse, nisi quam cum magnam dolorum laboriosam numquam repellendus distinctio! Ducimus blanditiis hic inventore, voluptatum, vel ullam delectus nobis totam debitis non recusandae magnam minima nemo, quo neque corrupti illo! Laudantium tempora cupiditate deleniti amet ipsam quia excepturi voluptatibus perspiciatis. Atque vero temporibus incidunt possimus minima et quaerat fugiat beatae magnam corrupti modi autem eligendi reprehenderit voluptate obcaecati ea error aspernatur ut ex, quas ipsa nihil animi! Tempore sapiente odit delectus iure? Consequuntur assumenda architecto maiores deleniti veniam magni nemo dolore vero in ipsum, ducimus, placeat voluptate illum quisquam. Minima minus harum impedit dolore natus officia rem et. Ex, qui. Laudantium quas laboriosam eos totam ullam aut distinctio magnam inventore voluptate? Ut, cumque ratione. Itaque, necessitatibus numquam non magnam nulla, laboriosam, perspiciatis nesciunt ipsum earum eveniet soluta.</p>
+  </div>
+
+
+
+
+  <!-- Galería de fotos -->
+  <!-- <div id="galeriaOferta">
+    <div class="col">
+    </div>
+    <div class="col">
+    </div>
+    <div class="col">
+    </div>
+  </div> -->
+</div>
+
+<!-- Código viejo -->
+<!-- <div class="h-50 d-flex">
     <img src={{oferta.imagen}} class="img-fluid w-100 img-thumbnail" alt="...">
     <img src={{oferta.imagen}} class="img-fluid w-100 img-thumbnail" alt="...">
     <button type="button" class="btn" (click)="toastTrigger()">
@@ -53,6 +127,6 @@
           </div>
         </div>
       </div>
-</div>
+</div> -->
 <!-- Aqui va el footer -->
 <app-footer></app-footer>
