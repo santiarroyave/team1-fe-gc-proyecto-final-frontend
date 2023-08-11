@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { OfertasService } from 'src/app/services/ofertas.service';
 
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-oferta',
@@ -24,8 +25,22 @@ export class OfertaComponent implements OnInit{
   favorito(){
     if (this.favoritoActivo == false){
       this.favoritoActivo = true;
+      this.toastTriggerAdd();
     }else{
       this.favoritoActivo = false;
+      this.toastTriggerDelete();
     }
+  }
+
+  toastTriggerAdd(): void {
+    const toastLiveExample = document.getElementById('liveToastAdd');
+    const toastBootstrap = new bootstrap.Toast(toastLiveExample);
+    toastBootstrap.show();
+  }
+
+  toastTriggerDelete(): void {
+    const toastLiveExample = document.getElementById('liveToastDelete');
+    const toastBootstrap = new bootstrap.Toast(toastLiveExample);
+    toastBootstrap.show();
   }
 }

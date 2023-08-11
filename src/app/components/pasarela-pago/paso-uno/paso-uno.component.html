@@ -15,13 +15,13 @@
 </div>
 <div class="container w-50 d-flex align-items-center justify-content-center flex-column">
   <div class="row mt-4 w-100 d-flex align-items-center justify-content-center">
-    <div class="col d-flex align-items-center justify-content-center">
-      <label class="form-label lbl-1 d-flex align-items-center justify-content-center m-0 p-0">Número de personas</label>
+    <div class="col">
+      <label class="form-label lbl-1 text-center m-0 p-0">Número de personas</label>
     </div>
     <div class="col p-0">
       <div class="input-group">
         <span class="input-group-btn">
-            <button type="button" class="btn btn-default p-3 border rounded-end-0" (click)="decreasePersonCount()">-</button>
+            <button type="button" class="btn input-group-btn btn-default p-3 border rounded-end-0" (click)="decreasePersonCount()">-</button>
         </span>
         <input type="text" class="form-control text-center p-3" [(ngModel)]="num_personas">
         <span class="input-group-btn">
