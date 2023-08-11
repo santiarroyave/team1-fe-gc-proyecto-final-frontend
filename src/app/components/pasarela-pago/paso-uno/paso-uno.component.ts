@@ -68,4 +68,18 @@ export class PasoUnoComponent implements OnInit {
     this.ofertasService.oferta = this.precio_noche*this.noches;
     this.router.navigate([`/paso-2/${this.oferta.id}`]);
   }
+
+  increasePersonCount() {
+    if (this.num_personas < 18) {
+      this.num_personas++;
+      this.calcularNoches();
+    }
+  }
+
+  decreasePersonCount() {
+    if (this.num_personas > 1) {
+      this.num_personas--;
+      this.calcularNoches();
+    }
+  }
 }

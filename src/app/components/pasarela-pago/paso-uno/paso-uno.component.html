@@ -13,37 +13,28 @@
     <img width="30" height="30" src="https://img.icons8.com/flat-round/64/hearts.png" alt="hearts"/>
   </button>
 </div>
-<div class="container-fluid w-50 d-flex align-items-center justify-content-center flex-column">
-  <div class="row mt-4 w-100">
-    <div class="col cl-1">
-      <label class="form-label lbl-1">Selecciona el número de personas</label>
-      <select class="form-select" [(ngModel)]="num_personas" (ngModelChange)="calcularNoches()">
-        <option value="1">1</option>
-        <option value="2" selected>2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-      </select>
+<div class="container w-50 d-flex align-items-center justify-content-center flex-column">
+  <div class="row mt-4 w-100 d-flex align-items-center justify-content-center">
+    <div class="col d-flex align-items-center justify-content-center">
+      <label class="form-label lbl-1 d-flex align-items-center justify-content-center m-0 p-0">Número de personas</label>
+    </div>
+    <div class="col">
+      <div class="input-group">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default p-3 border rounded-end-0" (click)="decreasePersonCount()">-</button>
+        </span>
+        <input type="text" class="form-control text-center p-3" [(ngModel)]="num_personas">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-default p-3 border rounded-start-0" (click)="increasePersonCount()">+</button>
+        </span>
+      </div>
     </div>
   </div>
   <div class="row mt-4 w-100">
-    <div class="col cl-1">
-      <label class="form-label lbl-1">¿Cuándo quieres viajar?</label>
+    <div class="col d-flex align-items-center justify-content-center">
+      <label class="form-label lbl-1 d-flex align-items-center justify-content-center">¿Cuándo quieres viajar?</label>
+    </div>
+    <div class="col d-flex align-items-center justify-content-center">
       <mat-form-field class="date-picker-form">
         <mat-date-range-input
           [formGroup]="campaignOne"
@@ -58,7 +49,6 @@
           />
           <input matEndDate placeholder="End date" formControlName="end" />
         </mat-date-range-input>
-        <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
         <mat-datepicker-toggle
           matIconSuffix
           [for]="campaignOnePicker"
@@ -79,28 +69,29 @@
 
   <!-- Botones personas - precio/persona -->
   <div class="col-12">
-    <div class="row mt-4 d-flex justify-content-center gap-1">
-      <!-- <div class="col cl-2"> -->
-        <div class="tb-1 gap-1">
-          <label class="lbl-2">Personas</label>
-          <label class="lbl-2">Precio/persona</label>
-        </div>
-        <div class="tb-1 gap-1">
-          <label class="lbl-2">{{num_personas}}</label>
-          <label class="lbl-2">{{precio_persona | number: '1.2-2' }} €</label>
-        </div>
-        <div class="tb-1 gap-1">
-          <label class="lbl-2">Total</label>
-          <label class="lbl-2">{{noches*precio_noche | number: '1.2-2' }} €</label>
-        </div>
-      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Personas</th>
+            <th scope="col">Precio/persona</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr>
+            <th>{{num_personas}}</th>
+            <td>{{precio_persona | number: '1.2-2' }} €</td>
+            <td>{{noches*precio_noche | number: '1.2-2' }} €</td>
+          </tr>
+        </tbody>
+      </table>
     <!-- </div> -->
   </div>
 
     <div class="row rw-1 mt-3">
       <div class="col btn-settings">
           <button type="button" class="btn btn-primary" routerLink="/oferta/{{oferta.id}}">volver</button>
-          <button type="button" class="btn btn-danger" (click)="actualizarOferta()">{{precio_persona | number: '1.2-2' }} €/persona</button>
+          <button type="button" class="btn btn-danger" (click)="actualizarOferta()">{{noches*precio_noche | number: '1.2-2' }} €/persona</button>
       </div>
     </div>
     <div class="row m-3">
@@ -120,5 +111,4 @@
         </div>
       </div>
     </div>
-
 </div>
