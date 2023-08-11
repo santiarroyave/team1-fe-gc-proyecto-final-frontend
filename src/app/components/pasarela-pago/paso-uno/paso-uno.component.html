@@ -18,7 +18,7 @@
     <div class="col d-flex align-items-center justify-content-center">
       <label class="form-label lbl-1 d-flex align-items-center justify-content-center m-0 p-0">Número de personas</label>
     </div>
-    <div class="col">
+    <div class="col p-0">
       <div class="input-group">
         <span class="input-group-btn">
             <button type="button" class="btn btn-default p-3 border rounded-end-0" (click)="decreasePersonCount()">-</button>
@@ -31,11 +31,11 @@
     </div>
   </div>
   <div class="row mt-4 w-100">
-    <div class="col d-flex align-items-center justify-content-center">
+    <div class="col d-flex align-items-center justify-content-center w-100">
       <label class="form-label lbl-1 d-flex align-items-center justify-content-center">¿Cuándo quieres viajar?</label>
     </div>
-    <div class="col d-flex align-items-center justify-content-center">
-      <mat-form-field class="date-picker-form">
+    <div class="col d-flex align-items-center justify-content-center p-0">
+      <mat-form-field class="date-picker-form w-100">
         <mat-date-range-input
           [formGroup]="campaignOne"
           [rangePicker]="campaignOnePicker"
@@ -68,33 +68,33 @@
   </div>
 
   <!-- Botones personas - precio/persona -->
-  <div class="col-12">
+  <div class="col-12 mt-4">
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Personas</th>
-            <th scope="col">Precio/persona</th>
-            <th scope="col">Total</th>
+            <th class="tbl-settings">Personas</th>
+            <th class="tbl-settings">Precio/persona</th>
+            <th class="tbl-settings">Total</th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
           <tr>
-            <th>{{num_personas}}</th>
-            <td>{{precio_persona | number: '1.2-2' }} €</td>
-            <td>{{noches*precio_noche | number: '1.2-2' }} €</td>
+            <th class="tbl-settings">{{num_personas}}</th>
+            <td class="tbl-settings">{{precio_persona | number: '1.2-2' }} €</td>
+            <td class="tbl-settings">{{noches*precio_noche | number: '1.2-2' }} €</td>
           </tr>
         </tbody>
       </table>
     <!-- </div> -->
   </div>
 
-    <div class="row rw-1 mt-3">
+    <div class="row rw-1 mt-5">
       <div class="col btn-settings">
           <button type="button" class="btn botonAzulVacio btn-settings-2" routerLink="/oferta/{{oferta.id}}">volver</button>
           <button type="button" class="btn botonNaranja btn-settings-3" (click)="actualizarOferta()">{{noches*precio_noche | number: '1.2-2' }} €/persona</button>
       </div>
     </div>
-    <div class="row m-3">
+    <div class="row m-5">
       <div class="col">
         <div class="toast-container position-fixed bottom-0 end-0 p-3">
           <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
