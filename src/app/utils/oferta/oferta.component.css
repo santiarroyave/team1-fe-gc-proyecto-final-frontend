@@ -12,6 +12,7 @@
     aspect-ratio: 21/9;
     object-fit: cover;
     position: relative;
+    max-height: 250px;
 }
 
 /* Clases del tiempo restante */
