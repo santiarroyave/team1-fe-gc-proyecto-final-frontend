@@ -10,14 +10,6 @@ img{
     object-fit: cover;
 }
 
-.cl-1{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-}
-
 .cl-2{
     display: flex;
     align-items: center;
@@ -35,8 +27,8 @@ img{
 .lbl-1{
     border-radius: 5px;
     border: 1px solid black;
-    width: 100%;
-    text-align: center;
+    width: 300px;
+    height: 50px;
 }
 
 .lbl-2{
@@ -54,4 +46,14 @@ img{
     width: 500px;
     margin: 0;
     padding: 0;
+}
+
+.btn-settings-2{
+    color: black;
+    width: 175px;
+    text-align: center;
+}
+
+.btn-settings-3{
+    color: white;
 }

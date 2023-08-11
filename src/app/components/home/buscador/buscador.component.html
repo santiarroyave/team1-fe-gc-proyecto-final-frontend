@@ -1,13 +1,13 @@
 <h2>¿Quieres buscar tu viaje?</h2>
-<nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-center">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid my-2">
-  <button class="navbar-toggler w-100 my-2 btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler w-100 my-2 btn botonAzulVacio btn-settings-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     Buscador
   </button>
-  <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-      <ul class="row w-100 navbar-nav mb-2 mb-lg-0">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="row w-100 navbar-nav mb-2 mb-lg-0 justify-content-center">
           <li class="nav-item col my-2">
-              <input type="text" class="form-control p-3 d-flex align-items-center" placeholder="Nombre de la oferta" [(ngModel)]="nombre" (keyup)="sendEvent(nombre)">
+              <input type="text" class="form-control p-3 d-flex" placeholder="Nombre de la oferta" [(ngModel)]="nombre" (keyup)="sendEvent(nombre)">
           </li>
           <li class="nav-item col my-2">
               <div class="d-flex align-items-center form-control">
@@ -33,10 +33,10 @@
               <span class="input-group-btn">
                   <button type="button" class="btn btn-default p-3 border rounded-start-0" (click)="increasePersonCount()">+</button>
               </span>
-          </div>
+            </div>
           </li>
           <li class="nav-item col my-2">
-              <button type="button" class="btn btn-primary btn-lg btn-block p-3 w-100">Buscar</button>
+              <button type="button" class="btn botonNaranja btn-settings btn-lg btn-block p-3 w-100">Buscar</button>
           </li>
       </ul>
     </div>
