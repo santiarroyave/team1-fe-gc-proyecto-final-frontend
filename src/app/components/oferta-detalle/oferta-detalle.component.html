@@ -3,21 +3,21 @@
 <!-- Escribir código aqui -->
 
 <div id="bannerOferta" style="background-image: url({{oferta.imagen}});">
-  <div class="filtroBannerOscuro d-flex justify-content-center align-items-center">
+  <div class="filtroBannerOscuro d-flex justify-content-center align-items-center flex-column">
     <h1>{{oferta.titulo}}</h1>
+    <button type="button" class="btn btn-danger btn-lg botonNaranja" routerLink="/paso-1/{{oferta.id}}">{{oferta.precio}} €/noche</button>
   </div>
 </div>
 
 <div class="container py-4">
   <!-- Descripcion -->
-  <div class="fondoBlanco rounded-3 p-3">
+  <!-- <div class="fondoBlanco rounded-3 p-3">
     <h2>Titulo oferta</h2>
     {{oferta | json}}
     <ul>
       <li>Precio/noche/persona</li>
     </ul>
-    
-  </div>
+  </div> -->
   
   <div class="fondoBlanco rounded-3 p-3 mt-4">
     <!-- Info hotel -->
@@ -42,7 +42,7 @@
       </div>
       <!-- Foto alojamiento -->
       <div class="col-4">
-        <img src="{{oferta.imagen}}" alt="" class="w-100">
+        <img src="{{fotosGaleria[2].url}}" alt="" class="w-100" style="max-height: 300px; object-fit: cover;">
       </div>
     </div>
   </div>
@@ -50,7 +50,8 @@
   <!-- Descripcion extensa -->
   <div class="fondoBlanco rounded-3 p-3 mt-4">
     <h2>Descripción</h2>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi reprehenderit mollitia quibusdam ducimus cum odio iste ex illo? Itaque cupiditate impedit minus reprehenderit expedita perferendis? Atque officia ratione ducimus eum hic eaque quam quod unde itaque nobis consectetur, nam nostrum temporibus nihil architecto. Optio dignissimos architecto est? Reiciendis, culpa deleniti. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam est, vel vero nam qui quasi reiciendis odio quam deleniti ipsam voluptatibus minus debitis, rem necessitatibus ut error hic magni! Ipsam, accusamus, facilis in doloribus rem voluptates culpa quaerat quod ipsa excepturi corrupti maiores voluptatum nemo, harum ex dicta cupiditate impedit dolores architecto facere. Deserunt atque at corporis, laudantium velit officia placeat excepturi sint debitis ea. Et odit pariatur dolor distinctio iusto quae soluta, aliquam iure blanditiis ipsa, dolorum consequatur consectetur maiores enim nemo illo? Illum a quaerat velit ad, adipisci dignissimos odit. Ipsa aliquam alias est corporis incidunt blanditiis dolores natus autem numquam dolorum dolore tempora odit voluptatibus illo quasi minus sed veniam, consequatur quibusdam nostrum cumque eos! Maiores provident tempora sapiente repellendus voluptatum dolor cumque veniam sed ratione incidunt excepturi, consequuntur eaque, culpa atque blanditiis reiciendis suscipit aut sint, facilis libero similique nemo natus qui. Aliquid labore similique commodi magni quos earum exercitationem atque. Vitae, quaerat iusto possimus enim dolore minus ea id numquam? Voluptatem expedita corrupti repellat cupiditate iure vitae sunt earum officia! Ipsa error aspernatur voluptatibus et quasi vel excepturi suscipit facere, perferendis nihil est. Architecto recusandae quas provident porro! Est minima necessitatibus rerum, voluptates saepe vel sapiente molestias illo accusantium dolorum, reprehenderit nihil aperiam repellendus laudantium? Veritatis, autem pariatur quidem error sit possimus velit dolore reprehenderit, minima saepe, praesentium repellat quaerat nihil hic cumque eaque maxime odit est id laborum tempore sed ipsum quas! Perferendis amet ullam vel, sunt officiis, sed dolorum, est libero optio accusantium quaerat modi tempora minus recusandae esse natus nulla dolore reiciendis quas consectetur quos necessitatibus deserunt? Tempore eum deleniti doloremque architecto quo in error laboriosam, asperiores optio quae? At vel veniam, asperiores veritatis maxime culpa repudiandae fuga sint quos, consectetur libero, architecto commodi nesciunt. Id ipsam voluptatibus est consectetur! Saepe modi doloremque natus voluptate maiores corrupti non, rem veniam earum ipsam facere quasi libero dolorem voluptatem odio et laboriosam officiis aperiam expedita? Deleniti, aliquam ratione hic quos optio alias, rem minima veritatis incidunt odit sit cum placeat consequatur officiis commodi libero. Vel facilis, neque quae repellat maiores earum nostrum iure magni asperiores reiciendis molestiae obcaecati quibusdam consequatur omnis amet perferendis veniam quisquam nobis aliquam voluptatibus ut ipsum excepturi autem numquam? Recusandae asperiores iusto, mollitia, esse, nisi quam cum magnam dolorum laboriosam numquam repellendus distinctio! Ducimus blanditiis hic inventore, voluptatum, vel ullam delectus nobis totam debitis non recusandae magnam minima nemo, quo neque corrupti illo! Laudantium tempora cupiditate deleniti amet ipsam quia excepturi voluptatibus perspiciatis. Atque vero temporibus incidunt possimus minima et quaerat fugiat beatae magnam corrupti modi autem eligendi reprehenderit voluptate obcaecati ea error aspernatur ut ex, quas ipsa nihil animi! Tempore sapiente odit delectus iure? Consequuntur assumenda architecto maiores deleniti veniam magni nemo dolore vero in ipsum, ducimus, placeat voluptate illum quisquam. Minima minus harum impedit dolore natus officia rem et. Ex, qui. Laudantium quas laboriosam eos totam ullam aut distinctio magnam inventore voluptate? Ut, cumque ratione. Itaque, necessitatibus numquam non magnam nulla, laboriosam, perspiciatis nesciunt ipsum earum eveniet soluta.</p>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi reprehenderit mollitia quibusdam ducimus cum odio iste ex illo? Itaque cupiditate impedit minus reprehenderit expedita perferendis? Atque officia ratione ducimus eum hic eaque quam quod unde itaque nobis consectetur, nam nostrum temporibus nihil architecto. Optio dignissimos architecto est? Reiciendis, culpa deleniti. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam est, vel vero nam qui quasi reiciendis odio quam deleniti ipsam voluptatibus minus debitis, rem necessitatibus ut error hic magni! Ipsam, accusamus, facilis in doloribus rem voluptates culpa quaerat quod ipsa excepturi corrupti maiores voluptatum nemo, harum ex dicta cupiditate impedit dolores architecto facere. Deserunt atque at corporis, laudantium velit officia placeat excepturi sint debitis ea. Et odit pariatur dolor distinctio iusto quae soluta, aliquam iure blanditiis ipsa, dolorum consequatur consectetur maiores enim nemo illo?</p>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi reprehenderit mollitia quibusdam ducimus cum odio iste ex illo? Itaque cupiditate impedit minus reprehenderit expedita perferendis? Atque officia ratione ducimus eum hic eaque quam quod unde itaque nobis consectetur, nam nostrum temporibus nihil architecto. Optio dignissimos architecto est? Reiciendis, culpa deleniti. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam est, vel vero nam qui quasi reiciendis odio quam deleniti ipsam voluptatibus minus debitis, rem necessitatibus ut error hic magni! Ipsam, accusamus, facilis in doloribus rem voluptates culpa quaerat quod ipsa excepturi corrupti maiores voluptatum nemo, harum ex dicta cupiditate impedit dolores architecto facere. Deserunt atque at corporis, laudantium velit officia placeat excepturi sint debitis ea. Et odit pariatur dolor distinctio iusto quae soluta, aliquam iure blanditiis ipsa, dolorum consequatur consectetur maiores enim nemo illo?</p>
   </div>
 
   <!-- Galeria -->
@@ -101,63 +102,9 @@
     </div>
   </div>
   
-
+  <button type="button" class="btn btn-danger btn-lg botonNaranja w-100 mt-5" routerLink="/paso-1/{{oferta.id}}">Reservar oferta</button>
 
 </div>
 
-<!-- Código viejo -->
-<!-- <div class="h-50 d-flex">
-    <img src={{oferta.imagen}} class="img-fluid w-100 img-thumbnail" alt="...">
-    <img src={{oferta.imagen}} class="img-fluid w-100 img-thumbnail" alt="...">
-    <button type="button" class="btn" (click)="toastTrigger()">
-      <img width="30" height="30" src="https://img.icons8.com/flat-round/64/hearts.png" alt="hearts"/>
-    </button>
-</div>
-<div class="container-fluid w-75">
-    <div class="row">
-        <div class="col mt-3 d-flex justify-content-center align-items-center flex-column">
-            <h1 class="text-style">{{oferta.titulo}}</h1>
-            <p class="text-style">{{oferta.descripcion}}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col mt-3">
-            <h2>Alojamiento: {{alojamiento.nombre}}</h2>
-            <ul>
-                <li>Detalle</li>
-                <li>Detalle</li>
-                <li>Detalle</li>
-                <li>Detalle</li>
-            </ul>
-            <h2 class="mt-4">Actividad: {{actividad.titulo}}</h2>
-            <ul>
-                <li>Detalle</li>
-                <li>Detalle</li>
-                <li>Detalle</li>
-                <li>Detalle</li>
-            </ul>
-            <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-danger" routerLink="/paso-1/{{oferta.id}}">{{oferta.precio}} €/noche</button>
-            </div>
-        </div>
-    </div>
-    <div class="row m-3">
-        <div class="col">
-          <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-              <div class="toast-header">
-                <img width="20" height="20" src="https://img.icons8.com/color/48/filled-like.png" alt="filled-like"/>
-                <strong class="me-auto">Oferta X</strong>
-                <small>now</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-              </div>
-              <div class="toast-body">
-                Oferta añadida a favoritos
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-</div> -->
 <!-- Aqui va el footer -->
 <app-footer></app-footer>
