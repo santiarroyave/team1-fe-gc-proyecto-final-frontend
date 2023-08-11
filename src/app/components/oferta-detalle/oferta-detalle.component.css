@@ -72,27 +72,42 @@ ul li:before {
     background-image: linear-gradient(to bottom, transparent, #fff 35%, #fff 50%);
 }
 
+/* ------------------------------------------------------------------------------------------------ */
 /* GALERIA DE FOTOS */
-/* -------------------------------- */
-#galeriaOferta{
-    height: 50vh;
-    overflow: hidden;
-    background-color: green;
-    padding: .5em;
+/* ------------------------------------------------------------------------------------------------ */
 
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    /* grid-template-rows: ; */
-    gap: .5em;
+.fotoPrincipalGaleria{
+    height: 500px;
+    position: relative;
 }
 
-#galeriaOferta div{
-    background-color: blue;
+/* Botones galeria */
+/* -------------------------------------------------- */
+.fotoPrincipalGaleria .botones{
+    position: absolute;
     height: 100%;
-    border: 1px solid wheat;
+    width: 100%;
+    font-size: 4em;
+}
+.fotoPrincipalGaleria .botones > div{
+    width: 100%;
+    opacity: 0;
+    transition: all .3s;
+}
+.fotoPrincipalGaleria .botones > div:hover{
+    cursor: pointer;
+    opacity: 0.5;
+    color: var(--turquesa-brillante);
 }
 
-#galeriaOferta img{
-    height: 100%;
-    border: 2px solid red;
+/* Mini carrusel */
+/* -------------------------------------------------- */
+.carruselGaleria  img{
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+}
+.carruselGaleria  img:hover{
+    cursor: pointer;
+    border: 5px solid var(--turquesa-brillante);
 }
