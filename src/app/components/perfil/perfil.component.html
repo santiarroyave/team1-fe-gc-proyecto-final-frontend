@@ -1,21 +1,19 @@
 <app-navbar-h></app-navbar-h>
 
-<div class="container py-4">
+<div class="container">
     <div class="row justify-content-center">
         <!-- Falta arreglar esto, para que al colapsar aparezca mas arriba junto al otro menu y no haya la separacion del header y del buscador -->
-        <div class="d-flex flex-column d-none d-lg-block col-lg-4 col-xxl-3">
-            <ng-container *ngIf="!menuColapsado">
-                <img src="https://th.bing.com/th/id/R.ac95ab07af8298a3f45e06b8641681ea?rik=bsgAuQZ5iGem7g&pid=ImgRaw&r=0" class="profile-photo rounded-circle mb-3" alt="...">
-                <div class="text-center relative mb-3">
-                    <a class="color-secondary-darker" (click)="openFileInput()">
-                        <i class="fa fa-image"></i>
-                        Seleccionar imagen de perfil
-                    </a>
-                    <input type="file" class="form-control" id="fileInput" style="display: none" (change)="handleFileChange($event)">
-                </div>
-            </ng-container>
+        <div class="d-flex flex-column col-12 col-lg-12 col-xxl-3 mt-5 me-3 align-items-center">
+            <img src="https://th.bing.com/th/id/R.ac95ab07af8298a3f45e06b8641681ea?rik=bsgAuQZ5iGem7g&pid=ImgRaw&r=0" class="profile-photo rounded-circle mb-3" alt="...">
+            <div class="text-center relative mb-3">
+                <a class="color-secondary-darker" (click)="openFileInput()">
+                    <i class="fa fa-image"></i>
+                    Seleccionar imagen de perfil
+                </a>
+                <input type="file" class="form-control" id="fileInput" style="display: none" (change)="handleFileChange($event)">
+            </div>
         </div>
-        <div class="user-form-settings col-12 col-lg-12 col-xxl-8 ms-4">
+        <div class="user-form-settings col-11 col-lg-12 col-xxl-8">
             <h2>Datos personales</h2>
             <hr>
             <form class="input-has-icon">
