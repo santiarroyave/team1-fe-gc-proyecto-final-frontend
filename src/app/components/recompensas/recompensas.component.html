@@ -1,0 +1,44 @@
+<app-navbar-h></app-navbar-h>
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+      <app-menu-perfil class="d-none d-lg-block col-lg-3"></app-menu-perfil>
+      <div class="col-12 col-lg-8 p-3">
+            <div>
+                <h1>Logros</h1>
+                <hr>
+                <div>
+                    <button class="card awards-item-component d-flex align-items-center justify-content-center" style="width: 10rem;" (click)="modalTrigger()" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="https://www.chess.com/bundles/web/images/achievements/progressive_live_bullet_1.b24b083d.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p><strong class="card-text">Nivel 1</strong></p>
+                        </div>
+                    </button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body d-flex align-items-center justify-content-center">
+                                <img width="100" height="100" src="https://www.chess.com/bundles/web/images/achievements/progressive_live_bullet_1.b24b083d.png" alt="...">
+                                <div class="d-flex flex-column">
+                                    <p><strong class="card-text">Nivel 1</strong></p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet voluptas laborum quis deserunt beatae fuga tenetur impedit eum accusamus.</p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Aqui va el footer -->
+<app-footer></app-footer>

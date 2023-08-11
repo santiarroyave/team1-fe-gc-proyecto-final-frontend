@@ -1,9 +1,29 @@
 import { Injectable } from '@angular/core';
+// import { HttpClient } from '@angular/common/http';
+// import { Observable } from 'rxjs';
+import db from '../../assets/db.json'
 
 @Injectable({
   providedIn: 'root'
 })
 export class OfertasService {
+  oferta: any;
+  // constructor(private http:HttpClient) { }
 
-  constructor() { }
+  getAllOfertas(): any[]{
+    return db.ofertas;
+  }
+
+  getOfertaById(id:number): Object{
+    return db.ofertas[id-1];
+  }
+
+  //reservas
+  getAllReservas(): any[]{
+    return db.reservas;
+  }
+
+  getReservaById(id:number): Object{
+    return db.reservas[id-1];
+  }
 }

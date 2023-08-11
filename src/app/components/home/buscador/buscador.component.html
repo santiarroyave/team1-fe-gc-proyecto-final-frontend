@@ -1,1 +1,44 @@
-<p>buscador works!</p>
+<h2>¿Quieres buscar tu viaje?</h2>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid my-2">
+  <button class="navbar-toggler w-100 my-2 btn botonAzulVacio btn-settings-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    Buscador
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="row w-100 navbar-nav mb-2 mb-lg-0 justify-content-center">
+          <li class="nav-item col my-2">
+              <input type="text" class="form-control p-3 d-flex" placeholder="Nombre de la oferta" [(ngModel)]="nombre" (keyup)="sendEvent(nombre)">
+          </li>
+          <li class="nav-item col my-2">
+              <div class="d-flex align-items-center form-control">
+                  <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="campaignOnePicker" [max]="max" [min]="min">
+                      <input matStartDate placeholder="Start date" formControlName="start"/>
+                      <input matEndDate placeholder="End date" formControlName="end"/>
+                  </mat-date-range-input>
+                  <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #campaignOnePicker touchUi="true" matCalendarStartOfWeek="1">
+                      <mat-date-range-picker-actions>
+                          <button mat-button matDateRangePickerCancel>Cancel</button>
+                          <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+                      </mat-date-range-picker-actions>
+                  </mat-date-range-picker>
+              </div>
+          </li>
+          <li class="nav-item col my-2">
+            <div class="input-group">
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-default p-3 border rounded-end-0" (click)="decreasePersonCount()">-</button>
+              </span>
+              <input type="text" class="form-control text-center p-3 " [(ngModel)]="num_personas">
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-default p-3 border rounded-start-0" (click)="increasePersonCount()">+</button>
+              </span>
+            </div>
+          </li>
+          <li class="nav-item col my-2">
+              <button type="button" class="btn botonNaranja btn-settings btn-lg btn-block p-3 w-100">Buscar</button>
+          </li>
+      </ul>
+    </div>
+  </div>
+</nav>

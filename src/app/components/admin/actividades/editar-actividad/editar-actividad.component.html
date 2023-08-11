@@ -1,1 +1,49 @@
-<p>editar-actividad works!</p>
+<!-- Esto es el menu horizontal -->
+<app-navbar-h></app-navbar-h>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-11 col-md-10 col-lg-9 col-xxl-7 m-5">
+            <h1>Editar actividad</h1>
+            <form>
+                <div class="mb-3">
+                    <label for="titulo" class="form-label fw-bold">Titulo</label>
+                    <div class="d-flex">
+                        <input *ngIf="tituloEditSeleccionado; else tituloBloqueado" type="text" class="form-control me-4" id="titulo" [(ngModel)]="actividad.titulo" name="titulo">
+                        <ng-template class="w-100" #tituloBloqueado>
+                            <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ actividad.titulo }}</p>
+                            </div>
+                        </ng-template>
+                        <button class="btn btn-secondary material-symbols-outlined" (click)="activadoTituloEdit()">
+                            {{ tituloEditSeleccionado ? 'save' : 'edit' }}
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label fw-bold">Descripción</label>
+                    <div class="d-flex">
+                        <textarea *ngIf="descripcionEditSeleccionado; else descripcionBloqueado" type="text" rows="10" required class="form-control me-4" id="descripcion" [(ngModel)]="actividad.descripcion" name="descripcion"></textarea>
+                        <ng-template class="w-100" #descripcionBloqueado>
+                            <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ actividad.descripcion }}</p>
+                            </div>
+                        </ng-template>
+                        <button class="btn btn-secondary material-symbols-outlined" (click)="activadoDescripcionEdit()">
+                            {{ descripcionEditSeleccionado ? 'save' : 'edit' }}
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="imagen" class="form-label">Imagen</label>
+                    <input type="file" class="form-control" id="imagen" name="imagen">
+                    <small class="form-text text-muted">Puedes cargar una imagen desde tu ordenador.</small>
+                </div>
+                <button type="submit" class="btn btn-primary" (click)="confirmarEdit()">Confirmar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Aqui va el footer -->
+<app-footer></app-footer>

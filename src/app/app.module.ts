@@ -1,10 +1,16 @@
-import { NgModule } from '@angular/core';
+import { NgModule,LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from '@angular/material/card';
+import {MatNativeDateModule,MAT_DATE_FORMATS} from '@angular/material/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarHComponent } from './utils/navbar-h/navbar-h.component';
 import { NavbarVComponent } from './utils/navbar-v/navbar-v.component';
 import { FooterComponent } from './utils/footer/footer.component';
@@ -26,6 +32,33 @@ import { CrearActividadComponent } from './components/admin/actividades/crear-ac
 import { EditarActividadComponent } from './components/admin/actividades/editar-actividad/editar-actividad.component';
 import { EditarHotelComponent } from './components/admin/hoteles/editar-hotel/editar-hotel.component';
 import { ActividadesListaComponent } from './utils/actividades-lista/actividades-lista.component';
+import { PasoUnoComponent } from './components/pasarela-pago/paso-uno/paso-uno.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PasoDosComponent } from './components/pasarela-pago/paso-dos/paso-dos.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { HotelItemComponent } from './components/admin/hoteles/hotel-item/hotel-item.component';
+import { ActividadItemComponent } from './components/admin/actividades/actividad-item/actividad-item.component';
+import { EditarCampoComponent } from './utils/editar-campo/editar-campo.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { RecompensasComponent } from './components/recompensas/recompensas.component';
+import { ReservaItemComponent } from './components/reservas/reserva-item/reserva-item.component';
+import { ReservaDetalleComponent } from './components/reservas/reserva-detalle/reserva-detalle.component';
+import { MenuComponent } from './components/admin/menu/menu.component';
+import { MenuPerfilComponent } from './utils/menu-perfil/menu-perfil.component';
+
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
   declarations: [
@@ -50,15 +83,38 @@ import { ActividadesListaComponent } from './utils/actividades-lista/actividades
     CrearActividadComponent,
     EditarActividadComponent,
     EditarHotelComponent,
-    ActividadesListaComponent
+    ActividadesListaComponent,
+    PasoUnoComponent,
+    PasoDosComponent,
+    LoginComponent,
+    RegisterComponent,
+    HotelItemComponent,
+    ActividadItemComponent,
+    EditarCampoComponent,
+    PerfilComponent,
+    RecompensasComponent,
+    ReservaItemComponent,
+    ReservaDetalleComponent,
+    MenuComponent,
+    MenuPerfilComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatButtonModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
