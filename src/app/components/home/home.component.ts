@@ -12,7 +12,8 @@ export class HomeComponent implements OnInit{
   ofertas_por_pagina: number = 6;
   pagina_actual: number = 0;
   total_paginas: number | any;
-
+  
+  filtroAbierto = false;
   menuColapsado = false;
   // Escucha el evento 'resize' en la ventana del navegador (host).
   // Cuando la ventana cambia de tamaño (por ejemplo, se cambia el tamaño de la pantalla o se rota el dispositivo móvil),
@@ -21,6 +22,16 @@ export class HomeComponent implements OnInit{
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.detectScreenSize();
+    
+    //Si se modifica el tamaño de la pantalla, la pantalla es mas pequeña que el limite y el menu esta abierto, lo cierra
+    if (this.menuColapsado){
+      this.filtroAbierto = false;
+      
+      let filtro = document.getElementById("boton-filtro-responsive");
+      let filtroText = "Abrir filtro";
+      if (filtro!=null)
+        filtro.textContent = filtroText;
+      }
   }
 
   constructor(private ofertasService: OfertasService, private elementRef: ElementRef, private renderer: Renderer2) {}
@@ -36,6 +47,16 @@ export class HomeComponent implements OnInit{
     for (let index = 0; index < this.ofertas_por_pagina; index++) {
       this.ofertas_mostradas.push(this.ofertas[index]);
     }
+  }
+  
+
+  pulsarFiltro() {
+    this.filtroAbierto = !this.filtroAbierto;
+    let filtro = document.getElementById("boton-filtro-responsive");
+    //si el filtro esta abierto (filtroAbierto es true, el texto será cerrar filtro, en caso cvontrario Abrir filtro)
+    let filtroText = this.filtroAbierto ? "Cerrar filtro" : "Abrir filtro";
+    if (filtro!=null)
+      filtro.textContent = filtroText;
   }
 
   // Esta función detecta cuando la pantalla llega al limite de colapsamiento del menu
