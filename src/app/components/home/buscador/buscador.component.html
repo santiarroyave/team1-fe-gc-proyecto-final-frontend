@@ -1,15 +1,14 @@
 <h2>¿Quieres buscar tu viaje?</h2>
-<nav class="navbar navbar-expand-lg bg-body-tertiary mb-3 p-2 rounded-3" style="background-color: #fff !important;">
-<div class="container-fluid p-0 m-0">
+<nav class="navbar navbar-expand-lg bg-body-tertiary rounded-3 mb-1" style="background-color: transparent !important;">
 
     <!-- Boton buscador -->
-    <button class="navbar-toggler col-12 my-2 btn botonAzulVacio btn-settings-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler col-12 btn botonAzulVacio py-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         Buscador
     </button>
 
     <!-- Buscador desplegable -->
-    <div class="collapse navbar-collapse p-0 m-0" id="navbarSupportedContent" >
-        <ul class="row navbar-nav justify-content-center col-12 m-0 p-0 gap-3 align-items-center">
+    <div class="collapse navbar-collapse p-0 mt-3 rounded-3 border-filtros" id="navbarSupportedContent" style="background-color: #fff">
+        <ul class="row navbar-nav justify-content-center col-12 m-0 p-3 gap-3 align-items-center">
             <li class="nav-item col p-0">
                 <input type="text" class="form-control p-3 d-flex" placeholder="Nombre de la oferta" [(ngModel)]="nombre" (keyup)="sendEvent(nombre)">
             </li>
@@ -44,5 +43,4 @@
             </li>
         </ul>
     </div>
-</div>
 </nav>

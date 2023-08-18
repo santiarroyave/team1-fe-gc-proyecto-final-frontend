@@ -6,7 +6,6 @@ import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AboutComponent } from './components/about/about.component';
 import { OfertaDetalleComponent } from './components/oferta-detalle/oferta-detalle.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FavoritosComponent } from './components/favoritos/favoritos.component';
 import { ReservasComponent } from './components/reservas/reservas.component';
 import { CrearOfertaComponent } from './components/admin/crear-oferta/crear-oferta.component';
@@ -35,7 +34,6 @@ const routes: Routes = [
   {path:"reservas", component: ReservasComponent},
   {path:"recompensas", component: RecompensasComponent},
   {path:"reservas/:id", component: ReservaDetalleComponent},
-  {path:"checkout", component:CheckoutComponent},
   {path:"paso-1/:id", component:PasoUnoComponent},
   {path:"paso-2/:id", component:PasoDosComponent},
   {path:"", redirectTo:"/home", pathMatch:"full"},
