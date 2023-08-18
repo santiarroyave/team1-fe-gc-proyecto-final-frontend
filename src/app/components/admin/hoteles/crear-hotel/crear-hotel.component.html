@@ -2,20 +2,47 @@
 <app-navbar-h></app-navbar-h>
 
 <div class="container">
-    <div class="row">
-        <!-- Aqui va el menu vertical -->
-        <app-navbar-v class="col col-12 col-lg-3"></app-navbar-v>
-        
-        <div class="col col-9 p-3">
-            <div>
-                <!-- Escribir código aqui -->
-                <h1>Crear hotel</h1>
-
-
-
-
-                <!-- fin zona de codigo -->
-            </div> 
+    <div class="row justify-content-center">
+        <div class="col col-11 col-md-10 col-lg-9 col-xxl-7 m-5">
+            <h1>Crear alojamiento</h1>
+            <form>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required [(ngModel)]="nombre">
+                </div>
+                <div class="mb-3">
+                    <label for="categoria" class="form-label">Categoria</label>
+                    <select class="form-control form-select" id="categoria" name="categoria" required [(ngModel)]="categoria">
+                        <option value="" disabled selected>Selecciona una categoría</option>
+                        <option value="1">Categoría 1</option>
+                        <option value="2">Categoría 2</option>
+                        <option value="3">Categoría 3</option>
+                        <!-- Agrega más opciones según tus necesidades -->
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="web" class="form-label">Web</label>
+                    <input type="text" class="form-control" id="web" name="web" required [(ngModel)]="web">
+                </div>
+                <div class="mb-3">
+                    <label for="telefono" class="form-label">Telefono</label>
+                    <input type="text" class="form-control" id="telefono" name="telefono" required [(ngModel)]="telefono">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required [(ngModel)]="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" >
+                    <div class="invalid-feedback">Por favor, ingresa un correo electrónico válido.</div>
+                </div>
+                <div class="mb-3">
+                    <div>
+                        <label for="imagen" class="form-label">Imagen</label>
+                        <input type="file" class="form-control" id="imagen" name="imagen" [(ngModel)]="imagen">
+                        <small class="form-text text-muted">Cargar imagen</small>
+                    </div>
+                    <button type="submit" class="btn btn-warning text-white mt-2">Añadir imagen</button>
+                </div>
+                <button type="submit" class="btn btn-primary" (click)="addHotel()">Añadir alojamiento</button>
+            </form>
         </div>
     </div>
 </div>

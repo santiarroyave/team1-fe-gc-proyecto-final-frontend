@@ -1,28 +1,20 @@
-<!-- Esto es el menu horizontal -->
 <app-navbar-h></app-navbar-h>
 
 <div class="container">
-    <div class="row">
-        <!-- Aqui va el menu vertical -->
-        <app-navbar-v class="col col-12 col-lg-3"></app-navbar-v>
-        
-        <div class="col col-9 p-3">
+    <div class="row justify-content-center">
+        <app-menu class="d-none d-lg-block col-lg-3"></app-menu>
+        <div class="col-12 col-lg-8 p-3">
             <div>
-                <!-- Escribir código aqui -->
                 <h1>Hoteles</h1>
-                <button type="button" class="btn btn-primary" routerLink="/admin/crear-hotel">Crear hotel</button>
-                <br>
-                <br>
-                <button type="button" class="btn btn-primary" routerLink="/admin/editar-hotel/aqui-va-el-id">Editar hotel</button>
-
-
-
-
-                <!-- fin zona de codigo -->
+                <div class="d-flex mt-3 mb-3">
+                    <button type="button" class="btn btn-primary" routerLink="/admin/crear-hotel">Crear hotel</button>
+                </div>
+                <div *ngFor="let hotel of hoteles">
+                    <app-hotel-item [hotel]="hotel"></app-hotel-item>
+                </div>
             </div> 
         </div>
     </div>
 </div>
 
-<!-- Aqui va el footer -->
 <app-footer></app-footer>

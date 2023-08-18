@@ -6,7 +6,6 @@ import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AboutComponent } from './components/about/about.component';
 import { OfertaDetalleComponent } from './components/oferta-detalle/oferta-detalle.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FavoritosComponent } from './components/favoritos/favoritos.component';
 import { ReservasComponent } from './components/reservas/reservas.component';
 import { CrearOfertaComponent } from './components/admin/crear-oferta/crear-oferta.component';
@@ -16,6 +15,11 @@ import { ActividadesComponent } from './components/admin/actividades/actividades
 import { CrearActividadComponent } from './components/admin/actividades/crear-actividad/crear-actividad.component';
 import { EditarActividadComponent } from './components/admin/actividades/editar-actividad/editar-actividad.component';
 import { EditarHotelComponent } from './components/admin/hoteles/editar-hotel/editar-hotel.component';
+import { PasoUnoComponent } from './components/pasarela-pago/paso-uno/paso-uno.component';
+import { PasoDosComponent } from './components/pasarela-pago/paso-dos/paso-dos.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { RecompensasComponent } from './components/recompensas/recompensas.component';
+import { ReservaDetalleComponent } from './components/reservas/reserva-detalle/reserva-detalle.component';
 
 
 const routes: Routes = [
@@ -23,12 +27,15 @@ const routes: Routes = [
   {path:"register", component: RegisterComponent},
   {path:"home", component: HomeComponent},
   {path:"about", component: AboutComponent},
+  {path:"perfil", component: PerfilComponent},
   {path:"oferta/:id", component: OfertaDetalleComponent},
   {path:"favoritos", component: FavoritosComponent},
   {path:"favoritos/:id", component: OfertaDetalleComponent},
   {path:"reservas", component: ReservasComponent},
-  {path:"reservas/:id", component: OfertaDetalleComponent},
-  {path:"checkout", component:CheckoutComponent},
+  {path:"recompensas", component: RecompensasComponent},
+  {path:"reservas/:id", component: ReservaDetalleComponent},
+  {path:"paso-1/:id", component:PasoUnoComponent},
+  {path:"paso-2/:id", component:PasoDosComponent},
   {path:"", redirectTo:"/home", pathMatch:"full"},
   // ADMIN
   {path:"admin/crear-oferta", component: CrearOfertaComponent},
@@ -44,7 +51,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

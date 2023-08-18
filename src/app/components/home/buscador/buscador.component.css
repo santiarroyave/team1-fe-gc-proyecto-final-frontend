@@ -1,0 +1,15 @@
+.search-input-settings{
+    height: 100%;
+}
+
+.btn-settings{
+    color: white;
+}
+
+.btn-settings-2{
+    color: black;
+}
+
+.border-filtros{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}

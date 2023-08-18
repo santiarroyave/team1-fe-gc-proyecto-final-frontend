@@ -1,24 +1,18 @@
-<!-- Esto es el menu horizontal -->
 <app-navbar-h></app-navbar-h>
 
-<div class="container">
-    <div class="row">
-        <!-- Aqui va el menu vertical -->
-        <app-navbar-v class="col col-12 col-lg-3"></app-navbar-v>
-        
-        <div class="col col-9 p-3">
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <app-menu-perfil class="d-none d-lg-block col-lg-3"></app-menu-perfil>
+        <div class="col-12 col-lg-8 p-3">
             <div>
-                <!-- Escribir código aqui -->
                 <h1>Mis reservas</h1>
-
-
-
-
-                <!-- fin zona de codigo -->
-            </div> 
+                <hr>
+                <div *ngFor="let reserva of listaReservas">
+                    <app-reserva-item [reserva]="reserva"></app-reserva-item>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Aqui va el footer -->
 <app-footer></app-footer>

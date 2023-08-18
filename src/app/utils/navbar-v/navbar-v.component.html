@@ -1,21 +1,16 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    
-    <div class="container-fluid container">
-        
-        <!-- Menu pc -->
-        <div class="collapse navbar-collapse gap-2" id="navbarVertical">
-            <div class="d-grid gap-2 mt-3">
-                <button type="button" class="btn btn-warning" routerLink="/home">Ofertas</button>
-                <button type="button" class="btn btn-warning" routerLink="/reservas">Mis reservas</button>
-                <button type="button" class="btn btn-warning" routerLink="/favoritos">Favoritos</button>
-                <hr>
-                <button type="button" class="btn btn-warning" routerLink="/admin/crear-oferta">Crear oferta</button>
-                <button type="button" class="btn btn-warning" routerLink="/admin/hoteles">Hoteles</button>
-                <button type="button" class="btn btn-warning" routerLink="/admin/actividades">Actividades</button>
+<nav class="navbar navbar-expand-lg bg-body-tertiary rounded-3" style="background-color: transparent !important;">
 
-                
-                <!-- FILTROS -->
-                <!-- Categoría de alojamiento -->
+    <!-- Boton buscador -->
+    <button class="navbar-toggler col-12 btn botonAzulVacio py-3" type="button" data-bs-toggle="collapse" data-bs-target="#filtros" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        Filtros
+    </button>
+
+    <!-- Buscador desplegable -->
+    <div class="collapse navbar-collapse mt-3 rounded-3 border-filtros" id="filtros" style="background-color: #fff">
+        <div class="row navbar-nav justify-content-center col-12 p-3 gap-3 align-items-center">
+            <!-- FILTROS -->
+            <!-- Categoría de alojamiento -->
+            <div class="categoriaAlojamiento">
                 <h3 class="mt-4">Filtros</h3>
                 <h4>Categoría de alojamiento</h4>
                 <div class="form-check">
@@ -25,75 +20,76 @@
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="uno">
-                    <label class="form-check-label" for="uno">
+                    <input class="form-check-input" type="checkbox">
+                    <label class="form-check-label">
                         <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="uno">
-                    <label class="form-check-label" for="uno">
+                    <input class="form-check-input" type="checkbox">
+                    <label class="form-check-label">
                         <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="uno">
-                    <label class="form-check-label" for="uno">
+                    <input class="form-check-input" type="checkbox">
+                    <label class="form-check-label">
                         <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="uno">
-                    <label class="form-check-label" for="uno">
+                    <input class="form-check-input" type="checkbox">
+                    <label class="form-check-label">
                         <i class="bi bi-star-fill"></i>
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="uno">
-                    <label class="form-check-label" for="uno">
+                    <input class="form-check-input" type="checkbox">
+                    <label class="form-check-label">
                         Apartamentos y cámpings
                     </label>
                 </div>
-                <!-- PRECIO -->
+            </div>
+
+            <!-- PRECIO -->
+            <div class="preciosFiltro">
                 <hr>
+
                 <!-- Precio maximo -->
-                <h4>Precio</h4>
-                <label for="customRange1" class="form-label">Precio mínimo</label>
-                <input type="range" class="form-range" id="customRange1" min="0" max="2000" step="50" value="200">
-                
+                <div class="mb-3">
+                    <h4>Precio</h4>
+                    <label for="customRange1" class="form-label">Precio mínimo</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" [(ngModel)]="precioMinimo">
+                        <span class="input-group-text" id="basic-addon2">€</span>
+                    </div>
+                    <input type="range" class="form-range" id="customRange1" min="0" max="2000" step="50" [(ngModel)]="precioMinimo">
+                </div>
+
                 <!-- Precio mínimo -->
-                <label for="customRange2" class="form-label">Precio máximo</label>
-                <input type="range" class="form-range" id="customRange2" min="200" max="5000" step="100" value="2000">
-                
-                <!-- Servicios de alojamiento -->
+                <div>
+                    <label for="customRange2" class="form-label">Precio máximo</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" [(ngModel)]="precioMaximo">
+                        <span class="input-group-text" id="basic-addon2">€</span>
+                    </div>
+                    <input type="range" class="form-range" id="customRange2" min="200" max="5000" step="100" [(ngModel)]="precioMaximo">
+                </div>
+            </div>
+            
+            
+            <!-- Servicios de alojamiento -->
+            <div *ngIf="listaServicios != ''">
                 <hr>
                 <h4>Servicios de alojamiento</h4>
-                
                 <div>
-                    <div class="form-check">
+                    <div class="form-check" *ngFor="let servicio of listaServicios">
                         <input class="form-check-input" type="checkbox" value="" id="uno">
-                        <label class="form-check-label" for="uno">Wifi</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="uno">
-                        <label class="form-check-label" for="uno">Desayuno</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="uno">
-                        <label class="form-check-label" for="uno">Piscina</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="uno">
-                        <label class="form-check-label" for="uno">Mascotas</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="uno">
-                        <label class="form-check-label" for="uno">Lavadora</label>
+                        <label class="form-check-label" for="uno">{{servicio}}</label>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- fin menu pc -->
-
     </div>
 </nav>
+

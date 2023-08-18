@@ -1,0 +1,11 @@
+#page-not-found{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#figura404{
+    max-width: 60em;
+}

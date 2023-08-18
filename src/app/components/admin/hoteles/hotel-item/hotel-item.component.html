@@ -1,0 +1,24 @@
+<!-- <div *ngFor="let hotel of listaHoteles" class="card card-style mb-3" id="{{hotel.id}}"> -->
+<div class="card card-style mb-3">
+    <img src="{{hotel.imagen}}" class="card-img-top img-style img-size" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{hotel.nombre}}</h5>
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-danger" routerLink="/admin/editar-hotel/{{hotel.id}}" (click)="onEditar()">Editar</button>
+        </div>
+    </div>
+</div>
+<!-- </div> -->
+
+
+
+<!-- ejemplo hotel -->
+<!-- {
+    "id": 20,
+    "nombre": "fermentum justo",
+    "categoria": 1,
+    "web": "Nulla nisl.",
+    "telefono": "4134071930",
+    "email": "jinmettj@deliciousdays.com",
+    "imagen": "http://dummyimage.com/116x100.png/dddddd/000000"
+}, -->

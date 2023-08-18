@@ -1,0 +1,66 @@
+.fondoBlanco{
+    background-color: #fff;
+}
+/* Banner */
+/* -------------------------------- */
+#bannerOferta{
+    color: #fff;
+    height: 40vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.filtroBannerOscuro{
+    height: 100%;
+    background-color: rgba(28,30,32,.45);
+}
+
+/* Lista de actividades */
+.imagenActividad{
+    background-color: #f1f1f1;
+    object-fit: cover;
+}
+.botonesActividades{
+    background-image: linear-gradient(to bottom, transparent, #fff 35%, #fff 50%);
+}
+
+/* ------------------------------------------------------------------------------------------------ */
+/* GALERIA DE FOTOS */
+/* ------------------------------------------------------------------------------------------------ */
+
+.fotoPrincipalGaleria{
+    height: 500px;
+    position: relative;
+}
+
+/* Botones galeria */
+/* -------------------------------------------------- */
+.fotoPrincipalGaleria .botones{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    font-size: 4em;
+}
+.fotoPrincipalGaleria .botones > div{
+    width: 100%;
+    opacity: 0;
+    transition: all .3s;
+}
+.fotoPrincipalGaleria .botones > div:hover{
+    cursor: pointer;
+    opacity: 0.5;
+    color: var(--turquesa-brillante);
+}
+
+/* Mini carrusel */
+/* -------------------------------------------------- */
+.carruselGaleria  img{
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+}
+.carruselGaleria  img:hover{
+    cursor: pointer;
+    border: 5px solid var(--turquesa-brillante);
+}

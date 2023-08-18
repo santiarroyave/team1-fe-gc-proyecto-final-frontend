@@ -1,17 +1,228 @@
 <!-- Esto es el menu horizontal -->
 <app-navbar-h></app-navbar-h>
 
+<!-- Galeria de imagenes de la oferta -->
+
 <div class="container">
-    <div class="row">
-        <!-- Aqui va el menu vertical -->
-        <app-navbar-v class="col col-12 col-lg-3"></app-navbar-v>
-        
-        <div class="col col-9 p-3">
+    <div class="row justify-content-center">
+        <app-menu class="d-none d-lg-block col-lg-3"></app-menu>
+        <div class="col-12 col-lg-8 p-3">
             <div>
                 <!-- Escribir código aqui -->
-                <h1>Crear oferta</h1>
+                <div class="titulo d-flex justify-content-between mt-3 align-items-center">
+                    <h1 class="">Crear oferta</h1>
+                    <button class="btn btn-primary btn-lg botonAzul">Crear oferta</button>
+                </div>
+                <hr>
+
+                <!-- GALERIA DE FOTOS -->
+                <!-- ------------------------------------------------------------------------------------------------ -->
+                <div class="galeriaCrearOferta mb-3">
+                    <div class="btnGaleria btnIz align-self-center">
+                        <i class="bi bi-caret-left"></i>
+                    </div>
+                    <div class="btnGaleria btnDer align-self-center">
+                        <i class="bi bi-caret-right"></i>
+                    </div>
+                    <div class="foto foto1" style="background-image: url({{fotos[0]}});"></div>
+                    <div class="foto foto3" style="background-image: url({{fotos[1]}});"></div>
+                    <div class="foto foto2" style="background-image: url({{fotos[2]}});"></div>
+                    <div class="foto foto4" style="background-image: url({{fotos[3]}});"></div>
+                    <div class="foto foto5" style="background-image: url({{fotos[4]}});"></div>
+                    <div class="foto foto6" style="background-image: url({{fotos[5]}});"></div>
+                    <div class="foto foto7" style="background-image: url({{fotos[6]}});"></div>
+                </div>
+
+                
+                
+                <!-- APARTADO INFORMACION DE LA OFERTA -->
+                <!-- ------------------------------------------------------------------------------------------------ -->
+                <div class="contenedorInfoOferta rounded-3 p-3">
+                    <h2>Oferta</h2>
+                    <hr>
+                    <!-- Titulo -->
+                    <label class="form-label">Titulo</label>
+                    <input class="form-control" type="text">
+
+                    <!-- Precio y Max de personas -->
+                    <div class="d-flex gap-2">
+                        <label class="form-label column-6 w-50">Precio
+                            <input class="form-control" type="text">
+                        </label>
+
+                        <label class="form-label column-6 w-50">Máximo de personas
+                            <input class="form-control" type="text">
+                        </label>
+                    </div>
+
+                    <!-- Fecha inicio y Fecha fin -->
+                    <div class="d-flex gap-2">
+                        <label class="form-label column-6 w-50">Fecha inicio
+                            <input class="form-control" type="date">
+                        </label>
+
+                        <label class="form-label column-6 w-50">Fecha fin
+                            <input class="form-control" type="date">
+                        </label>
+                    </div>
+
+                    <!-- Ofertas disponibles -->
+                    <label class="form-label">Ofertas disponibles</label>
+                    <input class="form-control" type="text">
+
+                    <!-- Descripción -->
+                    <label class="form-label">Descripción</label>
+                    <!-- <input class="form-control" type="text"> -->
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
 
 
+                <!-- APARTADO ALOJAMIENTOS -->
+                <!-- ------------------------------------------------------------------------------------------------ -->
+                <div class="contenedorInfoOferta rounded-3 p-3 mt-4">
+                    <!-- Titulo y Boton agenda -->
+                    <div class="titulo d-flex justify-content-between align-items-center">
+                        <h2>Alojamiento</h2>
+                        <button class="btn btn-primary btn-lg botonAzul"><i class="bi bi-journal-bookmark-fill"></i> Agenda</button>
+                    </div>
+                    <hr>
+
+                    <!-- Nombre -->
+                    <label class="form-label">Nombre</label>
+                    <input class="form-control" type="text">
+                    
+                    <!-- País -->
+                    <label class="form-label">País</label>
+                    <input class="form-control" type="text">
+
+                    <!-- Dirección y Numero -->
+                    <div class="d-flex gap-2">
+                        <label class="form-label w-75">Dirección
+                            <input class="form-control" type="text">
+                        </label>
+
+                        <label class="form-label w-25">Nº
+                            <input class="form-control" type="text">
+                        </label>
+                    </div>
+
+                    <!-- C.P. y Provincia -->
+                    <div class="d-flex gap-2">
+                        <label class="form-label w-25">C.P.
+                            <input class="form-control" type="text">
+                        </label>
+
+                        <label class="form-label w-75">Provincia
+                            <input class="form-control" type="text">
+                        </label>
+                    </div>
+
+                    <!-- Localidad -->
+                    <label class="form-label">Localidad</label>
+                    <input class="form-control" type="text">
+
+                    <!-- Wen y Telefono -->
+                    <div class="d-flex gap-2">
+                        <label class="form-label w-75">Página web
+                            <input class="form-control" type="text">
+                        </label>
+
+                        <label class="form-label w-25">Telefono
+                            <input class="form-control" type="text">
+                        </label>
+                    </div>
+
+                    <!-- Categoría -->
+                    <label class="form-label">Categoría</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected default disabled>Elegir categoría</option>
+                        <option value="5">★★★★★</option>
+                        <option value="4">★★★★</option>
+                        <option value="3">★★★</option>
+                        <option value="2">★★</option>
+                        <option value="1">★</option>
+                        <option value="0">Apartamentos y cámpings</option>
+
+                    </select>
+                    
+                    <!-- Boton -->
+                    <div class="d-flex d-md-grid justify-content-end">
+                        <button class="btn btn-primary btn-lg botonAzulVacio mt-4 col-12">Guardar alojamiento</button>
+                    </div>
+                </div>
+
+                <!-- SERVICIOS ALOJAMIENTOS -->
+                <!-- ----------------------------------------------- -->
+                <div class="contenedorInfoOferta rounded-3 p-3 mt-3">
+                    <!-- Titulo -->
+                    <div class="titulo d-flex justify-content-between align-items-center">
+                        <h2>¿Qué hay en este alojamiento?</h2>
+                    </div>
+                    <hr>
+
+                    <!-- Servicios -->
+                    <div class="row px-3">
+                        <div class="form-check col-6 col-md-3" *ngFor="let servicio of serviciosAlojamiento">
+                            <input class="form-check-input" type="checkbox" id="uno">
+                            <label class="form-check-label" for="uno">{{servicio}}</label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- APARTADO ACTIVIDADES -->
+                <!-- ------------------------------------------------------------------------------------------------ -->
+                <div id="crearActividad" class="contenedorInfoOferta rounded-3 p-3 mt-4">
+                    <!-- Actividades -->
+                    <div class="titulo d-flex justify-content-between align-items-center">
+                        <h2>Actividades</h2>
+                    </div>
+                    <hr>
+
+                    <!-- Titulo -->
+                    <label class="form-label">Título</label>
+                    <input class="form-control" type="text" [(ngModel)]='nombreActividad'>
+
+                    <!-- Descripcion -->
+                    <label class="form-label">Descripción</label>
+                    <textarea class="form-control" rows="2" [(ngModel)]='descripcionActividad'></textarea>
+                    
+                    <label class="form-label">Imagen</label>
+                    <input class="form-control" type="file" id="file-input" accept="image/*">
+
+                    <!-- Boton -->
+                    <div class="d-flex justify-content-end align-items-center">
+                    </div>
+                    <!-- Boton -->
+                    <div class="d-flex d-md-grid justify-content-end">
+                        <button class="btn btn-primary btn-lg botonAzulVacio mt-4 col-12" (click)="btnAddActividad()">Guardar</button>
+                    </div>
+                    
+                    <!-- Lista de actividades -->
+                    <div *ngIf="listaActividades != ''">
+                        <hr>
+                        <h3>Actividades incluidas</h3>
+                        <div class="contenedorListaActividades d-flex flex-nowrap overflow-x-auto gap-2" style="height: 400px;">
+                            <div class="card sombraHover overflow-hidden" style="width: 18rem; min-width: 18rem;" *ngFor="let actividad of listaActividades">
+                                <img src="{{actividad.imagen}}" class="card-img-top imagenActividad" alt="..." style="aspect-ratio: 16/9; background-color: #f1f1f1;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{actividad.titulo}}</h5>
+                                    <p class="card-text">{{actividad.descripcion}}</p>
+                                    <div class="botonesActividades d-flex gap-2 p-3 position-absolute bottom-0 end-0 start-0">
+                                        <button class="btn btn-primary btn-sm botonAzul mt-4 w-50" (click)="editarActividad(actividad.id)">Editar</button>
+                                        <button class="btn btn-primary btn-sm botonNaranja mt-4 w-50" (click)="borrarActividad(actividad.id)">Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOTON PARA GUARDAR LA OFERTA -->
+                <!-- ------------------------------------------------------------------------------------------------ -->
+                <div class="d-flex justify-content-end mb-5 py-4 mt-3">
+                    <button class="btn btn-primary btn-lg botonAzul col-12 col-lg-12">Crear oferta</button>
+                </div>
 
 
                 <!-- fin zona de codigo -->
