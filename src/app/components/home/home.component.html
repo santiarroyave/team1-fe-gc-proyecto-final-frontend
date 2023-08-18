@@ -5,27 +5,18 @@
 <app-header></app-header>
 <!-- Aqui va el buscador -->
 <div id="auxiliarBuscador"></div>
-<div class="container mb-3">
-  <app-buscador id="buscador" (nombre_oferta)="actualizarListaOfertas($event)"></app-buscador>
-  <button id="boton-filtro-responsive" class="col-12 d-lg-none btn botonAzulVacio" (click)="pulsarFiltro()">Abrir Filtro</button>
-</div>
 <div class="container">
-  <div class="row">
-    
-    <!-- Aqui va el menu vertical -->
-    <div class="mb-3">
-      <div *ngIf="filtroAbierto" class="col-lg-3 col-md-12" [ngClass]="{'open': filtroAbierto}">
-        <app-navbar-v></app-navbar-v>
-      </div>
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <app-buscador id="buscador" (nombre_oferta)="actualizarListaOfertas($event)"></app-buscador>
     </div>
-      <div *ngIf="!filtroAbierto" class="d-none col-lg-3 d-lg-block" [ngClass]="{'open': filtroAbierto}">
-        <app-navbar-v></app-navbar-v>
-      </div>
-    
-    
-
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-lg-3 col-md-12">
+      <app-navbar-v></app-navbar-v>
+    </div>
     <!-- Aqui va el contenido -->
-    <div class="col col-12 col-lg-9">
+    <div class="col col-12 col-lg-9 mt-4">
 
         <!-- Ofertas -->
         <app-oferta *ngFor="let oferta of ofertas_mostradas" [ofertaId]="oferta.id"></app-oferta>
