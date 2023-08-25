@@ -6,16 +6,17 @@
 <!-- Aqui va el buscador -->
 <div id="auxiliarBuscador"></div>
 <div class="container">
-  <app-buscador id="buscador" (nombre_oferta)="actualizarListaOfertas($event)"></app-buscador>
-</div>
-<div class="container">
-  <div class="row">
-    
-    <!-- Aqui va el menu vertical -->
-    <app-navbar-v class="col col-12 col-lg-3"></app-navbar-v>
-    
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <app-buscador id="buscador" (nombre_oferta)="actualizarListaOfertas($event)"></app-buscador>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-lg-3 col-md-12">
+      <app-navbar-v></app-navbar-v>
+    </div>
     <!-- Aqui va el contenido -->
-    <div class="col col-12 col-lg-9">
+    <div class="col col-12 col-lg-9 mt-4">
 
         <!-- Ofertas -->
         <app-oferta *ngFor="let oferta of ofertas_mostradas" [ofertaId]="oferta.id"></app-oferta>
