@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import db from '../../assets/db.json'
 
 @Injectable({
@@ -8,10 +8,11 @@ import db from '../../assets/db.json'
 })
 export class ActividadesService {
 
-  // constructor(private http:HttpClient) { }
+  baseUrl: string = "api/Actividades";
+  constructor(private http:HttpClient) { }
 
-  getAllActividades(): any[]{
-    return db.actividades;
+  getAllActividades():Observable<any>{
+    return this.http.get<any>(this.baseUrl);
   }
 
   getActividadById(id:number): Object{
