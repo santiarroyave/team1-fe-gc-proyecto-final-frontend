@@ -13,13 +13,12 @@ export class OfertaComponent implements OnInit{
   @Input() ofertaId: any;
 
   favoritoActivo:boolean = false;
-  oferta:any;
+  @Input() oferta:any;
 
-  constructor(private ofertasService: OfertasService){ };
+  constructor(){ };
   
   // Obtiene la información de la oferta haciendo una llamada al servidor por IP
   ngOnInit(): void {
-    this.oferta = this.ofertasService.getOfertaById(this.ofertaId);
   }
   
   favorito(){

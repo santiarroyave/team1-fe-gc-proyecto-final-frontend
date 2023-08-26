@@ -1,4 +1,4 @@
-import { NgModule,LOCALE_ID } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
@@ -45,7 +45,6 @@ import { ReservaItemComponent } from './components/reservas/reserva-item/reserva
 import { ReservaDetalleComponent } from './components/reservas/reserva-detalle/reserva-detalle.component';
 import { MenuComponent } from './components/admin/menu/menu.component';
 import { MenuPerfilComponent } from './utils/menu-perfil/menu-perfil.component';
-
 
 export const MY_DATE_FORMATS = {
   parse: {

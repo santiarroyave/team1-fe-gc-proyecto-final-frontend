@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener, ElementRef, Renderer2 } from '@angular/core';
+import { HomeService } from 'src/app/services/home.service';
 import { OfertasService } from 'src/app/services/ofertas.service';
 
 @Component({
@@ -6,6 +7,7 @@ import { OfertasService } from 'src/app/services/ofertas.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit{
   ofertas: any = [];
   ofertas_mostradas: any = [];
@@ -22,19 +24,22 @@ export class HomeComponent implements OnInit{
     this.detectScreenSize();
   }
 
-  constructor(private ofertasService: OfertasService, private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(private homeService: HomeService) {}
 
   ngOnInit(): void {
     // Obtiene todas las ofertas del servicio
-    this.ofertas = this.ofertasService.getAllOfertas();
+    // this.ofertas = this.ofertasService.getAllOfertas();
+    this.homeService.getAllOfertas().subscribe(response => {
+      console.log(response);
+      this.ofertas = response;
+      // Detecta el tamaño de la pantalla para colapsar el menu
+      this.detectScreenSize();
+      this.total_paginas = Math.floor(this.ofertas.length/this.ofertas_por_pagina);
 
-    // Detecta el tamaño de la pantalla para colapsar el menu
-    this.detectScreenSize();
-    this.total_paginas = Math.floor(this.ofertas.length/this.ofertas_por_pagina);
-
-    for (let index = 0; index < this.ofertas_por_pagina; index++) {
-      this.ofertas_mostradas.push(this.ofertas[index]);
-    }
+      for (let index = 0; index < this.ofertas_por_pagina; index++) {
+        this.ofertas_mostradas.push(this.ofertas[index]);
+      }
+    });
   }
 
   // Esta función detecta cuando la pantalla llega al limite de colapsamiento del menu
