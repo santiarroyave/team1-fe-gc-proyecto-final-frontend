@@ -14,7 +14,11 @@ export class HomeService {
     return this.http.get<any>(this.baseUrl+"Ofertas");
   }
 
-  createOferta(oferta:Oferta):Observable<any>{
-    return this.http.post<Oferta>(this.baseUrl+"Ofertas",oferta);
+  // createOferta(oferta:Oferta):Observable<any>{
+  //   return this.http.post<Oferta>(this.baseUrl+"Ofertas",oferta);
+  // }
+
+  getBuscarOfertas(nombre:string, fecha_ini:string, fecha_fin:string, num_personas:number):Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}Ofertas/Buscar?nombre=${nombre}&fecha_inicio=${fecha_ini}&fecha_fin=${fecha_fin}&num_personas=${num_personas}`);
   }
 }

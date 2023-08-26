@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit{
     // Obtiene todas las ofertas del servicio
     // this.ofertas = this.ofertasService.getAllOfertas();
     this.homeService.getAllOfertas().subscribe(response => {
-      console.log(response);
       this.ofertas = response;
       // Detecta el tamaño de la pantalla para colapsar el menu
       this.detectScreenSize();
