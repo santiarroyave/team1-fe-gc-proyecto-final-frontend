@@ -12,6 +12,10 @@ const httpOptions = {
 })
 export class AuthService {
 
+  private admin: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+
   constructor(private http: HttpClient) { }
 
   login(email: string, pass: string): Observable<any>{

@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { HomeService } from 'src/app/services/home.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -15,11 +16,6 @@ export class HomeComponent implements OnInit{
   pagina_actual: number = 0;
   total_paginas: number | any;
 
-  private admin: string[] = [];
-  isLoggedIn = false;
-  showAdminBoard = false;
-  username?: string;
-
   menuColapsado = false;
   // Escucha el evento 'resize' en la ventana del navegador (host).
   // Cuando la ventana cambia de tamaño (por ejemplo, se cambia el tamaño de la pantalla o se rota el dispositivo móvil),
@@ -30,7 +26,7 @@ export class HomeComponent implements OnInit{
     this.detectScreenSize();
   }
 
-  constructor(private homeService: HomeService, private tokenStorageService: TokenStorageService) {}
+  constructor(private homeService: HomeService, private tokenStorageService: TokenStorageService, private authService: AuthService) {}
 
   ngOnInit(): void {
     // Obtiene todas las ofertas del servicio
@@ -48,16 +44,13 @@ export class HomeComponent implements OnInit{
 
     // this.uploadFile();
 
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    this.authService.isLoggedIn = !!this.tokenStorageService.getToken();
 
-      if(this.isLoggedIn){
+      if(this.authService.isLoggedIn){
+
         const user = this.tokenStorageService.getUser();
-        this.admin = user.admin;
-
-        this.showAdminBoard = this.admin ? true : false;
-        console.log(this.showAdminBoard);
-        
-        this.username = user.username;
+        this.authService.isLoggedIn = true;
+        this.authService.showAdminBoard = user.admin ? true : false;
       }
   }
 

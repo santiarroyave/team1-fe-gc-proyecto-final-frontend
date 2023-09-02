@@ -25,7 +25,7 @@
                 <!-- Botones derecha -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex col justify-content-end">
                     <!-- Login (desaparece cuando inicias sesión) -->
-                    <a class="nav-link" aria-current="page" routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
+                    <a *ngIf="!user && !admin" class="nav-link" aria-current="page" routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
                     
                     <!-- Admin (descaparece si cierras sesion) -->
                     <li *ngIf="admin" class="nav-item dropdown">

@@ -1,13 +1,22 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
-export class PerfilComponent {
+export class PerfilComponent implements OnInit {
 
   menuColapsado = false;
+  currentUser: any;
+
+  constructor(private tokenStorageService: TokenStorageService){}
+
+  ngOnInit(): void {
+      this.currentUser = this.tokenStorageService.getUser();
+  }
+
   // Escucha el evento 'resize' en la ventana del navegador (host).
   // Cuando la ventana cambia de tamaño (por ejemplo, se cambia el tamaño de la pantalla o se rota el dispositivo móvil),
   // se ejecuta la función 'onResize()'.

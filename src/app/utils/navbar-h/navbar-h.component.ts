@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { fakeAsync } from '@angular/core/testing';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar-h',
@@ -13,8 +14,8 @@ export class NavbarHComponent implements OnInit{
   // Ruta actual
   rutaActual:any;
 
-  @Input() admin = false;
-  @Input() user = false;
+  admin = false;
+  user = false;
 
   // Lista donde se mostrará el navbar-v dentro del menu horizontal
   whiteList:any = [
@@ -32,7 +33,7 @@ export class NavbarHComponent implements OnInit{
     this.posicionNavbar();
   }
   
-  constructor(private route: ActivatedRoute, private tokenStorageService: TokenStorageService , private viewportScroller: ViewportScroller) { }
+  constructor(private route: ActivatedRoute, private tokenStorageService: TokenStorageService , private authService: AuthService ) { }
 
   ngOnInit(): void {
     // Obtiene la ruta actual y la coteja con la WhiteList para mostrar el menu o no
@@ -40,6 +41,13 @@ export class NavbarHComponent implements OnInit{
       this.rutaActual = segments.map(segment => segment.path).join('/');
       this.mostrarMenu = this.whiteList.includes(this.rutaActual);
     });
+
+    this.authService.isLoggedIn = !!this.tokenStorageService.getToken();
+
+      if(this.authService.isLoggedIn){
+        this.user = this.authService.isLoggedIn;
+        this.admin = this.authService.showAdminBoard;
+      }
   }
 
   logout():void{
