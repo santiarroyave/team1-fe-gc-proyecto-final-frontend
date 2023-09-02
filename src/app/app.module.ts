@@ -106,7 +106,7 @@ export const MY_DATE_FORMATS = {
     MatCardModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },

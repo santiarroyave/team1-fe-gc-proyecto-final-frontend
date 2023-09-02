@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Oferta } from '../models/Oferta';
+import { environment } from 'src/environments/environments.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
   baseUrl: string = "api/";
+
   constructor(private http:HttpClient) { }
 
   getAllOfertas():Observable<any>{

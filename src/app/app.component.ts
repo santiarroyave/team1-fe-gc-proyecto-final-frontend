@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActividadesService } from './services/actividades.service';
 import { HomeService } from './services/home.service';
 import { Oferta } from './models/Oferta';
+import { TokenStorageService } from './services/token-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,11 @@ import { Oferta } from './models/Oferta';
 })
 export class AppComponent implements OnInit{
   title = 'team1-fe-gc-proyecto-final-frontend';
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  username?: string;
+
   // oferta:Oferta = {
   //   Titulo:"nuevaOferta2",
   //   Precio:123,
@@ -22,7 +28,7 @@ export class AppComponent implements OnInit{
   //   IdAlojamiento:3
   // }
 
-  constructor(private homeService: HomeService){
+  constructor(){
 
   }
 

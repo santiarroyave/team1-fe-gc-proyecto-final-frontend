@@ -1,6 +1,6 @@
-import { Component, OnInit, HostListener, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { HomeService } from 'src/app/services/home.service';
-import { OfertasService } from 'src/app/services/ofertas.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +14,12 @@ export class HomeComponent implements OnInit{
   ofertas_por_pagina: number = 6;
   pagina_actual: number = 0;
   total_paginas: number | any;
+
+  private admin: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  username?: string;
+
   menuColapsado = false;
   // Escucha el evento 'resize' en la ventana del navegador (host).
   // Cuando la ventana cambia de tamaño (por ejemplo, se cambia el tamaño de la pantalla o se rota el dispositivo móvil),
@@ -24,7 +30,7 @@ export class HomeComponent implements OnInit{
     this.detectScreenSize();
   }
 
-  constructor(private homeService: HomeService) {}
+  constructor(private homeService: HomeService, private tokenStorageService: TokenStorageService) {}
 
   ngOnInit(): void {
     // Obtiene todas las ofertas del servicio
@@ -39,6 +45,20 @@ export class HomeComponent implements OnInit{
         this.ofertas_mostradas.push(this.ofertas[index]);
       }
     });
+
+    // this.uploadFile();
+
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+      if(this.isLoggedIn){
+        const user = this.tokenStorageService.getUser();
+        this.admin = user.admin;
+
+        this.showAdminBoard = this.admin ? true : false;
+        console.log(this.showAdminBoard);
+        
+        this.username = user.username;
+      }
   }
 
   // Esta función detecta cuando la pantalla llega al limite de colapsamiento del menu
@@ -86,4 +106,24 @@ export class HomeComponent implements OnInit{
       flecha.scrollIntoView({ behavior: 'smooth' });
     }
   }
+
+  // uploadFile() {
+  //   try{
+  //     const response = this.drive.files.create({
+  //       requestBody:{
+  //         name:'test.jpg',
+  //         mimeType: 'image/jpg'
+  //       },
+  //       media:{
+  //         mimeType:'image/jpg',
+  //         body:'https://images.wikidexcdn.net/mwuploads/wikidex/7/77/latest/20150621181250/Pikachu.png'
+  //       }
+  //     });
+
+  //     console.log(response.data);
+      
+  //   }catch(error:any){
+  //     console.log(error.message);
+  //   }
+  // }
 }

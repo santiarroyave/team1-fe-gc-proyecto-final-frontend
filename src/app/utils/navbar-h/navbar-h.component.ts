@@ -1,6 +1,8 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { fakeAsync } from '@angular/core/testing';
 
 @Component({
   selector: 'app-navbar-h',
@@ -10,6 +12,10 @@ import { ViewportScroller } from '@angular/common';
 export class NavbarHComponent implements OnInit{
   // Ruta actual
   rutaActual:any;
+
+  @Input() admin = false;
+  @Input() user = false;
+
   // Lista donde se mostrará el navbar-v dentro del menu horizontal
   whiteList:any = [
     "home",
@@ -26,7 +32,7 @@ export class NavbarHComponent implements OnInit{
     this.posicionNavbar();
   }
   
-  constructor(private route: ActivatedRoute, private router: Router, private viewportScroller: ViewportScroller) { }
+  constructor(private route: ActivatedRoute, private tokenStorageService: TokenStorageService , private viewportScroller: ViewportScroller) { }
 
   ngOnInit(): void {
     // Obtiene la ruta actual y la coteja con la WhiteList para mostrar el menu o no
@@ -34,6 +40,11 @@ export class NavbarHComponent implements OnInit{
       this.rutaActual = segments.map(segment => segment.path).join('/');
       this.mostrarMenu = this.whiteList.includes(this.rutaActual);
     });
+  }
+
+  logout():void{
+    this.tokenStorageService.signOut();
+    window.location.reload();
   }
 
   // Activa los dos navbar desplegables al hacer click en el boton de menu de los moviles
