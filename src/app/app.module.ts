@@ -1,4 +1,4 @@
-import { NgModule,LOCALE_ID } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
@@ -45,7 +45,7 @@ import { ReservaItemComponent } from './components/reservas/reserva-item/reserva
 import { ReservaDetalleComponent } from './components/reservas/reserva-detalle/reserva-detalle.component';
 import { MenuComponent } from './components/admin/menu/menu.component';
 import { MenuPerfilComponent } from './utils/menu-perfil/menu-perfil.component';
-
+import { authInterceptorProviders } from './helpers/auth.interceptor';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -107,11 +107,12 @@ export const MY_DATE_FORMATS = {
     MatCardModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
-    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    authInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })
