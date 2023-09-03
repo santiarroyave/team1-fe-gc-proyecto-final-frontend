@@ -1,17 +1,21 @@
-import { Component, OnInit, HostListener, ElementRef, Renderer2 } from '@angular/core';
-import { OfertasService } from 'src/app/services/ofertas.service';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { HomeService } from 'src/app/services/home.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit{
   ofertas: any = [];
   ofertas_mostradas: any = [];
   ofertas_por_pagina: number = 6;
   pagina_actual: number = 0;
   total_paginas: number | any;
+
   menuColapsado = false;
   // Escucha el evento 'resize' en la ventana del navegador (host).
   // Cuando la ventana cambia de tamaño (por ejemplo, se cambia el tamaño de la pantalla o se rota el dispositivo móvil),
@@ -22,19 +26,32 @@ export class HomeComponent implements OnInit{
     this.detectScreenSize();
   }
 
-  constructor(private ofertasService: OfertasService, private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(private homeService: HomeService, private tokenStorageService: TokenStorageService, private authService: AuthService) {}
 
   ngOnInit(): void {
     // Obtiene todas las ofertas del servicio
-    this.ofertas = this.ofertasService.getAllOfertas();
+    // this.ofertas = this.ofertasService.getAllOfertas();
+    this.homeService.getAllOfertas().subscribe(response => {
+      this.ofertas = response;
+      // Detecta el tamaño de la pantalla para colapsar el menu
+      this.detectScreenSize();
+      this.total_paginas = Math.floor(this.ofertas.length/this.ofertas_por_pagina);
 
-    // Detecta el tamaño de la pantalla para colapsar el menu
-    this.detectScreenSize();
-    this.total_paginas = Math.floor(this.ofertas.length/this.ofertas_por_pagina);
+      for (let index = 0; index < this.ofertas_por_pagina; index++) {
+        this.ofertas_mostradas.push(this.ofertas[index]);
+      }
+    });
 
-    for (let index = 0; index < this.ofertas_por_pagina; index++) {
-      this.ofertas_mostradas.push(this.ofertas[index]);
-    }
+    // this.uploadFile();
+
+    this.authService.isLoggedIn = !!this.tokenStorageService.getToken();
+
+      if(this.authService.isLoggedIn){
+
+        const user = this.tokenStorageService.getUser();
+        this.authService.isLoggedIn = true;
+        this.authService.showAdminBoard = user.admin ? true : false;
+      }
   }
 
   // Esta función detecta cuando la pantalla llega al limite de colapsamiento del menu
@@ -82,4 +99,24 @@ export class HomeComponent implements OnInit{
       flecha.scrollIntoView({ behavior: 'smooth' });
     }
   }
+
+  // uploadFile() {
+  //   try{
+  //     const response = this.drive.files.create({
+  //       requestBody:{
+  //         name:'test.jpg',
+  //         mimeType: 'image/jpg'
+  //       },
+  //       media:{
+  //         mimeType:'image/jpg',
+  //         body:'https://images.wikidexcdn.net/mwuploads/wikidex/7/77/latest/20150621181250/Pikachu.png'
+  //       }
+  //     });
+
+  //     console.log(response.data);
+      
+  //   }catch(error:any){
+  //     console.log(error.message);
+  //   }
+  // }
 }
