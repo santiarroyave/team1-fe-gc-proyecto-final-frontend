@@ -14,6 +14,40 @@
                     <label for="descripcion" class="form-label">Descripción</label>
                     <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required [(ngModel)]="descripcion"></textarea>
                 </div>
+                <!-- País -->
+                <div class="mb-3">
+                    <label class="form-label ">País</label>
+                    <input class="form-control" type="text">
+                </div>
+
+                <!-- Dirección y Numero -->
+                <div class="mb-3 gap-2 d-flex">
+                    <label class="form-label w-75">Dirección
+                        <input class="form-control" type="text">
+                    </label>
+
+                    <label class="form-label w-25">Nº
+                        <input class="form-control" type="text">
+                    </label>
+                </div>
+
+                <!-- C.P. y Provincia -->
+                <div class="d-flex gap-2 mb-3">
+                    <label class="form-label w-25">C.P.
+                        <input class="form-control" type="text">
+                    </label>
+
+                    <label class="form-label w-75">Provincia
+                        <input class="form-control" type="text">
+                    </label>
+                </div>
+
+                <!-- Localidad -->
+                <div class="mb-3">
+                    <label class="form-label">Localidad</label>
+                    <input class="form-control" type="text">
+                </div>
+
                 <div class="mb-3">
                     <label for="imagen" class="form-label">Imagen</label>
                     <input type="file" class="form-control" id="imagen" name="imagen">

@@ -21,10 +21,6 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="web" class="form-label">Web</label>
-                    <input type="text" class="form-control" id="web" name="web" required [(ngModel)]="web">
-                </div>
-                <div class="mb-3">
                     <label for="telefono" class="form-label">Telefono</label>
                     <input type="text" class="form-control" id="telefono" name="telefono" required [(ngModel)]="telefono">
                 </div>
@@ -32,6 +28,39 @@
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" required [(ngModel)]="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" >
                     <div class="invalid-feedback">Por favor, ingresa un correo electrónico válido.</div>
+                </div>
+                <!-- País -->
+                <div class="mb-3">
+                    <label class="form-label ">País</label>
+                    <input class="form-control" type="text">
+                </div>
+
+                <!-- Dirección y Numero -->
+                <div class="mb-3 gap-2 d-flex">
+                    <label class="form-label w-75">Dirección
+                        <input class="form-control" type="text">
+                    </label>
+
+                    <label class="form-label w-25">Nº
+                        <input class="form-control" type="text">
+                    </label>
+                </div>
+
+                <!-- C.P. y Provincia -->
+                <div class="d-flex gap-2 mb-3">
+                    <label class="form-label w-25">C.P.
+                        <input class="form-control" type="text">
+                    </label>
+
+                    <label class="form-label w-75">Provincia
+                        <input class="form-control" type="text">
+                    </label>
+                </div>
+
+                <!-- Localidad -->
+                <div class="mb-3">
+                    <label class="form-label">Localidad</label>
+                    <input class="form-control" type="text">
                 </div>
                 <div class="mb-3">
                     <div>

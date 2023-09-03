@@ -36,7 +36,6 @@ export class EditarHotelComponent {
 
   nombreEditSeleccionado: boolean = false;
   categoriaEditSeleccionado: boolean = false;
-  webEditSeleccionado: boolean = false;
   telefonoEditSeleccionado: boolean = false;
   emailEditSeleccionado: boolean = false;
   
@@ -47,10 +46,6 @@ export class EditarHotelComponent {
   
   activadoCategoriaEdit() {
     this.categoriaEditSeleccionado = !this.categoriaEditSeleccionado;
-  }
-
-  activadoWebEdit() {
-    this.webEditSeleccionado = !this.webEditSeleccionado;
   }
 
   activadoTelefonoEdit() {
