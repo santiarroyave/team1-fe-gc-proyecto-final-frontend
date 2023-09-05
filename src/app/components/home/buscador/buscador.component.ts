@@ -11,6 +11,7 @@ export class BuscadorComponent {
   num_personas: number = 2;
   nombre: string = '';
   @Output() nombre_oferta = new EventEmitter();
+  @Output() lista_ofertas = new EventEmitter();
 
   today: Date = new Date();
   month: number = this.today.getMonth();
@@ -32,6 +33,7 @@ export class BuscadorComponent {
       ),
       end: new FormControl(new Date(this.year, this.month, this.today.getDate())),
     });
+    
   }
 
   sendEvent(event: any):void{
@@ -39,21 +41,46 @@ export class BuscadorComponent {
   }
 
   increasePersonCount() {
+    
     if (this.num_personas < 18) {
       this.num_personas++;
     }
   }
 
   decreasePersonCount() {
+    
     if (this.num_personas > 1) {
       this.num_personas--;
     }
   }
 
   buscar():void {
-    this.homeService.getBuscarOfertas("Oferta A","2023-09-01","2023-09-15",2).subscribe(response => {
-      console.log(response);
+    let fechas = this.formatearFechas(this.campaignOne.value.start,this.campaignOne.value.end);
+    
+    this.homeService.getBuscarOfertas(this.nombre,fechas[0],fechas[1],this.num_personas).subscribe(response => {
+      this.lista_ofertas.emit(response);
     });
+  }
+
+  formatearFechas(fecha_ini:string,fecha_fin:string): string[] {
+    const fecha_inicio = new Date(fecha_ini);
+    let año = fecha_inicio.getFullYear();
+    // El mes se devuelve en base 0, por lo que sumamos 1 para obtener el mes real
+    let mes = (fecha_inicio.getMonth() + 1).toString().padStart(2, '0');
+    let dia = fecha_inicio.getDate().toString().padStart(2, '0');
+    const fecha_inicio_formateada = `${año}-${mes}-${dia}`;
+
+    let fecha_fin_formateada = '';
+    if(fecha_fin != null){
+      const fecha_fi = new Date(fecha_fin);
+      año = fecha_fi.getFullYear();
+      // El mes se devuelve en base 0, por lo que sumamos 1 para obtener el mes real
+      mes = (fecha_fi.getMonth() + 1).toString().padStart(2, '0');
+      dia = fecha_fi.getDate().toString().padStart(2, '0');
+      fecha_fin_formateada = `${año}-${mes}-${dia}`;
+    }
+
+    return [fecha_inicio_formateada,fecha_fin_formateada];
   }
   
 }

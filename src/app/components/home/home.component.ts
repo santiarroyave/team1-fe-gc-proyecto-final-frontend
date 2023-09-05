@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit{
   ofertas_por_pagina: number = 6;
   pagina_actual: number = 0;
   total_paginas: number | any;
-
+  mostrarElemento:boolean | any;
+  res_length:number | any;
   menuColapsado = false;
   // Escucha el evento 'resize' en la ventana del navegador (host).
   // Cuando la ventana cambia de tamaño (por ejemplo, se cambia el tamaño de la pantalla o se rota el dispositivo móvil),
@@ -32,7 +33,6 @@ export class HomeComponent implements OnInit{
     // Obtiene todas las ofertas del servicio
     this.homeService.getAllOfertas().subscribe(response => {
       this.ofertas = response;
-      console.log(this.ofertas);
       // Detecta el tamaño de la pantalla para colapsar el menu
       this.detectScreenSize();
       this.total_paginas = Math.floor(this.ofertas.length/this.ofertas_por_pagina);
@@ -66,8 +66,22 @@ export class HomeComponent implements OnInit{
     }
   }
 
-  actualizarListaOfertas(nombre_oferta: any):void {  
-    this.ofertas_mostradas = this.ofertas.filter((oferta:any) => oferta.titulo.toLowerCase().includes(nombre_oferta.toLowerCase()))
+  actualizarListaOfertas(event: string | string[]):void {  
+    if(typeof(event)==='string'){
+      this.ofertas_mostradas = this.ofertas.filter((oferta:any) => oferta.titulo.toLowerCase().includes(event.toLowerCase()));
+    }else{
+      if(event.length === 0){
+        this.res_length = event.length;
+        this.mostrarElemento = false;
+        this.mostrarElemento = !this.mostrarElemento;
+      }else{
+        this.res_length = event.length;
+        this.mostrarElemento = false;
+        this.mostrarElemento = !this.mostrarElemento;
+        this.ofertas = event
+        this.ofertas_mostradas = this.ofertas;
+      }
+    }
   }
 
   goToPage(page:number):void{
@@ -100,23 +114,4 @@ export class HomeComponent implements OnInit{
     }
   }
 
-  // uploadFile() {
-  //   try{
-  //     const response = this.drive.files.create({
-  //       requestBody:{
-  //         name:'test.jpg',
-  //         mimeType: 'image/jpg'
-  //       },
-  //       media:{
-  //         mimeType:'image/jpg',
-  //         body:'https://images.wikidexcdn.net/mwuploads/wikidex/7/77/latest/20150621181250/Pikachu.png'
-  //       }
-  //     });
-
-  //     console.log(response.data);
-      
-  //   }catch(error:any){
-  //     console.log(error.message);
-  //   }
-  // }
 }
