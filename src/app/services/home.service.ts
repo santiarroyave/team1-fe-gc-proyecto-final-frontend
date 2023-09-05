@@ -8,12 +8,12 @@ import { environment } from 'src/environments/environments.prod';
   providedIn: 'root'
 })
 export class HomeService {
-  baseUrl: string = "api/";
+  baseUrl: string = "api/Ofertas";
 
   constructor(private http:HttpClient) { }
 
   getAllOfertas():Observable<any>{
-    return this.http.get<any>(this.baseUrl+"Ofertas");
+    return this.http.get<any>(this.baseUrl);
   }
 
   // createOferta(oferta:Oferta):Observable<any>{
@@ -21,6 +21,6 @@ export class HomeService {
   // }
 
   getBuscarOfertas(nombre:string, fecha_ini:string, fecha_fin:string, num_personas:number):Observable<any>{
-    return this.http.get<any>(`${this.baseUrl}Ofertas/Buscar?nombre=${nombre}&fecha_inicio=${fecha_ini}&fecha_fin=${fecha_fin}&num_personas=${num_personas}`);
+    return this.http.get<any>(`${this.baseUrl}/Buscar?nombre=${nombre}&fecha_inicio=${fecha_ini}&fecha_fin=${fecha_fin}&num_personas=${num_personas}`);
   }
 }

@@ -30,9 +30,9 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void {
     // Obtiene todas las ofertas del servicio
-    // this.ofertas = this.ofertasService.getAllOfertas();
     this.homeService.getAllOfertas().subscribe(response => {
       this.ofertas = response;
+      console.log(this.ofertas);
       // Detecta el tamaño de la pantalla para colapsar el menu
       this.detectScreenSize();
       this.total_paginas = Math.floor(this.ofertas.length/this.ofertas_por_pagina);

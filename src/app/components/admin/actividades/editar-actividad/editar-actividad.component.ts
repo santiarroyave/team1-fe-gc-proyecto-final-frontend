@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActividadesService } from 'src/app/services/actividades.service';
 
+
 @Component({
   selector: 'app-editar-actividad',
   templateUrl: './editar-actividad.component.html',
@@ -12,18 +13,17 @@ export class EditarActividadComponent {
     "titulo": "",
     "descripcion": "",
     "imagen": ""
-
   }
 
   actividadId: number = 0;
 
   descripcionEditSeleccionado: boolean = false;
-  descripcion: string = "Ejemplo descripcion";
+  descripcion: string = "";
 
   tituloEditSeleccionado: boolean = false;
-  titulo: string = "Ejemplo descripcion";
+  titulo: string = "";
 
-  constructor(private route: ActivatedRoute, private actividadService: ActividadesService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private actividadesService: ActividadesService, private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -32,7 +32,10 @@ export class EditarActividadComponent {
     });
     console.log("Hotel antes de llamar al servicio en el componente edit:");
     console.log(JSON.stringify(this.actividad));
-    this.actividad = this.actividadService.getActividadById(this.actividadId);
+    this.actividadesService.getActividadById(this.actividadId).subscribe(response => {
+      this.actividad = response;
+      console.log(this.actividad);
+    });
     console.log("Hotel al iniciar el componente edit:");
     console.log(JSON.stringify(this.actividad));
   }
@@ -45,12 +48,10 @@ export class EditarActividadComponent {
   }
 
   confirmarEdit(){
-      console.log("ACTIVIDAD al iniciar el CONFIRAMR EDIT:");
-      console.log(JSON.stringify(this.actividad));
-      this.actividadService.updateActividad(this.actividad);
+      this.actividadesService.updateActividad(this.actividad);
       console.log("Hotel al iniciar el CONFIRAMR EDIT:");
       //compruevo si los cambios se han realizado correctamente
-      console.log(JSON.stringify(this.actividadService.getActividadById(this.actividadId)));
+      console.log(JSON.stringify(this.actividadesService.getActividadById(this.actividadId)));
       this.router.navigate(['/admin/actividades']);
   }
 }
