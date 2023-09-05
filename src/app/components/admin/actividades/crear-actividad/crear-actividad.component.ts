@@ -20,7 +20,6 @@ export class CrearActividadComponent {
   provincia: string = "";
   localidad: string = "";
   imagenes: string[] = [];
-
   imagen: string = "";
 
   constructor(private actividadesService: ActividadesService, private router: Router) {}
