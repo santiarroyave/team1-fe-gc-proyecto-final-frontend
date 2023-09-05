@@ -12,6 +12,9 @@ export class ActividadesComponent {
   constructor(private actividadesService: ActividadesService) {}
 
   ngOnInit(): void {
-      this.actividades = this.actividadesService.getAllActividades();
+    this.actividadesService.getAllActividades().subscribe(response => {
+      this.actividades = response;
+      console.log(this.actividades);
+    });
   }
 }

@@ -39,20 +39,6 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="web" class="form-label fw-bold">Web</label>
-                    <div class="d-flex">
-                        <input *ngIf="webEditSeleccionado; else webBloqueado" type="text" class="form-control me-4" id="web" [(ngModel)]="hotel.web" name="web">
-                        <ng-template class="w-100" #webBloqueado>
-                            <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
-                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ hotel.web }}</p>
-                            </div>
-                        </ng-template>
-                        <button class="btn btn-secondary material-symbols-outlined" (click)="activadoWebEdit()">
-                            {{ webEditSeleccionado ? 'save' : 'edit' }}
-                        </button>
-                    </div>
-                </div>
-                <div class="mb-3">
                     <label for="telefono" class="form-label fw-bold">Telefono</label>
                     <div class="d-flex">
                         <input *ngIf="telefonoEditSeleccionado; else telefonoBloqueado" type="text" class="form-control me-4" id="nombre" [(ngModel)]="hotel.telefono" name="telefono">

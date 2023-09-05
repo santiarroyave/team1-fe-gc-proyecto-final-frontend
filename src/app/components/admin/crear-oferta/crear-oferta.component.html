@@ -123,7 +123,7 @@
 
                     <!-- Wen y Telefono -->
                     <div class="d-flex gap-2">
-                        <label class="form-label w-75">Página web
+                        <label class="form-label w-75">Email
                             <input class="form-control" type="text">
                         </label>
 
@@ -190,9 +190,36 @@
                     <label class="form-label">Imagen</label>
                     <input class="form-control" type="file" id="file-input" accept="image/*">
 
-                    <!-- Boton -->
-                    <div class="d-flex justify-content-end align-items-center">
+                    <!-- País -->
+                    <label class="form-label">País</label>
+                    <input class="form-control" type="text">
+
+                    <!-- Dirección y Numero -->
+                    <div class="d-flex gap-2">
+                        <label class="form-label w-75">Dirección
+                            <input class="form-control" type="text">
+                        </label>
+
+                        <label class="form-label w-25">Nº
+                            <input class="form-control" type="text">
+                        </label>
                     </div>
+
+                    <!-- C.P. y Provincia -->
+                    <div class="d-flex gap-2">
+                        <label class="form-label w-25">C.P.
+                            <input class="form-control" type="text">
+                        </label>
+
+                        <label class="form-label w-75">Provincia
+                            <input class="form-control" type="text">
+                        </label>
+                    </div>
+
+                    <!-- Localidad -->
+                    <label class="form-label">Localidad</label>
+                    <input class="form-control" type="text">
+
                     <!-- Boton -->
                     <div class="d-flex d-md-grid justify-content-end">
                         <button class="btn btn-primary btn-lg botonAzulVacio mt-4 col-12" (click)="btnAddActividad()">Guardar</button>

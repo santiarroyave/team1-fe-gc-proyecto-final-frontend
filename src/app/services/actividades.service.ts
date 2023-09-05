@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { IActividadCrear } from '../models/IActividadCrear';
 import db from '../../assets/db.json'
 
 @Injectable({
@@ -8,21 +9,32 @@ import db from '../../assets/db.json'
 })
 export class ActividadesService {
 
-  // constructor(private http:HttpClient) { }
+  baseUrl: string = "api/Actividads";
 
-  getAllActividades(): any[]{
-    return db.actividades;
+  constructor(private http:HttpClient) { }
+
+  getAllActividades():Observable<any>{
+    return this.http.get<any>(this.baseUrl);
   }
 
-  getActividadById(id:number): Object{
-    return db.actividades[id-1];
+  getActividadById(id:number): Observable<any>{
+    return this.http.get<any>(this.baseUrl + "/" + id);
   }
 
-  updateActividad(actividad: any){
-    db.alojamientos[actividad.id-1] = actividad;
+  updateActividad(actividad: any): void{
+    // this.http.post<any>(this.baseUrl, actividad);
   }
 
-  addActividad(actividad: any){
-    console.log("actividad añadida" + JSON.stringify(actividad));
+  addActividad(actividad: IActividadCrear){
+    console.log("Actividad a subir:" + JSON.stringify(actividad));
+    this.http.post<IActividadCrear>(this.baseUrl, actividad).subscribe(
+      () => {
+        console.log('Actividad subida correctamente');
+      },
+      (error) => {
+        console.error("Ha habido un errooooooooor aaaaaaaaaaaaaahhhhh" + error);
+        throw error;
+      }
+    );
   }
 }

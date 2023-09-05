@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
-import { OfertasService } from 'src/app/services/ofertas.service';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-buscador',
@@ -21,7 +19,7 @@ export class BuscadorComponent {
   max: Date | any;
   min: Date = new Date(this.today);
   campaignOne: FormGroup | any;
-  constructor(private route: ActivatedRoute, private ofertasService: OfertasService){}
+  constructor(private homeService: HomeService){}
 
   ngOnInit(): void {
     this.ts_max = this.today.setMonth(this.today.getMonth() + 2);
@@ -50,6 +48,12 @@ export class BuscadorComponent {
     if (this.num_personas > 1) {
       this.num_personas--;
     }
+  }
+
+  buscar():void {
+    this.homeService.getBuscarOfertas("Oferta A","2023-09-01","2023-09-15",2).subscribe(response => {
+      console.log(response);
+    });
   }
   
 }
