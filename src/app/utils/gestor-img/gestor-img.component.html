@@ -1,0 +1,26 @@
+<div id="galeriaContainer" class="rounded-3 p-3 my-3">
+    
+    <!-- Galeria de fotos -->
+    <div class="galeriaFotos d-flex flex-column">
+        <!-- Foto principal -->
+        <div class="foto fotoPrincipal" style="background-image: url({{listaFotos[0]}});"></div>
+        
+        <!-- Fotos extra -->
+        <div class="carrusel d-flex gap-2 py-3 flex-nowrap overflow-x-auto">
+            <div class="foto fotoExtra position-relative"*ngFor="let foto of listaFotos" style="background-image: url({{foto}});">
+                <!-- Icono papelera fotoExtra-->
+                <div class="borrarFoto position-absolute h-100 w-100" (click)="borrarFoto(foto)">
+                    <i class="bi bi-trash3-fill posit"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- Formulario imput archivo -->
+    <div class="my-3">
+        <label for="formFileSm" class="form-label">Subir imágen</label>
+        <input class="form-control" id="formFileSm" type="file">
+        <!-- <input class="form-control" id="formFileSm" type="file" (change)="uploadFile($event)"> -->
+    </div>
+
+</div>

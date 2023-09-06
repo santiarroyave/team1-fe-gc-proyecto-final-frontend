@@ -45,6 +45,7 @@ import { ReservaItemComponent } from './components/reservas/reserva-item/reserva
 import { ReservaDetalleComponent } from './components/reservas/reserva-detalle/reserva-detalle.component';
 import { MenuComponent } from './components/admin/menu/menu.component';
 import { MenuPerfilComponent } from './utils/menu-perfil/menu-perfil.component';
+import { GestorImgComponent } from './utils/gestor-img/gestor-img.component';
 
 
 export const MY_DATE_FORMATS = {
@@ -94,7 +95,8 @@ export const MY_DATE_FORMATS = {
     ReservaItemComponent,
     ReservaDetalleComponent,
     MenuComponent,
-    MenuPerfilComponent
+    MenuPerfilComponent,
+    GestorImgComponent
   ],
   imports: [
     BrowserModule,
