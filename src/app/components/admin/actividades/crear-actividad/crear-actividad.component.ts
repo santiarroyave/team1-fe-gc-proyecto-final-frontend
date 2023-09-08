@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs';
 import { ActividadesService } from 'src/app/services/actividades.service';
-import { IActividadCrear } from '../../../../models/IActividadCrear';
+import { ActividadCrear } from '../../../../models/ActividadCrear';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class CrearActividadComponent {
   constructor(private actividadesService: ActividadesService, private router: Router) {}
 
   addActividad(){
-    const nuevaActividad: IActividadCrear = {
+    const nuevaActividad: ActividadCrear = {
       titulo: this.titulo,
       descripcion: this.descripcion,
       pais: this.pais,

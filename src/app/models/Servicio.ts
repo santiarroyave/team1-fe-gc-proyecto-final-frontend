@@ -1,3 +1,3 @@
 export interface Servicio{
-    Nombre:string
+    nombre:string
 }
