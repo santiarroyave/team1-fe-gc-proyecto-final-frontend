@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { AlojamientoCrear } from 'src/app/models/alojamientos/AlojamientoCrear';
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
 
 @Component({
@@ -8,23 +9,34 @@ import { AlojamientosService } from 'src/app/services/alojamientos.service';
   styleUrls: ['./crear-hotel.component.css']
 })
 export class CrearHotelComponent {
+
   nombre: string = '';
   categoria: string = '';
-  web: string = '';
   telefono: string = '';
   email: string = '';
-  imagen: string = '';
+  pais: string = '';
+  calle: string = '';
+  numero: number = 0;
+  codigoPostal: string = '';
+  provincia: string = '';
+  localidad: string = '';
+  imagenes: string[] = [];
 
   constructor(private alojamientoService: AlojamientosService, private router: Router) {}
 
   addHotel(){
-    const nuevoAlojamiento: any = {
+    const nuevoAlojamiento: AlojamientoCrear = {
       nombre: this.nombre,
       categoria: this.categoria,
-      web: this.web,
       telefono: this.telefono,
       email: this.email,
-      imagen: this.imagen
+      pais: this.pais,
+      calle: this.calle,
+      numero: this.numero,
+      codigoPostal: this.codigoPostal,
+      provincia: this.provincia,
+      localidad: this.localidad,
+      imagenes: this.imagenes
     };
 
     this.alojamientoService.addAlojamiento(nuevoAlojamiento);

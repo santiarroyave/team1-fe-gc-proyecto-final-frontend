@@ -12,12 +12,14 @@
                 </div>
                 <div class="mb-3">
                     <label for="categoria" class="form-label">Categoria</label>
-                    <select class="form-control form-select" id="categoria" name="categoria" required [(ngModel)]="categoria">
-                        <option value="" disabled selected>Selecciona una categoría</option>
-                        <option value="1">Categoría 1</option>
-                        <option value="2">Categoría 2</option>
-                        <option value="3">Categoría 3</option>
-                        <!-- Agrega más opciones según tus necesidades -->
+                    <select class="form-select" id="categoria" name="categoria" aria-label="Default select example" required [(ngModel)]="categoria">
+                        <option selected default disabled>Elegir categoría</option>
+                        <option value="5">★★★★★</option>
+                        <option value="4">★★★★</option>
+                        <option value="3">★★★</option>
+                        <option value="2">★★</option>
+                        <option value="1">★</option>
+                        <option value="0">Apartamentos y cámpings</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -32,40 +34,40 @@
                 <!-- País -->
                 <div class="mb-3">
                     <label class="form-label ">País</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" id="pais" name="pais" required [(ngModel)]="pais">
                 </div>
 
                 <!-- Dirección y Numero -->
                 <div class="mb-3 gap-2 d-flex">
-                    <label class="form-label w-75">Dirección
-                        <input class="form-control" type="text">
+                    <label class="form-label w-75">Calle
+                        <input class="form-control" type="text" id="calle" name="calle" required [(ngModel)]="calle">
                     </label>
 
-                    <label class="form-label w-25">
-                        <input class="form-control" type="text">
+                    <label class="form-label w-25">Nº
+                        <input class="form-control" type="text" id="numero" name="numero" required [(ngModel)]="numero">
                     </label>
                 </div>
 
                 <!-- C.P. y Provincia -->
                 <div class="d-flex gap-2 mb-3">
                     <label class="form-label w-25">C.P.
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" id="codigoPostal" name="codigoPostal" required [(ngModel)]="codigoPostal">
                     </label>
 
                     <label class="form-label w-75">Provincia
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" id="provincia" name="provincia" required [(ngModel)]="provincia">
                     </label>
                 </div>
 
                 <!-- Localidad -->
                 <div class="mb-3">
                     <label class="form-label">Localidad</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" id="localidad" name="localidad" required [(ngModel)]="localidad">
                 </div>
                 <div class="mb-3">
                     <div>
                         <label for="imagen" class="form-label">Imagen</label>
-                        <input type="file" class="form-control" id="imagen" name="imagen" [(ngModel)]="imagen">
+                        <input type="file" class="form-control" id="imagen" name="imagen" [(ngModel)]="imagenes">
                         <small class="form-text text-muted">Cargar imagen</small>
                     </div>
                     <button type="submit" class="btn btn-warning text-white mt-2">Añadir imagen</button>
