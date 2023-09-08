@@ -7,11 +7,14 @@ import { AlojamientosService } from 'src/app/services/alojamientos.service';
   styleUrls: ['./hoteles.component.css']
 })
 export class HotelesComponent {
-  hoteles: any = [];
+  alojamientos: any = [];
 
   constructor(private alojamientoService: AlojamientosService) {}
 
   ngOnInit(): void {
-      this.hoteles = this.alojamientoService.getAllAlojamientos();
+    this.alojamientoService.getAllAlojamientos().subscribe(response => {
+      this.alojamientos = response;
+      console.log(this.alojamientos);
+    });
   }
 }

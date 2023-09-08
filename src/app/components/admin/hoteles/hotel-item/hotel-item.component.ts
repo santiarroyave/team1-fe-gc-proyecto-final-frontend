@@ -7,10 +7,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class HotelItemComponent {
   // @Input() listaHoteles: any = [];
-  @Input() hotel: any;
+  @Input() alojamiento: any;
   @Output() editar = new EventEmitter<string>();
 
   onEditar() {
-    this.editar.emit(this.hotel.id);
+    this.editar.emit(this.alojamiento.id);
   }
 }

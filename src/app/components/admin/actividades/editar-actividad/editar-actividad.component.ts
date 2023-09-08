@@ -25,43 +25,25 @@ export class EditarActividadComponent {
     "imagenes": []
   }
 
-  actividadId: number = 0;
-
   tituloEditSeleccionado: boolean = false;
-  titulo: string = "";
-
   descripcionEditSeleccionado: boolean = false;
-  descripcion: string = "";
-
   paisEditSeleccionado: boolean = false;
-  pais: string = "";
-
   calleEditSeleccionado: boolean = false;
-  calle: string = "";
-
   numeroEditSeleccionado: boolean = false;
-  numero: number = 0;
-
   CPEditSeleccionado: boolean = false;
-  CP: string = "";
-
   provinciaEditSeleccionado: boolean = false;
-  provincia: string = "";
-
   localidadEditSeleccionado: boolean = false;
-  localidad: string = "";
 
   constructor(private route: ActivatedRoute, private actividadesService: ActividadesService, private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.actividadId = params['id'];
-      console.log(this.actividadId);
+      this.actividad.id= params['id'];
     });
     console.log("Hotel antes de llamar al servicio en el componente edit:");
     console.log(JSON.stringify(this.actividad));
 
-    this.actividadesService.getActividadById(this.actividadId).subscribe(
+    this.actividadesService.getActividadById(this.actividad.id).subscribe(
       (response) => {
         this.actividad = response;
       }
@@ -104,7 +86,7 @@ export class EditarActividadComponent {
   }
 
   confirmarEdit(){
-      this.actividadesService.updateActividad(this.actividad).subscribe(
+    this.actividadesService.updateActividad(this.actividad).subscribe(
       (response) => {
         console.log("Actividad actualizada correctamente");
         console.log(this.actividad);
