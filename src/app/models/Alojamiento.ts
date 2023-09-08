@@ -1,8 +1,8 @@
 export interface Alojamiento{
-    Nombre:string,
-    Categoria:number,
-    Web:string,
-    Telefono:string,
+    nombre:string,
+    categoria:number,
+    web:string,
+    telefono:string,
     Email:string,
     IdDireccion:number
 }
