@@ -46,6 +46,9 @@ import { ReservaDetalleComponent } from './components/reservas/reserva-detalle/r
 import { MenuComponent } from './components/admin/menu/menu.component';
 import { MenuPerfilComponent } from './utils/menu-perfil/menu-perfil.component';
 import { GestorImgComponent } from './utils/gestor-img/gestor-img.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 
 export const MY_DATE_FORMATS = {
@@ -109,7 +112,9 @@ export const MY_DATE_FORMATS = {
     MatCardModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideStorage(() => getStorage())
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
