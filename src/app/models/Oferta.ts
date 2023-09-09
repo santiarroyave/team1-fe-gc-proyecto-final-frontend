@@ -1,4 +1,5 @@
 export interface Oferta {
+    Id:number | any,
     Titulo:string,
     Precio:number,
     MaxPersonas:number,
@@ -7,5 +8,5 @@ export interface Oferta {
     OfertasDisponibles:number,
     Descripcion:string,
     IdActividad:number,
-    IdAlojamiento:number
+    idAlojamiento:number
 }

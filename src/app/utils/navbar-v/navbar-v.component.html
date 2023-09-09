@@ -14,43 +14,42 @@
                 <h3 class="mt-4">Filtros</h3>
                 <h4>Categoría de alojamiento</h4>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="uno">
+                    <input class="form-check-input" [(ngModel)]="categorias_alojamiento[5]" (click)="cambiarValor(5)" type="checkbox" value="" id="uno">
                     <label class="form-check-label" for="uno">
                         <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox">
+                    <input class="form-check-input" [(ngModel)]="categorias_alojamiento[4]" (click)="cambiarValor(4)" type="checkbox">
                     <label class="form-check-label">
                         <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox">
+                    <input class="form-check-input" [(ngModel)]="categorias_alojamiento[3]" (click)="cambiarValor(3)" type="checkbox">
                     <label class="form-check-label">
                         <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox">
+                    <input class="form-check-input" [(ngModel)]="categorias_alojamiento[2]" (click)="cambiarValor(2)" type="checkbox">
                     <label class="form-check-label">
                         <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox">
+                    <input class="form-check-input" [(ngModel)]="categorias_alojamiento[1]" (click)="cambiarValor(1)" type="checkbox">
                     <label class="form-check-label">
                         <i class="bi bi-star-fill"></i>
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox">
+                    <input class="form-check-input" [(ngModel)]="categorias_alojamiento[0]" (click)="cambiarValor(0)" type="checkbox">
                     <label class="form-check-label">
                         Apartamentos y cámpings
                     </label>
                 </div>
             </div>
-
             <!-- PRECIO -->
             <div class="preciosFiltro">
                 <hr>

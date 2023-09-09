@@ -1,4 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { forkJoin } from 'rxjs';
+import { Oferta } from 'src/app/models/Oferta';
 import { AuthService } from 'src/app/services/auth.service';
 import { HomeService } from 'src/app/services/home.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
@@ -10,7 +12,8 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 })
 
 export class HomeComponent implements OnInit{
-  ofertas: any = [];
+  ofertas: Oferta[] = [];
+  alojamientos: any = [];
   ofertas_mostradas: any = [];
   ofertas_por_pagina: number = 6;
   pagina_actual: number = 0;
@@ -31,27 +34,37 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void {
     // Obtiene todas las ofertas del servicio
+    // Obtiene todas las ofertas del servicio
     this.homeService.getAllOfertas().subscribe(response => {
       this.ofertas = response;
-      // Detecta el tamaño de la pantalla para colapsar el menu
+      // Detecta el tamaño de la pantalla para colapsar el menú
       this.detectScreenSize();
-      this.total_paginas = Math.floor(this.ofertas.length/this.ofertas_por_pagina);
+      this.total_paginas = Math.floor(this.ofertas.length / this.ofertas_por_pagina);
 
       for (let index = 0; index < this.ofertas_por_pagina; index++) {
         this.ofertas_mostradas.push(this.ofertas[index]);
       }
+
+      // Obtener todos los alojamientos de manera paralela
+      const observables = this.ofertas.map(offer => {
+        return this.homeService.getAlojamientoById(offer.idAlojamiento);
+      });
+
+      forkJoin(observables).subscribe(responses => {
+        this.alojamientos = responses;
+      });
     });
+    
 
     // this.uploadFile();
 
     this.authService.isLoggedIn = !!this.tokenStorageService.getToken();
 
-      if(this.authService.isLoggedIn){
-
-        const user = this.tokenStorageService.getUser();
-        this.authService.isLoggedIn = true;
-        this.authService.showAdminBoard = user.admin ? true : false;
-      }
+    if(this.authService.isLoggedIn){
+      const user = this.tokenStorageService.getUser();
+      this.authService.isLoggedIn = true;
+      this.authService.showAdminBoard = user.admin ? true : false;
+    }
   }
 
   // Esta función detecta cuando la pantalla llega al limite de colapsamiento del menu
@@ -78,7 +91,6 @@ export class HomeComponent implements OnInit{
         this.res_length = event.length;
         this.mostrarElemento = false;
         this.mostrarElemento = !this.mostrarElemento;
-        this.ofertas = event
         this.ofertas_mostradas = this.ofertas;
       }
     }
