@@ -1,7 +1,7 @@
 export interface Reserva {
     IdOferta:number,
     IdUsuario:string,
-    FechaInicio:string,
-    FechaFin:string,
-    Estado:string
+    fechaInicio:string,
+    fechaFin:string,
+    estado:string
 }

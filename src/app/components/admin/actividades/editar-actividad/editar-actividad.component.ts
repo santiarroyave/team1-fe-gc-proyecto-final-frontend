@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ActividadCrear } from '../../../../models/ActividadCrear';
 import { ActividadesService } from 'src/app/services/actividades.service';
+import { ActividadCompleta } from 'src/app/models/ActividadCompleta';
+
 
 @Component({
   selector: 'app-editar-actividad',
@@ -8,34 +11,48 @@ import { ActividadesService } from 'src/app/services/actividades.service';
   styleUrls: ['./editar-actividad.component.css']
 })
 export class EditarActividadComponent {
-  actividad: any = {
+  actividad: ActividadCompleta = {
+    "id": 0,
     "titulo": "",
     "descripcion": "",
-    "imagen": ""
-
+    "idDireccion": 0,
+    "pais": "",
+    "calle": "",
+    "numero": 0,
+    "codigoPostal": "",
+    "provincia": "",
+    "localidad": "",
+    "imagenes": []
   }
 
-  actividadId: number = 0;
-
-  descripcionEditSeleccionado: boolean = false;
-  descripcion: string = "Ejemplo descripcion";
-
   tituloEditSeleccionado: boolean = false;
-  titulo: string = "Ejemplo descripcion";
+  descripcionEditSeleccionado: boolean = false;
+  paisEditSeleccionado: boolean = false;
+  calleEditSeleccionado: boolean = false;
+  numeroEditSeleccionado: boolean = false;
+  CPEditSeleccionado: boolean = false;
+  provinciaEditSeleccionado: boolean = false;
+  localidadEditSeleccionado: boolean = false;
 
-  constructor(private route: ActivatedRoute, private actividadService: ActividadesService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private actividadesService: ActividadesService, private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.actividadId = params['id'];
-      console.log(this.actividadId);
+      this.actividad.id= params['id'];
     });
     console.log("Hotel antes de llamar al servicio en el componente edit:");
     console.log(JSON.stringify(this.actividad));
-    this.actividad = this.actividadService.getActividadById(this.actividadId);
+
+    this.actividadesService.getActividadById(this.actividad.id).subscribe(
+      (response) => {
+        this.actividad = response;
+      }
+    );
+    
     console.log("Hotel al iniciar el componente edit:");
     console.log(JSON.stringify(this.actividad));
   }
+
   activadoDescripcionEdit(){
       this.descripcionEditSeleccionado = !this.descripcionEditSeleccionado;
   }
@@ -44,13 +61,39 @@ export class EditarActividadComponent {
     this.tituloEditSeleccionado = !this.tituloEditSeleccionado;
   }
 
+  activadoPaisEdit(){
+    this.paisEditSeleccionado = !this.paisEditSeleccionado;
+  }
+
+  activadoCalleEdit(){
+    this.calleEditSeleccionado = !this.calleEditSeleccionado;
+  }
+
+  activadoNumeroEdit(){
+    this.numeroEditSeleccionado = !this.numeroEditSeleccionado;
+  }
+
+  activadoCPEdit(){
+    this.CPEditSeleccionado = !this.CPEditSeleccionado;
+  }
+
+  activadoProvinciaEdit(){
+    this.provinciaEditSeleccionado = !this.provinciaEditSeleccionado;
+  }
+
+  activadoLocalidadEdit(){
+    this.localidadEditSeleccionado = !this.localidadEditSeleccionado;
+  }
+
   confirmarEdit(){
-      console.log("ACTIVIDAD al iniciar el CONFIRAMR EDIT:");
-      console.log(JSON.stringify(this.actividad));
-      this.actividadService.updateActividad(this.actividad);
-      console.log("Hotel al iniciar el CONFIRAMR EDIT:");
-      //compruevo si los cambios se han realizado correctamente
-      console.log(JSON.stringify(this.actividadService.getActividadById(this.actividadId)));
-      this.router.navigate(['/admin/actividades']);
+    this.actividadesService.updateActividad(this.actividad).subscribe(
+      (response) => {
+        console.log("Actividad actualizada correctamente");
+        console.log(this.actividad);
+      },
+      (error) => {
+        console.error("Error al actualizar la actividad:", error);
+      }
+    );
   }
 }

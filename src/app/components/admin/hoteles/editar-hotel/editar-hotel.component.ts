@@ -1,5 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
 
 @Component({
@@ -9,36 +10,50 @@ import { AlojamientosService } from 'src/app/services/alojamientos.service';
 })
 export class EditarHotelComponent {
 
-  hotel: any =  {
-    "id": null,
+  alojamiento: AlojamientoCompleto =  {
+    "id": 0,
     "nombre": "",
-    "categoria": null,
-    "web": "",
+    "categoria": 0,
     "telefono": "",
     "email": "",
-    "imagen": ""
+    "idDireccion": 0,
+    "pais": "",
+    "calle": "",
+    "numero": 0,
+    "codigoPostal": "",
+    "provincia": "",
+    "localidad": "",
+    "imagenes": []
   };
-  hotelId: number = 0;
+  
+  paisEditSeleccionado: boolean = false;
+  calleEditSeleccionado: boolean = false;
+  numeroEditSeleccionado: boolean = false;
+  CPEditSeleccionado: boolean = false;
+  provinciaEditSeleccionado: boolean = false;
+  localidadEditSeleccionado: boolean = false;
+  nombreEditSeleccionado: boolean = false;
+  categoriaEditSeleccionado: boolean = false;
+  telefonoEditSeleccionado: boolean = false;
+  emailEditSeleccionado: boolean = false;
+
   constructor(private route: ActivatedRoute, private alojamientoService: AlojamientosService, private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.hotelId = params['id'];
-      console.log(this.hotelId);
+      this.alojamiento.id = params['id'];
     });
     console.log("Hotel antes de llamar al servicio en el componente edit:");
-    console.log(JSON.stringify(this.hotel));
-    this.hotel = this.alojamientoService.getAlojamientoById(this.hotelId);
+    console.log(JSON.stringify(this.alojamiento));
+    this.alojamientoService.getAlojamientoById(this.alojamiento.id).subscribe(
+      (response) => {
+        this.alojamiento = response;
+      }
+    );
     console.log("Hotel al iniciar el componente edit:");
-    console.log(JSON.stringify(this.hotel));
+    console.log(JSON.stringify(this.alojamiento));
   }
 
-
-  nombreEditSeleccionado: boolean = false;
-  categoriaEditSeleccionado: boolean = false;
-  webEditSeleccionado: boolean = false;
-  telefonoEditSeleccionado: boolean = false;
-  emailEditSeleccionado: boolean = false;
   
 
   activadoNombreEdit(){
@@ -49,10 +64,6 @@ export class EditarHotelComponent {
     this.categoriaEditSeleccionado = !this.categoriaEditSeleccionado;
   }
 
-  activadoWebEdit() {
-    this.webEditSeleccionado = !this.webEditSeleccionado;
-  }
-
   activadoTelefonoEdit() {
     this.telefonoEditSeleccionado = !this.telefonoEditSeleccionado;
   }
@@ -61,16 +72,42 @@ export class EditarHotelComponent {
     this.emailEditSeleccionado = !this.emailEditSeleccionado;
   }
 
+  activadoPaisEdit(){
+    this.paisEditSeleccionado = !this.paisEditSeleccionado;
+  }
+
+  activadoCalleEdit(){
+    this.calleEditSeleccionado = !this.calleEditSeleccionado;
+  }
+
+  activadoNumeroEdit(){
+    this.numeroEditSeleccionado = !this.numeroEditSeleccionado;
+  }
+
+  activadoCPEdit(){
+    this.CPEditSeleccionado = !this.CPEditSeleccionado;
+  }
+
+  activadoProvinciaEdit(){
+    this.provinciaEditSeleccionado = !this.provinciaEditSeleccionado;
+  }
+
+  activadoLocalidadEdit(){
+    this.localidadEditSeleccionado = !this.localidadEditSeleccionado;
+  }
+
 
   
   confirmarEdicion(){
-      console.log("Hotel al iniciar el CONFIRAMR EDIT:");
-      console.log(JSON.stringify(this.hotel));
-      this.alojamientoService.updateAlojamiento(this.hotel);
-      console.log("Hotel al iniciar el CONFIRAMR EDIT:");
-      //compruevo si los cambios se han realizado correctamente
-      console.log(JSON.stringify(this.alojamientoService.getAlojamientoById(this.hotelId)));
-      this.router.navigate(['/admin/hoteles']);
+    this.alojamientoService.updateAlojamiento(this.alojamiento).subscribe(
+      (response) => {
+        console.log("Actividad actualizada correctamente");
+        console.log(this.alojamiento);
+      },
+      (error) => {
+        console.error("Error al actualizar la actividad:", error);
+      }
+    );
   }
 }
   

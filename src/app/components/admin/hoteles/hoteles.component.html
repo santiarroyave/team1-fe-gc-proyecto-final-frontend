@@ -9,8 +9,8 @@
                 <div class="d-flex mt-3 mb-3">
                     <button type="button" class="btn btn-primary" routerLink="/admin/crear-hotel">Crear hotel</button>
                 </div>
-                <div *ngFor="let hotel of hoteles">
-                    <app-hotel-item [hotel]="hotel"></app-hotel-item>
+                <div *ngFor="let alojamiento of alojamientos">
+                    <app-hotel-item [alojamiento]="alojamiento"></app-hotel-item>
                 </div>
             </div> 
         </div>

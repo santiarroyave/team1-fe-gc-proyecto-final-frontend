@@ -1,11 +1,11 @@
 export interface Oferta {
-    Titulo:string,
-    Precio:number,
-    MaxPersonas:number,
-    FechaInicio:string,
-    FechaFin:string,
-    OfertasDisponibles:number,
-    Descripcion:string,
-    IdActividad:number,
-    IdAlojamiento:number
+    id:number | any,
+    titulo:string,
+    precio:number,
+    maxPersonas:number,
+    fechaInicio:string,
+    fechaFin:string,
+    ofertasDisponibles:number,
+    descripcion:string,
+    idAlojamiento:number
 }
