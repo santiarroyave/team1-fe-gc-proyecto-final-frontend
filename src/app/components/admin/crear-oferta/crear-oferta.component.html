@@ -9,13 +9,13 @@
                 <!-- Escribir código aqui -->
                 <div class="titulo d-flex justify-content-between mt-3 align-items-center">
                     <h1 class="">Crear oferta</h1>
-                    <button class="btn btn-primary btn-lg botonAzul">Crear oferta</button>
+                    <button class="btn btn-primary btn-lg botonAzul" (click)="crearOferta()">Crear oferta</button>
                 </div>
                 <hr>
 
                 <!-- GALERIA DE FOTOS -->
                 <!-- ------------------------------------------------------------------------------------------------ -->
-                <app-gestor-img></app-gestor-img>
+                <app-gestor-img #galeriaFotos></app-gestor-img>
                 <!-- <div class="galeriaCrearOferta mb-3">
                     <div class="btnGaleria btnIz align-self-center">
                         <i class="bi bi-caret-left"></i>
@@ -218,7 +218,7 @@
                 <!-- BOTON PARA GUARDAR LA OFERTA -->
                 <!-- ------------------------------------------------------------------------------------------------ -->
                 <div class="d-flex justify-content-end mb-5 py-4 mt-3">
-                    <button class="btn btn-primary btn-lg botonAzul col-12 col-lg-12">Crear oferta</button>
+                    <button class="btn btn-primary btn-lg botonAzul col-12 col-lg-12" (click)="crearOferta()">Crear oferta</button>
                 </div>
 
 
