@@ -1,5 +1,5 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { FiltrosResponse } from 'src/app/models/FiltrosResponse';
 import { Oferta } from 'src/app/models/Oferta';
 import { AuthService } from 'src/app/services/auth.service';
 import { HomeService } from 'src/app/services/home.service';
@@ -8,18 +8,20 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
-
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   ofertas: Oferta[] = [];
-  alojamientos: any = [];
   ofertas_mostradas: any = [];
   ofertas_por_pagina: number = 6;
   pagina_actual: number = 0;
   total_paginas: number | any;
-  mostrarElemento:boolean | any;
-  res_length:number | any;
+  mostrarElemento: boolean | any;
+  res_length: number | any;
+  filtros_data: FiltrosResponse | any;
+
+  @Input() ofertas_filtered: any;
+
   menuColapsado = false;
   // Escucha el evento 'resize' en la ventana del navegador (host).
   // Cuando la ventana cambia de tamaño (por ejemplo, se cambia el tamaño de la pantalla o se rota el dispositivo móvil),
@@ -30,37 +32,33 @@ export class HomeComponent implements OnInit{
     this.detectScreenSize();
   }
 
-  constructor(private homeService: HomeService, private tokenStorageService: TokenStorageService, private authService: AuthService) {}
+  constructor(
+    private homeService: HomeService,
+    private tokenStorageService: TokenStorageService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     // Obtiene todas las ofertas del servicio
     // Obtiene todas las ofertas del servicio
-    this.homeService.getAllOfertas().subscribe(response => {
-      this.ofertas = response;
+    this.homeService.getDataFiltros().subscribe((response) => {
+      this.ofertas = response.ofertas;
+      this.filtros_data = response;      
+
       // Detecta el tamaño de la pantalla para colapsar el menú
       this.detectScreenSize();
-      this.total_paginas = Math.floor(this.ofertas.length / this.ofertas_por_pagina);
+      this.actualizarTotalPaginas();
 
       for (let index = 0; index < this.ofertas_por_pagina; index++) {
         this.ofertas_mostradas.push(this.ofertas[index]);
       }
-
-      // Obtener todos los alojamientos de manera paralela
-      const observables = this.ofertas.map(offer => {
-        return this.homeService.getAlojamientoById(offer.idAlojamiento);
-      });
-
-      forkJoin(observables).subscribe(responses => {
-        this.alojamientos = responses;
-      });
     });
-    
 
     // this.uploadFile();
 
     this.authService.isLoggedIn = !!this.tokenStorageService.getToken();
 
-    if(this.authService.isLoggedIn){
+    if (this.authService.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.authService.isLoggedIn = true;
       this.authService.showAdminBoard = user.admin ? true : false;
@@ -72,58 +70,88 @@ export class HomeComponent implements OnInit{
     let windowWidth = window.innerWidth;
     let limite = 992;
 
-    if(windowWidth < limite){
+    if (windowWidth < limite) {
       this.menuColapsado = true;
-    }else{
+    } else {
       this.menuColapsado = false;
     }
   }
 
-  actualizarListaOfertas(event: string | string[]):void {  
-    if(typeof(event)==='string'){
-      this.ofertas_mostradas = this.ofertas.filter((oferta:any) => oferta.titulo.toLowerCase().includes(event.toLowerCase()));
-    }else{
-      if(event.length === 0){
-        this.res_length = event.length;
+  actualizarListaOfertas(event: string | FiltrosResponse): void {
+    if (typeof event === 'string') {
+      this.ofertas_mostradas = this.ofertas.filter((oferta: any) =>
+        oferta.titulo.toLowerCase().includes(event.toLowerCase())
+      );
+    } else {    
+      if (event.ofertas.length === 0) {
+        this.res_length = 0;
         this.mostrarElemento = false;
-        this.mostrarElemento = !this.mostrarElemento;
-      }else{
-        this.res_length = event.length;
-        this.mostrarElemento = false;
-        this.mostrarElemento = !this.mostrarElemento;
-        this.ofertas_mostradas = this.ofertas;
+       this.updateMostrarResBusqueda();
+      } else {
+        this.filtros_data = event;
+        this.ofertas = event.ofertas;
+        this.res_length = this.ofertas.length;
+        this.updateMostrarResBusqueda();
+        this.actualizarTotalPaginas();
+        this.actualizarPagina();
       }
     }
   }
 
-  goToPage(page:number):void{
+  goToPage(page: number): void {
     this.pagina_actual = page;
     this.actualizarPagina();
   }
 
-  nextPage():void{
-    if(this.pagina_actual<this.total_paginas) this.pagina_actual++;
+  nextPage(): void {
+    if (this.pagina_actual < this.total_paginas) this.pagina_actual++;
     this.actualizarPagina();
   }
-  previousPage():void{
-    if(this.pagina_actual>0) this.pagina_actual--;
+  previousPage(): void {
+    if (this.pagina_actual > 0) this.pagina_actual--;
     this.actualizarPagina();
   }
 
-  private actualizarPagina():void{
+  private actualizarPagina(): void {
     this.ofertas_mostradas = [];
     for (let index = 0; index < this.ofertas_por_pagina; index++) {
-      if(this.ofertas[index+this.ofertas_por_pagina*this.pagina_actual] != null){
-        this.ofertas_mostradas.push(this.ofertas[index+this.ofertas_por_pagina*this.pagina_actual]);
+      if (
+        this.ofertas[index + this.ofertas_por_pagina * this.pagina_actual] !=
+        null
+      ) {
+        this.ofertas_mostradas.push(
+          this.ofertas[index + this.ofertas_por_pagina * this.pagina_actual]
+        );
       }
     }
   }
 
-  scrollClick(){
-    let flecha = document.getElementById("auxiliarBuscador");
-    if (flecha){
+  scrollClick() {
+    let flecha = document.getElementById('auxiliarBuscador');
+    if (flecha) {
       flecha.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
+  actualizarPaginaFiltrada(event: any): void {
+    this.ofertas = event;
+    this.actualizarTotalPaginas();
+    this.actualizarPagina();
+  }
+
+  actualizarTotalPaginas():void{
+    this.total_paginas = Math.floor(
+      this.ofertas.length / this.ofertas_por_pagina
+    );
+  }
+
+  updateResBusqueda(event:number):void{
+    this.res_length = event;
+    this.updateMostrarResBusqueda();
+  }
+
+  updateMostrarResBusqueda():void{
+    this.mostrarElemento = false;
+    this.mostrarElemento = !this.mostrarElemento;
+  }
 }

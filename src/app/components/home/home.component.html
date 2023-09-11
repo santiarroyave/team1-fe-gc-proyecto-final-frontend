@@ -13,7 +13,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-lg-3 col-md-12">
-      <app-navbar-v [alojamientos]="alojamientos" [ofertas]="ofertas_mostradas"></app-navbar-v>
+      <app-navbar-v (res_busqueda)="updateResBusqueda($event)" [data_filtros]="filtros_data" (ofertas)="actualizarPaginaFiltrada($event)" ></app-navbar-v>
     </div>
     <!-- Aqui va el contenido -->
     <div class="col col-12 col-lg-9 mt-4" id="main">
