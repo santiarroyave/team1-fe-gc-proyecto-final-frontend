@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
+import { ServiciosAlojamientoService } from 'src/app/services/servicios-alojamiento.service';
 
 declare var bootstrap: any;
 import { GestorImgComponent } from 'src/app/utils/gestor-img/gestor-img.component';
@@ -23,7 +24,63 @@ export class CrearOfertaComponent implements OnInit{
   idAutoIncrementalActividades:number = 0;
   idActividadSeleccionada:number = -1;
 
-  constructor(private alojamientosService: AlojamientosService){ }
+  // datos formulario
+  urlFotos:string[];
+  crearOfertaJson:any;
+  crearAlojJson:any;
+  // oferta
+  ofertaTitulo:string;
+  ofertaPrecioDia:number|null;
+  ofertaMaxPersonas:number|null;
+  ofertaFechaInicio:Date|null;
+  ofertaFechaFin:Date|null;
+  ofertasDisponibles:number|null;
+  ofertaDescripcion:string;
+  // alojamiento
+  alojNombre:string;
+  alojPais:string;
+  alojDireccion:string;
+  alojNum:string;
+  alojCp:number|null;
+  alojProvincia:string;
+  alojLocalidad:string;
+  alojEmail:string;
+  alojTel:number|null;
+  alojCategoria:number|null;
+  alojServiciosIds:number[];
+
+  prueba:any;
+
+
+  constructor(private alojamientosService: AlojamientosService, private serviciosAlojamientoService: ServiciosAlojamientoService){
+    // this.serviciosAlojamiento = serviciosAlojamientoService.getAllServicios();
+    // console.log(serviciosAlojamientoService.getAllServicios());
+    
+    
+
+    // datos formulario 
+    this.urlFotos = [];
+    // oferta
+    this.ofertaTitulo = "";
+    this.ofertaPrecioDia = null;
+    this.ofertaMaxPersonas = null;
+    this.ofertaFechaInicio = null;
+    this.ofertaFechaFin = null;
+    this.ofertasDisponibles = null;
+    this.ofertaDescripcion = "";
+    // alojamiento
+    this.alojNombre = "";
+    this.alojPais = "";
+    this.alojDireccion = "";
+    this.alojNum = "";
+    this.alojCp = null;
+    this.alojProvincia = "";
+    this.alojLocalidad = "";
+    this.alojEmail = "";
+    this.alojTel = null;
+    this.alojCategoria = null;
+    this.alojServiciosIds = [];
+  }
   @ViewChild(GestorImgComponent) galeriaFotos!:GestorImgComponent;
   
   ngOnInit(): void {
@@ -33,7 +90,11 @@ export class CrearOfertaComponent implements OnInit{
     }
     
     // Genera servicios para el alojamiento de ejemplo
-    this.serviciosAlojamiento = ["Wifi", "Lavadora", "Aire acondicionado", "Cocina", "Secadora", "Calefacción", "Zona para trabajar", "Televisión", "Piscina", "Desayuno", "Gimnasio"];
+    this.serviciosAlojamientoService.getAllServicios().subscribe(result => {
+      this.serviciosAlojamiento = result;
+    });
+    // this.serviciosAlojamiento = ["Wifi", "Lavadora", "Aire acondicionado", "Cocina", "Secadora", "Calefacción", "Zona para trabajar", "Televisión", "Piscina", "Desayuno", "Gimnasio"];
+
     this.alojamientosService.getAllAlojamientos().subscribe(response => {
       this.alojamientosCompletos = response;
       console.log(this.alojamientosCompletos);
@@ -121,18 +182,60 @@ export class CrearOfertaComponent implements OnInit{
       this.galeriaFotos.uploadImages()
       .then((urls) => {
         // Maneja la lista de URLs aquí
-          console.log('URLs de las imágenes cargadas:', urls);
+          this.urlFotos = urls;
 
         // ###############################################
         // Aqui se ejecutará el codigo para guardar la oferta en BBDD
         // Porque tiene que esperarse a tener las URLs
         // ###############################################
+        this.crearJson();
 
       })
       .catch((error) => {
         // Maneja cualquier error que pueda ocurrir durante la carga de imágenes
         console.error('Error al cargar imágenes:', error);
       });
+    }
+  }
+
+  crearJson(){
+    this.crearOfertaJson = {
+      oferta: {
+        titulo: this.ofertaTitulo,
+        precioDia: this.ofertaPrecioDia,
+        maxPersonas: this.ofertaMaxPersonas,
+        fechaInicio: this.ofertaFechaInicio,
+        fechaFin: this.ofertaFechaFin,
+        ofertasDisponibles: this.ofertasDisponibles,
+        descripcion: this.ofertaDescripcion,
+        urlFotos: this.urlFotos
+      },
+      alojamiento: {
+        nombre: this.alojNombre,
+        pais: this.alojPais,
+        direccion: this.alojDireccion,
+        numero: this.alojNum,
+        cp: this.alojCp,
+        provincia: this.alojProvincia,
+        localidad: this.alojLocalidad,
+        email: this.alojEmail,
+        tel: this.alojTel,
+        categoria: this.alojCategoria,
+        servicios: this.alojServiciosIds
+      } 
+    };
+    
+    console.log("ESTE ES EL JSON");
+    console.log(this.crearOfertaJson);
+  }
+
+  seleccionarServicio(servicioId:number){
+    if (this.alojServiciosIds.includes(servicioId)) {
+      // El servicio está seleccionado, así que lo deseleccionamos
+      this.alojServiciosIds = this.alojServiciosIds.filter(id => id !== servicioId);
+    }else{
+      // El servicio no está seleccionado, así que lo seleccionamos
+      this.alojServiciosIds.push(servicioId);
     }
   }
 }

@@ -1,15 +1,26 @@
 <!-- Esto es el menu horizontal -->
 <app-navbar-h></app-navbar-h>
-
 <div class="container">
     <div class="row justify-content-center">
         <app-menu class="d-none d-lg-block col-lg-3"></app-menu>
         <div class="col-12 col-lg-8 p-3">
             <div>
                 <!-- Escribir código aqui -->
+                <!-- ################################# -->
+                <!-- PIPE -->
+                <!-- <div class="contenedorInfoOferta rounded-3 p-3 mt-4" *ngIf="true">
+                    <h3>JSON Crear oferta:</h3>
+                    <pre>
+                        {{crearOfertaJson | json}}
+                    </pre>
+                    <pre>
+                        {{alojServiciosIds | json}}
+                    </pre>
+                </div> -->
+                <!-- ################################# -->
                 <div class="titulo d-flex justify-content-between mt-3 align-items-center">
                     <h1 class="">Crear oferta</h1>
-                    <button class="btn btn-primary btn-lg botonAzul">Crear oferta</button>
+                    <button class="btn btn-primary btn-lg botonAzul" (click)="crearOferta();">Crear oferta</button>
                 </div>
                 <hr>
 
@@ -24,38 +35,37 @@
                     <hr>
                     <!-- Titulo -->
                     <label class="form-label">Titulo</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" [(ngModel)]="ofertaTitulo">
 
                     <!-- Precio y Max de personas -->
                     <div class="d-flex gap-2">
-                        <label class="form-label column-6 w-50">Precio
-                            <input class="form-control" type="text">
+                        <label class="form-label column-6 w-50">Precio por día
+                            <input class="form-control" type="text" [(ngModel)]="ofertaPrecioDia">
                         </label>
 
                         <label class="form-label column-6 w-50">Máximo de personas
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" [(ngModel)]="ofertaMaxPersonas">
                         </label>
                     </div>
 
                     <!-- Fecha inicio y Fecha fin -->
                     <div class="d-flex gap-2">
                         <label class="form-label column-6 w-50">Fecha inicio
-                            <input class="form-control" type="date">
+                            <input class="form-control" type="date" [(ngModel)]="ofertaFechaInicio">
                         </label>
 
                         <label class="form-label column-6 w-50">Fecha fin
-                            <input class="form-control" type="date">
+                            <input class="form-control" type="date" [(ngModel)]="ofertaFechaFin">
                         </label>
                     </div>
 
                     <!-- Ofertas disponibles -->
                     <label class="form-label">Ofertas disponibles</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" [(ngModel)]="ofertasDisponibles">
 
                     <!-- Descripción -->
                     <label class="form-label">Descripción</label>
-                    <!-- <input class="form-control" type="text"> -->
-                    <textarea class="form-control" rows="3"></textarea>
+                    <textarea class="form-control" rows="3" [(ngModel)]="ofertaDescripcion"></textarea>
                 </div>
 
 
@@ -80,8 +90,7 @@
                                         <p><strong class="card-text">Alojamientos</strong></p>
                                         <div *ngFor="let alojamiento of alojamientosCompletos">
                                             {{alojamiento.nombre}}, {{alojamiento.localidad}}, {{alojamiento.pais}}
-                                          </div>
-                                        
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -95,52 +104,52 @@
 
                     <!-- Nombre -->
                     <label class="form-label">Nombre</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" [(ngModel)]="alojNombre">
                     
                     <!-- País -->
                     <label class="form-label">País</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" [(ngModel)]="alojPais">
 
                     <!-- Dirección y Numero -->
                     <div class="d-flex gap-2">
                         <label class="form-label w-75">Dirección
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" [(ngModel)]="alojDireccion">
                         </label>
 
                         <label class="form-label w-25">Nº
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" [(ngModel)]="alojNum">
                         </label>
                     </div>
 
                     <!-- C.P. y Provincia -->
                     <div class="d-flex gap-2">
                         <label class="form-label w-25">C.P.
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" [(ngModel)]="alojCp">
                         </label>
 
                         <label class="form-label w-75">Provincia
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" [(ngModel)]="alojProvincia">
                         </label>
                     </div>
 
                     <!-- Localidad -->
                     <label class="form-label">Localidad</label>
-                    <input class="form-control" type="text">
+                    <input class="form-control" type="text" [(ngModel)]="alojLocalidad">
 
                     <!-- Wen y Telefono -->
                     <div class="d-flex gap-2">
                         <label class="form-label w-75">Email
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" [(ngModel)]="alojEmail">
                         </label>
 
                         <label class="form-label w-25">Telefono
-                            <input class="form-control" type="text">
+                            <input class="form-control" type="text" [(ngModel)]="alojTel">
                         </label>
                     </div>
 
                     <!-- Categoría -->
                     <label class="form-label">Categoría</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="alojCategoria">
                         <option selected default disabled>Elegir categoría</option>
                         <option value="5">★★★★★</option>
                         <option value="4">★★★★</option>
@@ -152,9 +161,9 @@
                     </select>
                     
                     <!-- Boton -->
-                    <div class="d-flex d-md-grid justify-content-end">
+                    <!-- <div class="d-flex d-md-grid justify-content-end">
                         <button class="btn btn-primary btn-lg botonAzulVacio mt-4 col-12">Guardar alojamiento</button>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- SERVICIOS ALOJAMIENTOS -->
@@ -169,8 +178,8 @@
                     <!-- Servicios -->
                     <div class="row px-3">
                         <div class="form-check col-6 col-md-3" *ngFor="let servicio of serviciosAlojamiento">
-                            <input class="form-check-input" type="checkbox" id="uno">
-                            <label class="form-check-label" for="uno">{{servicio}}</label>
+                            <input class="form-check-input" type="checkbox" (click)="seleccionarServicio(servicio.id)">
+                            <label class="form-check-label" >{{servicio.nombre}}</label>
                         </div>
                     </div>
                 </div>
