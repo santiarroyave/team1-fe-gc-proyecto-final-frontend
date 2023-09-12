@@ -20,4 +20,15 @@ export class PasoDosComponent {
     });
     this.precio = this.ofertasService.oferta;
   }
+
+  // pagar(){
+
+  //   const reserva = {
+  //     IdOferta: this.oferta.id,
+  //     IdUsuario: this.id_usuario,
+  //     fechaInicio: ,
+  //     fechaFin: this.fechaFin,
+  //     estado: "Completada"
+  //   }
+  // }
 }

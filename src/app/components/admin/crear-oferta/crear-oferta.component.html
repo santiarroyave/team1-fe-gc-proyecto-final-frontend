@@ -65,8 +65,32 @@
                     <!-- Titulo y Boton agenda -->
                     <div class="titulo d-flex justify-content-between align-items-center">
                         <h2>Alojamiento</h2>
-                        <button class="btn btn-primary btn-lg botonAzul"><i class="bi bi-journal-bookmark-fill"></i> Agenda</button>
+                        <button class="btn btn-primary btn-lg botonAzul" (click)="modalTrigger()" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-journal-bookmark-fill"></i> Agenda</button>
                     </div>
+
+                    <!-- Modal de Agenda de Alojamientos -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="d-flex flex-column">
+                                        <p><strong class="card-text">Alojamientos</strong></p>
+                                        <div *ngFor="let alojamiento of alojamientosCompletos">
+                                            {{alojamiento.nombre}}, {{alojamiento.localidad}}, {{alojamiento.pais}}
+                                          </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <hr>
 
                     <!-- Nombre -->

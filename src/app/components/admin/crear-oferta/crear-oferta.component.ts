@@ -1,5 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
+import { AlojamientosService } from 'src/app/services/alojamientos.service';
+
+declare var bootstrap: any;
 import { GestorImgComponent } from 'src/app/utils/gestor-img/gestor-img.component';
+
 
 @Component({
   selector: 'app-crear-oferta',
@@ -7,7 +12,7 @@ import { GestorImgComponent } from 'src/app/utils/gestor-img/gestor-img.componen
   styleUrls: ['./crear-oferta.component.css']
 })
 export class CrearOfertaComponent implements OnInit{
-
+  alojamientosCompletos: AlojamientoCompleto[] = [];
   fotos:any = [];
   serviciosAlojamiento:any = [];
   listaActividades:any = [];
@@ -18,9 +23,8 @@ export class CrearOfertaComponent implements OnInit{
   idAutoIncrementalActividades:number = 0;
   idActividadSeleccionada:number = -1;
 
+  constructor(private alojamientosService: AlojamientosService){ }
   @ViewChild(GestorImgComponent) galeriaFotos!:GestorImgComponent;
-
-  constructor(){ }
   
   ngOnInit(): void {
     // Generador de fotos de ejemplo
@@ -30,7 +34,10 @@ export class CrearOfertaComponent implements OnInit{
     
     // Genera servicios para el alojamiento de ejemplo
     this.serviciosAlojamiento = ["Wifi", "Lavadora", "Aire acondicionado", "Cocina", "Secadora", "Calefacción", "Zona para trabajar", "Televisión", "Piscina", "Desayuno", "Gimnasio"];
-
+    this.alojamientosService.getAllAlojamientos().subscribe(response => {
+      this.alojamientosCompletos = response;
+      console.log(this.alojamientosCompletos);
+    });
     // Generador de actividades de ejemplo
     for (let i = 0; i < 5; i++) {
       this.agregarActividad(`Actividad ${i}`, "Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title and make up the bulk of the card's content.", "https://www.portaventuraworld.com/blog/wp-content/uploads/2023/05/Paw-World-1200x600-1.jpg");
@@ -91,6 +98,8 @@ export class CrearOfertaComponent implements OnInit{
     }
   }
 
+  
+
   borrarActividad(id:number){
     // 1. Encuentra su posición dentro de la lista
     let posicion = this.listaActividades.findIndex((busqueda:any) => busqueda.id == id);
@@ -98,6 +107,13 @@ export class CrearOfertaComponent implements OnInit{
     // 2. Borra la actividad
     this.listaActividades.splice(posicion, 1);
   }
+
+  
+  modalTrigger(): void {
+    const modalLiveExample = document.getElementById('liveModal');
+
+    const modalBootstrap = new bootstrap.Toast(modalLiveExample);
+    modalBootstrap.show();
 
   crearOferta(){
     if (this.galeriaFotos){
