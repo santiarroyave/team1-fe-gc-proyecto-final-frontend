@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import db from '../../assets/db.json'
 import { Favorito } from '../models/Favorito';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { Oferta } from '../models/Oferta';
 
 @Injectable({
   providedIn: 'root'
@@ -42,4 +42,4 @@ export class OfertasService {
   }
 }
 
-}
+
