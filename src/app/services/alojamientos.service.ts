@@ -14,8 +14,8 @@ export class AlojamientosService {
 
   constructor(private http:HttpClient) { }
 
-  getAllAlojamientos(): Observable<any>{
-    return this.http.get<any>(this.baseUrl);
+  getAllAlojamientos(): Observable<AlojamientoCompleto[]> {
+    return this.http.get<AlojamientoCompleto[]>(this.baseUrl);
   }
 
   getAlojamientoById(id:number): Observable<AlojamientoCompleto>{
@@ -41,7 +41,7 @@ export class AlojamientosService {
     );
   }
 
-  updateAlojamiento(alojamiento: AlojamientoCompleto): Observable<any>{
+  updateAlojamiento(alojamiento: AlojamientoCompleto): Observable<AlojamientoCompleto>{
     return this.http.put<AlojamientoCompleto>(`${this.baseUrl}/${alojamiento.id}`, alojamiento);
   }
 

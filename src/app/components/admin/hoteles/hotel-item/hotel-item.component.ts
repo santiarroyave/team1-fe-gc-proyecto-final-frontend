@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
 
 @Component({
   selector: 'app-hotel-item',
@@ -7,8 +8,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class HotelItemComponent {
   // @Input() listaHoteles: any = [];
-  @Input() alojamiento: any;
-  @Output() editar = new EventEmitter<string>();
+  @Input() alojamiento: AlojamientoCompleto = {} as AlojamientoCompleto;
+  @Output() editar = new EventEmitter<number>();
 
   onEditar() {
     this.editar.emit(this.alojamiento.id);
