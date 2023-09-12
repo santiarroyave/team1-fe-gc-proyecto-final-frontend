@@ -94,9 +94,10 @@ export class GestorImgComponent{
     return new Promise<any>(async (resolve, reject) => {
       const nombreCarpeta = this.nombreCarpetaFire;
       const promises = [];
-      const nombre = this.generarNombre();
+      let nombre;
 
       for(let image of this.listaFotosFile){
+        nombre = this.generarNombre();
         // Sube la imagen
         const imgRef = ref(this.storage, `${nombreCarpeta}/${nombre}`);
   
