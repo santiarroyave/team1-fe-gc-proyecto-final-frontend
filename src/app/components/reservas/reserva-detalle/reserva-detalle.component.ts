@@ -15,6 +15,6 @@ constructor(private ofertaService: OfertasService, private route: ActivatedRoute
   this.route.params.subscribe(params => {
     this.id = params['id'];
   });
-  this.reserva= this.ofertaService.getReservaById(this.id);
+  //this.reserva= this.ofertaService.getReservaById(this.id);
 }
 }

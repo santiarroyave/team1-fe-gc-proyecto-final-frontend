@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { AlojamientosService } from 'src/app/services/alojamientos.service';
   styleUrls: ['./hoteles.component.css']
 })
 export class HotelesComponent {
-  alojamientos: any = [];
+  alojamientos: AlojamientoCompleto[] = [];
 
   constructor(private alojamientoService: AlojamientosService) {}
 

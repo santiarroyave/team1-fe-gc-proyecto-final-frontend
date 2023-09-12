@@ -18,6 +18,17 @@ export class PasoDosComponent {
       const elementId: number = Number(params['id']);
       this.oferta = this.ofertasService.getOfertaById(elementId);
     });
-    this.precio = this.ofertasService.oferta;
+    //this.precio = this.ofertasService.oferta;
   }
+
+  // pagar(){
+
+  //   const reserva = {
+  //     IdOferta: this.oferta.id,
+  //     IdUsuario: this.id_usuario,
+  //     fechaInicio: ,
+  //     fechaFin: this.fechaFin,
+  //     estado: "Completada"
+  //   }
+  // }
 }
