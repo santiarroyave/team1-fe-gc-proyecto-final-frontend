@@ -94,10 +94,11 @@ export class GestorImgComponent{
     return new Promise<any>(async (resolve, reject) => {
       const nombreCarpeta = this.nombreCarpetaFire;
       const promises = [];
+      const nombre = this.generarNombre();
 
       for(let image of this.listaFotosFile){
         // Sube la imagen
-        const imgRef = ref(this.storage, `${nombreCarpeta}/${image.name}`);
+        const imgRef = ref(this.storage, `${nombreCarpeta}/${nombre}`);
   
         const uploadPromise = uploadBytes(imgRef, image)
         .then(async () => {
@@ -120,5 +121,28 @@ export class GestorImgComponent{
         reject('Error al cargar las imágenes');
       }
     });
+  }
+
+  generarNombre() {
+    // Este método genera un nombre aleatorio de 100 digitos para la imagen
+    let nombre = '';
+    const longitud = 100;
+  
+    for (let i = 0; i < longitud; i++) {
+      // Número aleatorio para elegir qué tipo de carácter incluir en el nombre
+      let randomTemp = Math.floor(Math.random() * 3);
+  
+      if (randomTemp === 2) {
+        // Mayúsculas
+        nombre += String.fromCharCode(Math.floor(Math.random() * (91 - 65)) + 65);
+      } else if (randomTemp === 1) {
+        // Minúsculas
+        nombre += String.fromCharCode(Math.floor(Math.random() * (123 - 97)) + 97);
+      } else {
+        // Números
+        nombre += Math.floor(Math.random() * 10);
+      }
+    }
+    return nombre;
   }
 }
