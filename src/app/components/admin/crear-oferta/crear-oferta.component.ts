@@ -3,6 +3,8 @@ import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoComp
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
 
 declare var bootstrap: any;
+import { GestorImgComponent } from 'src/app/utils/gestor-img/gestor-img.component';
+
 
 @Component({
   selector: 'app-crear-oferta',
@@ -22,6 +24,7 @@ export class CrearOfertaComponent implements OnInit{
   idActividadSeleccionada:number = -1;
 
   constructor(private alojamientosService: AlojamientosService){ }
+  @ViewChild(GestorImgComponent) galeriaFotos!:GestorImgComponent;
   
   ngOnInit(): void {
     // Generador de fotos de ejemplo
@@ -39,7 +42,6 @@ export class CrearOfertaComponent implements OnInit{
     for (let i = 0; i < 5; i++) {
       this.agregarActividad(`Actividad ${i}`, "Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title and make up the bulk of the card's content.", "https://www.portaventuraworld.com/blog/wp-content/uploads/2023/05/Paw-World-1200x600-1.jpg");
     }
-
   }
 
   // Recoge los datos del formulario y los envia a la funcion que los agrega y resetea el formulario
@@ -49,8 +51,6 @@ export class CrearOfertaComponent implements OnInit{
 
   // Añade una actividad a la lista de actividades
   agregarActividad(titulo:string, descripcion:string, imagen:string){
-
-    
     // Nueva actividad: si no hay un ID seleccionada se usa el ID auto incremental
     // Editar actividad: si hay un ID seleccionada se usa ese id
     if(this.idActividadSeleccionada == -1){
@@ -64,7 +64,6 @@ export class CrearOfertaComponent implements OnInit{
         descripcion: descripcion,
         imagen: imagen
       });
-      
     }else{
       // Edita los datos de la Actividad seleccionada
       this.listaActividades.splice(this.idActividadSeleccionada, 1, {
@@ -73,7 +72,6 @@ export class CrearOfertaComponent implements OnInit{
         descripcion: descripcion,
         imagen: imagen
       });
-
     }
 
     // Resetea el formulario y lo deja vacio
@@ -109,12 +107,32 @@ export class CrearOfertaComponent implements OnInit{
     // 2. Borra la actividad
     this.listaActividades.splice(posicion, 1);
   }
+
   
   modalTrigger(): void {
     const modalLiveExample = document.getElementById('liveModal');
 
     const modalBootstrap = new bootstrap.Toast(modalLiveExample);
     modalBootstrap.show();
+
+  crearOferta(){
+    if (this.galeriaFotos){
+      this.galeriaFotos.uploadImages()
+      .then((urls) => {
+        // Maneja la lista de URLs aquí
+          console.log('URLs de las imágenes cargadas:', urls);
+
+        // ###############################################
+        // Aqui se ejecutará el codigo para guardar la oferta en BBDD
+        // Porque tiene que esperarse a tener las URLs
+        // ###############################################
+
+      })
+      .catch((error) => {
+        // Maneja cualquier error que pueda ocurrir durante la carga de imágenes
+        console.error('Error al cargar imágenes:', error);
+      });
+    }
   }
 }
 
