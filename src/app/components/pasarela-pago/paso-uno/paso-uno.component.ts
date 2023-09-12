@@ -65,7 +65,7 @@ export class PasoUnoComponent implements OnInit {
   }
 
   actualizarOferta():void {
-    this.ofertasService.oferta = this.precio_noche*this.noches;
+    //this.ofertasService.oferta = this.precio_noche*this.noches;
     this.router.navigate([`/paso-2/${this.oferta.id}`]);
   }
 

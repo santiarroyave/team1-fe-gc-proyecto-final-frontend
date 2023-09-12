@@ -10,6 +10,6 @@ export class ReservasComponent {
   listaReservas: any[] = [];
 
   constructor(private ofertasService: OfertasService) {
-    this.listaReservas = this.ofertasService.getAllReservas();
+    //this.listaReservas = this.ofertasService.getAllReservas();
   }
 }

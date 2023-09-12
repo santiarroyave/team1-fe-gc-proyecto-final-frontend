@@ -18,7 +18,7 @@ export class PasoDosComponent {
       const elementId: number = Number(params['id']);
       this.oferta = this.ofertasService.getOfertaById(elementId);
     });
-    this.precio = this.ofertasService.oferta;
+    //this.precio = this.ofertasService.oferta;
   }
 
   // pagar(){

@@ -1,44 +1,37 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import db from '../../assets/db.json'
-import { Reserva } from '../models/Reserva';
+import { Observable, map } from 'rxjs';
+import { Oferta } from '../models/Oferta';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OfertasService {
-  oferta: any;
-  baseUrl: string = "api/Reservas";
+
+  baseUrl: string = "api/Ofertas";
+
   constructor(private http:HttpClient) { }
 
-  getAllOfertas(): any[]{
-    return db.ofertas;
+  getAllOfertas(): Observable<Oferta[]>{
+    return this.http.get<Oferta[]>(this.baseUrl);
   }
 
-  getOfertaById(id:number): Object{
-    return db.ofertas[id-1];
-  }
-
-  //reservas
-  getAllReservas(): any[]{
-    return db.reservas;
-  }
-
-  getReservaById(id:number): Object{
-    return db.reservas[id-1];
-  }
-
-  createReserva(reserva: Reserva): void{
-    this.http.post<Reserva>(this.baseUrl, reserva).subscribe(
-      () => {
-        console.log('reserva subida correctamente');
-        console.log(reserva);
-      },
-      (error) => {
-        console.error("Ha habido un errooooooooor aaaaaaaaaaaaaahhhhh" + error);
-        throw error;
-      }
+  getOfertaById(id:number): Observable<Oferta>{
+    return this.http.get<Oferta>(this.baseUrl + "/" + id).pipe(
+      map((response) => {
+        const oferta: Oferta = {
+          id: response.id,
+          titulo: response.titulo,
+          descripcion: response.descripcion,
+          precio: response.precio,
+          maxPersonas: response.maxPersonas,
+          fechaInicio: response.fechaInicio,
+          fechaFin: response.fechaFin,
+          ofertasDisponibles: response.ofertasDisponibles,
+          idAlojamiento: response.idAlojamiento
+        };
+        return oferta;
+      })
     );
   }
 }
