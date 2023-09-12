@@ -1,8 +1,6 @@
 <!-- Esto es el menu horizontal -->
 <app-navbar-h></app-navbar-h>
 
-<!-- Galeria de imagenes de la oferta -->
-
 <div class="container">
     <div class="row justify-content-center">
         <app-menu class="d-none d-lg-block col-lg-3"></app-menu>
@@ -11,29 +9,13 @@
                 <!-- Escribir código aqui -->
                 <div class="titulo d-flex justify-content-between mt-3 align-items-center">
                     <h1 class="">Crear oferta</h1>
-                    <button class="btn btn-primary btn-lg botonAzul">Crear oferta</button>
+                    <button class="btn btn-primary btn-lg botonAzul" (click)="crearOferta()">Crear oferta</button>
                 </div>
                 <hr>
 
                 <!-- GALERIA DE FOTOS -->
                 <!-- ------------------------------------------------------------------------------------------------ -->
-                <div class="galeriaCrearOferta mb-3">
-                    <div class="btnGaleria btnIz align-self-center">
-                        <i class="bi bi-caret-left"></i>
-                    </div>
-                    <div class="btnGaleria btnDer align-self-center">
-                        <i class="bi bi-caret-right"></i>
-                    </div>
-                    <div class="foto foto1" style="background-image: url({{fotos[0]}});"></div>
-                    <div class="foto foto3" style="background-image: url({{fotos[1]}});"></div>
-                    <div class="foto foto2" style="background-image: url({{fotos[2]}});"></div>
-                    <div class="foto foto4" style="background-image: url({{fotos[3]}});"></div>
-                    <div class="foto foto5" style="background-image: url({{fotos[4]}});"></div>
-                    <div class="foto foto6" style="background-image: url({{fotos[5]}});"></div>
-                    <div class="foto foto7" style="background-image: url({{fotos[6]}});"></div>
-                </div>
-
-                
+                <app-gestor-img #galeriaFotos></app-gestor-img>
                 
                 <!-- APARTADO INFORMACION DE LA OFERTA -->
                 <!-- ------------------------------------------------------------------------------------------------ -->
@@ -248,7 +230,7 @@
                 <!-- BOTON PARA GUARDAR LA OFERTA -->
                 <!-- ------------------------------------------------------------------------------------------------ -->
                 <div class="d-flex justify-content-end mb-5 py-4 mt-3">
-                    <button class="btn btn-primary btn-lg botonAzul col-12 col-lg-12">Crear oferta</button>
+                    <button class="btn btn-primary btn-lg botonAzul col-12 col-lg-12" (click)="crearOferta()">Crear oferta</button>
                 </div>
 
 
