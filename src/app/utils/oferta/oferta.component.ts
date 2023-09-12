@@ -32,7 +32,6 @@ export class OfertaComponent implements OnInit{
         idOferta: id_oferta,
         idUsuario: id_user
       }
-      this.ofertasService.postFavorito(fav).subscribe();
       this.toastTriggerAdd();
     }else{
       this.favoritoActivo = false;
