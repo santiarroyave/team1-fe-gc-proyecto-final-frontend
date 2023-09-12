@@ -17,7 +17,7 @@ export class AboutComponent {
 
     this.datosEquipo.push({
       nombre: "Santi Arroyave",
-      urlFoto: "../../../assets/about/foto-santi.jpeg",
+      urlFoto: "../../../assets/about/foto-santi.jpg",
       linkGithub: "https://github.com/santiarroyave",
       linkLinkedin: "https://www.linkedin.com/in/santiarroyave/",
       descripcion: ""
@@ -31,7 +31,7 @@ export class AboutComponent {
     });
     this.datosEquipo.push({
       nombre: "Jhon del Águila",
-      urlFoto: "../../../assets/about/foto-jhon.jpeg",
+      urlFoto: "../../../assets/about/foto-jhon.jpg",
       linkGithub: "https://github.com/jhondelaguila",
       linkLinkedin: "https://www.linkedin.com/in/jhondelaguila/",
       descripcion: ""
