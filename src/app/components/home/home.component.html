@@ -8,41 +8,41 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12">
-      <app-buscador id="buscador" (nombre_oferta)="actualizarListaOfertas($event)"></app-buscador>
+      <app-buscador id="buscador" (nombre_oferta)="actualizarListaOfertas($event)" (lista_ofertas)="actualizarListaOfertas($event)"></app-buscador>
     </div>
   </div>
   <div class="row justify-content-center">
     <div class="col-lg-3 col-md-12">
-      <app-navbar-v></app-navbar-v>
+      <app-navbar-v (res_busqueda)="updateResBusqueda($event)" [data_filtros]="filtros_data" (ofertas)="actualizarPaginaFiltrada($event)" ></app-navbar-v>
     </div>
     <!-- Aqui va el contenido -->
-    <div class="col col-12 col-lg-9 mt-4">
-
+    <div class="col col-12 col-lg-9 mt-4" id="main">
+        <p id="resultados" [ngStyle]="{'display': mostrarElemento ? 'block' : 'none'}">Obtuviste {{res_length}} de la búsqueda</p>
         <!-- Ofertas -->
-        <app-oferta *ngFor="let oferta of ofertas_mostradas" [ofertaId]="oferta.id"></app-oferta>
+        <app-oferta *ngFor="let oferta of ofertas_mostradas" [oferta]="oferta"></app-oferta>
 
         <!-- Paginación -->
         <div class="d-flex align-items-center justify-content-center mt-3">
             <nav aria-label="Page navigation example">
                 <ul class="pagination botonesPaginacion">
                   <li class="page-item">
-                    <button class="page-link" aria-label="Previous" (click)="goToPage(0)">
+                    <button class="page-link" aria-label="goToPage" (click)="goToPage(0)">
                       <span aria-hidden="true">&laquo;</span>
                     </button>
                   </li>
                   <li class="page-item">
-                    <button class="page-link" aria-label="Previous" (click)="previousPage()">
+                    <button class="page-link" aria-label="previous" (click)="previousPage()">
                         Anterior
                     </button>
                   </li>
                   <li class="page-item"><button class="page-link">{{pagina_actual+1}}</button></li>
                   <li class="page-item">
-                    <button class="page-link" aria-label="Previous" (click)="nextPage()">
+                    <button class="page-link" aria-label="next" (click)="nextPage()">
                         Siguiente
                     </button>
                   </li>
                   <li class="page-item">
-                    <button class="page-link" aria-label="Next" (click)="goToPage(total_paginas)">
+                    <button class="page-link" aria-label="goToPage" (click)="goToPage(total_paginas)">
                       <span aria-hidden="true">&raquo;</span>
                     </button>
                   </li>

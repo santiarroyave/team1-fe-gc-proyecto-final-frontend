@@ -35,6 +35,90 @@
                     </div>
                 </div>
                 <div class="mb-3">
+                    <label for="pais" class="form-label fw-bold">Pais</label>
+                    <div class="d-flex">
+                        <input *ngIf="paisEditSeleccionado; else paisBloqueado" type="text" class="form-control me-4" id="pais" [(ngModel)]="actividad.pais" name="pais">
+                        <ng-template class="w-100" #paisBloqueado>
+                            <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ actividad.pais }}</p>
+                            </div>
+                        </ng-template>
+                        <button class="btn btn-secondary material-symbols-outlined" (click)="activadoPaisEdit()">
+                            {{ paisEditSeleccionado ? 'save' : 'edit' }}
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="calle" class="form-label fw-bold">Calle</label>
+                    <div class="d-flex">
+                        <input *ngIf="calleEditSeleccionado; else calleBloqueado" type="text" class="form-control me-4" id="calle" [(ngModel)]="actividad.calle" name="calle">
+                        <ng-template class="w-100" #calleBloqueado>
+                            <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ actividad.calle }}</p>
+                            </div>
+                        </ng-template>
+                        <button class="btn btn-secondary material-symbols-outlined" (click)="activadoCalleEdit()">
+                            {{ calleEditSeleccionado ? 'save' : 'edit' }}
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="numero" class="form-label fw-bold">Numero</label>
+                    <div class="d-flex">
+                        <input *ngIf="numeroEditSeleccionado; else numeroBloqueado" type="text" class="form-control me-4" id="numero" [(ngModel)]="actividad.numero" name="numero">
+                        <ng-template class="w-100" #numeroBloqueado>
+                            <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ actividad.numero }}</p>
+                            </div>
+                        </ng-template>
+                        <button class="btn btn-secondary material-symbols-outlined" (click)="activadoNumeroEdit()">
+                            {{ numeroEditSeleccionado ? 'save' : 'edit' }}
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="CP" class="form-label fw-bold">CP</label>
+                    <div class="d-flex">
+                        <input *ngIf="CPEditSeleccionado; else CPBloqueado" type="text" class="form-control me-4" id="CP" [(ngModel)]="actividad.codigoPostal" name="CP">
+                        <ng-template class="w-100" #CPBloqueado>
+                            <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ actividad.codigoPostal }}</p>
+                            </div>
+                        </ng-template>
+                        <button class="btn btn-secondary material-symbols-outlined" (click)="activadoCPEdit()">
+                            {{ CPEditSeleccionado ? 'save' : 'edit' }}
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="provincia" class="form-label fw-bold">Provincia</label>
+                    <div class="d-flex">
+                        <input *ngIf="provinciaEditSeleccionado; else provinciaBloqueado" type="text" class="form-control me-4" id="provincia" [(ngModel)]="actividad.provincia" name="provincia">
+                        <ng-template class="w-100" #provinciaBloqueado>
+                            <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ actividad.provincia }}</p>
+                            </div>
+                        </ng-template>
+                        <button class="btn btn-secondary material-symbols-outlined" (click)="activadoProvinciaEdit()">
+                            {{ provinciaEditSeleccionado ? 'save' : 'edit' }}
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="localidad" class="form-label fw-bold">Localidad</label>
+                    <div class="d-flex">
+                        <input *ngIf="localidadEditSeleccionado; else localidadBloqueado" type="text" class="form-control me-4" id="localidad" [(ngModel)]="actividad.localidad" name="localidad">
+                        <ng-template class="w-100" #localidadBloqueado>
+                            <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ actividad.localidad }}</p>
+                            </div>
+                        </ng-template>
+                        <button class="btn btn-secondary material-symbols-outlined" (click)="activadoLocalidadEdit()">
+                            {{ localidadEditSeleccionado ? 'save' : 'edit' }}
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
                     <label for="imagen" class="form-label">Imagen</label>
                     <input type="file" class="form-control" id="imagen" name="imagen">
                     <small class="form-text text-muted">Puedes cargar una imagen desde tu ordenador.</small>

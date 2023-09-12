@@ -1,4 +1,4 @@
-import { NgModule,LOCALE_ID } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
@@ -49,7 +49,7 @@ import { GestorImgComponent } from './utils/gestor-img/gestor-img.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-
+import { authInterceptorProviders } from './helpers/auth.interceptor';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -118,7 +118,8 @@ export const MY_DATE_FORMATS = {
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
-    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    authInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })
