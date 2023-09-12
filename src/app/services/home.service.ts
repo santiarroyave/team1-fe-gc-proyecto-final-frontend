@@ -5,6 +5,7 @@ import { Oferta } from '../models/Oferta';
 import { FiltrosResponse } from '../models/FiltrosResponse';
 import { Alojamiento } from '../models/Alojamiento';
 import { ServiciosAlojamientos } from '../models/ServiciosAlojamientos';
+import { Favorito } from '../models/Favorito';
 
 @Injectable({
   providedIn: 'root'

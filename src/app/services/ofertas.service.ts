@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import db from '../../assets/db.json'
+import { Favorito } from '../models/Favorito';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OfertasService {
   oferta: any;
-  // constructor(private http:HttpClient) { }
+  baseUrl: string = "api/";
+  constructor(private http:HttpClient) { }
 
   getAllOfertas(): any[]{
     return db.ofertas;
@@ -25,5 +27,9 @@ export class OfertasService {
 
   getReservaById(id:number): Object{
     return db.reservas[id-1];
+  }
+
+  postFavorito(fav:Favorito):Observable<any>{
+    return this.http.post(this.baseUrl+'Favoritoes',fav);
   }
 }
