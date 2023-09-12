@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Favorito } from 'src/app/models/Favorito';
 import { OfertasService } from 'src/app/services/ofertas.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 declare var bootstrap: any;
 
@@ -15,7 +17,7 @@ export class OfertaComponent implements OnInit{
   favoritoActivo:boolean = false;
   @Input() oferta:any;
 
-  constructor(){ };
+  constructor(private tokenStorageService: TokenStorageService, private ofertasService: OfertasService){ };
   
   // Obtiene la información de la oferta haciendo una llamada al servidor por IP
   ngOnInit(): void {
@@ -24,6 +26,13 @@ export class OfertaComponent implements OnInit{
   favorito(){
     if (this.favoritoActivo == false){
       this.favoritoActivo = true;
+      const id_user = this.tokenStorageService.getUser().id;
+      const id_oferta = this.ofertaId;
+      const fav:Favorito = {
+        idOferta: id_oferta,
+        idUsuario: id_user
+      }
+      this.ofertasService.postFavorito(fav).subscribe();
       this.toastTriggerAdd();
     }else{
       this.favoritoActivo = false;

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
-import { Oferta } from '../models/Oferta';
+import db from '../../assets/db.json'
+import { Favorito } from '../models/Favorito';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OfertasService {
+  oferta: any;
 
   baseUrl: string = "api/Ofertas";
 
@@ -34,4 +36,10 @@ export class OfertasService {
       })
     );
   }
+
+  postFavorito(fav:Favorito):Observable<any>{
+    return this.http.post(this.baseUrl+'Favoritoes',fav);
+  }
+}
+
 }
