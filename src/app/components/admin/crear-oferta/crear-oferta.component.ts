@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
 
@@ -114,7 +114,8 @@ export class CrearOfertaComponent implements OnInit{
 
     const modalBootstrap = new bootstrap.Toast(modalLiveExample);
     modalBootstrap.show();
-
+  }
+  
   crearOferta(){
     if (this.galeriaFotos){
       this.galeriaFotos.uploadImages()
@@ -139,4 +140,4 @@ export class CrearOfertaComponent implements OnInit{
 
 // ¿Cómo funcionan las ID de las actividades?
 // Estas id se usan de manera local para editar las actividades, si se obtuvieran actividades de la base de datos, esas id no se usarian aqui.
-// Al crear la oferta se guardan las actividades en la base de datos, el id auto incremental lo pone la propia base de datos.
+// Al crear la oferta se guardan las actividades en la base de datos, el id auto incremental lo pone la propia base de datos

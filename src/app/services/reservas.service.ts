@@ -11,8 +11,7 @@ export class ReservasService {
   baseUrl: string = "api/Reservas";
 
   constructor(private http:HttpClient) { }
-
-  //reservas
+  
   getAllReservas(): Observable<Reserva[]>{
     return this.http.get<Reserva[]>(this.baseUrl);
   }

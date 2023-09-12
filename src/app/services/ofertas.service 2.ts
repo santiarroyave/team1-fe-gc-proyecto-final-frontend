@@ -1,29 +1,38 @@
 import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
 import db from '../../assets/db.json'
+import { Oferta } from '../models/Oferta';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OfertasService {
-  oferta: any;
-  // constructor(private http:HttpClient) { }
 
-  getAllOfertas(): any[]{
-    return db.ofertas;
+  baseUrl: string = "api/Ofertas";
+
+  constructor(private http:HttpClient) { }
+
+  getAllOfertas(): Observable<Oferta[]>{
+    return this.http.get<Oferta[]>(this.baseUrl);
   }
 
-  getOfertaById(id:number): Object{
-    return db.ofertas[id-1];
-  }
-
-  //reservas
-  getAllReservas(): any[]{
-    return db.reservas;
-  }
-
-  getReservaById(id:number): Object{
-    return db.reservas[id-1];
+  getOfertaById(id:number): Observable<Oferta>{
+    return this.http.get<Oferta>(this.baseUrl + "/" + id).pipe(
+      map((response) => {
+        const oferta: Oferta = {
+          id: response.id,
+          titulo: response.titulo,
+          descripcion: response.descripcion,
+          precio: response.precio,
+          maxPersonas: response.maxPersonas,
+          fechaInicio: response.fechaInicio,
+          fechaFin: response.fechaFin,
+          ofertasDisponibles: response.ofertasDisponibles,
+          idAlojamiento: response.idAlojamiento
+        };
+        return oferta;
+      })
+    );
   }
 }
