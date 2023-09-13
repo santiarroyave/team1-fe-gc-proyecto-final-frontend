@@ -17,7 +17,7 @@ export class OfertaDetalleComponent implements OnInit {
   toastLiveExampleRef!: ElementRef<HTMLElement>;
   oferta: any = {};
   alojamiento: any = {};
-  actividad: any = {};
+  actividad: any = [];
 
   listaActividades:any = [];
   fotosGaleria:any = [];
@@ -33,9 +33,15 @@ export class OfertaDetalleComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const elementId: number = Number(params['id']);
-      this.oferta = this.ofertasService.getOfertaById(elementId);
-      this.alojamiento = this.alojamientosService.getAlojamientoById(elementId);
-      this.actividad = this.actividadesService.getActividadById(elementId);
+      this.ofertasService.getOfertaById(elementId).subscribe(res =>{
+        this.oferta = res;        
+        this.alojamientosService.getAlojamientoById(this.oferta.idAlojamiento).subscribe(res => {
+          this.alojamiento = res;          
+          this.actividadesService.getActividadesByOfertaId(this.oferta.id).subscribe(res => {
+            this.actividad = res;            
+          });
+        });
+      });
     });
 
     // Genera actividades de ejemplo

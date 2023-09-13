@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import { ActividadCrear } from '../models/ActividadCrear';
 import db from '../../assets/db.json'
 import { ActividadCompleta } from '../models/ActividadCompleta';
+import { Actividad } from '../models/Actividad';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,10 @@ export class ActividadesService {
         return actividad;
       })
     );
+  }
+
+  getActividadesByOfertaId(id_oferta:number):Observable<Actividad>{
+    return this.http.get<Actividad>('api/OfertasActividades/IdOferta/'+id_oferta);
   }
 
   updateActividad(actividad: ActividadCompleta): Observable<any> {

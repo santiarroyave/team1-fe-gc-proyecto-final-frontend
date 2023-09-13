@@ -1,5 +1,5 @@
-export interface Reserva {
-    // id:number,
+export interface GetReserva {
+    id:number,
     idOferta:number,
     idUsuario:number,
     fechaInicio:string,
