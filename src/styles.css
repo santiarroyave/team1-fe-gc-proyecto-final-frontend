@@ -129,6 +129,13 @@ hr{
 .sombraHover:hover{
     box-shadow: .2em .2em .7em rgba(0, 0, 0, 0.15);
 }
+
+/* Cambia el color de los checks */
+.form-check-input:checked{
+    background-color: var(--turquesa-brillante);
+    border-color: var(--turquesa-brillante);
+}
+
 /* ------------------------------------------------------------------------------------------------------------------------- */
 /* Animaciones */
 /* ------------------------------------------------------------------------------------------------------------------------- */
