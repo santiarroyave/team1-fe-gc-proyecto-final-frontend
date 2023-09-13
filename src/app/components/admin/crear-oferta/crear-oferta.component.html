@@ -88,19 +88,19 @@
                                         <!-- BUSCADOR -->
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1"><i class="bi bi-house-fill"></i></span>
-                                            <input type="text" class="form-control" placeholder="Nombre del alojamiento" aria-label="Username" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" placeholder="Nombre del alojamiento" aria-label="Username" aria-describedby="basic-addon1" [(ngModel)]="busquedaAloj">
                                         </div>
                                         
-                                        <!-- NOTON BUSCAR -->
-                                        <button type="button" class="btn btn-primary botonAzul" data-bs-dismiss="modal" aria-label="Close">Buscar</button>
+                                        <!-- BOTON BUSCAR -->
+                                        <button type="button" class="btn btn-primary botonAzul" (click)="buscarAloj()">Buscar</button>
                                         
-                                        <div class="div">
+                                        <div *ngFor="let alojamiento of listaAlojBuscador">
                                             <hr>
-                                            <div class="fichaAlojBuscador p-2">
-                                                <h5>Hotel palace</h5>
-                                                <p><i class="bi bi-globe-americas"></i> Salou - Tarragona</p>
-                                                <p><i class="bi bi-geo-alt-fill"></i> Calle Real 123 | <b>CP:</b> 43545 | <i class="bi bi-telephone-fill"></i> 977334628</p>
-                                                <p><i class="bi bi-envelope-fill"></i> hotelpalace@hotelp.com</p>
+                                            <div class="fichaAlojBuscador p-2" (click)="seleccionarAloj(alojamiento.id)" data-bs-dismiss="modal">
+                                                <h5>{{alojamiento.nombre}}</h5>
+                                                <p><i class="bi bi-globe-americas"></i> {{alojamiento.localidad}} - {{alojamiento.provincia}}</p>
+                                                <p><i class="bi bi-geo-alt-fill"></i> {{alojamiento.calle}} | <b>CP:</b> {{alojamiento.cp}} | <i class="bi bi-telephone-fill"></i> {{alojamiento.tel}}</p>
+                                                <p><i class="bi bi-envelope-fill"></i> {{alojamiento.email}}</p>
                                             </div>
                                         </div>
 

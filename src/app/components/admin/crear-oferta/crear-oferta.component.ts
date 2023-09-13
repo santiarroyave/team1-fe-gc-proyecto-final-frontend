@@ -25,6 +25,9 @@ export class CrearOfertaComponent implements OnInit{
   fotoActividad: File | null;
   fotoActividadEdicionMode: boolean;
 
+  busquedaAloj:string;
+  listaAlojBuscador:any[];
+
   // datos formulario
   urlFotos:string[];
   crearOfertaJson:any;
@@ -37,6 +40,9 @@ export class CrearOfertaComponent implements OnInit{
   actividad:any;
 
   constructor(private alojamientosService: AlojamientosService, private serviciosAlojamientoService: ServiciosAlojamientoService, private gestorImgService: GestorImgService){
+    this.busquedaAloj = "";
+    this.listaAlojBuscador = [];
+
     // datos formulario 
     this.urlFotos = [];
     this.fotoActividad = null;
@@ -191,14 +197,6 @@ export class CrearOfertaComponent implements OnInit{
     // 2. Borra la actividad
     this.actividades.splice(posicion, 1);
   }
-
-  
-  modalTrigger(): void {
-    const modalLiveExample = document.getElementById('liveModal');
-
-    const modalBootstrap = new bootstrap.Toast(modalLiveExample);
-    modalBootstrap.show();
-  }
   
   crearOferta(){
     if (this.galeriaFotos){
@@ -246,5 +244,60 @@ export class CrearOfertaComponent implements OnInit{
 
   uploadImagesLocalActividad($event:any){
     this.fotoActividad = $event.target.files[0];
+  }
+
+  // AGENDA
+  modalTrigger(): void {
+    const modalLiveExample = document.getElementById('liveModal');
+
+    const modalBootstrap = new bootstrap.Toast(modalLiveExample);
+    modalBootstrap.show();
+  }
+
+  buscarAloj(){
+    let alojamiento = {
+      id: 45,
+      nombre: "Hotel palace",
+      localidad: "Salou",
+      provincia: "Tarragona",
+      calle: "Calle Real",
+      numero: "123",
+      cp: "45683",
+      tel: "977494753",
+      email: "hotelpalace@hotelp.com"
+    };
+    for (let i = 0; i < 3; i++) {
+      this.listaAlojBuscador.push(alojamiento);      
+    }
+  }
+
+  seleccionarAloj(id:number){
+    // alert(id);
+    // obtener todos los datos de este alojamiento por ID y guardarlos en "this.alojamiento"
+
+    // Llamar ala servicio buscar por id
+
+    // Almacenar datos en "this.alojamiento"
+    this.alojamiento = {
+      nombre: "Hotel palace",
+      pais: "España",
+      direccion: "Calle Real",
+      numero: "123",
+      cp: 45683,
+      provincia: "Tarragona",
+      localidad: "Salou",
+      email: "hotelpalace@hotelp.com",
+      tel: 977494753,
+      categoria: 3
+    }
+
+    // Servicios de ejemplo
+    let listaServicios = [3, 4, 6]
+
+    for (let i = 0; i < listaServicios.length; i++) {
+      console.log("seleccionando servicio");
+      console.log(listaServicios[i]);
+      this.seleccionarServicio(listaServicios[i]); 
+    }
   }
 }
