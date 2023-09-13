@@ -14,6 +14,13 @@
 
                 <!-- GALERIA DE FOTOS -->
                 <!-- ------------------------------------------------------------------------------------------------ -->
+                <!-- <div class="contenedorInfoOferta rounded-3 p-3">
+                    <h2>Lista alojamientos</h2>
+                    <pre>
+                        {{alojamientosCompletos | json}}
+                    </pre>
+                </div> -->
+
                 <app-gestor-img #galeriaFotos></app-gestor-img>
                 
                 <!-- APARTADO INFORMACION DE LA OFERTA -->
@@ -71,18 +78,40 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn btn-primary botonAzulVacio" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-circle"></i> Cerrar</button>
+                                    <h3><i class="bi bi-journal-bookmark"></i> Agenda</h3>
                                 </div>
                                 <div class="modal-body">
                                     <div class="d-flex flex-column">
-                                        <p><strong class="card-text">Alojamientos</strong></p>
-                                        <div *ngFor="let alojamiento of alojamientosCompletos">
-                                            {{alojamiento.nombre}}, {{alojamiento.localidad}}, {{alojamiento.pais}}
+                                        <h5>Buscar alojamientos:</h5>
+
+                                        <!-- BUSCADOR -->
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-house-fill"></i></span>
+                                            <input type="text" class="form-control" placeholder="Nombre del alojamiento" aria-label="Username" aria-describedby="basic-addon1">
                                         </div>
+                                        
+                                        <!-- NOTON BUSCAR -->
+                                        <button type="button" class="btn btn-primary botonAzul" data-bs-dismiss="modal" aria-label="Close">Buscar</button>
+                                        
+                                        <div class="div">
+                                            <hr>
+                                            <div class="fichaAlojBuscador p-2">
+                                                <h5>Hotel palace</h5>
+                                                <p><i class="bi bi-globe-americas"></i> Salou - Tarragona</p>
+                                                <p><i class="bi bi-geo-alt-fill"></i> Calle Real 123 | <b>CP:</b> 43545 | <i class="bi bi-telephone-fill"></i> 977334628</p>
+                                                <p><i class="bi bi-envelope-fill"></i> hotelpalace@hotelp.com</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- LISTA DE ALOJAMIENTOS -->
+                                        <!-- <div *ngFor="let alojamiento of alojamientosCompletos">
+                                            {{alojamiento.nombre}}, {{alojamiento.localidad}}, {{alojamiento.pais}}
+                                        </div> -->
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
                                 </div>
                             </div>
                         </div>

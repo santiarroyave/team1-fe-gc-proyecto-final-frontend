@@ -88,10 +88,10 @@ export class CrearOfertaComponent implements OnInit{
       this.serviciosAlojamiento = result;
     });
 
-    // this.alojamientosService.getAllAlojamientos().subscribe(response => {
-    //   this.alojamientosCompletos = response;
-    //   console.log(this.alojamientosCompletos);
-    // });
+    this.alojamientosService.getAllAlojamientos().subscribe(response => {
+      this.alojamientosCompletos = response;
+      console.log(this.alojamientosCompletos);
+    });
   }
 
   // Añade una actividad a la lista de actividades
