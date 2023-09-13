@@ -13,13 +13,10 @@ import { GestorImgComponent } from 'src/app/utils/gestor-img/gestor-img.componen
   styleUrls: ['./crear-oferta.component.css']
 })
 export class CrearOfertaComponent implements OnInit{
+  @ViewChild(GestorImgComponent) galeriaFotos!:GestorImgComponent;
   alojamientosCompletos: AlojamientoCompleto[] = [];
   fotos:any = [];
   serviciosAlojamiento:any = [];
-  listaActividades:any = [];
-
-  nombreActividad:string="";
-  descripcionActividad:string="";
 
   idAutoIncrementalActividades:number = 0;
   idActividadSeleccionada:number = -1;
@@ -28,90 +25,76 @@ export class CrearOfertaComponent implements OnInit{
   urlFotos:string[];
   crearOfertaJson:any;
   crearAlojJson:any;
-  // oferta
-  ofertaTitulo:string;
-  ofertaPrecioDia:number|null;
-  ofertaMaxPersonas:number|null;
-  ofertaFechaInicio:Date|null;
-  ofertaFechaFin:Date|null;
-  ofertasDisponibles:number|null;
-  ofertaDescripcion:string;
-  // alojamiento
-  alojNombre:string;
-  alojPais:string;
-  alojDireccion:string;
-  alojNum:string;
-  alojCp:number|null;
-  alojProvincia:string;
-  alojLocalidad:string;
-  alojEmail:string;
-  alojTel:number|null;
-  alojCategoria:number|null;
+
+  oferta:any;
   alojServiciosIds:number[];
-
-  prueba:any;
-
+  alojamiento:any;
+  actividades:any[];
+  actividad:any;
 
   constructor(private alojamientosService: AlojamientosService, private serviciosAlojamientoService: ServiciosAlojamientoService){
-    // this.serviciosAlojamiento = serviciosAlojamientoService.getAllServicios();
-    // console.log(serviciosAlojamientoService.getAllServicios());
-    
-    
-
     // datos formulario 
     this.urlFotos = [];
     // oferta
-    this.ofertaTitulo = "";
-    this.ofertaPrecioDia = null;
-    this.ofertaMaxPersonas = null;
-    this.ofertaFechaInicio = null;
-    this.ofertaFechaFin = null;
-    this.ofertasDisponibles = null;
-    this.ofertaDescripcion = "";
+    this.oferta = {
+        titulo: "",
+        precioDia: null,
+        maxPersonas: null,
+        fechaInicio: Date,
+        fechaFin: Date,
+        ofertasDisponibles: null,
+        descripcion: "",
+        urlFotos: this.urlFotos
+    }
     // alojamiento
-    this.alojNombre = "";
-    this.alojPais = "";
-    this.alojDireccion = "";
-    this.alojNum = "";
-    this.alojCp = null;
-    this.alojProvincia = "";
-    this.alojLocalidad = "";
-    this.alojEmail = "";
-    this.alojTel = null;
-    this.alojCategoria = null;
     this.alojServiciosIds = [];
+    this.alojamiento = {
+        nombre: "",
+        pais: "",
+        direccion: "",
+        numero: "",
+        cp: null,
+        provincia: "",
+        localidad: "",
+        email: "",
+        tel: null,
+        categoria: null,
+        servicios: this.alojServiciosIds
+    }
+    // servicios
+    this.actividad = {
+      titulo: "",
+      descripcion: "",
+      urlImagen: "",
+      pais: "",
+      direccion: "",
+      numero: null,
+      cp: "",
+      provincia: "",
+      localidad: ""
+    }
+    this.actividades = new Array;
   }
-  @ViewChild(GestorImgComponent) galeriaFotos!:GestorImgComponent;
   
   ngOnInit(): void {
-    // Generador de fotos de ejemplo
-    for (let i = 0; i < 7; i++) {
-      this.fotos[i] = "https://concepto.de/wp-content/uploads/2015/03/paisaje-e1549600034372.jpg";
-    }
-    
-    // Genera servicios para el alojamiento de ejemplo
+    // Importa los servicios disponibles en la BBDD
     this.serviciosAlojamientoService.getAllServicios().subscribe(result => {
       this.serviciosAlojamiento = result;
     });
-    // this.serviciosAlojamiento = ["Wifi", "Lavadora", "Aire acondicionado", "Cocina", "Secadora", "Calefacción", "Zona para trabajar", "Televisión", "Piscina", "Desayuno", "Gimnasio"];
 
     this.alojamientosService.getAllAlojamientos().subscribe(response => {
       this.alojamientosCompletos = response;
       console.log(this.alojamientosCompletos);
     });
-    // Generador de actividades de ejemplo
-    for (let i = 0; i < 5; i++) {
-      this.agregarActividad(`Actividad ${i}`, "Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title and make up the bulk of the card's content.", "https://www.portaventuraworld.com/blog/wp-content/uploads/2023/05/Paw-World-1200x600-1.jpg");
-    }
   }
 
   // Recoge los datos del formulario y los envia a la funcion que los agrega y resetea el formulario
   btnAddActividad(){
-    this.agregarActividad(this.nombreActividad, this.descripcionActividad, "");
+    this.agregarActividad();
   }
 
   // Añade una actividad a la lista de actividades
-  agregarActividad(titulo:string, descripcion:string, imagen:string){
+  agregarActividad(){
     // Nueva actividad: si no hay un ID seleccionada se usa el ID auto incremental
     // Editar actividad: si hay un ID seleccionada se usa ese id
     if(this.idActividadSeleccionada == -1){
@@ -119,36 +102,34 @@ export class CrearOfertaComponent implements OnInit{
       this.idActividadSeleccionada = this.idAutoIncrementalActividades;
       
       // Añade nuevas actividades a la lista
-      this.listaActividades.unshift({
-        id: this.idActividadSeleccionada,
-        titulo: titulo,
-        descripcion: descripcion,
-        imagen: imagen
-      });
+      this.actividades.unshift(this.actividad);
     }else{
       // Edita los datos de la Actividad seleccionada
-      this.listaActividades.splice(this.idActividadSeleccionada, 1, {
-        id: this.idActividadSeleccionada,
-        titulo: titulo,
-        descripcion: descripcion,
-        imagen: imagen
-      });
+      this.actividades.splice(this.idActividadSeleccionada, 1, this.actividad);
     }
 
     // Resetea el formulario y lo deja vacio
-    this.nombreActividad="";
-    this.descripcionActividad="";
+    this.actividad = {
+      titulo: "",
+      descripcion: "",
+      urlImagen: "",
+      pais: "",
+      direccion: "",
+      numero: null,
+      cp: "",
+      provincia: "",
+      localidad: ""
+    }
     this.idActividadSeleccionada = -1;
   }
 
-  editarActividad(id:number){
+  editarActividad(titulo:string){
     // 1. Encuentra su posición dentro de la lista
-    let posicion = this.listaActividades.findIndex((busqueda:any) => busqueda.id == id);
+    let posicion = this.actividades.findIndex((actividad:any) => actividad.titulo == titulo);
 
     // 2. Muestra los datos en el formulario y guarda el ID
     if(posicion != -1){
-      this.nombreActividad = this.listaActividades[posicion].titulo;
-      this.descripcionActividad = this.listaActividades[posicion].descripcion;
+      this.actividad = this.actividades[posicion];
       this.idActividadSeleccionada = posicion;
     }
 
@@ -161,12 +142,12 @@ export class CrearOfertaComponent implements OnInit{
 
   
 
-  borrarActividad(id:number){
+  borrarActividad(titulo:string){
     // 1. Encuentra su posición dentro de la lista
-    let posicion = this.listaActividades.findIndex((busqueda:any) => busqueda.id == id);
+    let posicion = this.actividades.findIndex((actividad:any) => actividad.titulo == titulo);
 
     // 2. Borra la actividad
-    this.listaActividades.splice(posicion, 1);
+    this.actividades.splice(posicion, 1);
   }
 
   
@@ -181,8 +162,11 @@ export class CrearOfertaComponent implements OnInit{
     if (this.galeriaFotos){
       this.galeriaFotos.uploadImages()
       .then((urls) => {
-        // Maneja la lista de URLs aquí
-          this.urlFotos = urls;
+        // Agrega las URLs creadas a la lista de URLs
+        for (let i = 0; i < urls.length; i++) {
+          this.urlFotos.push(urls[i]);
+        }
+        console.log(urls);
 
         // ###############################################
         // Aqui se ejecutará el codigo para guardar la oferta en BBDD
@@ -200,29 +184,9 @@ export class CrearOfertaComponent implements OnInit{
 
   crearJson(){
     this.crearOfertaJson = {
-      oferta: {
-        titulo: this.ofertaTitulo,
-        precioDia: this.ofertaPrecioDia,
-        maxPersonas: this.ofertaMaxPersonas,
-        fechaInicio: this.ofertaFechaInicio,
-        fechaFin: this.ofertaFechaFin,
-        ofertasDisponibles: this.ofertasDisponibles,
-        descripcion: this.ofertaDescripcion,
-        urlFotos: this.urlFotos
-      },
-      alojamiento: {
-        nombre: this.alojNombre,
-        pais: this.alojPais,
-        direccion: this.alojDireccion,
-        numero: this.alojNum,
-        cp: this.alojCp,
-        provincia: this.alojProvincia,
-        localidad: this.alojLocalidad,
-        email: this.alojEmail,
-        tel: this.alojTel,
-        categoria: this.alojCategoria,
-        servicios: this.alojServiciosIds
-      } 
+      oferta: this.oferta,
+      alojamiento: this.alojamiento,
+      actividades: this.actividades
     };
     
     console.log("ESTE ES EL JSON");
@@ -233,9 +197,11 @@ export class CrearOfertaComponent implements OnInit{
     if (this.alojServiciosIds.includes(servicioId)) {
       // El servicio está seleccionado, así que lo deseleccionamos
       this.alojServiciosIds = this.alojServiciosIds.filter(id => id !== servicioId);
+      console.log("Servicio quitado");
     }else{
       // El servicio no está seleccionado, así que lo seleccionamos
       this.alojServiciosIds.push(servicioId);
+      console.log("Servicio agregado");
     }
   }
 }
