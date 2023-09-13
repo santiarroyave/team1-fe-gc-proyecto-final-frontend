@@ -199,8 +199,9 @@
                     <label class="form-label">Descripción</label>
                     <textarea class="form-control" rows="2" [(ngModel)]='actividad.descripcion'></textarea>
                     
+                    <!-- Imagen -->
                     <label class="form-label">Imagen</label>
-                    <input class="form-control" type="file" id="file-input" accept="image/*">
+                    <input class="form-control" type="file" accept="image/*" (change)="uploadImagesLocalActividad($event)">
 
                     <!-- País -->
                     <label class="form-label">País</label>
@@ -234,7 +235,7 @@
 
                     <!-- Boton -->
                     <div class="d-flex d-md-grid justify-content-end">
-                        <button class="btn btn-primary btn-lg botonAzulVacio mt-4 col-12" (click)="btnAddActividad()">Guardar</button>
+                        <button class="btn btn-primary btn-lg botonAzulVacio mt-4 col-12" (click)="agregarActividad()">Guardar</button>
                     </div>
                     
                     <!-- Lista de actividades -->
@@ -243,7 +244,7 @@
                         <h3>Actividades incluidas</h3>
                         <div class="contenedorListaActividades d-flex flex-nowrap overflow-x-auto gap-2" style="height: 400px;">
                             <div class="card sombraHover overflow-hidden" style="width: 18rem; min-width: 18rem;" *ngFor="let activ of actividades">
-                                <img src="{{activ.imagen}}" class="card-img-top imagenActividad" alt="..." style="aspect-ratio: 16/9; background-color: #f1f1f1;">
+                                <img [src]="activ.urlImagen" class="card-img-top imagenActividad" alt="..." style="aspect-ratio: 16/9; background-color: #f1f1f1;">
                                 <div class="card-body">
                                     <h5 class="card-title">{{activ.titulo}}</h5>
                                     <p class="card-text">{{activ.descripcion}}</p>
@@ -260,7 +261,7 @@
                 <!-- BOTON PARA GUARDAR LA OFERTA -->
                 <!-- ------------------------------------------------------------------------------------------------ -->
                 <div class="d-flex justify-content-end mb-5 py-4 mt-3">
-                    <button class="btn btn-primary btn-lg botonAzul col-12 col-lg-12">Crear oferta</button>
+                    <button class="btn btn-primary btn-lg botonAzul col-12 col-lg-12" (click)="crearOferta();">Crear oferta</button>
                 </div>
 
 

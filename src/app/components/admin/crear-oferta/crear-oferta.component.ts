@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
+import { GestorImgService } from 'src/app/services/gestor-img.service';
 import { ServiciosAlojamientoService } from 'src/app/services/servicios-alojamiento.service';
 
 declare var bootstrap: any;
@@ -20,6 +21,9 @@ export class CrearOfertaComponent implements OnInit{
 
   idAutoIncrementalActividades:number = 0;
   idActividadSeleccionada:number = -1;
+  
+  fotoActividad: File | null;
+  fotoActividadEdicionMode: boolean;
 
   // datos formulario
   urlFotos:string[];
@@ -32,9 +36,11 @@ export class CrearOfertaComponent implements OnInit{
   actividades:any[];
   actividad:any;
 
-  constructor(private alojamientosService: AlojamientosService, private serviciosAlojamientoService: ServiciosAlojamientoService){
+  constructor(private alojamientosService: AlojamientosService, private serviciosAlojamientoService: ServiciosAlojamientoService, private gestorImgService: GestorImgService){
     // datos formulario 
     this.urlFotos = [];
+    this.fotoActividad = null;
+    this.fotoActividadEdicionMode = false;
     // oferta
     this.oferta = {
         titulo: "",
@@ -82,32 +88,65 @@ export class CrearOfertaComponent implements OnInit{
       this.serviciosAlojamiento = result;
     });
 
-    this.alojamientosService.getAllAlojamientos().subscribe(response => {
-      this.alojamientosCompletos = response;
-      console.log(this.alojamientosCompletos);
-    });
-  }
-
-  // Recoge los datos del formulario y los envia a la funcion que los agrega y resetea el formulario
-  btnAddActividad(){
-    this.agregarActividad();
+    // this.alojamientosService.getAllAlojamientos().subscribe(response => {
+    //   this.alojamientosCompletos = response;
+    //   console.log(this.alojamientosCompletos);
+    // });
   }
 
   // Añade una actividad a la lista de actividades
   agregarActividad(){
-    // Nueva actividad: si no hay un ID seleccionada se usa el ID auto incremental
-    // Editar actividad: si hay un ID seleccionada se usa ese id
-    if(this.idActividadSeleccionada == -1){
-      this.idAutoIncrementalActividades += 1;
-      this.idActividadSeleccionada = this.idAutoIncrementalActividades;
-      
-      // Añade nuevas actividades a la lista
-      this.actividades.unshift(this.actividad);
-    }else{
-      // Edita los datos de la Actividad seleccionada
-      this.actividades.splice(this.idActividadSeleccionada, 1, this.actividad);
-    }
+    // Notas:
+    // - Si se crea una nueva actividad es obligatorio poner foto.
+    // - Si se edita la actividad y se actualiza la foto, se almacena y se obiene una url nueva. Sino no y solo se actualizarian los datos.
+    // - Se han clonado los datos en las variables temp, porque si la variable apunta a la misma dirección en vez de clonarse, los datos se resetearian antes de obtener la url de la foto
+    let tempActividad = { ...this.actividad };
+    let tempIdActividadSeleccionada = this.idActividadSeleccionada;
 
+    // NUEVA ACTIVIDAD: si no hay un ID seleccionada se usa el ID auto incremental
+    if(tempIdActividadSeleccionada == -1){
+      // Guardar y obtener url de la foto
+      if (this.fotoActividad != null) {
+        this.idAutoIncrementalActividades += 1;
+
+        this.gestorImgService.uploadImage(this.fotoActividad, "actividades")
+          .then(result => {
+            // Ejecuta el código después de tener la URL
+            // Añade nuevas actividades a la lista
+            // -----------------------------------------
+            tempActividad.urlImagen = result;
+            this.actividades.unshift(tempActividad);
+            // -----------------------------------------
+          })
+          .catch(error => console.log(error));
+      }else{
+        alert("Falta añadir foto a la actividad");
+        return;
+      }
+    }
+    // EDITAR ACTIVIDAD: si hay un ID seleccionada se usa ese id
+    else{
+      // Si se ha actualizado la foto se guarda y se obtiene nueva URL
+      if (this.fotoActividadEdicionMode == true && this.fotoActividad != null) {
+        // Guardar y obtener url de la foto
+        this.gestorImgService.uploadImage(this.fotoActividad, "actividades")
+        .then(result => {
+          // Ejecuta el código después de tener la URL
+          // Actualiza con la nueva foto
+          // -----------------------------------------
+          tempActividad.urlImagen = result;
+          this.actividades.splice(tempIdActividadSeleccionada, 1, tempActividad);
+          // -----------------------------------------
+        })
+        .catch(error => {
+          console.log(error);
+          alert("Error al cargar la foto");
+        }); 
+        
+      }else{
+        this.actividades.splice(tempIdActividadSeleccionada, 1, tempActividad);
+      }
+    }
     // Resetea el formulario y lo deja vacio
     this.actividad = {
       titulo: "",
@@ -120,6 +159,8 @@ export class CrearOfertaComponent implements OnInit{
       provincia: "",
       localidad: ""
     }
+    this.fotoActividad = null;
+    this.fotoActividadEdicionMode = false;
     this.idActividadSeleccionada = -1;
   }
 
@@ -129,9 +170,12 @@ export class CrearOfertaComponent implements OnInit{
 
     // 2. Muestra los datos en el formulario y guarda el ID
     if(posicion != -1){
-      this.actividad = this.actividades[posicion];
+      this.actividad = { ...this.actividades[posicion] };
       this.idActividadSeleccionada = posicion;
     }
+
+    // 3. Activar el modo edicion de fotografia
+    this.fotoActividadEdicionMode = true;
 
     // Funcionalidad para hacer scroll automático hasta la zona de edición
     let elemento = document.getElementById("crearActividad");
@@ -139,8 +183,6 @@ export class CrearOfertaComponent implements OnInit{
       elemento.scrollIntoView({ behavior: 'smooth' });
     }
   }
-
-  
 
   borrarActividad(titulo:string){
     // 1. Encuentra su posición dentro de la lista
@@ -204,9 +246,8 @@ export class CrearOfertaComponent implements OnInit{
       console.log("Servicio agregado");
     }
   }
+
+  uploadImagesLocalActividad($event:any){
+    this.fotoActividad = $event.target.files[0];
+  }
 }
-
-
-// ¿Cómo funcionan las ID de las actividades?
-// Estas id se usan de manera local para editar las actividades, si se obtuvieran actividades de la base de datos, esas id no se usarian aqui.
-// Al crear la oferta se guardan las actividades en la base de datos, el id auto incremental lo pone la propia base de datos
