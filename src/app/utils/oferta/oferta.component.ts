@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Favorito } from 'src/app/models/Favorito';
+import { FavoritosService } from 'src/app/services/favoritos.service';
 import { OfertasService } from 'src/app/services/ofertas.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -17,24 +18,26 @@ export class OfertaComponent implements OnInit{
   favoritoActivo:boolean = false;
   @Input() oferta:any;
 
-  constructor(private tokenStorageService: TokenStorageService, private ofertasService: OfertasService){ };
+  constructor(private tokenStorageService: TokenStorageService, private favoritosService: FavoritosService){ };
   
   // Obtiene la información de la oferta haciendo una llamada al servidor por IP
   ngOnInit(): void {
   }
   
-  favorito(){
-    if (this.favoritoActivo == false){
+  favorito(id_fav:number){
+    const id_user = this.tokenStorageService.getUser().id;
+    const id_oferta = id_fav;
+    if (!this.favoritoActivo){
       this.favoritoActivo = true;
-      const id_user = this.tokenStorageService.getUser().id;
-      const id_oferta = this.ofertaId;
       const fav:Favorito = {
         idOferta: id_oferta,
         idUsuario: id_user
       }
+      this.favoritosService.createFavorito(fav).subscribe();
       this.toastTriggerAdd();
     }else{
       this.favoritoActivo = false;
+      this.favoritosService.deleteFavorito(id_user,id_oferta).subscribe();
       this.toastTriggerDelete();
     }
   }

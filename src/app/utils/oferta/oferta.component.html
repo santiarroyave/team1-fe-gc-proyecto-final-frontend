@@ -1,7 +1,7 @@
 <div class="contenedorOferta card card-style mb-3 rounded-3" *ngIf="oferta != null; else espera">
   
   <!-- Botón de favorito -->
-  <div class="favs position-absolute top-0 end-0" (click)="favorito()">
+  <div class="favs position-absolute top-0 end-0" (click)="favorito(oferta.id)">
     <i class="bi bi-heart" *ngIf="favoritoActivo == false"></i>
     <i class="bi bi-heart-fill" *ngIf="favoritoActivo == true"></i>
   </div>
