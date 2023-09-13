@@ -230,9 +230,6 @@ export class CrearOfertaComponent implements OnInit{
       alojamiento: this.alojamiento,
       actividades: this.actividades
     };
-    
-    console.log("ESTE ES EL JSON");
-    console.log(this.crearOfertaJson);
   }
 
   seleccionarServicio(servicioId:number){
