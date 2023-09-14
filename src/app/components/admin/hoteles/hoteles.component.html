@@ -12,6 +12,8 @@
                 <div *ngFor="let alojamiento of alojamientos">
                     <app-hotel-item [alojamiento]="alojamiento"></app-hotel-item>
                 </div>
+                <app-spinner-tarjeta *ngIf="!alojamientos"></app-spinner-tarjeta>
+                <app-spinner-tarjeta *ngIf="!alojamientos"></app-spinner-tarjeta>
             </div> 
         </div>
     </div>

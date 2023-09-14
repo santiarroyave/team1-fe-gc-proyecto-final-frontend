@@ -1,0 +1,31 @@
+.contenedorOferta{
+    overflow: hidden;
+    transition: all .3s;
+    cursor: pointer;
+    /* border: 1px solid var(--naranja-aventura); */
+    border: transparent;
+}
+
+.contenedorOferta:hover{
+    box-shadow: .2em .2em .7em rgba(0, 0, 0, 0.15);
+}
+
+.imgOferta{
+    aspect-ratio: 21/9;
+    object-fit: cover;
+    position: relative;
+    max-height: 250px;
+}
+
+/* Clases del tiempo restante */
+.tiempoRestante{
+    background-color: var(--naranja-aventura);
+    padding: .5em 1em;
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.colorFondo{
+    background-color: #f1f1f1;
+    background-color: #fff;
+}

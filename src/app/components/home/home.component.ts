@@ -12,7 +12,7 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 })
 export class HomeComponent implements OnInit {
   ofertas: Oferta[] = [];
-  ofertas_mostradas: any = [];
+  ofertas_mostradas: any|null;
   ofertas_por_pagina: number = 6;
   pagina_actual: number = 0;
   total_paginas: number | any;
@@ -36,7 +36,9 @@ export class HomeComponent implements OnInit {
     private homeService: HomeService,
     private tokenStorageService: TokenStorageService,
     private authService: AuthService
-  ) {}
+  ) {
+    this.ofertas_mostradas = null;
+  }
 
   ngOnInit(): void {
     // Obtiene todas las ofertas del servicio
@@ -49,6 +51,9 @@ export class HomeComponent implements OnInit {
       this.detectScreenSize();
       this.actualizarTotalPaginas();
 
+      // Se le asigna un array para que deje de ser nulo y deje de aparecer el spinner
+      this.ofertas_mostradas = [];
+      
       for (let index = 0; index < this.ofertas_por_pagina; index++) {
         this.ofertas_mostradas.push(this.ofertas[index]);
       }
