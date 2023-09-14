@@ -85,7 +85,7 @@ export class GestorImgService {
   generarNombre():string {
     // Este método genera un nombre aleatorio de 100 digitos para la imagen
     let nombre = '';
-    const longitud = 100;
+    const longitud = 50;
   
     for (let i = 0; i < longitud; i++) {
       // Número aleatorio para elegir qué tipo de carácter incluir en el nombre
