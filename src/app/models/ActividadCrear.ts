@@ -3,7 +3,7 @@ export interface ActividadCrear{
     descripcion:string,
     pais: string,
     calle: string,
-    numero: number,
+    numero: number|null,
     codigoPostal: string,
     provincia: string,
     localidad: string,
