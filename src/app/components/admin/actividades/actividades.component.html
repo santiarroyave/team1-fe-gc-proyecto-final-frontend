@@ -11,6 +11,8 @@
                 </div>
                 
                 <app-actividad-item [listaActividades]="actividades"></app-actividad-item>
+                <app-spinner-tarjeta *ngIf="!actividades"></app-spinner-tarjeta>
+                <app-spinner-tarjeta *ngIf="!actividades"></app-spinner-tarjeta>
             </div> 
         </div>
     </div>
