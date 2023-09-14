@@ -9,5 +9,6 @@ export interface AlojamientoCrear{
     codigoPostal: string,
     provincia: string,
     localidad: string,
-    imagenes: string[]
+    imagenes: string[],
+    servicios: number[]
 }
