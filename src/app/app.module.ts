@@ -50,6 +50,7 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
+import { SpinnerTarjetaComponent } from './utils/spinner-tarjeta/spinner-tarjeta.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -99,7 +100,8 @@ export const MY_DATE_FORMATS = {
     ReservaDetalleComponent,
     MenuComponent,
     MenuPerfilComponent,
-    GestorImgComponent
+    GestorImgComponent,
+    SpinnerTarjetaComponent
   ],
   imports: [
     BrowserModule,
