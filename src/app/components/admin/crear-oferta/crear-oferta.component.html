@@ -15,9 +15,9 @@
                 <!-- GALERIA DE FOTOS -->
                 <!-- ------------------------------------------------------------------------------------------------ -->
                 <!-- <div class="contenedorInfoOferta rounded-3 p-3">
-                    <h2>Lista alojamientos</h2>
+                    <h2>Json final</h2>
                     <pre>
-                        {{alojamientosCompletos | json}}
+                        {{crearOfertaJson | json}}
                     </pre>
                 </div> -->
 
@@ -30,37 +30,37 @@
                     <hr>
                     <!-- Titulo -->
                     <label class="form-label">Titulo</label>
-                    <input class="form-control" type="text" [(ngModel)]="oferta.titulo">
+                    <input class="form-control" type="text" [(ngModel)]="ofertaTitulo">
 
                     <!-- Precio y Max de personas -->
                     <div class="d-flex gap-2">
                         <label class="form-label column-6 w-50">Precio por día
-                            <input class="form-control" type="number" [(ngModel)]="oferta.precioDia">
+                            <input class="form-control" type="number" [(ngModel)]="ofertaPrecioDia" (input)="validarInputNumero($event)">
                         </label>
 
                         <label class="form-label column-6 w-50">Máximo de personas
-                            <input class="form-control" type="number" [(ngModel)]="oferta.maxPersonas">
+                            <input class="form-control" type="number" [(ngModel)]="ofertaMaxPersonas" (input)="validarInputNumero($event)">
                         </label>
                     </div>
 
                     <!-- Fecha inicio y Fecha fin -->
                     <div class="d-flex gap-2">
                         <label class="form-label column-6 w-50">Fecha inicio
-                            <input class="form-control" type="date" [(ngModel)]="oferta.fechaInicio">
+                            <input class="form-control" type="date" [(ngModel)]="ofertaFechaInicio">
                         </label>
 
                         <label class="form-label column-6 w-50">Fecha fin
-                            <input class="form-control" type="date" [(ngModel)]="oferta.fechaFin">
+                            <input class="form-control" type="date" [(ngModel)]="ofertaFechaFin">
                         </label>
                     </div>
 
                     <!-- Ofertas disponibles -->
                     <label class="form-label">Ofertas disponibles</label>
-                    <input class="form-control" type="number" [(ngModel)]="oferta.ofertasDisponibles">
+                    <input class="form-control" type="number" [(ngModel)]="ofertaCantidadDisponible" (input)="validarInputNumero($event)">
 
                     <!-- Descripción -->
                     <label class="form-label">Descripción</label>
-                    <textarea class="form-control" rows="3" [(ngModel)]="oferta.descripcion"></textarea>
+                    <textarea class="form-control" rows="3" [(ngModel)]="ofertaDescripcion"></textarea>
                 </div>
 
 
@@ -130,18 +130,18 @@
                     <!-- Dirección y Numero -->
                     <div class="d-flex gap-2">
                         <label class="form-label w-75">Dirección
-                            <input class="form-control" type="text" [(ngModel)]="alojamiento.direccion">
+                            <input class="form-control" type="text" [(ngModel)]="alojamiento.calle">
                         </label>
 
                         <label class="form-label w-25">Nº
-                            <input class="form-control" type="number" [(ngModel)]="alojamiento.numero">
+                            <input class="form-control" type="number" [(ngModel)]="alojamiento.numero" (input)="validarInputNumero($event)">
                         </label>
                     </div>
 
                     <!-- C.P. y Provincia -->
                     <div class="d-flex gap-2">
                         <label class="form-label w-25">C.P.
-                            <input class="form-control" type="text" [(ngModel)]="alojamiento.cp">
+                            <input class="form-control" type="text" [(ngModel)]="alojamiento.codigoPostal">
                         </label>
 
                         <label class="form-label w-75">Provincia
@@ -160,7 +160,7 @@
                         </label>
 
                         <label class="form-label w-25">Telefono
-                            <input class="form-control" type="number" [(ngModel)]="alojamiento.tel">
+                            <input class="form-control" type="text" [(ngModel)]="alojamiento.telefono">
                         </label>
                     </div>
 
@@ -230,18 +230,18 @@
                     <!-- Dirección y Numero -->
                     <div class="d-flex gap-2">
                         <label class="form-label w-75">Dirección
-                            <input class="form-control" type="text" [(ngModel)]="actividad.direccion">
+                            <input class="form-control" type="text" [(ngModel)]="actividad.calle">
                         </label>
 
                         <label class="form-label w-25">Nº
-                            <input class="form-control" type="number" [(ngModel)]="actividad.numero">
+                            <input class="form-control" type="number" [(ngModel)]="actividad.numero" (input)="validarInputNumero($event)">
                         </label>
                     </div>
 
                     <!-- C.P. y Provincia -->
                     <div class="d-flex gap-2">
                         <label class="form-label w-25">C.P.
-                            <input class="form-control" type="text" [(ngModel)]="actividad.cp">
+                            <input class="form-control" type="text" [(ngModel)]="actividad.codigoPostal">
                         </label>
 
                         <label class="form-label w-75">Provincia
@@ -264,7 +264,7 @@
                         <h3>Actividades incluidas</h3>
                         <div class="contenedorListaActividades d-flex flex-nowrap overflow-x-auto gap-2" style="height: 400px;">
                             <div class="card sombraHover overflow-hidden" style="width: 18rem; min-width: 18rem;" *ngFor="let activ of actividades">
-                                <img [src]="activ.urlImagen" class="card-img-top imagenActividad" alt="..." style="aspect-ratio: 16/9; background-color: #f1f1f1;">
+                                <img [src]="activ.imagenes[0]" class="card-img-top imagenActividad" alt="..." style="aspect-ratio: 16/9; background-color: #f1f1f1;">
                                 <div class="card-body">
                                     <h5 class="card-title">{{activ.titulo}}</h5>
                                     <p class="card-text">{{activ.descripcion}}</p>

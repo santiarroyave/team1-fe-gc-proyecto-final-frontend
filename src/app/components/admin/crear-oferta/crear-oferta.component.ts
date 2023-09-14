@@ -1,7 +1,11 @@
-import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ɵsetAllowDuplicateNgModuleIdsForTest } from '@angular/core';
+import { ActividadCrear } from 'src/app/models/ActividadCrear';
+import { OfertaCrear } from 'src/app/models/OfertaCrear';
 import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
+import { AlojamientoCrear } from 'src/app/models/alojamientos/AlojamientoCrear';
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
 import { GestorImgService } from 'src/app/services/gestor-img.service';
+import { OfertasService } from 'src/app/services/ofertas.service';
 import { ServiciosAlojamientoService } from 'src/app/services/servicios-alojamiento.service';
 
 declare var bootstrap: any;
@@ -19,6 +23,8 @@ export class CrearOfertaComponent implements OnInit{
   fotos:any = [];
   serviciosAlojamiento:any = [];
 
+  crearOfertaJson:any;
+  
   idAutoIncrementalActividades:number = 0;
   idActividadSeleccionada:number = -1;
   
@@ -29,63 +35,67 @@ export class CrearOfertaComponent implements OnInit{
   listaAlojBuscador:any[];
 
   // datos formulario
-  urlFotos:string[];
-  crearOfertaJson:any;
-  crearAlojJson:any;
-
-  oferta:any;
+  // crearAlojJson:any;
   alojServiciosIds:number[];
-  alojamiento:any;
   actividades:any[];
-  actividad:any;
 
-  constructor(private alojamientosService: AlojamientosService, private serviciosAlojamientoService: ServiciosAlojamientoService, private gestorImgService: GestorImgService){
+  // Atributos esenciales del JSON Crear Oferta
+  ofertaTitulo:string;
+  ofertaPrecioDia:number|null;
+  ofertaMaxPersonas:number|null;
+  ofertaFechaInicio:Date|null;
+  ofertaFechaFin:Date|null;
+  ofertaCantidadDisponible:number|null;
+  ofertaDescripcion:string;
+  ofertaUrlFotos:string[];
+  alojamiento:AlojamientoCrear;
+  actividad:ActividadCrear;
+
+
+  constructor(private alojamientosService: AlojamientosService, private serviciosAlojamientoService: ServiciosAlojamientoService, private gestorImgService: GestorImgService, private ofertaService: OfertasService){
     this.busquedaAloj = "";
     this.listaAlojBuscador = [];
-
-    // datos formulario 
-    this.urlFotos = [];
-    this.fotoActividad = null;
-    this.fotoActividadEdicionMode = false;
-    // oferta
-    this.oferta = {
-        titulo: "",
-        precioDia: null,
-        maxPersonas: null,
-        fechaInicio: Date,
-        fechaFin: Date,
-        ofertasDisponibles: null,
-        descripcion: "",
-        urlFotos: this.urlFotos
-    }
-    // alojamiento
     this.alojServiciosIds = [];
+    
+    // Datos formulario
+    this.ofertaTitulo = "";
+    this.ofertaPrecioDia = null;
+    this.ofertaMaxPersonas = null;
+    this.ofertaFechaInicio = null;
+    this.ofertaFechaFin = null;
+    this.ofertaCantidadDisponible = null;
+    this.ofertaDescripcion = "";
+    this.ofertaUrlFotos = [];
     this.alojamiento = {
-        nombre: "",
-        pais: "",
-        direccion: "",
-        numero: "",
-        cp: null,
-        provincia: "",
-        localidad: "",
-        email: "",
-        tel: null,
-        categoria: null,
-        servicios: this.alojServiciosIds
+      nombre: "",
+      categoria: "",
+      telefono: "",
+      email: "",
+      pais: "",
+      calle: "",
+      numero: null,
+      codigoPostal: "",
+      provincia: "",
+      localidad: "",
+      imagenes: [],
+      servicios: this.alojServiciosIds
     }
-    // servicios
     this.actividad = {
       titulo: "",
       descripcion: "",
-      urlImagen: "",
       pais: "",
-      direccion: "",
+      calle: "",
       numero: null,
-      cp: "",
+      codigoPostal: "",
       provincia: "",
-      localidad: ""
+      localidad: "",
+      imagenes: [],
     }
-    this.actividades = new Array;
+    
+    // Otros datos 
+    this.fotoActividad = null;
+    this.fotoActividadEdicionMode = false;
+    this.actividades = [];
   }
   
   ngOnInit(): void {
@@ -106,7 +116,7 @@ export class CrearOfertaComponent implements OnInit{
     // - Si se crea una nueva actividad es obligatorio poner foto.
     // - Si se edita la actividad y se actualiza la foto, se almacena y se obiene una url nueva. Sino no y solo se actualizarian los datos.
     // - Se han clonado los datos en las variables temp, porque si la variable apunta a la misma dirección en vez de clonarse, los datos se resetearian antes de obtener la url de la foto
-    let tempActividad = { ...this.actividad };
+    let tempActividad:ActividadCrear = { ...this.actividad };
     let tempIdActividadSeleccionada = this.idActividadSeleccionada;
 
     // NUEVA ACTIVIDAD: si no hay un ID seleccionada se usa el ID auto incremental
@@ -120,7 +130,7 @@ export class CrearOfertaComponent implements OnInit{
             // Ejecuta el código después de tener la URL
             // Añade nuevas actividades a la lista
             // -----------------------------------------
-            tempActividad.urlImagen = result;
+            tempActividad.imagenes[0] = result;
             this.actividades.unshift(tempActividad);
             // -----------------------------------------
           })
@@ -140,7 +150,7 @@ export class CrearOfertaComponent implements OnInit{
           // Ejecuta el código después de tener la URL
           // Actualiza con la nueva foto
           // -----------------------------------------
-          tempActividad.urlImagen = result;
+          tempActividad.imagenes[0] = result;
           this.actividades.splice(tempIdActividadSeleccionada, 1, tempActividad);
           // -----------------------------------------
         })
@@ -157,13 +167,13 @@ export class CrearOfertaComponent implements OnInit{
     this.actividad = {
       titulo: "",
       descripcion: "",
-      urlImagen: "",
       pais: "",
-      direccion: "",
-      numero: null,
-      cp: "",
+      calle: "",
+      numero: 0,
+      codigoPostal: "",
       provincia: "",
-      localidad: ""
+      localidad: "",
+      imagenes: [],
     }
     this.fotoActividad = null;
     this.fotoActividadEdicionMode = false;
@@ -204,7 +214,7 @@ export class CrearOfertaComponent implements OnInit{
       .then((urls) => {
         // Agrega las URLs creadas a la lista de URLs
         for (let i = 0; i < urls.length; i++) {
-          this.urlFotos.push(urls[i]);
+          this.ofertaUrlFotos.push(urls[i]);
         }
         console.log(urls);
 
@@ -213,6 +223,7 @@ export class CrearOfertaComponent implements OnInit{
         // Porque tiene que esperarse a tener las URLs
         // ###############################################
         this.crearJson();
+        this.ofertaUrlFotos = [];
 
       })
       .catch((error) => {
@@ -223,20 +234,40 @@ export class CrearOfertaComponent implements OnInit{
   }
 
   crearJson(){
-    this.crearOfertaJson = {
-      oferta: this.oferta,
+    // Crea el JSON
+    const crearOfertaJson: OfertaCrear = {
+      titulo: this.ofertaTitulo,
+      precioDia: this.ofertaPrecioDia,
+      maxPersonas: this.ofertaMaxPersonas,
+      fechaInicio: this.ofertaFechaInicio,
+      fechaFin: this.ofertaFechaFin,
+      ofertasDisponibles: this.ofertaCantidadDisponible,
+      descripcion: this.ofertaDescripcion,
+      urlFotos: this.ofertaUrlFotos,
       alojamiento: this.alojamiento,
       actividades: this.actividades
     };
+
+    // Verificar si hay valores nulos
+    // if(!this.hayNulos(crearOfertaJson)){
+    // }else{
+    //   alert("Faltan datos");
+    // }
+    
+    // Asigna JSON a variable de pruebas
+    this.crearOfertaJson = crearOfertaJson;
+    
+    // Hace el POST
+    this.ofertaService.createOferta(crearOfertaJson);
   }
 
   seleccionarServicio(servicioId:number){
+    // Si el servicio está seleccionado, lo quita.
+    // Si el servicio no está seleccionado, lo agrega.
     if (this.alojServiciosIds.includes(servicioId)) {
-      // El servicio está seleccionado, así que lo deseleccionamos
       this.alojServiciosIds = this.alojServiciosIds.filter(id => id !== servicioId);
       console.log("Servicio quitado");
     }else{
-      // El servicio no está seleccionado, así que lo seleccionamos
       this.alojServiciosIds.push(servicioId);
       console.log("Servicio agregado");
     }
@@ -255,6 +286,7 @@ export class CrearOfertaComponent implements OnInit{
   }
 
   buscarAloj(){
+    // Añade 3 alojamientos de ejemplo
     let alojamiento = {
       id: 45,
       nombre: "Hotel palace",
@@ -272,23 +304,22 @@ export class CrearOfertaComponent implements OnInit{
   }
 
   seleccionarAloj(id:number){
-    // alert(id);
-    // obtener todos los datos de este alojamiento por ID y guardarlos en "this.alojamiento"
+    // Llamar al servicio buscar por id
 
-    // Llamar ala servicio buscar por id
-
-    // Almacenar datos en "this.alojamiento"
+    // Almacenar datos en las variables de alojamiento
     this.alojamiento = {
       nombre: "Hotel palace",
+      categoria: "3",
+      telefono: "977494753",
+      email: "hotelpalace@hotelp.com",
       pais: "España",
-      direccion: "Calle Real",
-      numero: "123",
-      cp: 45683,
+      calle: "Calle Real",
+      numero: 123,
+      codigoPostal: "45683",
       provincia: "Tarragona",
       localidad: "Salou",
-      email: "hotelpalace@hotelp.com",
-      tel: 977494753,
-      categoria: 3
+      imagenes: [],
+      servicios: [1, 4, 6]
     }
 
     // Servicios de ejemplo
@@ -300,4 +331,33 @@ export class CrearOfertaComponent implements OnInit{
       this.seleccionarServicio(listaServicios[i]); 
     }
   }
+
+  validarInputNumero(event: any){
+    let valorIntroducido = event.target.value;
+
+    // Verifica que el valor introducido sea un numero
+    if (!isNaN(parseInt(valorIntroducido))) {
+      event.target.classList.remove('input-invalido');
+    } else {
+      event.target.classList.add('input-invalido');
+    }
+  }
+
+  // Notas:
+  // Falta implementar para que no deje crear la oferta si hay nulos.
+  // Hay que mirarlo porque primero obtiene las URL, luego crea el JSON y luego lo verifica para saber si hace el POST o no, pero se tendria que validar antes de generar las URL para que no de problemas.
+
+  // hayNulos(objeto:any){
+  //   for (const clave in objeto) {
+  //     if (objeto[clave] === null) {
+  //       return true; // Se encontró un valor nulo
+  //     } else if (typeof objeto[clave] === 'object') {
+  //       if (this.hayNulos(objeto[clave])) {
+  //         return true; // Se encontró un valor nulo dentro de un objeto anidado
+  //       }
+  //     }
+  //   }
+  //   return false; // No se encontró ningún valor nulo
+  // }
+
 }
