@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlojamientoCrear } from 'src/app/models/alojamientos/AlojamientoCrear';
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
+import { GestorImgComponent } from 'src/app/utils/gestor-img/gestor-img.component';
 
 @Component({
   selector: 'app-crear-hotel',
@@ -9,6 +10,7 @@ import { AlojamientosService } from 'src/app/services/alojamientos.service';
   styleUrls: ['./crear-hotel.component.css']
 })
 export class CrearHotelComponent {
+  @ViewChild(GestorImgComponent) galeriaFotos!:GestorImgComponent;
 
   nombre: string = '';
   categoria: string = '';
@@ -27,6 +29,22 @@ export class CrearHotelComponent {
   constructor(private alojamientoService: AlojamientosService, private router: Router) {}
 
   addHotel(){
+    if (this.galeriaFotos){
+      this.galeriaFotos.uploadImages()
+      .then((urls) => {
+        // Agrega las URLs creadas a la lista de URLs
+        for (let i = 0; i < urls.length; i++) {
+          this.imagenes.push(urls[i]); 
+        }
+        console.log(urls);
+
+      })
+      .catch((error) => {
+        // Maneja cualquier error que pueda ocurrir durante la carga de imágenes
+        console.error('Error al cargar imágenes:', error);
+      });
+    }
+
     const nuevoAlojamiento: AlojamientoCrear = {
       nombre: this.nombre,
       categoria: this.categoria,
