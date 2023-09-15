@@ -268,20 +268,7 @@ export class CrearOfertaComponent implements OnInit{
     // Hace el POST
     this.ofertaService.createOferta(crearOfertaJson);
   }
-
-  // seleccionarServicio(servicioId:number){
-  //   // Si el servicio está seleccionado, lo quita.
-  //   // Si el servicio no está seleccionado, lo agrega.
-  //   if (this.alojServiciosIds.includes(servicioId)) {
-  //     this.alojServiciosIds = this.alojServiciosIds.filter(id => id !== servicioId);
-  //     console.log("Servicio quitado");
-  //   }else{
-  //     this.alojServiciosIds.push(servicioId);
-  //     console.log("Servicio agregado");
-  //   }
-  // }
-
-  
+    
   guardarIdsServiciosAloj(){
     // Este método guarda las ID de los servicios seleccionados (true) en la lista de IDs (this.alojServiciosIds) para adjuntarlo en el JSON
     // Se usa en el método de crear oferta.
@@ -385,8 +372,4 @@ export class CrearOfertaComponent implements OnInit{
   //   }
   //   return false; // No se encontró ningún valor nulo
   // }
-
-  agregarCheckServicio(){
-    document.getElementById
-  }
 }
