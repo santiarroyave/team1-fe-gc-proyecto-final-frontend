@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   mostrarElemento: boolean | any;
   res_length: number | any;
   filtros_data: FiltrosResponse | any;
+  esperando = true;
 
   @Input() ofertas_filtered: any;
 
@@ -38,7 +39,6 @@ export class HomeComponent implements OnInit {
     private tokenStorageService: TokenStorageService,
     private authService: AuthService
   ) {
-    this.ofertas_mostradas = null;
   }
 
   ngOnInit(): void {
@@ -51,24 +51,33 @@ export class HomeComponent implements OnInit {
       // Detecta el tamaño de la pantalla para colapsar el menú
       this.detectScreenSize();
       this.actualizarTotalPaginas();
-      if (user.id != null) {
+      for (let i = 0; i < this.ofertas.length; i++) {
+        this.ofertas[i] = {
+          ...this.ofertas[i],
+          favorito: false,
+        };
+      }
+      
+      if (Object.keys(user).length > 0) {
         this.homeService.getFavoritosByUserId(user.id).subscribe((res) => {
           for (let i = 0; i < this.ofertas.length; i++) {
-            this.ofertas[i] = {
-              ...this.ofertas[i],
-              favorito: false,
-            };
             for (let j = 0; j < res.length; j++) {
               if (this.ofertas[i].id == res[j].idOferta)
                 this.ofertas[i].favorito = true;
-            }
+            }   
           }
           for (let index = 0; index < this.ofertas_por_pagina; index++) {
-            this.ofertas_mostradas.push(this.ofertas[index]);
+          this.ofertas_mostradas.push(this.ofertas[index]);
           }
         });
+      } else {        
+        for (let index = 0; index < this.ofertas_por_pagina; index++) {          
+          this.ofertas_mostradas.push(this.ofertas[index]);
+        }
       }
+      this.esperando = false;
     });
+
     this.authService.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.authService.isLoggedIn) {
       this.authService.isLoggedIn = true;
