@@ -22,6 +22,8 @@ export class CrearHotelComponent {
   localidad: string = '';
   imagenes: string[] = [];
 
+  serviciosAlojamiento: string[] = ["Wifi", "Lavadora", "Aire acondicionado", "Cocina", "Secadora", "Calefacción", "Zona para trabajar", "Televisión", "Piscina", "Desayuno", "Gimnasio"];
+
   constructor(private alojamientoService: AlojamientosService, private router: Router) {}
 
   addHotel(){
