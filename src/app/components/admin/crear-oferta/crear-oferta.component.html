@@ -14,12 +14,19 @@
 
                 <!-- GALERIA DE FOTOS -->
                 <!-- ------------------------------------------------------------------------------------------------ -->
-                <!-- <div class="contenedorInfoOferta rounded-3 p-3">
-                    <h2>Json final</h2>
+                <div class="contenedorInfoOferta rounded-3 p-3">
+                    <!-- <h2>Json final</h2>
                     <pre>
                         {{crearOfertaJson | json}}
+                    </pre> -->
+                    
+                    <pre>
+                        {{alojServiciosIds | json}}
                     </pre>
-                </div> -->
+                    <pre>
+                        {{serviciosAlojamiento | json}}
+                    </pre>
+                </div>
 
                 <app-gestor-img #galeriaFotos></app-gestor-img>
                 
@@ -195,7 +202,7 @@
                     <!-- Servicios -->
                     <div class="row px-3">
                         <div class="form-check col-6 col-md-3" *ngFor="let servicio of serviciosAlojamiento">
-                            <input class="form-check-input" type="checkbox" (click)="seleccionarServicio(servicio.id)">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="servicio.select">
                             <label class="form-check-label" >{{servicio.nombre}}</label>
                         </div>
                     </div>

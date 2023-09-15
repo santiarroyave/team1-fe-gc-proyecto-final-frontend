@@ -102,6 +102,11 @@ export class CrearOfertaComponent implements OnInit{
     // Importa los servicios disponibles en la BBDD
     this.serviciosAlojamientoService.getAllServicios().subscribe(result => {
       this.serviciosAlojamiento = result;
+
+      // Añade clave select y los establece como desactivados
+      for (let i = 0; i < this.serviciosAlojamiento.length; i++) {
+        this.serviciosAlojamiento[i].select = false;
+      }
     });
 
     this.alojamientosService.getAllAlojamientos().subscribe(response => {
@@ -209,6 +214,9 @@ export class CrearOfertaComponent implements OnInit{
   }
   
   crearOferta(){
+    // Recoge las IDs de los servicios y los almacena en el array necesario
+    this.guardarIdsServiciosAloj();
+
     if (this.galeriaFotos){
       this.galeriaFotos.uploadImages()
       .then((urls) => {
@@ -261,15 +269,39 @@ export class CrearOfertaComponent implements OnInit{
     this.ofertaService.createOferta(crearOfertaJson);
   }
 
-  seleccionarServicio(servicioId:number){
-    // Si el servicio está seleccionado, lo quita.
-    // Si el servicio no está seleccionado, lo agrega.
-    if (this.alojServiciosIds.includes(servicioId)) {
-      this.alojServiciosIds = this.alojServiciosIds.filter(id => id !== servicioId);
-      console.log("Servicio quitado");
-    }else{
-      this.alojServiciosIds.push(servicioId);
-      console.log("Servicio agregado");
+  // seleccionarServicio(servicioId:number){
+  //   // Si el servicio está seleccionado, lo quita.
+  //   // Si el servicio no está seleccionado, lo agrega.
+  //   if (this.alojServiciosIds.includes(servicioId)) {
+  //     this.alojServiciosIds = this.alojServiciosIds.filter(id => id !== servicioId);
+  //     console.log("Servicio quitado");
+  //   }else{
+  //     this.alojServiciosIds.push(servicioId);
+  //     console.log("Servicio agregado");
+  //   }
+  // }
+
+  
+  guardarIdsServiciosAloj(){
+    // Este método guarda las ID de los servicios seleccionados (true) en la lista de IDs (this.alojServiciosIds) para adjuntarlo en el JSON
+    // Se usa en el método de crear oferta.
+
+    // Resetea las ID de la lista
+    this.alojServiciosIds = [];
+    // Añade las ID seleccionadas
+    for(let servicio of this.serviciosAlojamiento){
+      if(servicio.select == true){
+        this.alojServiciosIds.push(servicio.id);
+      }
+    }
+  }
+
+  seleccionarServiciosAlojAgenda(ids:number[]){
+    // Este  método obtiene las IDs de los servicios del alojamiento de la agenda y los selecciona para que se vean en el Checkbox
+    for(let servicio of this.serviciosAlojamiento){
+      if(ids.includes(servicio.id)){
+        servicio.select = true;
+      }
     }
   }
 
@@ -325,11 +357,12 @@ export class CrearOfertaComponent implements OnInit{
     // Servicios de ejemplo
     let listaServicios = [3, 4, 6]
 
-    for (let i = 0; i < listaServicios.length; i++) {
-      console.log("seleccionando servicio");
-      console.log(listaServicios[i]);
-      this.seleccionarServicio(listaServicios[i]); 
-    }
+    this.seleccionarServiciosAlojAgenda(listaServicios);
+    // for (let i = 0; i < listaServicios.length; i++) {
+    //   console.log("seleccionando servicio");
+    //   console.log(listaServicios[i]);
+    //   this.seleccionarServicio(listaServicios[i]); 
+    // }
   }
 
   validarInputNumero(event: any){
@@ -360,4 +393,7 @@ export class CrearOfertaComponent implements OnInit{
   //   return false; // No se encontró ningún valor nulo
   // }
 
+  agregarCheckServicio(){
+    document.getElementById
+  }
 }
