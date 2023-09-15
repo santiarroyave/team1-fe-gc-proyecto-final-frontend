@@ -355,14 +355,7 @@ export class CrearOfertaComponent implements OnInit{
     }
 
     // Servicios de ejemplo
-    let listaServicios = [3, 4, 6]
-
-    this.seleccionarServiciosAlojAgenda(listaServicios);
-    // for (let i = 0; i < listaServicios.length; i++) {
-    //   console.log("seleccionando servicio");
-    //   console.log(listaServicios[i]);
-    //   this.seleccionarServicio(listaServicios[i]); 
-    // }
+    this.seleccionarServiciosAlojAgenda(this.alojamiento.servicios);
   }
 
   validarInputNumero(event: any){
