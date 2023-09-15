@@ -42,4 +42,8 @@ export class HomeService {
   postSA(sa:ServiciosAlojamientos):Observable<ServiciosAlojamientos>{
     return this.http.post<ServiciosAlojamientos>(this.baseUrl+'ServiciosAlojamientos',sa);
   }
+
+  getFavoritosByUserId(id_user:number): Observable<Favorito[]>{
+    return this.http.get<Favorito[]>(this.baseUrl+'Favoritoes/IdUsuario/'+id_user);
+  }
 }
