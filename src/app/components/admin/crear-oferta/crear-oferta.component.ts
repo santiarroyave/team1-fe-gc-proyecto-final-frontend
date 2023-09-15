@@ -255,12 +255,6 @@ export class CrearOfertaComponent implements OnInit{
       alojamiento: this.alojamiento,
       actividades: this.actividades
     };
-
-    // Verificar si hay valores nulos
-    // if(!this.hayNulos(crearOfertaJson)){
-    // }else{
-    //   alert("Faltan datos");
-    // }
     
     // Asigna JSON a variable de pruebas
     this.crearOfertaJson = crearOfertaJson;
@@ -294,14 +288,6 @@ export class CrearOfertaComponent implements OnInit{
 
   uploadImagesLocalActividad($event:any){
     this.fotoActividad = $event.target.files[0];
-  }
-
-  // AGENDA
-  modalTrigger(): void {
-    const modalLiveExample = document.getElementById('liveModal');
-
-    const modalBootstrap = new bootstrap.Toast(modalLiveExample);
-    modalBootstrap.show();
   }
 
   buscarAloj(){
@@ -357,19 +343,7 @@ export class CrearOfertaComponent implements OnInit{
   }
 
   // Notas:
-  // Falta implementar para que no deje crear la oferta si hay nulos.
-  // Hay que mirarlo porque primero obtiene las URL, luego crea el JSON y luego lo verifica para saber si hace el POST o no, pero se tendria que validar antes de generar las URL para que no de problemas.
-
-  // hayNulos(objeto:any){
-  //   for (const clave in objeto) {
-  //     if (objeto[clave] === null) {
-  //       return true; // Se encontró un valor nulo
-  //     } else if (typeof objeto[clave] === 'object') {
-  //       if (this.hayNulos(objeto[clave])) {
-  //         return true; // Se encontró un valor nulo dentro de un objeto anidado
-  //       }
-  //     }
-  //   }
-  //   return false; // No se encontró ningún valor nulo
-  // }
+  // - Falta implementar para que no deje crear la oferta si hay nulos.
+  //Hay que mirarlo porque primero obtiene las URL, luego crea el JSON y luego lo verifica para saber si hace el POST o no, pero se tendria que validar antes de generar las URL para que no de problemas.
+  // - Falta que la agenda haga las busquedas
 }
