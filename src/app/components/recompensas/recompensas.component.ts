@@ -34,13 +34,11 @@ export class RecompensasComponent {
     // Detecta el tamaño de la pantalla para colapsar el menu
     this.detectScreenSize();
     this.id_nivel = this.tokenStorageService.getUser().id_nivel;
-    // this.experiencia_usuario = this.tokenStorageService.getUser().experiencia;
+    this.experiencia_usuario = this.tokenStorageService.getUser().experiencia;
 
     if(this.id_nivel!=null){
       this.recompensasService.getNivelesById(this.id_nivel).subscribe( res => {
-        this.nivel = res;
-        console.log(res);
-        
+        this.nivel = res;        
         switch(this.nivel.nombre){
           case 'Oro': this.valor_nivel = 1; break;
           case 'Platino': this.valor_nivel = 2; break;

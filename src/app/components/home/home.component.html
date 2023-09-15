@@ -19,7 +19,7 @@
     <div class="col col-12 col-lg-9 mt-4" id="main">
         <p id="resultados" [ngStyle]="{'display': mostrarElemento ? 'block' : 'none'}">Obtuviste {{res_length}} de la búsqueda</p>
         <!-- Ofertas -->
-        <app-oferta *ngFor="let oferta of ofertas_mostradas" [oferta]="oferta"></app-oferta>
+        <app-oferta [ofertas]="ofertas_mostradas"></app-oferta>
 
         <!-- Paginación -->
         <div class="d-flex align-items-center justify-content-center mt-3">

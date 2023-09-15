@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Favorito } from 'src/app/models/Favorito';
 import { FavoritosService } from 'src/app/services/favoritos.service';
-import { OfertasService } from 'src/app/services/ofertas.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 declare var bootstrap: any;
@@ -13,10 +12,7 @@ declare var bootstrap: any;
 })
 export class OfertaComponent implements OnInit{
   
-  @Input() ofertaId: any;
-
-  favoritoActivo:boolean = false;
-  @Input() oferta:any;
+  @Input() ofertas:any;
 
   constructor(private tokenStorageService: TokenStorageService, private favoritosService: FavoritosService){ };
   
@@ -24,11 +20,11 @@ export class OfertaComponent implements OnInit{
   ngOnInit(): void {
   }
   
-  favorito(id_fav:number){
+  favorito(oferta:any){
     const id_user = this.tokenStorageService.getUser().id;
-    const id_oferta = id_fav;
-    if (!this.favoritoActivo){
-      this.favoritoActivo = true;
+    const id_oferta = oferta.id;
+    if (!oferta.favorito){
+      oferta.favorito = true;
       const fav:Favorito = {
         idOferta: id_oferta,
         idUsuario: id_user
@@ -36,7 +32,7 @@ export class OfertaComponent implements OnInit{
       this.favoritosService.createFavorito(fav).subscribe();
       this.toastTriggerAdd();
     }else{
-      this.favoritoActivo = false;
+      oferta.favorito = false;
       this.favoritosService.deleteFavorito(id_user,id_oferta).subscribe();
       this.toastTriggerDelete();
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Favorito } from 'src/app/models/Favorito';
 import { FiltrosResponse } from 'src/app/models/FiltrosResponse';
 import { Oferta } from 'src/app/models/Oferta';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,7 +12,7 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  ofertas: Oferta[] = [];
+  ofertas: any = [];
   ofertas_mostradas: any = [];
   ofertas_por_pagina: number = 6;
   pagina_actual: number = 0;
@@ -40,26 +41,34 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // Obtiene todas las ofertas del servicio
-    // Obtiene todas las ofertas del servicio
+    const user = this.tokenStorageService.getUser();
+
     this.homeService.getDataFiltros().subscribe((response) => {
       this.ofertas = response.ofertas;
-      this.filtros_data = response;      
-
+      this.filtros_data = response;
       // Detecta el tamaño de la pantalla para colapsar el menú
       this.detectScreenSize();
       this.actualizarTotalPaginas();
-
-      for (let index = 0; index < this.ofertas_por_pagina; index++) {
-        this.ofertas_mostradas.push(this.ofertas[index]);
+      if (user.id != null) {
+        this.homeService.getFavoritosByUserId(user.id).subscribe((res) => {
+          for (let i = 0; i < this.ofertas.length; i++) {
+            this.ofertas[i] = {
+              ...this.ofertas[i],
+              favorito: false,
+            };
+            for (let j = 0; j < res.length; j++) {
+              if (this.ofertas[i].id == res[j].idOferta)
+                this.ofertas[i].favorito = true;
+            }
+          }
+          for (let index = 0; index < this.ofertas_por_pagina; index++) {
+            this.ofertas_mostradas.push(this.ofertas[index]);
+          }
+        });
       }
     });
-
-    // this.uploadFile();
-
     this.authService.isLoggedIn = !!this.tokenStorageService.getToken();
-
     if (this.authService.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
       this.authService.isLoggedIn = true;
       this.authService.showAdminBoard = user.admin ? true : false;
     }
@@ -82,11 +91,11 @@ export class HomeComponent implements OnInit {
       this.ofertas_mostradas = this.ofertas.filter((oferta: any) =>
         oferta.titulo.toLowerCase().includes(event.toLowerCase())
       );
-    } else {    
+    } else {
       if (event.ofertas.length === 0) {
         this.res_length = 0;
         this.mostrarElemento = false;
-       this.updateMostrarResBusqueda();
+        this.updateMostrarResBusqueda();
       } else {
         this.filtros_data = event;
         this.ofertas = event.ofertas;
@@ -139,18 +148,18 @@ export class HomeComponent implements OnInit {
     this.actualizarPagina();
   }
 
-  actualizarTotalPaginas():void{
+  actualizarTotalPaginas(): void {
     this.total_paginas = Math.floor(
       this.ofertas.length / this.ofertas_por_pagina
     );
   }
 
-  updateResBusqueda(event:number):void{
+  updateResBusqueda(event: number): void {
     this.res_length = event;
     this.updateMostrarResBusqueda();
   }
 
-  updateMostrarResBusqueda():void{
+  updateMostrarResBusqueda(): void {
     this.mostrarElemento = false;
     this.mostrarElemento = !this.mostrarElemento;
   }

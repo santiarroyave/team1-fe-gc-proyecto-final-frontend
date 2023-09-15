@@ -14,9 +14,7 @@
             <div>
                 <h1>Favoritos</h1>
                 <hr>
-                <div *ngFor="let oferta of listaOfertas">
-                    <app-oferta [ofertaId]="oferta.id" class="col-3"></app-oferta>
-                </div>
+                    <app-oferta [ofertas]="ofertas" class="col-3"></app-oferta>
             </div> 
         </div>
     </div>
