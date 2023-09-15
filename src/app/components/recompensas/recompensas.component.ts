@@ -3,9 +3,6 @@ import { Nivel } from 'src/app/models/Nivel';
 import { RecompensasService } from 'src/app/services/recompensas.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
-declare var bootstrap: any;
-
-
 @Component({
   selector: 'app-recompensas',
   templateUrl: './recompensas.component.html',
@@ -15,7 +12,7 @@ export class RecompensasComponent {
   id_nivel: number | any;
   nivel: Nivel | any;
   menuColapsado = false;
-  valor_nivel: number = 0;
+  valor_nivel: number = 3;
   experiencia_usuario: number = 500;
   porcentage_exp:number = 0;
 
@@ -65,12 +62,5 @@ export class RecompensasComponent {
     }else{
       this.menuColapsado = false;
     }
-  }
-
-  modalTrigger(): void {
-    const modalLiveExample = document.getElementById('liveModal');
-
-    const modalBootstrap = new bootstrap.Toast(modalLiveExample);
-    modalBootstrap.show();
   }
 }
