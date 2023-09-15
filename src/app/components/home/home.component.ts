@@ -37,7 +37,9 @@ export class HomeComponent implements OnInit {
     private homeService: HomeService,
     private tokenStorageService: TokenStorageService,
     private authService: AuthService
-  ) {}
+  ) {
+    this.ofertas_mostradas = null;
+  }
 
   ngOnInit(): void {
     // Obtiene todas las ofertas del servicio

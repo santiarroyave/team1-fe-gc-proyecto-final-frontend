@@ -1,102 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { getStorage, ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 
-@Component({
-  selector: 'app-gestor-img',
-  templateUrl: './gestor-img.component.html',
-  styleUrls: ['./gestor-img.component.css']
+@Injectable({
+  providedIn: 'root'
 })
-export class GestorImgComponent{
+export class GestorImgService {
 
-  // # INFO FUNCIONAMIENTO
-  // 1. Almacena el archivo de imagen en "listaFotosFile".
-  // 2. Almacena la imagen base64 en "listaFotosPreview" para previsualizarlas.
-  // 3. Cuando guardamos las fotos llama a uploadImages() para guardarlas en Firebase y almacena las URLs en "listaUrl".
-
-  // Notas
-  // - Hacer que las fotos se compriman
-  // - Automatizar la eleccion de nombres para que no se repitan
-  // - Añadir opción de borrar fotos
-
+  // ATRIBUTOS
   storage: any;
   listaFotosPreview: string[];
-  listaFotosFile: File[];
   nombreCarpetaFire: string;
   listaUrl: string[];
 
+  // CONSTRUCTOR
   constructor(){
     this.listaFotosPreview = [];
-    this.listaFotosFile = [];
     this.nombreCarpetaFire = "images";
     this.listaUrl = [];
-    
+
     // Inicializar app firebase
     initializeApp(environment.firebase);
 
     // Inicializar Cloud Storage y obtener referencia del servicio
     this.storage = getStorage();
   }
-    
-  borrarFoto(foto:string){
-    // 1. Encuentra su posición dentro de la lista
-    let posicion = this.listaFotosPreview.findIndex((busqueda:any) => busqueda == foto);
-    // 2. Borra la imagen
-    this.listaFotosPreview.splice(posicion, 1);
-    this.listaFotosFile.splice(posicion, 1);
-  }
 
-  uploadImagesLocal($event:any){
-    const files = $event.target.files;
-
-    if (files && files.length > 0) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
+  uploadImage(image:File, nombreCarpeta:string){
+    // Guarda una imagen en Firebase
+    return new Promise<any>(async (resolve, reject) => {
+      let nombre = this.generarNombre();
+        // Sube la imagen
+        const imgRef = ref(this.storage, `${nombreCarpeta}/${nombre}`);
   
-        // Verifica que es una imagen
-        if (this.verificarImagen(file)) {
-  
-          // Se almacena el archivo en la lista de imágenes
-          this.listaFotosFile.push(file);
-  
-          // Convierte en base64 y se almacena en la lista de previsualizaciones
-          this.addPreview(file);
-  
-          console.log("Foto añadida correctamente");
-        }
-      }
-    }
+        const uploadPromise = uploadBytes(imgRef, image)
+        .then(async () => {
+          // Obtiene la url
+          const url = await getDownloadURL(imgRef);
+          resolve(url);
+        })
+        .catch(error => {
+          reject('Error al cargar las imágenes');
+        });
+    });
   }
-
-  verificarImagen(file: File){
-    if (file.type.startsWith('image/')) {
-      return true;
-    }else{
-      console.error('El archivo seleccionado no es una imagen válida.');
-      return false;
-    }
-  }
-
-  addPreview(file: File) {
-    // Almacena preview de base64
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.listaFotosPreview.push(e.target.result);
-    };
-    reader.readAsDataURL(file);
-  }
-
-  uploadImages():Promise<any>{
+  
+  uploadImages(listaFotos: File[], nombreCarpeta:string): Promise<any>{
     // Guarda las imagenes de la lista en Firebase
     // Se ha usado "Promise.all" para esperar a que todas las promesas se resuelvan antes de resolver la promesa principal
 
     return new Promise<any>(async (resolve, reject) => {
-      const nombreCarpeta = this.nombreCarpetaFire;
       const promises = [];
       let nombre;
 
-      for(let image of this.listaFotosFile){
+      for(let image of listaFotos){
         nombre = this.generarNombre();
         // Sube la imagen
         const imgRef = ref(this.storage, `${nombreCarpeta}/${nombre}`);
@@ -124,10 +82,10 @@ export class GestorImgComponent{
     });
   }
 
-  generarNombre() {
+  generarNombre():string {
     // Este método genera un nombre aleatorio de 100 digitos para la imagen
     let nombre = '';
-    const longitud = 100;
+    const longitud = 50;
   
     for (let i = 0; i < longitud; i++) {
       // Número aleatorio para elegir qué tipo de carácter incluir en el nombre
@@ -145,5 +103,14 @@ export class GestorImgComponent{
       }
     }
     return nombre;
+  }
+
+  verificarImagen(file: File){
+    if (file.type.startsWith('image/')) {
+      return true;
+    }else{
+      console.error('El archivo seleccionado no es una imagen válida.');
+      return false;
+    }
   }
 }

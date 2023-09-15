@@ -5,9 +5,10 @@ export interface AlojamientoCrear{
     email:string,
     pais: string,
     calle: string,
-    numero: number,
+    numero: number|null,
     codigoPostal: string,
     provincia: string,
     localidad: string,
-    imagenes: string[]
+    imagenes: string[],
+    servicios: number[]
 }

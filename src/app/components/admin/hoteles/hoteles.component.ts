@@ -8,9 +8,11 @@ import { AlojamientosService } from 'src/app/services/alojamientos.service';
   styleUrls: ['./hoteles.component.css']
 })
 export class HotelesComponent {
-  alojamientos: AlojamientoCompleto[] = [];
+  alojamientos: AlojamientoCompleto[]|null;
 
-  constructor(private alojamientoService: AlojamientosService) {}
+  constructor(private alojamientoService: AlojamientosService) {
+    this.alojamientos = null;
+  }
 
   ngOnInit(): void {
     this.alojamientoService.getAllAlojamientos().subscribe(response => {

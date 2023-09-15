@@ -7,9 +7,11 @@ import { ActividadesService } from 'src/app/services/actividades.service';
   styleUrls: ['./actividades.component.css']
 })
 export class ActividadesComponent {
-  actividades: any = [];
+  actividades: any|null;
 
-  constructor(private actividadesService: ActividadesService) {}
+  constructor(private actividadesService: ActividadesService) {
+    this.actividades = null;
+  }
 
   ngOnInit(): void {
     this.actividadesService.getAllActividades().subscribe(response => {

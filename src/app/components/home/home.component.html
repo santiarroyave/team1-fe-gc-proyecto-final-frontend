@@ -20,6 +20,8 @@
         <p id="resultados" [ngStyle]="{'display': mostrarElemento ? 'block' : 'none'}">Obtuviste {{res_length}} de la búsqueda</p>
         <!-- Ofertas -->
         <app-oferta [ofertas]="ofertas_mostradas"></app-oferta>
+        <!-- PLANTILLA DE ESPERA PARA CARGAR LOS DATOS -->
+        <app-spinner-tarjeta *ngIf="!ofertas_mostradas"></app-spinner-tarjeta>
 
         <!-- Paginación -->
         <div class="d-flex align-items-center justify-content-center mt-3">
