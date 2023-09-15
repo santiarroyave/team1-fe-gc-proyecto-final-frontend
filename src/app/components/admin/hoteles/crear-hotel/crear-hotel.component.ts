@@ -56,7 +56,8 @@ export class CrearHotelComponent {
       codigoPostal: this.codigoPostal,
       provincia: this.provincia,
       localidad: this.localidad,
-      imagenes: this.imagenes
+      imagenes: this.imagenes,
+      servicios: []
     };
 
     this.alojamientoService.addAlojamiento(nuevoAlojamiento);

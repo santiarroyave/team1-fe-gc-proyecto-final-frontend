@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Oferta } from '../models/Oferta';
 import { Observable, map } from 'rxjs';
+import { OfertaCrear } from '../models/OfertaCrear';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,19 @@ export class OfertasService {
         };
         return oferta;
       })
+    );
+  }
+
+  createOferta(oferta: OfertaCrear){
+    this.http.post<OfertaCrear>(this.baseUrl, oferta).subscribe(
+      () => {
+        console.log('Oferta subida correctamente');
+        console.log(oferta);
+      },
+      (error) => {
+        console.error("Ha habido un error al subir la oferta" + error);
+        throw error;
+      }
     );
   }
 }
