@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import db from '../../assets/db.json'
 import { AlojamientoCrear } from '../models/alojamientos/AlojamientoCrear';
 import { AlojamientoCompleto } from '../models/alojamientos/AlojamientoCompleto';
+import { redis_v1 } from 'googleapis';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,8 @@ export class AlojamientosService {
           codigoPostal: response.codigoPostal,
           provincia: response.provincia,
           localidad: response.localidad,
-          imagenes: response.imagenes
+          imagenes: response.imagenes,
+          servicios: response.servicios
         };
         return alojamiento;
       })

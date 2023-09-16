@@ -13,5 +13,6 @@ export interface AlojamientoCompleto{
     codigoPostal: string,
     provincia: string,
     localidad: string,
-    imagenes: Imagen[]
+    imagenes: Imagen[],
+    servicios: number[]
 }

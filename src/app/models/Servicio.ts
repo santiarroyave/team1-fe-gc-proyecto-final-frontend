@@ -1,4 +1,5 @@
 export interface Servicio{
+    select: boolean
     nombre:string
 }
 

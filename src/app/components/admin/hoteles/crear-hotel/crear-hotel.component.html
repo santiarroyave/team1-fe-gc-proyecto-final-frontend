@@ -72,9 +72,11 @@
                     </div>
                     
                     <div class="row px-3">
-                        <div class="form-check col-6 col-md-3" *ngFor="let servicio of serviciosAlojamiento">
-                            <input class="form-check-input" type="checkbox" id="uno">
-                            <label class="form-check-label" for="uno">{{servicio}}</label>
+                        <div class="row px-3">
+                            <div class="form-check col-6 col-md-3" *ngFor="let servicio of serviciosSelect">
+                                <input class="form-check-input" type="checkbox" [(ngModel)]="servicio.select">
+                                <label class="form-check-label" >{{servicio.nombre}}</label>
+                            </div>
                         </div>
                     </div>
                 </div>

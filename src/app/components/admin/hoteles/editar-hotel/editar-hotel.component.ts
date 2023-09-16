@@ -23,7 +23,8 @@ export class EditarHotelComponent {
     "codigoPostal": "",
     "provincia": "",
     "localidad": "",
-    "imagenes": []
+    "imagenes": [],
+    "servicios": []
   };
   
   paisEditSeleccionado: boolean = false;
