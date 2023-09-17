@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActividadCard } from 'src/app/models/actividades/ActividadCard';
 import { ActividadesService } from 'src/app/services/actividades.service';
 
 @Component({
@@ -7,11 +8,9 @@ import { ActividadesService } from 'src/app/services/actividades.service';
   styleUrls: ['./actividades.component.css']
 })
 export class ActividadesComponent {
-  actividades: any|null;
+  actividades: ActividadCard[] = [];
 
-  constructor(private actividadesService: ActividadesService) {
-    this.actividades = null;
-  }
+  constructor(private actividadesService: ActividadesService) {}
 
   ngOnInit(): void {
     this.actividadesService.getAllActividades().subscribe(response => {

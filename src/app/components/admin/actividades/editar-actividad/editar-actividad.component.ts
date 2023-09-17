@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ActividadCrear } from '../../../../models/ActividadCrear';
+import { ActividadCrear } from '../../../../models/actividades/ActividadCrear';
 import { ActividadesService } from 'src/app/services/actividades.service';
-import { ActividadCompleta } from 'src/app/models/ActividadCompleta';
+import { ActividadCompleta } from 'src/app/models/actividades/ActividadCompleta';
 
 
 @Component({
@@ -12,18 +12,20 @@ import { ActividadCompleta } from 'src/app/models/ActividadCompleta';
 })
 export class EditarActividadComponent {
   actividad: ActividadCompleta = {
-    "id": 0,
-    "titulo": "",
-    "descripcion": "",
-    "idDireccion": 0,
-    "pais": "",
-    "calle": "",
-    "numero": 0,
-    "codigoPostal": "",
-    "provincia": "",
-    "localidad": "",
-    "imagenes": []
-  }
+    id: 0,
+    titulo: "",
+    descripcion: "",
+    direccion: {
+        id: 0,
+        pais: "",
+        calle: "",
+        numero: 0,
+        codigoPostal: "",
+        provincia: "",
+        localidad: ""
+    },
+    imagenes: []
+  };
 
   tituloEditSeleccionado: boolean = false;
   descripcionEditSeleccionado: boolean = false;

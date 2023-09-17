@@ -11,20 +11,22 @@ import { AlojamientosService } from 'src/app/services/alojamientos.service';
 export class EditarHotelComponent {
 
   alojamiento: AlojamientoCompleto =  {
-    "id": 0,
-    "nombre": "",
-    "categoria": 0,
-    "telefono": "",
-    "email": "",
-    "idDireccion": 0,
-    "pais": "",
-    "calle": "",
-    "numero": 0,
-    "codigoPostal": "",
-    "provincia": "",
-    "localidad": "",
-    "imagenes": [],
-    "servicios": []
+    id: 0,
+    nombre: "",
+    categoria: 0,
+    telefono: "",
+    email: "",
+    direccion: {
+        id: 0,
+        pais: "",
+        calle: "",
+        numero: 0,
+        codigoPostal: "",
+        provincia: "",
+        localidad: ""
+    },
+    imagenes: [],
+    servicios: []
   };
   
   paisEditSeleccionado: boolean = false;
@@ -44,15 +46,11 @@ export class EditarHotelComponent {
     this.route.params.subscribe(params => {
       this.alojamiento.id = params['id'];
     });
-    console.log("Hotel antes de llamar al servicio en el componente edit:");
-    console.log(JSON.stringify(this.alojamiento));
     this.alojamientoService.getAlojamientoById(this.alojamiento.id).subscribe(
       (response) => {
         this.alojamiento = response;
       }
     );
-    console.log("Hotel al iniciar el componente edit:");
-    console.log(JSON.stringify(this.alojamiento));
   }
 
   
