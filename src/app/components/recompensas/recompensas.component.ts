@@ -6,17 +6,19 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 @Component({
   selector: 'app-recompensas',
   templateUrl: './recompensas.component.html',
-  styleUrls: ['./recompensas.component.css']
+  styleUrls: ['./recompensas.component.css'],
 })
 export class RecompensasComponent {
-  id_nivel: number | any;
-  nivel: Nivel | any;
+  nivel!: string;
   menuColapsado = false;
-  valor_nivel: number = 3;
+  valor_nivel: number = 0;
   experiencia_usuario: number = 500;
-  porcentage_exp:number = 0;
+  porcentage_exp: number = 0;
 
-  constructor(private tokenStorageService: TokenStorageService, private recompensasService: RecompensasService){}
+  constructor(
+    private tokenStorageService: TokenStorageService,
+    private recompensasService: RecompensasService
+  ) {}
 
   // Escucha el evento 'resize' en la ventana del navegador (host).
   // Cuando la ventana cambia de tamaño (por ejemplo, se cambia el tamaño de la pantalla o se rota el dispositivo móvil),
@@ -30,25 +32,28 @@ export class RecompensasComponent {
   ngOnInit(): void {
     // Detecta el tamaño de la pantalla para colapsar el menu
     this.detectScreenSize();
-    this.id_nivel = this.tokenStorageService.getUser().id_nivel;
+    this.nivel = this.tokenStorageService.getUser().nivel;
     this.experiencia_usuario = this.tokenStorageService.getUser().experiencia;
 
-    if(this.id_nivel!=null){
-      this.recompensasService.getNivelesById(this.id_nivel).subscribe( res => {
-        this.nivel = res;        
-        switch(this.nivel.nombre){
-          case 'Oro': this.valor_nivel = 1; break;
-          case 'Platino': this.valor_nivel = 2; break;
-          case 'Diamante': this.valor_nivel = 3; break;
-        }
-      });
+    if (this.nivel != null) {
+      switch (this.nivel) {
+        case 'Oro':
+          this.valor_nivel = 1;
+          break;
+        case 'Platino':
+          this.valor_nivel = 2;
+          break;
+        case 'Diamante':
+          this.valor_nivel = 3;
+          break;
+      }
     }
 
-    let barra = document.getElementById("barra-progreso");
-    this.porcentage_exp = Math.floor(this.experiencia_usuario*100/3000);
-    
-    if(barra != null){
-      barra.style.width = this.porcentage_exp.toString()+'%';
+    let barra = document.getElementById('barra-progreso');
+    this.porcentage_exp = Math.floor((this.experiencia_usuario * 100) / 3000);
+
+    if (barra != null) {
+      barra.style.width = this.porcentage_exp.toString() + '%';
     }
   }
 
@@ -57,9 +62,9 @@ export class RecompensasComponent {
     let windowWidth = window.innerWidth;
     let limite = 992;
 
-    if(windowWidth < limite){
+    if (windowWidth < limite) {
       this.menuColapsado = true;
-    }else{
+    } else {
       this.menuColapsado = false;
     }
   }

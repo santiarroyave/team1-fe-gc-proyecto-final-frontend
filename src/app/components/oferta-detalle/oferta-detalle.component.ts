@@ -16,6 +16,7 @@ export class OfertaDetalleComponent implements OnInit {
   num_noches: number = 14;
   toastLiveExampleRef!: ElementRef<HTMLElement>;
   oferta: any = {};
+  id!:number;
   alojamiento: any = {};
   actividad: any = [];
 
@@ -32,9 +33,11 @@ export class OfertaDetalleComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      const elementId: number = Number(params['id']);
-      this.ofertasService.getOfertaById(elementId).subscribe(res =>{
-        this.oferta = res;        
+      this.id = Number(params['id']);
+      this.ofertasService.getOfertaById(this.id).subscribe(res =>{
+        this.oferta = res;      
+        console.log();
+          
         this.alojamientosService.getAlojamientoById(this.oferta.idAlojamiento).subscribe(res => {
           this.alojamiento = res;          
           this.actividadesService.getActividadesByOfertaId(this.oferta.id).subscribe(res => {
@@ -48,13 +51,6 @@ export class OfertaDetalleComponent implements OnInit {
     this.generadorListaActividades();
     // Genera fotos para la galeria de ejemplo
     this.generadorListaFotos();
-  }
-
-  toastTrigger(): void {
-    const toastLiveExample = document.getElementById('liveToast');
-
-    const toastBootstrap = new bootstrap.Toast(toastLiveExample);
-    toastBootstrap.show();
   }
 
   generadorListaActividades(){

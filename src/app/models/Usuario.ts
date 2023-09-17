@@ -9,6 +9,7 @@ export interface Usuario{
     idDireccion:number,
     puntos:number,
     experiencia:number,
+    idNivel:number,
     nivel:string,
     admin:boolean
 }
