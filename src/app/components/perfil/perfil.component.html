@@ -4,15 +4,15 @@
     <div class="row justify-content-center">
         <!-- Falta arreglar esto, para que al colapsar aparezca mas arriba junto al otro menu y no haya la separacion del header y del buscador -->
         <div class="d-flex flex-column col-12 col-lg-12 col-xxl-3 mt-5 me-3 align-items-center">
-            <img src="https://th.bing.com/th/id/R.ac95ab07af8298a3f45e06b8641681ea?rik=bsgAuQZ5iGem7g&pid=ImgRaw&r=0" class="profile-photo rounded-circle mb-3" alt="...">
+            <div class="profile-photo mb-3" *ngIf="usuario.nombre">
+                {{ usuario.nombre.charAt(0) }}
+            </div>
             <div class="text-center relative mb-3">
-                <a class="color-secondary-darker" (click)="openFileInput()">
-                    <i class="fa fa-image"></i>
-                    Seleccionar imagen de perfil
-                </a>
                 <input type="file" class="form-control" id="fileInput" style="display: none" (change)="handleFileChange($event)">
             </div>
         </div>
+        
+        
         <div class="user-form-settings col-11 col-lg-12 col-xxl-8">
             <h2>Datos personales</h2>
             <hr>
@@ -24,33 +24,33 @@
                         </div>
                         <div class="form-group">
                             <label>E-mail</label>
-                            <input type="text" name="email" placeholder="E-mail" class="form-control">
+                            <input type="text" name="email" placeholder="E-mail" class="form-control" [(ngModel)]="usuario.email" [disabled]="!editMode">
                             <i class="fa fa-envelope input-icon"></i>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nombre</label>
-                                    <input type="text" name="first_name" placeholder="Nombre" class="form-control">
+                                    <input type="text" name="first_name" placeholder="Nombre" class="form-control" [(ngModel)]="usuario.nombre" [disabled]="!editMode">
                                     <i class="fa fa-user input-icon"></i>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Apellidos</label>
-                                    <input type="text" name="last_name" placeholder="Apellidos" class="form-control">
+                                    <input type="text" name="last_name" placeholder="Apellidos" class="form-control" [(ngModel)]="usuario.apellidos" [disabled]="!editMode">
                                     <i class="fa fa-user input-icon"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Teléfono</label>
-                            <input type="text" name="phone" placeholder="Teléfono" class="form-control">
+                            <input type="text" name="phone" placeholder="Teléfono" class="form-control" [(ngModel)]="usuario.telefono" [disabled]="!editMode">
                             <i class="fa fa-phone input-icon"></i>
                         </div>
                         <div class="form-group">
                             <label>Fecha de nacimiento</label>
-                            <input type="text" name="birthday" placeholder="Fecha de nacimiento" class="form-control date-picker">
+                            <input type="text" name="birthday" placeholder="Fecha de nacimiento" class="form-control date-picker" [(ngModel)]="usuario.fechaNacimiento" [disabled]="!editMode">
                             <i class="fa fa-birthday-cake input-icon"></i>
                         </div>
                     </div>
@@ -59,29 +59,40 @@
                             <strong>Localización</strong>
                         </div>
                         <div class="form-group">
-                            <label>Dirección</label>
-                            <input type="text" name="direccion" placeholder="Dirección" class="form-control">
-                            <i class="fa fa-location-arrow input-icon"></i>
-                        </div>
-                        <div class="form-group">
-                            <label>Localidad</label>
-                            <input type="text" name="localidad" placeholder="Localidad" class="form-control">
-                            <i class="fa fa-street-view input-icon"></i>
+                            <label>País</label>
+                            <input type="text" name="pais" placeholder="País" class="form-control" [(ngModel)]="direccion.pais" [disabled]="!editMode">
+                            <i class="fa fa-map-pin input-icon"></i>
                         </div>
                         <div class="form-group">
                             <label>Provincia</label>
-                            <input type="text" name="provincia" placeholder="Provincia" class="form-control">
+                            <input type="text" name="provincia" placeholder="Provincia" class="form-control" [(ngModel)]="direccion.provincia" [disabled]="!editMode">
                             <i class="fa fa-map-signs input-icon"></i>
                         </div>
                         <div class="form-group">
+                            <label>Localidad</label>
+                            <input type="text" name="localidad" placeholder="Localidad" class="form-control" [(ngModel)]="direccion.localidad" [disabled]="!editMode">
+                            <i class="fa fa-street-view input-icon"></i>
+                        </div>
+                        
+                        <div class="form-group">
                             <label>Código Postal</label>
-                            <input type="text" value="" name="codigo_postal" placeholder="Código Postal" class="form-control">
+                            <input type="text" value="" name="codigo_postal" placeholder="Código Postal" class="form-control" [(ngModel)]="direccion.codigoPostal" [disabled]="!editMode">
                             <i class="fa fa-map-pin input-icon"></i>
                         </div>
+                        <div class="form-group">
+                            <label>Calle</label>
+                            <input type="text" name="direccion" placeholder="Dirección" class="form-control" [(ngModel)]="direccion.calle" [disabled]="!editMode">
+                            <i class="fa fa-location-arrow input-icon"></i>
+                        </div>
+                        
+                    </div>
+                    <div *ngIf="loading" class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i> Actualizando tu perfil
                     </div>
                     <div class="col-md-12">
                         <hr>
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Guardar cambios</button>
+                        <button class="btn btn-primary" (click)="permitirEditar()">{{ editMode ? 'Guardar cambios' : 'Editar' }}</button>
+
                     </div>
                 </div>
             </form>
