@@ -53,7 +53,6 @@ export class OfertaDetalleComponent implements OnInit {
         this.fotosGaleria = result.imagenes;
 
         this.corregirResultadosVacios();
-        console.log(this.serviciosAloj);
       },
       error =>{
         console.log("No se ha encontrado la oferta");
@@ -64,7 +63,24 @@ export class OfertaDetalleComponent implements OnInit {
 
   seleccionarImagenGaleria(id:number){
     // Buscar posicion del id en la lista
-    this.posicionFotoSeleccionada; // Asignar posicion del id
+    let posicion = this.fotosGaleria.findIndex((foto:any) => foto.id == id);
+    // Asignar posicion del id
+    this.posicionFotoSeleccionada = posicion;
+  }
+  seleccionarImagenConFlecha(direccion:number){
+    let posicion = this.posicionFotoSeleccionada;
+    let tamaño = this.fotosGaleria.length;
+    
+    if (direccion == 0){
+      if (posicion > 0) {
+        posicion -= 1;
+      }
+    }else if (direccion == 1) {
+      if (posicion < tamaño-1) {
+        posicion += 1;
+      }
+    }
+    this.posicionFotoSeleccionada = posicion;
   }
 
   mostrarCategoria(id:number):string{
