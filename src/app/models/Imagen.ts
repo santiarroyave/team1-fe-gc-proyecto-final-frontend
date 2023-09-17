@@ -1,6 +1,7 @@
 export interface Imagen{
+    id:number,
     url:string,
-    IdActividad:number,
-    IdAlojamiento: number,
+    idActividad:number,
+    idAlojamiento: number,
     ubicacion:string
 }

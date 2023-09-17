@@ -51,6 +51,7 @@ import { environment } from '../environments/environment';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
 import { SpinnerTarjetaComponent } from './utils/spinner-tarjeta/spinner-tarjeta.component';
+import { FavoritosCardComponent } from './components/favoritos/favoritos-card/favoritos-card.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -101,7 +102,8 @@ export const MY_DATE_FORMATS = {
     MenuComponent,
     MenuPerfilComponent,
     GestorImgComponent,
-    SpinnerTarjetaComponent
+    SpinnerTarjetaComponent,
+    FavoritosCardComponent
   ],
   imports: [
     BrowserModule,

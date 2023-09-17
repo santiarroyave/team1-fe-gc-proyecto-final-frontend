@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Favorito } from '../models/Favorito';
 import { Oferta } from '../models/Oferta';
+import { Imagen } from '../models/Imagen';
+import { OfertasImagenes } from '../models/OfertasImagenes';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +29,13 @@ export class FavoritosService {
 
   getOfertasById(id_oferta:number):Observable<Oferta>{
     return this.http.get<Oferta>("api/Ofertas/"+id_oferta);
+  }
+
+  getImagenesOferta():Observable<OfertasImagenes[]>{
+    return this.http.get<OfertasImagenes[]>('api/OfertasImagenes');
+  }
+
+  getImagenes():Observable<Imagen[]>{
+    return this.http.get<Imagen[]>('api/Imagens');
   }
 }
