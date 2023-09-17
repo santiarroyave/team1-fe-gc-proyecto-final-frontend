@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { ActividadCrear } from '../models/ActividadCrear';
-import db from '../../assets/db.json'
-import { ActividadCompleta } from '../models/ActividadCompleta';
+import { ActividadCrear } from '../models/actividades/ActividadCrear';
+import { ActividadCard } from '../models/actividades/ActividadCard';
+import { ActividadCompleta } from '../models/actividades/ActividadCompleta';
 import { Actividad } from '../models/Actividad';
 
 @Injectable({
@@ -15,8 +15,8 @@ export class ActividadesService {
 
   constructor(private http:HttpClient) { }
 
-  getAllActividades():Observable<any>{
-    return this.http.get<any>(this.baseUrl);
+  getAllActividades():Observable<ActividadCard[]>{
+    return this.http.get<ActividadCard[]>(this.baseUrl);
   }
 
   getActividadById(id:number): Observable<ActividadCompleta>{
@@ -26,13 +26,15 @@ export class ActividadesService {
           id: response.id,
           titulo: response.titulo,
           descripcion: response.descripcion,
-          idDireccion: response.idDireccion,
-          pais: response.pais,
-          calle: response.calle,
-          numero: response.numero,
-          codigoPostal: response.codigoPostal,
-          provincia: response.provincia,
-          localidad: response.localidad,
+          direccion: {
+            id: response.direccion.id,
+            pais: response.direccion.pais,
+            calle: response.direccion.calle,
+            numero: response.direccion.numero,
+            codigoPostal: response.direccion.codigoPostal,
+            provincia: response.direccion.provincia,
+            localidad: response.direccion.localidad
+        },
           imagenes: response.imagenes
         };
         return actividad;

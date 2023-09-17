@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs';
 import { ActividadesService } from 'src/app/services/actividades.service';
-import { ActividadCrear } from '../../../../models/ActividadCrear';
+import { ActividadCrear } from '../../../../models/actividades/ActividadCrear';
 
 
 @Component({
@@ -20,7 +20,6 @@ export class CrearActividadComponent {
   provincia: string = "";
   localidad: string = "";
   imagenes: string[] = [];
-  imagen: string = "";
 
   constructor(private actividadesService: ActividadesService, private router: Router) {}
 
@@ -34,7 +33,7 @@ export class CrearActividadComponent {
       codigoPostal: this.codigoPostal, 
       provincia: this.provincia,
       localidad: this.localidad, 
-      imagenes: [this.imagen]
+      imagenes: this.imagenes
     }
     this.actividadesService.addActividad(nuevaActividad);
     this.router.navigate(["/admin/actividades"]);

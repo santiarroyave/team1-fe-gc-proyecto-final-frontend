@@ -24,9 +24,13 @@
                     <label for="categoria" class="form-label fw-bold">Categoria</label>
                     <div class="d-flex">
                         <select *ngIf="categoriaEditSeleccionado; else categoriaBloqueado" class="form-control form-select me-4" [(ngModel)]="alojamiento.categoria" id="categoria" name="categoria" required>
-                            <option value="1">Categoría 1</option>
-                            <option value="2">Categoría 2</option>
-                            <option value="3">Categoría 3</option>
+                            <option selected default disabled>Elegir categoría</option>
+                            <option value="5">★★★★★</option>
+                            <option value="4">★★★★</option>
+                            <option value="3">★★★</option>
+                            <option value="2">★★</option>
+                            <option value="1">★</option>
+                            <option value="0">Apartamentos y cámpings</option>
                         </select>
                         <ng-template class="w-100" #categoriaBloqueado>
                             <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
@@ -69,10 +73,10 @@
                 <div class="mb-3">
                     <label for="pais" class="form-label fw-bold">Pais</label>
                     <div class="d-flex">
-                        <input *ngIf="paisEditSeleccionado; else paisBloqueado" type="text" class="form-control me-4" id="pais" [(ngModel)]="alojamiento.pais" name="pais">
+                        <input *ngIf="paisEditSeleccionado; else paisBloqueado" type="text" class="form-control me-4" id="pais" [(ngModel)]="alojamiento.direccion.pais" name="pais">
                         <ng-template class="w-100" #paisBloqueado>
                             <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
-                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ alojamiento.pais }}</p>
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ alojamiento.direccion.pais }}</p>
                             </div>
                         </ng-template>
                         <button class="btn btn-secondary material-symbols-outlined" (click)="activadoPaisEdit()">
@@ -83,10 +87,10 @@
                 <div class="mb-3">
                     <label for="calle" class="form-label fw-bold">Calle</label>
                     <div class="d-flex">
-                        <input *ngIf="calleEditSeleccionado; else calleBloqueado" type="text" class="form-control me-4" id="calle" [(ngModel)]="alojamiento.calle" name="calle">
+                        <input *ngIf="calleEditSeleccionado; else calleBloqueado" type="text" class="form-control me-4" id="calle" [(ngModel)]="alojamiento.direccion.calle" name="calle">
                         <ng-template class="w-100" #calleBloqueado>
                             <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
-                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ alojamiento.calle }}</p>
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ alojamiento.direccion.calle }}</p>
                             </div>
                         </ng-template>
                         <button class="btn btn-secondary material-symbols-outlined" (click)="activadoCalleEdit()">
@@ -97,10 +101,10 @@
                 <div class="mb-3">
                     <label for="numero" class="form-label fw-bold">Numero</label>
                     <div class="d-flex">
-                        <input *ngIf="numeroEditSeleccionado; else numeroBloqueado" type="text" class="form-control me-4" id="numero" [(ngModel)]="alojamiento.numero" name="numero">
+                        <input *ngIf="numeroEditSeleccionado; else numeroBloqueado" type="text" class="form-control me-4" id="numero" [(ngModel)]="alojamiento.direccion.numero" name="numero">
                         <ng-template class="w-100" #numeroBloqueado>
                             <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
-                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ alojamiento.numero }}</p>
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ alojamiento.direccion.numero }}</p>
                             </div>
                         </ng-template>
                         <button class="btn btn-secondary material-symbols-outlined" (click)="activadoNumeroEdit()">
@@ -111,10 +115,10 @@
                 <div class="mb-3">
                     <label for="CP" class="form-label fw-bold">CP</label>
                     <div class="d-flex">
-                        <input *ngIf="CPEditSeleccionado; else CPBloqueado" type="text" class="form-control me-4" id="CP" [(ngModel)]="alojamiento.codigoPostal" name="CP">
+                        <input *ngIf="CPEditSeleccionado; else CPBloqueado" type="text" class="form-control me-4" id="CP" [(ngModel)]="alojamiento.direccion.codigoPostal" name="CP">
                         <ng-template class="w-100" #CPBloqueado>
                             <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
-                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ alojamiento.codigoPostal }}</p>
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ alojamiento.direccion.codigoPostal }}</p>
                             </div>
                         </ng-template>
                         <button class="btn btn-secondary material-symbols-outlined" (click)="activadoCPEdit()">
@@ -125,10 +129,10 @@
                 <div class="mb-3">
                     <label for="provincia" class="form-label fw-bold">Provincia</label>
                     <div class="d-flex">
-                        <input *ngIf="provinciaEditSeleccionado; else provinciaBloqueado" type="text" class="form-control me-4" id="provincia" [(ngModel)]="alojamiento.provincia" name="provincia">
+                        <input *ngIf="provinciaEditSeleccionado; else provinciaBloqueado" type="text" class="form-control me-4" id="provincia" [(ngModel)]="alojamiento.direccion.provincia" name="provincia">
                         <ng-template class="w-100" #provinciaBloqueado>
                             <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
-                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ alojamiento.provincia }}</p>
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ alojamiento.direccion.provincia }}</p>
                             </div>
                         </ng-template>
                         <button class="btn btn-secondary material-symbols-outlined" (click)="activadoProvinciaEdit()">
@@ -139,10 +143,10 @@
                 <div class="mb-3">
                     <label for="localidad" class="form-label fw-bold">Localidad</label>
                     <div class="d-flex">
-                        <input *ngIf="localidadEditSeleccionado; else localidadBloqueado" type="text" class="form-control me-4" id="localidad" [(ngModel)]="alojamiento.localidad" name="localidad">
+                        <input *ngIf="localidadEditSeleccionado; else localidadBloqueado" type="text" class="form-control me-4" id="localidad" [(ngModel)]="alojamiento.direccion.localidad" name="localidad">
                         <ng-template class="w-100" #localidadBloqueado>
                             <div class="w-100 w-100 me-4 fondo-gris-claro rounded">
-                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ alojamiento.localidad }}</p>
+                                <p class="ms-3 mt-2 mb-0 me-2 fuente-color-gris">{{ alojamiento.direccion.localidad }}</p>
                             </div>
                         </ng-template>
                         <button class="btn btn-secondary material-symbols-outlined" (click)="activadoLocalidadEdit()">

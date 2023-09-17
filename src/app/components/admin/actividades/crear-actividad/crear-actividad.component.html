@@ -43,15 +43,13 @@
                 </div>
 
                 <!-- Localidad -->
-                <div class="mb-3">
+                <div class="mb-4">
                     <label class="form-label">Localidad</label>
                     <input class="form-control" type="text" [(ngModel)]="localidad" name="localidad" required>
                 </div>
 
-                <div class="mb-3">
-                    <label for="imagen" class="form-label">Imagen</label>
-                    <input type="file" class="form-control" [(ngModel)]="imagen" id="imagen" name="imagen">
-                    <small class="form-text text-muted">Puedes cargar una imagen desde tu ordenador.</small>
+                <div class="mb-4">
+                    <app-gestor-img #galeriaFotos></app-gestor-img>
                 </div>
                 <button type="submit" class="btn btn-primary" (click)="addActividad()">Añadir Actividad</button>
             </form>

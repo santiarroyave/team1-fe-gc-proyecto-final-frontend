@@ -1,3 +1,4 @@
+import { Direccion } from "../Direccion";
 import { Imagen } from "../Imagen";
 
 export interface AlojamientoCompleto{
@@ -6,12 +7,7 @@ export interface AlojamientoCompleto{
     categoria:number,
     telefono: string,
     email: string,
-    idDireccion: number,
-    pais: string,
-    calle: string,
-    numero: number,
-    codigoPostal: string,
-    provincia: string,
-    localidad: string,
-    imagenes: Imagen[]
+    direccion: Direccion,
+    imagenes: Imagen[],
+    servicios: number[]
 }

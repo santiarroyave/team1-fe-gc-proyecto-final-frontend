@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, ViewChild, ɵsetAllowDuplicateNgModuleIdsForTest } from '@angular/core';
-import { ActividadCrear } from 'src/app/models/ActividadCrear';
+import { ActividadCrear } from 'src/app/models/actividades/ActividadCrear';
 import { OfertaCrear } from 'src/app/models/OfertaCrear';
 import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
 import { AlojamientoCrear } from 'src/app/models/alojamientos/AlojamientoCrear';
@@ -10,6 +10,7 @@ import { ServiciosAlojamientoService } from 'src/app/services/servicios-alojamie
 
 declare var bootstrap: any;
 import { GestorImgComponent } from 'src/app/utils/gestor-img/gestor-img.component';
+import { AlojamientoCard } from 'src/app/models/alojamientos/AlojamientoCard';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { GestorImgComponent } from 'src/app/utils/gestor-img/gestor-img.componen
 })
 export class CrearOfertaComponent implements OnInit{
   @ViewChild(GestorImgComponent) galeriaFotos!:GestorImgComponent;
-  alojamientosCompletos: AlojamientoCompleto[] = [];
+  alojamientosCompletos: AlojamientoCard[] = [];
   fotos:any = [];
   serviciosAlojamiento:any = [];
 

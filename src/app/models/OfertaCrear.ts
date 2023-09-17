@@ -1,4 +1,4 @@
-import { ActividadCrear } from "./ActividadCrear";
+import { ActividadCrear } from "./actividades/ActividadCrear";
 import { AlojamientoCrear } from "./alojamientos/AlojamientoCrear";
 
 export interface OfertaCrear {

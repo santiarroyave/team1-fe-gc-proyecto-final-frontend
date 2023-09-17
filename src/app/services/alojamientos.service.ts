@@ -4,6 +4,8 @@ import { Observable, map } from 'rxjs';
 import db from '../../assets/db.json'
 import { AlojamientoCrear } from '../models/alojamientos/AlojamientoCrear';
 import { AlojamientoCompleto } from '../models/alojamientos/AlojamientoCompleto';
+import { redis_v1 } from 'googleapis';
+import { AlojamientoCard } from '../models/alojamientos/AlojamientoCard';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +16,12 @@ export class AlojamientosService {
 
   constructor(private http:HttpClient) { }
 
-  getAllAlojamientos(): Observable<AlojamientoCompleto[]> {
-    return this.http.get<AlojamientoCompleto[]>(this.baseUrl);
+  getAllAlojamientos(): Observable<AlojamientoCard[]> {
+    return this.http.get<AlojamientoCard[]>(this.baseUrl);
   }
 
   getAlojamientoById(id:number): Observable<AlojamientoCompleto>{
-    return this.http.get<any>(this.baseUrl + "/" + id).pipe(
+    return this.http.get<any>(this.baseUrl + "/" + id + "/completo").pipe(
       map((response) => {
         const alojamiento: AlojamientoCompleto = {
           id: response.id,
@@ -27,14 +29,17 @@ export class AlojamientosService {
           categoria: response.categoria,
           telefono: response.telefono,
           email: response.email,
-          idDireccion: response.idDireccion,
-          pais: response.pais,
-          calle: response.calle,
-          numero: response.numero,
-          codigoPostal: response.codigoPostal,
-          provincia: response.provincia,
-          localidad: response.localidad,
-          imagenes: response.imagenes
+          direccion: {
+            id: response.direccion.id,
+            pais: response.direccion.pais,
+            calle: response.direccion.calle,
+            numero: response.direccion.numero,
+            codigoPostal: response.direccion.codigoPostal,
+            provincia: response.direccion.provincia,
+            localidad: response.direccion.localidad
+          },
+          imagenes: response.imagenes,
+          servicios: response.servicios
         };
         return alojamiento;
       })
