@@ -3,6 +3,7 @@ import { Reserva } from '../models/Reserva';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { GetReserva } from '../models/GetReserva';
+import { ReservasOfertas } from '../models/ReservasOfertas';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class ReservasService {
       })
     ); 
   }
+  
+  getReservasByUserId(id_user:number):Observable<ReservasOfertas[]>{
+    return this.http.get<ReservasOfertas[]>(this.baseUrl+'/usuario/'+id_user);
+  }
 
   createReserva(reserva: Reserva): Observable<Reserva>{
     return this.http.post<Reserva>(this.baseUrl, reserva);
@@ -39,5 +44,9 @@ export class ReservasService {
 
   updateReserva(reserva: GetReserva): Observable<GetReserva>{
     return this.http.put<GetReserva>(`${this.baseUrl}/${reserva.id}`, reserva);
+  }
+
+  getOfertaById(id_oferta:number): Observable<any>{
+    return this.http.get<any>('api/Ofertas/'+id_oferta);
   }
 }

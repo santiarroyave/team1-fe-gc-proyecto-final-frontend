@@ -3,8 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OfertasService } from 'src/app/services/ofertas.service';
 
-declare var bootstrap: any;
-
 @Component({
   selector: 'app-paso-uno',
   templateUrl: './paso-uno.component.html',
@@ -59,12 +57,6 @@ export class PasoUnoComponent implements OnInit {
     });
   }
 
-  toastTrigger(): void {
-    const toastLiveExample = document.getElementById('liveToast');
-    const toastBootstrap = new bootstrap.Toast(toastLiveExample);
-    toastBootstrap.show();
-  }
-
   calcularNoches(): void {
     this.noches =
       Number(this.campaignOne.value.end?.getDate()) -
@@ -87,14 +79,21 @@ export class PasoUnoComponent implements OnInit {
   }
 
   pasoDos(): void {
+    const startDate = new Date(this.campaignOne.value.start)
+    const sdDay = startDate.getDate();
+    const sdMonth = startDate.getMonth() + 1;
+    const sdYear = startDate.getFullYear();
+    const start = `${sdYear}-${sdMonth}-${sdDay}`;
+    const endDate = new Date(this.campaignOne.value.end)
+    const endDay = endDate.getDate();
+    const endMonth = endDate.getMonth() + 1;
+    const endYear = endDate.getFullYear();
+    const end = `${endYear}-${endMonth}-${endDay}`;
+    
     this.router.navigate([`/paso-2/${this.oferta.id}`], {
       queryParams: {
-        fechaInicio: this.campaignOne.value.start
-          .toISOString('yyyy-mm-dd')
-          .split('T')[0],
-        fechaFin: this.campaignOne.value.end
-          .toISOString('yyyy-mm-dd')
-          .split('T')[0],
+        fechaInicio: start,
+        fechaFin: end,
         estado: 'Activa',
         precio: (this.noches*this.precio_noche).toString()
       },

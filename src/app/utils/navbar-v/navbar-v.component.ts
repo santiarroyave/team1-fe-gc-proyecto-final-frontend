@@ -86,7 +86,6 @@ export class NavbarVComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.data_filtros);
   }
 
   actualizarFiltroAlojamiento(indice: number) {
