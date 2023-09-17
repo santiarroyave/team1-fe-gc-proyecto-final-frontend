@@ -18,6 +18,7 @@ img{
     background-color: var(--turquesa-brillante) !important;
     opacity: 95%;
     box-shadow: 0 0 1em rgba(0, 0, 0, 0.25);
+    z-index: 100;
 }
 
 .navHorizontal a{
