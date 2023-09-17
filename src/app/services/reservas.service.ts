@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { GetReserva } from '../models/GetReserva';
 import { ReservasOfertas } from '../models/ReservasOfertas';
+import { Usuario } from '../models/Usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,9 @@ export class ReservasService {
 
   getOfertaById(id_oferta:number): Observable<any>{
     return this.http.get<any>('api/Ofertas/'+id_oferta);
+  }
+
+  updateUserExperience(user:Usuario): Observable<Usuario>{
+    return this.http.put<Usuario>('api/Usuarios/'+user.id,user);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OfertaCompleta } from 'src/app/models/OfertaCompleta';
 import { OfertasService } from 'src/app/services/ofertas.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class PasoUnoComponent implements OnInit {
   toastLiveExampleRef!: ElementRef<HTMLElement>;
 
   num_personas: number = 2;
-  oferta: any = {};
+  ofertaCompleta!: OfertaCompleta;
 
   precio_noche: number | any;
   precio_persona: number | any;
@@ -40,8 +41,10 @@ export class PasoUnoComponent implements OnInit {
     this.route.params.subscribe((params) => {
       const elementId: number = Number(params['id']);
       this.ofertasService.getOfertaById(elementId).subscribe((res) => {
-        this.oferta = res;
-        this.precio_noche = this.oferta.precio;
+        console.log(res);
+        
+        this.ofertaCompleta = res;
+        this.precio_noche = this.ofertaCompleta.oferta.precio;
         this.precio_persona = this.precio_noche / this.num_personas;
       });
     });
@@ -80,17 +83,17 @@ export class PasoUnoComponent implements OnInit {
 
   pasoDos(): void {
     const startDate = new Date(this.campaignOne.value.start)
-    const sdDay = startDate.getDate();
-    const sdMonth = startDate.getMonth() + 1;
+    const sdDay = String(startDate.getDate()).padStart(2, '0');
+    const sdMonth = String(startDate.getMonth() + 1).padStart(2, '0'); // El mes comienza en 0, así que le sumamos 1;
     const sdYear = startDate.getFullYear();
     const start = `${sdYear}-${sdMonth}-${sdDay}`;
     const endDate = new Date(this.campaignOne.value.end)
-    const endDay = endDate.getDate();
-    const endMonth = endDate.getMonth() + 1;
+    const endDay = String(endDate.getDate()).padStart(2, '0');
+    const endMonth = String(endDate.getMonth() + 1).padStart(2, '0'); // El mes comienza en 0, así que le sumamos 1;
     const endYear = endDate.getFullYear();
     const end = `${endYear}-${endMonth}-${endDay}`;
     
-    this.router.navigate([`/paso-2/${this.oferta.id}`], {
+    this.router.navigate([`/paso-2/${this.ofertaCompleta.oferta.id}`], {
       queryParams: {
         fechaInicio: start,
         fechaFin: end,

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Oferta } from '../models/Oferta';
 import { Observable, map } from 'rxjs';
 import { OfertaCrear } from '../models/OfertaCrear';
+import { OfertaCompleta } from '../models/OfertaCompleta';
 
 @Injectable({
   providedIn: 'root'
@@ -17,19 +18,14 @@ export class OfertasService {
     return this.http.get<Oferta[]>(this.baseUrl);
   }
 
-  getOfertaById(id:number): Observable<Oferta>{
-    return this.http.get<Oferta>(this.baseUrl + "/" + id).pipe(
+  getOfertaById(id:number): Observable<OfertaCompleta>{
+    return this.http.get<OfertaCompleta>(this.baseUrl + "/" + id).pipe(
       map((response) => {
-        const oferta: Oferta = {
-          id: response.id,
-          titulo: response.titulo,
-          descripcion: response.descripcion,
-          precio: response.precio,
-          maxPersonas: response.maxPersonas,
-          fechaInicio: response.fechaInicio,
-          fechaFin: response.fechaFin,
-          ofertasDisponibles: response.ofertasDisponibles,
-          idAlojamiento: response.idAlojamiento
+        const oferta: OfertaCompleta = {
+          oferta: response.oferta,
+          alojamiento: response.alojamiento,
+          actividades: response.actividades,
+          imagenes: response.imagenes
         };
         return oferta;
       })
