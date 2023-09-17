@@ -10,8 +10,8 @@
 <div class="container">
   <div class="row mt-4 justify-content-center">
     <div class="col-12 position-relative">
-      <img src={{oferta.imagen}} class="img-fluid col-6 img-thumbnail" alt="...">
-      <img src={{oferta.imagen}} class="img-fluid col-6 img-thumbnail" alt="...">
+      <img src={{ofertaCompleta.imagenes[0].url}} class="img-fluid col-6 img-thumbnail" alt="...">
+      <img src={{ofertaCompleta.imagenes[0].url}} class="img-fluid col-6 img-thumbnail" alt="...">
       <button type="button" class="btn position-absolute top-0 end-0 pt-3 pe-4">
         <img width="30" height="30" src="https://img.icons8.com/flat-round/64/hearts.png" alt="hearts"/>
       </button>
@@ -91,7 +91,7 @@
       </div>
       <div class="row justify-content-center">
         <div class="col-12 col-lg-8 p-0 mt-4 d-flex justify-content-around">
-            <button type="button" class="btn botonAzulVacio btn-settings-2" routerLink="/oferta/{{oferta.id}}">volver</button>
+            <button type="button" class="btn botonAzulVacio btn-settings-2" routerLink="/oferta/{{ofertaCompleta.oferta}}">volver</button>
             <button type="button" class="btn botonNaranja btn-settings-3" (click)="pasoDos()">{{noches*precio_noche | number: '1.2-2' }} €/persona</button>
         </div>
       </div>

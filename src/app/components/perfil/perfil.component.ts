@@ -29,6 +29,7 @@ export class PerfilComponent implements OnInit {
     idDireccion: 0,
     puntos: 0,
     experiencia: 0,
+    idNivel: 0,
     nivel: '',
     admin: false
   };

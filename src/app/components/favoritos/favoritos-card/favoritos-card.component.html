@@ -1,14 +1,13 @@
 <div class="contenedorOferta card card-style mb-3 rounded-3" *ngFor="let oferta of ofertas">
   
   <!-- Botón de favorito -->
-  <div class="favs position-absolute top-0 end-0" (click)="quitarFavorito(oferta.oferta.id,oferta)" >
-    <i class="bi bi-heart" *ngIf="!oferta.favorito"></i>
-    <i class="bi bi-heart-fill" *ngIf="oferta.favorito"></i>
+  <div class="favs position-absolute top-0 end-0" (click)="BorrarFavorito(oferta.id)" >
+    <i class="bi bi-heart-fill"></i>
   </div>
 
   <div routerLink="/oferta/{{oferta.id}}">
     <!-- Foto de la oferta -->
-    <img src="{{oferta.imagenes.url}}" class="imgOferta card-img-top img-style" alt="...">
+    <img src="{{oferta.fotoPortada}}" class="imgOferta card-img-top img-style" alt="...">
   
     <!-- Contador de días restantes -->
     <div class="tiempoRestante">
@@ -17,11 +16,11 @@
   
     <!-- Texto de la oferta -->
     <div class="card-body">
-      <h3 class="card-title">{{oferta.oferta.titulo}}</h3>
-      <p class="card-text">{{oferta.oferta.descripcion}}</p>
+      <h3 class="card-title">{{oferta.titulo}}</h3>
+      <p class="card-text">{{oferta.descripcion}}</p>
 
       <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-lg btn-primary botonOferta col-12 col-lg-3" routerLink="/oferta/{{oferta.oferta.id}}">{{oferta.oferta.precio}} € /pers.</button>
+        <button type="button" class="btn btn-lg btn-primary botonOferta col-12 col-lg-3" routerLink="/oferta/{{oferta.id}}">{{oferta.precio}} € /pers.</button>
       </div>
     </div>
 

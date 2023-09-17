@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Reserva } from 'src/app/models/Reserva';
+import { Usuario } from 'src/app/models/Usuario';
 import { OfertasService } from 'src/app/services/ofertas.service';
 import { ReservasService } from 'src/app/services/reservas.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
@@ -21,7 +22,7 @@ export class PasoDosComponent {
     estado:''
   };
 
-  constructor(private route: ActivatedRoute, private ofertasService: OfertasService, private tokenService: TokenStorageService, private reservasService: ReservasService){}
+  constructor(private route: ActivatedRoute, private ofertasService: OfertasService, private tokenService: TokenStorageService, private reservasService: ReservasService, private router: Router){}
 
   ngOnInit(): void {
     let elementId:number = 0;
@@ -40,8 +41,29 @@ export class PasoDosComponent {
   }
 
   pagar(){
-    console.log(this.reserva);
-    
-    this.reservasService.createReserva(this.reserva).subscribe();
+    this.reservasService.createReserva(this.reserva).subscribe(()=>{},()=>{},
+    ()=>{
+      let user:Usuario = this.tokenService.getUser();
+      user.experiencia = Math.floor(user.experiencia + this.precio * 0.1);       
+
+      switch(true){
+        case user.experiencia >= 500: 
+          user.idNivel = 2;
+          user.nivel = 'Oro'
+          break;
+        case user.experiencia >= 1500:
+          user.idNivel = 3;
+          user.nivel = 'Platino'
+          break;
+        case user.experiencia >= 3000:
+          user.idNivel = 4;
+          user.nivel = 'Diamente'
+          break;
+      }
+      this.tokenService.saveUser(user);
+      const updatedUser:Usuario = this.tokenService.getUser();
+      this.reservasService.updateUserExperience(updatedUser).subscribe();
+      this.router.navigate(['/reservas']);
+    });
   }
 }
