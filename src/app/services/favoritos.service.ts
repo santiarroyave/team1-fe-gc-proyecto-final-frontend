@@ -5,6 +5,7 @@ import { Favorito } from '../models/Favorito';
 import { Oferta } from '../models/Oferta';
 import { Imagen } from '../models/Imagen';
 import { OfertasImagenes } from '../models/OfertasImagenes';
+import { OfertaCard } from '../models/OfertaCard';
 
 @Injectable({
   providedIn: 'root'
@@ -23,12 +24,8 @@ export class FavoritosService {
     return this.http.delete<any>(this.baseUrl+`?id_usuario=${id_user}&id_oferta=${id_oferta}`);
   }
 
-  getFavoritosByUserId(id_user:number): Observable<Favorito[]>{
-    return this.http.get<Favorito[]>(this.baseUrl+'/IdUsuario/'+id_user);
-  }
-
-  getOfertasById(id_oferta:number):Observable<Oferta>{
-    return this.http.get<Oferta>("api/Ofertas/"+id_oferta);
+  getFavoritosByUserId(id_user:number): Observable<OfertaCard[]>{
+    return this.http.get<OfertaCard[]>('api/Favoritoes/Usuario/'+id_user);
   }
 
   getImagenesOferta():Observable<OfertasImagenes[]>{
