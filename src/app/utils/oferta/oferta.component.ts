@@ -13,11 +13,10 @@ export class OfertaComponent implements OnInit{
   
   @Input() ofertas:any;
 
-  constructor(private tokenStorageService: TokenStorageService, private favoritosService: FavoritosService, private ofertasService: OfertasService){ };
+  constructor(private tokenStorageService: TokenStorageService, private favoritosService: FavoritosService){ };
   
   // Obtiene la información de la oferta haciendo una llamada al servidor por IP
   ngOnInit(): void {
-    console
   }
   
   favorito(oferta:any){
