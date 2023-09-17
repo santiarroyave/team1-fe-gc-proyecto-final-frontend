@@ -2,109 +2,115 @@
 <app-navbar-h></app-navbar-h>
 <!-- Escribir código aqui -->
 
-<div id="bannerOferta" style="background-image: url({{oferta.imagen}});">
-  <div class="filtroBannerOscuro d-flex justify-content-center align-items-center flex-column">
-    <h1>{{oferta.titulo}}</h1>
-    <button type="button" class="btn btn-danger btn-lg botonNaranja" routerLink="/paso-1/{{oferta.id}}">{{oferta.precio}} €/noche</button>
-  </div>
-</div>
-
-<div class="container py-4">
-  <!-- Descripcion -->
-  <!-- <div class="fondoBlanco rounded-3 p-3">
-    <h2>Titulo oferta</h2>
-    {{oferta | json}}
-    <ul>
-      <li>Precio/noche/persona</li>
-    </ul>
-  </div> -->
-  
-  <div class="fondoBlanco rounded-3 p-3 mt-4">
-    <!-- Info hotel -->
-    <h3>Hotel Palace ★★★</h3>
-    <hr>
-    <div class="d-flex justify-content-center" >
-      <!-- Descripcion -->
-      <div class="col-8">
-        <h4>Dirección</h4>
-        <ul>
-          <li>Calle Principal 124</li>
-          <li>España</li>
-        </ul>
-        <h4>Servicios</h4>
-        <!-- Ajustar para que se muestre en columnas!!! -->
-        <ul>
-          <li>Wifi</li>
-          <li>Piscina</li>
-          <li>Lavadora</li>
-          <li>Mascotas</li>
-        </ul>
-      </div>
-      <!-- Foto alojamiento -->
-      <div class="col-4">
-        <img src="{{fotosGaleria[2].url}}" alt="" class="w-100" style="max-height: 300px; object-fit: cover;">
-      </div>
+<div class="oferta" *ngIf="oferta != null; else espera">
+  <div id="bannerOferta" style="background-image: url({{fotosGaleria[0].url}});">
+    <div class="filtroBannerOscuro d-flex justify-content-center align-items-center flex-column">
+      <h1>{{oferta.titulo}}</h1>
+      <button type="button" class="btn btn-danger btn-lg botonNaranja" routerLink="/paso-1/{{oferta.id}}">{{oferta.precio}} €/noche</button>
     </div>
   </div>
   
-  <!-- Descripcion extensa -->
-  <div class="fondoBlanco rounded-3 p-3 mt-4">
-    <h2>Descripción</h2>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi reprehenderit mollitia quibusdam ducimus cum odio iste ex illo? Itaque cupiditate impedit minus reprehenderit expedita perferendis? Atque officia ratione ducimus eum hic eaque quam quod unde itaque nobis consectetur, nam nostrum temporibus nihil architecto. Optio dignissimos architecto est? Reiciendis, culpa deleniti. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam est, vel vero nam qui quasi reiciendis odio quam deleniti ipsam voluptatibus minus debitis, rem necessitatibus ut error hic magni! Ipsam, accusamus, facilis in doloribus rem voluptates culpa quaerat quod ipsa excepturi corrupti maiores voluptatum nemo, harum ex dicta cupiditate impedit dolores architecto facere. Deserunt atque at corporis, laudantium velit officia placeat excepturi sint debitis ea. Et odit pariatur dolor distinctio iusto quae soluta, aliquam iure blanditiis ipsa, dolorum consequatur consectetur maiores enim nemo illo?</p>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi reprehenderit mollitia quibusdam ducimus cum odio iste ex illo? Itaque cupiditate impedit minus reprehenderit expedita perferendis? Atque officia ratione ducimus eum hic eaque quam quod unde itaque nobis consectetur, nam nostrum temporibus nihil architecto. Optio dignissimos architecto est? Reiciendis, culpa deleniti. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam est, vel vero nam qui quasi reiciendis odio quam deleniti ipsam voluptatibus minus debitis, rem necessitatibus ut error hic magni! Ipsam, accusamus, facilis in doloribus rem voluptates culpa quaerat quod ipsa excepturi corrupti maiores voluptatum nemo, harum ex dicta cupiditate impedit dolores architecto facere. Deserunt atque at corporis, laudantium velit officia placeat excepturi sint debitis ea. Et odit pariatur dolor distinctio iusto quae soluta, aliquam iure blanditiis ipsa, dolorum consequatur consectetur maiores enim nemo illo?</p>
-  </div>
-
-  <!-- Galeria -->
-  <div class="fondoBlanco rounded-3 p-3 mt-4" *ngIf="fotosGaleria != ''">
-    <h2>Galería</h2>
-    <hr>
-    <!-- Galería de fotos -->
-    <div id="galeriaOferta d-flex">
-      <!-- Foto principal -->
-      <div class="fotoPrincipalGaleria d-flex justify-content-center">
-        <img class="h-100" src="{{fotosGaleria[posicionFotoSeleccionada].url}}" alt="">
-        <div class="botones d-flex">
-          <div class="d-flex align-items-center justify-content-start">
-            <i class="bi bi-arrow-left-square-fill"></i>
-          </div>
-          <div class="d-flex align-items-center justify-content-end">
-            <i class="bi bi-arrow-right-square-fill"></i>
-          </div>
-        </div>
-      </div>
+  <div class="container py-4">
+    <!-- Info alojamiento -->
+    <div class="fondoBlanco rounded-3 p-3 mt-4" *ngIf="alojamiento != null">
+      <h3>{{alojamiento.nombre}} {{mostrarCategoria(alojamiento.categoria)}}</h3>
       <hr>
       
-      <!-- Carrusel de la galeria -->
-      <div class="carruselGaleria d-flex flex-nowrap overflow-x-auto gap-2">
-        <div class="d-flex mb-3" *ngFor="let foto of fotosGaleria">
-          <img src="{{foto.url}}" alt="" (click)="seleccionarImagenGaleria(foto.id)">
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Lista de Actividades -->
-  <div class="fondoBlanco rounded-3 p-3 mt-4" *ngIf="listaActividades != ''"> <!-- Condicional en función de si hay actividades o no-->
-    
-    <h3>Actividades incluidas</h3>
-    <hr>
-    <div class="d-flex flex-nowrap overflow-x-auto gap-2 pb-3" style="height: 400px;">
-      <div class="card sombraHover overflow-hidden" style="width: 18rem; min-width: 18rem;" *ngFor="let actividad of listaActividades"> <!-- Bucle For que muestra las listas-->
-        <img src="{{actividad.imagen}}" class="card-img-top imagenActividad" alt="..." style="aspect-ratio: 16/9; background-color: #f1f1f1;">
-        <div class="card-body">
-          <h5 class="card-title">{{actividad.titulo}}</h5>
-          <p class="card-text">{{actividad.descripcion}}</p>
-          <div class="botonesActividades d-flex gap-2 p-3 position-absolute bottom-0 end-0 start-0">
-              <button class="btn btn-primary btn-sm botonAzulVacio mt-4 w-100">Más info</button>
+      <div class="d-flex justify-content-center flex-wrap">
+        <div class="col-12 col-md-8 order-2 order-md-1">
+          <!-- Direccion -->
+          <div class="direccionAloj d-flex align-items-center gap-3 mb-3">
+            <i class="bi bi-geo-alt"></i>
+            <div>
+              <p>{{direccionAloj.calle}}, {{direccionAloj.numero}}, {{direccionAloj.codigoPostal}} {{direccionAloj.localidad}}, {{direccionAloj.provincia}}</p>
+              <p>{{direccionAloj.pais}}</p>
             </div>
+          </div>
+
+          <!-- Servicios -->
+          <h4>Servicios</h4>
+          <div class="servicios d-flex flex-wrap gap-3 mt-3">
+            <p *ngFor="let servicio of serviciosAloj" class="m-0 rounded-3">{{servicio.nombre}}</p>
+          </div>
+        </div>
+
+        <!-- Foto alojamiento -->
+        <div class="col-md-4 fotoAlojamiento col-12 order-1 order-md-2">
+          <img src="{{alojamiento.imagenes[0]}}" alt="" class="w-100">
         </div>
       </div>
     </div>
-  </div>
+    
+    <!-- Descripcion extensa -->
+    <div class="fondoBlanco rounded-3 p-3 mt-4" *ngIf="oferta.descripcion != null">
+      <h2>Descripción</h2>
+      {{oferta.descripcion}}
+    </div>
   
-  <button type="button" class="btn btn-danger btn-lg botonNaranja w-100 mt-5" routerLink="/paso-1/{{id}}">Reservar oferta</button>
-
+    <!-- Galeria -->
+    <div class="fondoBlanco rounded-3 p-3 mt-4" *ngIf="fotosGaleria[0].url != ''">
+      <h2>Galería</h2>
+      <hr>
+      <!-- Galería de fotos -->
+      <div id="galeriaOferta d-flex">
+        <!-- Foto principal -->
+        <div class="fotoPrincipalGaleria d-flex justify-content-center">
+          <img class="h-100 w-100 object-fit-contain" src="{{fotosGaleria[posicionFotoSeleccionada].url}}" alt="">
+          <div class="botones d-flex">
+            <div class="d-flex align-items-center justify-content-start" (click)="seleccionarImagenConFlecha(0);">
+              <i class="bi bi-arrow-left-square-fill"></i>
+            </div>
+            <div class="d-flex align-items-center justify-content-end" (click)="seleccionarImagenConFlecha(1);">
+              <i class="bi bi-arrow-right-square-fill"></i>
+            </div>
+          </div>
+        </div>
+        <hr>
+        
+        <!-- Carrusel de la galeria -->
+        <div class="carruselGaleria d-flex flex-nowrap overflow-x-auto gap-2">
+          <div class="d-flex mb-3" *ngFor="let foto of fotosGaleria">
+            <img src="{{foto.url}}" alt="" (click)="seleccionarImagenGaleria(foto.id)">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Lista de Actividades -->
+    <div class="fondoBlanco rounded-3 p-3 mt-4" *ngIf="actividades != ''"> <!-- Condicional en función de si hay actividades o no-->
+      
+      <h3>Actividades incluidas</h3>
+      <hr>
+      <div class="d-flex flex-nowrap overflow-x-auto gap-2 pb-3" style="height: 400px;">
+        <div class="card sombraHover actividadCard" style="width: 18rem; min-width: 18rem;" *ngFor="let actividad of actividades"> <!-- Bucle For que muestra las listas-->
+          <img src="{{actividad.imagenes[0].url}}" class="card-img-top imagenActividad" alt=" " style="aspect-ratio: 16/9; background-color: #f1f1f1;">
+          <div class="card-body">
+            <h5 class="card-title">{{actividad.titulo}}</h5>
+            <p class="card-text descripcionActiv">{{actividad.descripcion}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <button type="button" class="btn btn-danger btn-lg botonNaranja w-100 mt-5" routerLink="/paso-1/{{oferta.id}}" *ngIf="oferta != null">Reservar oferta</button>
+    
 </div>
+
+<ng-template #espera>
+  <div class="skeleton m-0"></div>
+  <div id="bannerOferta">
+    <div class="filtroBannerOscuro d-flex justify-content-center align-items-center flex-column">
+      <h1>Obteniendo datos...</h1>
+    </div>
+  </div>
+  <div class="position-relative p-5">
+    <div class="container">
+      <div class="fondoBlanco rounded-3 p-3 mt-4" style="background-color: #f1f1f1;">
+        <br><br><br><br><br><br><br>
+      </div>
+    </div>
+  </div>
+</ng-template>
 
 <!-- Aqui va el footer -->
 <app-footer></app-footer>

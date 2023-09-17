@@ -44,5 +44,9 @@ export class OfertasService {
       }
     );
   }
+
+  getOfertaCompletaById(id:number): Observable<OfertaCompleta>{
+    return this.http.get<OfertaCompleta>(this.baseUrl + "/" + id);
+  }
 }
 
