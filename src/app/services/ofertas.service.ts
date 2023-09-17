@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Oferta } from '../models/Oferta';
 import { Observable, map } from 'rxjs';
 import { OfertaCrear } from '../models/OfertaCrear';
+import { OfertaCompleta } from '../models/OfertaCompleta';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,10 @@ export class OfertasService {
         throw error;
       }
     );
+  }
+
+  getOfertaCompletaById(id:number): Observable<OfertaCompleta>{
+    return this.http.get<OfertaCompleta>(this.baseUrl + "/" + id);
   }
 }
 
