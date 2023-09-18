@@ -7,12 +7,11 @@
             <div>
                 <h1>Hoteles</h1>
                 <div class="d-flex mt-3 mb-3">
-                    <button type="button" class="btn btn-primary" routerLink="/admin/crear-hotel">Crear hotel</button>
+                    <button type="button" class="btn btn-primary btn-lg botonAzul" routerLink="/admin/crear-hotel">Crear hotel</button>
                 </div>
                 <div *ngFor="let alojamiento of alojamientos">
                     <app-hotel-item [alojamiento]="alojamiento"></app-hotel-item>
                 </div>
-                <app-spinner-tarjeta *ngIf="!alojamientos"></app-spinner-tarjeta>
                 <app-spinner-tarjeta *ngIf="!alojamientos"></app-spinner-tarjeta>
             </div> 
         </div>
