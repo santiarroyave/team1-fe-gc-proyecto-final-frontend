@@ -1,5 +1,14 @@
-.img-size{
+.imagenActiv{
     width: auto;
     height: 250px;
     object-fit: cover;
+
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/vivaviajes-c4008.appspot.com/o/recursos%2Factividades-1.svg?alt=media&token=6d506de8-9d65-438b-b09d-6efa4542b7a6");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.tarjeta{
+    cursor: pointer;
 }

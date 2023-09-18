@@ -14,10 +14,19 @@ export class HotelItemComponent {
 
   categoriaMostrar: string = "";
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit(): void {
+    // Muestra las estrellas segun la categoria
+    this.mostrarCategoria();
+  }
+
+
+  onEditar() {
+    this.editar.emit(this.alojamiento.id);
+  }
+
+  mostrarCategoria(){
     switch (this.alojamiento.categoria) {
       case 0:
         this.categoriaMostrar = "";
@@ -41,10 +50,5 @@ export class HotelItemComponent {
         this.categoriaMostrar = "";
         break;
     }
-  }
-
-
-  onEditar() {
-    this.editar.emit(this.alojamiento.id);
   }
 }

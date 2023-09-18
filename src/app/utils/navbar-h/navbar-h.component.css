@@ -4,7 +4,12 @@ img{
 }
 
 .barra-progreso{
-    width: 100px;
+    width: 70%;
+    height: 1.8em;
+}
+.barra-progreso .progress-bar{
+    background-color: var(--naranja-aventura);
+    
 }
 
 .logotipo{
@@ -18,6 +23,7 @@ img{
     background-color: var(--turquesa-brillante) !important;
     opacity: 95%;
     box-shadow: 0 0 1em rgba(0, 0, 0, 0.25);
+    z-index: 100;
 }
 
 .navHorizontal a{

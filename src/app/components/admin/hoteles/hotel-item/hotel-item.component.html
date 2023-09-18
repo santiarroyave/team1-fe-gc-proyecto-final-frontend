@@ -1,13 +1,13 @@
 <!-- <div *ngFor="let hotel of listaHoteles" class="card card-style mb-3" id="{{hotel.id}}"> -->
-<div class="card card-style mb-3">
-    <img src="{{alojamiento.fotoPortada}}" class="card-img-top img-style img-size" alt="...">
+<div class="card card-style mb-3 tarjeta sombraHover" routerLink="/admin/editar-hotel/{{alojamiento.id}}">
+    <img src="{{alojamiento.fotoPortada}}" class="card-img-top img-style imagenAloj" alt=" ">
     <div class="card-body row">
-        <div class="col-10">
+        <div class="col-12 col-md-10">
             <h5 class="card-title">{{alojamiento.nombre}} | {{categoriaMostrar}}</h5>
             <p class="initialism text-secondary"><i class="bi bi-geo-alt-fill me-1"></i> {{alojamiento.localidad}}, {{alojamiento.pais}}</p>
         </div>
-        <div class="col-2 d-flex align-items-end">
-            <button type="button" class="btn btn-danger" routerLink="/admin/editar-hotel/{{alojamiento.id}}" (click)="onEditar()">Editar</button>
+        <div class="col-12 col-md-2 d-flex align-items-end d-grid">
+            <button type="button" class="btn btn-danger botonNaranja col-12" routerLink="/admin/editar-hotel/{{alojamiento.id}}" (click)="onEditar()">Editar</button>
         </div>
     </div>
 </div>

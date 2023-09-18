@@ -46,8 +46,13 @@ export class OfertasService {
     );
   }
 
+
   getOfertaCardFiltros(): Observable<OfertaFiltros[]>{
     return this.http.get<OfertaFiltros[]>(this.baseUrl + "/FiltrosCard");
+  }
+  
+  getOfertaCompletaById(id:number): Observable<OfertaCompleta>{
+    return this.http.get<OfertaCompleta>(this.baseUrl + "/" + id);
   }
 }
 
