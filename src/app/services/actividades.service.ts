@@ -5,13 +5,15 @@ import { ActividadCrear } from '../models/actividades/ActividadCrear';
 import { ActividadCard } from '../models/actividades/ActividadCard';
 import { ActividadCompleta } from '../models/actividades/ActividadCompleta';
 import { Actividad } from '../models/Actividad';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActividadesService {
 
-  baseUrl: string = "api/Actividads";
+  baseUrl: string = environment.url+"api/Actividads";
 
   constructor(private http:HttpClient) { }
 

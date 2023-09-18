@@ -6,13 +6,15 @@ import { Oferta } from '../models/Oferta';
 import { Imagen } from '../models/Imagen';
 import { OfertasImagenes } from '../models/OfertasImagenes';
 import { OfertaCard } from '../models/OfertaCard';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoritosService {
 
-  baseUrl: string = "api/Favoritoes";
+  baseUrl: string = environment.url+"api/Favoritoes";
 
   constructor(private http:HttpClient) { }
 

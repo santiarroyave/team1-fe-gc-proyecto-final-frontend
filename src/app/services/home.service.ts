@@ -7,12 +7,14 @@ import { Alojamiento } from '../models/Alojamiento';
 import { ServiciosAlojamientos } from '../models/ServiciosAlojamientos';
 import { Favorito } from '../models/Favorito';
 import { OfertaFiltros } from '../models/OfertaFiltros';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
-  baseUrl: string = "api/";
+  baseUrl: string = environment.url+"api/";
 
   private ofertasFiltradas$ = new BehaviorSubject<any[]>([]);
 

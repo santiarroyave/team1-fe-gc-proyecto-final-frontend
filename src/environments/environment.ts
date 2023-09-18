@@ -8,4 +8,5 @@ export const environment = {
     authDomain: 'vivaviajes-c4008.firebaseapp.com',
     messagingSenderId: '455229257537',
   },
+  url: "https://vivaviajes-api-production.up.railway.app/"
 };

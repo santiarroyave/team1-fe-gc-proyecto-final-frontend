@@ -5,13 +5,15 @@ import { Observable, map } from 'rxjs';
 import { GetReserva } from '../models/GetReserva';
 import { ReservasOfertas } from '../models/ReservasOfertas';
 import { Usuario } from '../models/Usuario';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservasService {
 
-  baseUrl: string = "api/Reservas";
+  baseUrl: string = environment.url+"api/Reservas";
 
   constructor(private http:HttpClient) { }
   

@@ -6,13 +6,15 @@ import { AlojamientoCrear } from '../models/alojamientos/AlojamientoCrear';
 import { AlojamientoCompleto } from '../models/alojamientos/AlojamientoCompleto';
 import { redis_v1 } from 'googleapis';
 import { AlojamientoCard } from '../models/alojamientos/AlojamientoCard';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlojamientosService {
 
-  baseUrl: string = "api/Alojamientoes";
+  baseUrl: string = environment.url+"api/Alojamientoes";
 
   constructor(private http:HttpClient) { }
 

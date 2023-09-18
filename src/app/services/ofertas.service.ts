@@ -5,13 +5,14 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import { OfertaCrear } from '../models/OfertaCrear';
 import { OfertaCompleta } from '../models/OfertaCompleta';
 import { OfertaFiltros } from '../models/OfertaFiltros';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OfertasService {
 
-  baseUrl: string = "api/Ofertas";
+  baseUrl: string = environment.url+"api/Ofertas";
   
   constructor(private http:HttpClient) { }
 
@@ -48,7 +49,7 @@ export class OfertasService {
 
 
   getOfertaCardFiltros(): Observable<OfertaFiltros[]>{
-    return this.http.get<OfertaFiltros[]>("https://vivaviajes-api-production.up.railway.app/api/Ofertas/FiltrosCard");
+    return this.http.get<OfertaFiltros[]>(this.baseUrl+"/FiltrosCard");
   }
   
   getOfertaCompletaById(id:number): Observable<OfertaCompleta>{
