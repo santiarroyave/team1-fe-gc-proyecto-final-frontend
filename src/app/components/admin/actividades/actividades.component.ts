@@ -17,7 +17,7 @@ export class ActividadesComponent {
   ngOnInit(): void {
     this.actividadesService.getAllActividades().subscribe(response => {
       this.actividades = response;
-      console.log(this.actividades);
+      console.log("hola", this.actividades);
     });
   }
 }

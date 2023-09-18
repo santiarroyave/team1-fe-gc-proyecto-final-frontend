@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { OfertaFiltros } from 'src/app/models/OfertaFiltros';
 import { HomeService } from 'src/app/services/home.service';
+import { OfertasService } from 'src/app/services/ofertas.service';
 
 @Component({
   selector: 'app-buscador',
@@ -9,9 +11,9 @@ import { HomeService } from 'src/app/services/home.service';
 })
 export class BuscadorComponent {
   num_personas: number = 2;
-  nombre: string = '';
-  @Output() nombre_oferta = new EventEmitter();
-  @Output() lista_ofertas = new EventEmitter();
+  ubicacion: string = '';
+  
+  lista_ofertas: OfertaFiltros[] = [];
 
   today: Date = new Date();
   month: number = this.today.getMonth();
@@ -20,7 +22,8 @@ export class BuscadorComponent {
   max: Date | any;
   min: Date = new Date(this.today);
   campaignOne: FormGroup | any;
-  constructor(private homeService: HomeService){}
+
+  constructor(private homeService: HomeService, private ofertasService: OfertasService){}
 
   ngOnInit(): void {
     this.ts_max = this.today.setMonth(this.today.getMonth() + 2);
@@ -34,10 +37,6 @@ export class BuscadorComponent {
       end: new FormControl(new Date(this.year, this.month, this.today.getDate())),
     });
     
-  }
-
-  sendEvent(event: any):void{
-    this.nombre_oferta.emit(event);
   }
 
   increasePersonCount() {
@@ -54,11 +53,13 @@ export class BuscadorComponent {
     }
   }
 
-  buscar():void {
-    let fechas = this.formatearFechas(this.campaignOne.value.start,this.campaignOne.value.end);
-    
-    this.homeService.getBuscarOfertas(this.nombre,fechas[0],fechas[1],this.num_personas).subscribe(response => {
-      this.lista_ofertas.emit(response);
+  buscar(): void {
+    let fechas = this.formatearFechas(this.campaignOne.value.start, this.campaignOne.value.end);
+    this.homeService.getBuscarOfertas(this.ubicacion, fechas[0], fechas[1], this.num_personas).subscribe(response => {
+      this.lista_ofertas = response;
+      console.log("Ofertas filtradas por el buscador:", response);
+      this.homeService.actualizarOfertasFiltradas(response);
+      this.homeService.setOfertasAllParaFiltrar(response);
     });
   }
 
