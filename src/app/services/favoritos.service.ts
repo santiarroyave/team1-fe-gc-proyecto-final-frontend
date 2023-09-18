@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class FavoritosService {
 
-  baseUrl: string = environment.url+"api/Favoritoes";
+  baseUrl: string = environment.url+"/api/Favoritoes";
 
   constructor(private http:HttpClient) { }
 

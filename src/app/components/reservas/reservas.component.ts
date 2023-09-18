@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ReservasOfertas } from 'src/app/models/ReservasOfertas';
 import { OfertasService } from 'src/app/services/ofertas.service';
 import { ReservasService } from 'src/app/services/reservas.service';
@@ -13,7 +14,7 @@ export class ReservasComponent implements OnInit{
   reservas!: ReservasOfertas[];
   id_user!: number;
 
-  constructor(private reservasService:ReservasService, private tokenService: TokenStorageService) {
+  constructor(private reservasService:ReservasService, private tokenService: TokenStorageService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -25,5 +26,9 @@ export class ReservasComponent implements OnInit{
           
         });
       }
+  }
+
+  redirectToDetalle(id: number) {
+    this.router.navigate(['/reservas/', id]);
   }
 }
