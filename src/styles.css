@@ -173,6 +173,14 @@ input:focus, textarea:focus{
     }
 }
 
+/* Cambia color de los links de bootstrap */
+.btn-link{
+    color: var(--turquesa-brillante);
+}
+.btn-link:active, .btn-link:focus-visible, .btn-link:visited, .btn-link:hover{
+    color: var(--turquesa-brillante-1);
+}
+
 /* ------------------------------------------------------------------------------------------------------------------------- */
 /* Animaciones */
 /* ------------------------------------------------------------------------------------------------------------------------- */
