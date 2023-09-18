@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Oferta } from '../models/Oferta';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { OfertaCrear } from '../models/OfertaCrear';
 import { OfertaCompleta } from '../models/OfertaCompleta';
+import { OfertaFiltros } from '../models/OfertaFiltros';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { OfertaCompleta } from '../models/OfertaCompleta';
 export class OfertasService {
 
   baseUrl: string = "api/Ofertas";
-
+  
   constructor(private http:HttpClient) { }
 
   getAllOfertas(): Observable<Oferta[]>{
@@ -43,6 +44,10 @@ export class OfertasService {
         throw error;
       }
     );
+  }
+
+  getOfertaCardFiltros(): Observable<OfertaFiltros[]>{
+    return this.http.get<OfertaFiltros[]>(this.baseUrl + "/FiltrosCard");
   }
 }
 

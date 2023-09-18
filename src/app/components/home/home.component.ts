@@ -1,9 +1,10 @@
 import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { Favorito } from 'src/app/models/Favorito';
 import { FiltrosResponse } from 'src/app/models/FiltrosResponse';
-import { Oferta } from 'src/app/models/Oferta';
+import { OfertaFiltros } from 'src/app/models/OfertaFiltros';
 import { AuthService } from 'src/app/services/auth.service';
 import { HomeService } from 'src/app/services/home.service';
+import { OfertasService } from 'src/app/services/ofertas.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
@@ -12,7 +13,11 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  ofertas: any = [];
+  
+  ofertas: OfertaFiltros[] = [];
+
+
+
   ofertas_mostradas: any = [];
   ofertas_por_pagina: number = 6;
   pagina_actual: number = 0;
@@ -35,6 +40,7 @@ export class HomeComponent implements OnInit {
   }
 
   constructor(
+    private ofertaService: OfertasService,
     private homeService: HomeService,
     private tokenStorageService: TokenStorageService,
     private authService: AuthService
@@ -44,25 +50,38 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // Obtiene todas las ofertas del servicio
     const user = this.tokenStorageService.getUser();
+    
 
-    this.homeService.getDataFiltros().subscribe((response) => {
-      this.ofertas = response.ofertas;
-      this.filtros_data = response;
+    this.ofertaService.getOfertaCardFiltros().subscribe((response) => {
+      this.ofertas = response.map((item: OfertaFiltros) => {
+        return {
+          oferta: item.oferta,
+          categoriaAlojamiento: item.categoriaAlojamiento,
+          direccionAlojamiento: item.direccionAlojamiento,
+          serviciosAlojamiento: item.serviciosAlojamiento,
+          favorito: false,
+        };
+      });
+
+      console.log("Ofertas totales de la bdd:");
+      console.log(this.ofertas);
+      this.homeService.actualizarOfertasFiltradas(this.ofertas); //actualiza valor que variará
+      this.homeService.setOfertasAllParaFiltrar(this.ofertas); // actualizo valor original
+      console.log("Ofertas totales despues con el servicio de ofertas filtradas:");
+      this.homeService.getOfertasFiltradas$().subscribe(ofertas => {
+        console.log(ofertas);
+      });
+      
       // Detecta el tamaño de la pantalla para colapsar el menú
       this.detectScreenSize();
       this.actualizarTotalPaginas();
-      for (let i = 0; i < this.ofertas.length; i++) {
-        this.ofertas[i] = {
-          ...this.ofertas[i],
-          favorito: false,
-        };
-      }
+
       
       if (Object.keys(user).length > 0) {
         this.homeService.getFavoritosByUserId(user.id).subscribe((res) => {
           for (let i = 0; i < this.ofertas.length; i++) {
             for (let j = 0; j < res.length; j++) {
-              if (this.ofertas[i].id == res[j].idOferta)
+              if (this.ofertas[i].oferta.id == res[j].idOferta)
                 this.ofertas[i].favorito = true;
             }   
           }
@@ -75,8 +94,10 @@ export class HomeComponent implements OnInit {
           this.ofertas_mostradas.push(this.ofertas[index]);
         }
       }
+      
       this.esperando = false;
     });
+    
 
     this.authService.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.authService.isLoggedIn) {
@@ -94,27 +115,6 @@ export class HomeComponent implements OnInit {
       this.menuColapsado = true;
     } else {
       this.menuColapsado = false;
-    }
-  }
-
-  actualizarListaOfertas(event: string | FiltrosResponse): void {
-    if (typeof event === 'string') {
-      this.ofertas_mostradas = this.ofertas.filter((oferta: any) =>
-        oferta.titulo.toLowerCase().includes(event.toLowerCase())
-      );
-    } else {
-      if (event.ofertas.length === 0) {
-        this.res_length = 0;
-        this.mostrarElemento = false;
-        this.updateMostrarResBusqueda();
-      } else {
-        this.filtros_data = event;
-        this.ofertas = event.ofertas;
-        this.res_length = this.ofertas.length;
-        this.updateMostrarResBusqueda();
-        this.actualizarTotalPaginas();
-        this.actualizarPagina();
-      }
     }
   }
 
@@ -157,6 +157,7 @@ export class HomeComponent implements OnInit {
     this.ofertas = event;
     this.actualizarTotalPaginas();
     this.actualizarPagina();
+    this.homeService.actualizarOfertasFiltradas(event); 
   }
 
   actualizarTotalPaginas(): void {

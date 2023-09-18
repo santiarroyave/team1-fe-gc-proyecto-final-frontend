@@ -1,4 +1,5 @@
 export interface Servicio{
+    [x: string]: any
     select: boolean
     nombre:string
 }

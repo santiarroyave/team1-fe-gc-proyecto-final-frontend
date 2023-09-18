@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FiltrosResponse } from 'src/app/models/FiltrosResponse';
 import { Oferta } from 'src/app/models/Oferta';
+import { OfertaFiltros } from 'src/app/models/OfertaFiltros';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-navbar-v',
@@ -9,12 +11,10 @@ import { Oferta } from 'src/app/models/Oferta';
 })
 export class NavbarVComponent implements OnInit {
   // ATRIBUTOS
-  @Input() data_filtros: FiltrosResponse | any;
-  @Output() ofertas = new EventEmitter();
-  @Output() res_busqueda = new EventEmitter();
+  ofertas: any[] = [];
 
-  precioMinimo: number = 200;
-  precioMaximo: number = 2000;
+  precioMinimo: number = 0;
+  precioMaximo: number = 5000;
   // Servicios de ejemplo (hace llamada a la BBDD)
   listaServicios = [
     {
@@ -83,7 +83,11 @@ export class NavbarVComponent implements OnInit {
   ];
   filter_cat: number[] = [];
 
-  constructor() {}
+  constructor(private homeService: HomeService) {
+    
+      
+    
+  }
 
   ngOnInit(): void {
   }
@@ -104,75 +108,62 @@ export class NavbarVComponent implements OnInit {
   }
 
   filtrar(): void {
-    let ofertas_first_filter = [];
-    let ofertas_second_filter = [];
-    let ofertas_third_filter: Oferta[] = [];
 
-    //Primer filtro por categoria
+    this.ofertas = this.homeService.getAllOfertasParaFiltrar();
+    console.log("Dentro de los filtros:", this.ofertas);
+
+    let ofertas_first_filter: OfertaFiltros[] = [];
+    let ofertas_second_filter: OfertaFiltros[] = [];
+    let ofertas_third_filter: OfertaFiltros[] = [];
+
+    // Primer filtro por categoría
     let existeFiltroCategoria = false;
     if (this.filter_cat.length > 0) existeFiltroCategoria = true;
 
     if (existeFiltroCategoria) {
-      for (const oferta of this.data_filtros.ofertas) {
-        const id_alojamiento = oferta.idAlojamiento;
-        let alojamiento = undefined;
-        for (let i = 0; i < this.data_filtros.alojamientos.length; i++) {
-          if (id_alojamiento === this.data_filtros.alojamientos[i].id) {
-            alojamiento = this.data_filtros.alojamientos[i];
-            for (let j = 0; j < this.filter_cat.length; j++) {
-              if (alojamiento.categoria === this.filter_cat[j]) {
-                ofertas_first_filter.push(oferta);
-              }
-            }
-          }
+      for (const oferta of this.ofertas) {
+        if (this.filter_cat.includes(oferta.categoriaAlojamiento)) {
+          ofertas_first_filter.push(oferta);
         }
       }
     } else {
-      ofertas_first_filter = this.data_filtros.ofertas;
+      ofertas_first_filter = this.ofertas;
     }
 
-    //Segundo filtro por precio
+    // Segundo filtro por precio
     for (const oferta of ofertas_first_filter) {
       if (
-        oferta.precio <= Number(this.precioMaximo) &&
-        oferta.precio >= Number(this.precioMinimo)
+        oferta.oferta.precio <= Number(this.precioMaximo) &&
+        oferta.oferta.precio >= Number(this.precioMinimo)
       ) {
         ofertas_second_filter.push(oferta);
       }
     }
 
-    //Tercer filtro por servicios de alojamiento
-    let servicioIsChecked = false;
+    // Tercer filtro por servicios de alojamiento
+    const serviciosSeleccionados = this.listaServicios
+      .filter(servicio => servicio.check)
+      .map(servicio => servicio.id);
 
-    for (const ser of this.listaServicios) {
-      if (ser.check) servicioIsChecked = true;
-    }
-    
-    if (servicioIsChecked) {
+    if (serviciosSeleccionados.length > 0) {
       for (const oferta of ofertas_second_filter) {
-        const id_alojamiento = oferta.idAlojamiento;
-        for (
-          let i = 0;
-          i < this.data_filtros.s_A.length;
-          i++
-        ) {
-          const s_a = this.data_filtros.s_A[i];
-          for (let j = 0; j < this.listaServicios.length; j++) {
-            if (
-              s_a.idAlojamiento == id_alojamiento &&
-              s_a.idServicio == this.listaServicios[j].id && this.listaServicios[j].check
-            ) {
-              if (!ofertas_third_filter.includes(oferta)) {
-                ofertas_third_filter.push(oferta);
-              }
-            }
-          }
+        const serviciosOferta = oferta.serviciosAlojamiento.map(servicio => servicio['id']);
+
+        // Comprueba si todos los servicios seleccionados están presentes en la oferta
+        const todosLosServiciosCoinciden = serviciosSeleccionados.every(id =>
+          serviciosOferta.includes(id)
+        );
+
+        if (todosLosServiciosCoinciden) {
+          ofertas_third_filter.push(oferta);
         }
       }
     } else {
       ofertas_third_filter = ofertas_second_filter;
     }
-    this.ofertas.emit(ofertas_third_filter);
-    this.res_busqueda.emit(ofertas_third_filter.length);
+
+    // Ahora ofertas_third_filter contiene todas las ofertas que pasaron los tres filtros.
+    console.log("Ofertas filtradas:", ofertas_third_filter);
+    this.homeService.actualizarOfertasFiltradas(ofertas_third_filter);
   }
 }

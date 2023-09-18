@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Oferta } from '../models/Oferta';
 import { FiltrosResponse } from '../models/FiltrosResponse';
 import { Alojamiento } from '../models/Alojamiento';
 import { ServiciosAlojamientos } from '../models/ServiciosAlojamientos';
 import { Favorito } from '../models/Favorito';
+import { OfertaFiltros } from '../models/OfertaFiltros';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,31 @@ import { Favorito } from '../models/Favorito';
 export class HomeService {
   baseUrl: string = "api/";
 
+  private ofertasFiltradas$ = new BehaviorSubject<any[]>([]);
+
+  private ofertasAllParaFiltrar: any[] = [];
+
   constructor(private http:HttpClient) { }
 
-  getBuscarOfertas(nombre:string, fecha_ini:string, fecha_fin:string, num_personas:number):Observable<FiltrosResponse>{
-    return this.http.get<FiltrosResponse>(`${this.baseUrl}Ofertas/Buscar?nombre=${nombre}&fecha_inicio=${fecha_ini}&fecha_fin=${fecha_fin}&num_personas=${num_personas}`);
+  actualizarOfertasFiltradas(ofertasFiltradas: any[]): void {
+    this.ofertasFiltradas$.next(ofertasFiltradas);
+  }
+
+  getOfertasFiltradas$(): Observable<any[]> {
+    return this.ofertasFiltradas$;
+  }
+
+  getAllOfertasParaFiltrar(): any[] {
+    return this.ofertasAllParaFiltrar;
+  }
+
+  setOfertasAllParaFiltrar(ofertasAll: any[]): void {
+    this.ofertasAllParaFiltrar = ofertasAll;
+  }
+
+
+  getBuscarOfertas(ubicacion:string, fecha_ini:string, fecha_fin:string, num_personas:number):Observable<OfertaFiltros[]>{
+    return this.http.get<OfertaFiltros[]>(`${this.baseUrl}Ofertas/Buscar?ubicacion=${ubicacion}&fecha_inicio=${fecha_ini}&fecha_fin=${fecha_fin}&num_personas=${num_personas}`);
   }
 
   getDataFiltros():Observable<FiltrosResponse>{
