@@ -48,7 +48,7 @@ export class OfertasService {
 
 
   getOfertaCardFiltros(): Observable<OfertaFiltros[]>{
-    return this.http.get<OfertaFiltros[]>(this.baseUrl + "/FiltrosCard");
+    return this.http.get<OfertaFiltros[]>("https://vivaviajes-api-production.up.railway.app/api/Ofertas/FiltrosCard");
   }
   
   getOfertaCompletaById(id:number): Observable<OfertaCompleta>{
