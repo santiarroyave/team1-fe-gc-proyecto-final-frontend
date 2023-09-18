@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class FavoritosService {
 
-  baseUrl: string = environment.url+"/api/Favoritoes";
+  baseUrl: string = environment.url+"api/Favoritoes";
 
   constructor(private http:HttpClient) { }
 
@@ -23,11 +23,11 @@ export class FavoritosService {
   }
 
   deleteFavorito(id_user: number, id_oferta:number): Observable<any>{
-    return this.http.delete<any>(this.baseUrl+`?id_usuario=${id_user}&id_oferta=${id_oferta}`);
+    return this.http.delete<any>(this.baseUrl+`/?id_usuario=${id_user}&id_oferta=${id_oferta}`);
   }
 
   getFavoritosByUserId(id_user:number): Observable<OfertaCard[]>{
-    return this.http.get<OfertaCard[]>('api/Favoritoes/Usuario/'+id_user);
+    return this.http.get<OfertaCard[]>(this.baseUrl+'/Usuario/'+id_user);
   }
 
   getImagenesOferta():Observable<OfertasImagenes[]>{
