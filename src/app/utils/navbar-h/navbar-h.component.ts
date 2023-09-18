@@ -17,16 +17,6 @@ export class NavbarHComponent implements OnInit{
   admin = false;
   user = false;
 
-  // Lista donde se mostrará el navbar-v dentro del menu horizontal
-  whiteList:any = [
-    "home",
-    "reservas",
-    "favoritos",
-    "admin/hoteles"
-  ];
-  // Indica si el menú-V debe ser mostrado dentro del menú-H
-  mostrarMenu:boolean = false;
-
   // Alterna entre navbar fixed o no en funcion de si estas arriba de la pagina o no
   @HostListener("window:scroll", [])
   onWindowScroll(){
@@ -36,12 +26,6 @@ export class NavbarHComponent implements OnInit{
   constructor(private route: ActivatedRoute, private tokenStorageService: TokenStorageService , private authService: AuthService ) { }
 
   ngOnInit(): void {
-    // Obtiene la ruta actual y la coteja con la WhiteList para mostrar el menu o no
-    this.route.url.subscribe(segments => {
-      this.rutaActual = segments.map(segment => segment.path).join('/');
-      this.mostrarMenu = this.whiteList.includes(this.rutaActual);
-    });
-
     this.authService.isLoggedIn = !!this.tokenStorageService.getToken();
 
       if(this.authService.isLoggedIn){
@@ -66,21 +50,9 @@ export class NavbarHComponent implements OnInit{
     // Muestra el menu h colapsado
     if (menuH.classList.contains("show")) {
       menuH.classList.remove("show");
-      contenedorFix.classList.remove("h-100", "overflow-auto");
     } else {
       menuH.classList.add("show");
-      contenedorFix.classList.add("h-100", "overflow-auto");
     }
-    
-    // Muestra el menuV colapsado al hacer click
-    // Tiene un condicional nulo porque en algunas paginas se muestra y en otras no y sino daria error
-    // if(menuV != null){
-    //   if(menuV.classList.contains("show")){
-    //     menuV.classList.remove("show");
-    //   }else{
-    //     menuV.classList.add("show");
-    //   }
-    // }
   }
 
   posicionNavbar(){
