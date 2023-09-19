@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ServiciosAlojamientoService {
 
-  baseUrl: string = environment.url+"/api/Servicios";
+  baseUrl: string = environment.url+"api/Servicios";
 
   constructor(private http: HttpClient) { }
 
