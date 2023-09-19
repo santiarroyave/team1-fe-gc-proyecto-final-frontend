@@ -274,6 +274,7 @@ export class CrearOfertaComponent implements OnInit{
     for(let servicio of this.serviciosAlojamiento){
       if(servicio.select == true){
         this.alojServiciosIds.push(servicio.id);
+        this.alojamiento.servicios.push(servicio.id);
       }
     }
   }
