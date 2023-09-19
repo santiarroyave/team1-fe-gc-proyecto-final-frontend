@@ -1,5 +1,5 @@
 <div class="contenedorReserva card card-style mb-3 rounded-3" *ngIf="reserva != null; else espera">
-    <div class="row g-0" routerLink="/reservas/{{reserva.id}}" (click)="onDetalle()">
+    <div class="row g-0" routerLink="/reservas/{{reserva.id}}">
         <div class="col-md-4">
             <!-- Foto de la oferta -->
             <img src="{{reserva.imagen}}" class="card-img-top img-style-square" alt="...">
