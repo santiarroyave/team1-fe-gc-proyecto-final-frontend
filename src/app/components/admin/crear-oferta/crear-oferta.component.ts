@@ -7,6 +7,7 @@ import { AlojamientosService } from 'src/app/services/alojamientos.service';
 import { GestorImgService } from 'src/app/services/gestor-img.service';
 import { OfertasService } from 'src/app/services/ofertas.service';
 import { ServiciosAlojamientoService } from 'src/app/services/servicios-alojamiento.service';
+import { Router } from '@angular/router';
 
 declare var bootstrap: any;
 import { GestorImgComponent } from 'src/app/utils/gestor-img/gestor-img.component';
@@ -53,7 +54,7 @@ export class CrearOfertaComponent implements OnInit{
   actividad:ActividadCrear;
 
 
-  constructor(private alojamientosService: AlojamientosService, private serviciosAlojamientoService: ServiciosAlojamientoService, private gestorImgService: GestorImgService, private ofertaService: OfertasService){
+  constructor(private alojamientosService: AlojamientosService, private serviciosAlojamientoService: ServiciosAlojamientoService, private gestorImgService: GestorImgService, private ofertaService: OfertasService, private router: Router){
     this.busquedaAloj = "";
     this.listaAlojBuscador = [];
     this.alojServiciosIds = [];
@@ -233,6 +234,9 @@ export class CrearOfertaComponent implements OnInit{
         // ###############################################
         this.crearJson();
         this.ofertaUrlFotos = [];
+
+        // Redirige despues de crear la oferta
+        this.router.navigate(["/home"]);
 
       })
       .catch((error) => {
