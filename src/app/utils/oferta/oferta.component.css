@@ -36,3 +36,8 @@
     font-size: 1.5em;
     z-index: 10;
 }
+
+.caducada {
+    background-color: black;
+    color: white;
+}

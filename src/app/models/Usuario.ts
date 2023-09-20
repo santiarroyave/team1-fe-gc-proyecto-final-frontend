@@ -1,13 +1,15 @@
 export interface Usuario{
-    Email:string,
-    Nombre:string,
-    Apellidos:string,
-    Telefono:string,
-    FechaNacimiento:string,
-    Pass:string,
-    IdDireccion:number,
-    Puntos:number,
-    Experiencia:number,
-    Nivel:string,
-    Admin:boolean
+    id: number,
+    email:string,
+    nombre:string,
+    apellidos:string,
+    telefono:string,
+    fechaNacimiento:string,
+    pass:string,
+    idDireccion:number,
+    puntos:number,
+    experiencia:number,
+    idNivel:number,
+    nivel:string,
+    admin:boolean
 }

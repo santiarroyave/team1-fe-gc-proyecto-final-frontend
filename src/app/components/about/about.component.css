@@ -5,3 +5,75 @@ h1{
 h1, h2, p{
     text-align: justify;
 }
+
+.fotoPersona{
+    max-height: 12em;
+    max-width: 12em;
+}
+
+.tarjeta{
+    border: transparent;
+    background: linear-gradient(transparent, #fff);
+}
+
+.link a{
+    font-size: 2em;
+    color: var(--turquesa-brillante);
+    text-decoration: none;
+    margin: .2em;
+}
+.link a:hover{
+    color: var(--turquesa-brillante-1);
+}
+
+.descripcion{
+    max-height: 10em;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+h2{
+    font-size: 3em;
+    color: var(--turquesa-brillante-0);
+    font-weight: 300;
+}
+
+h3{
+    color: var(--turquesa-brillante-0);
+
+}
+
+.fullStack{
+    color: var(--turquesa-brillante-0);
+    font-weight: 400;
+}
+
+.fotoLogo{
+    height: 8em;
+    background-image: url(../../../assets/vivaviajes-logo-turquesa.svg);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+img{
+    transition: .5s;
+    border: solid transparent;
+    background-color: #ececec;
+    aspect-ratio: 1/1;
+}
+img:hover{
+    transform: scale(1.1);
+}
+
+.texto{
+    color: var(--turquesa-brillante-0);
+    font-size: 1.3em;
+    font-weight: 200;
+    margin: auto;
+    max-width: 1000px;
+}
+.texto p{
+    text-align: justify;
+}

@@ -1,5 +1,6 @@
 export interface Actividad{
-    Titulo:string,
-    Descripcion:string,
+    ID: number,
+    titulo:string,
+    descripcion:string,
     IdDireccion:number
 }

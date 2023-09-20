@@ -1,0 +1,86 @@
+<div class="contenedorOferta card card-style mb-3 rounded-3" *ngFor="let oferta of ofertas">
+  
+  <!-- Botón de favorito -->
+  <div class="favs position-absolute top-0 end-0" (click)="BorrarFavorito(oferta.id)" >
+    <i class="bi bi-heart-fill"></i>
+  </div>
+
+  <div routerLink="/oferta/{{oferta.id}}">
+    <!-- Foto de la oferta -->
+    <img src="{{oferta.fotoPortada}}" class="imgOferta card-img-top img-style" alt="...">
+  
+    <!-- Contador de días restantes -->
+    <div class="tiempoRestante">
+      <p><i class="bi bi-stopwatch"></i>¡Quedan 3 días y 7 horas!</p>
+    </div>
+  
+    <!-- Texto de la oferta -->
+    <div class="card-body">
+      <h3 class="card-title">{{oferta.titulo}}</h3>
+      <p class="card-text">{{oferta.descripcion}}</p>
+
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-lg btn-primary botonOferta col-12 col-lg-3" routerLink="/oferta/{{oferta.id}}">{{oferta.precio}} € /pers.</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToastAdd" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <img width="20" height="20" src="https://img.icons8.com/color/48/filled-like.png" alt="filled-like"/>
+            <strong class="me-auto">Oferta X</strong>
+            <small>now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            Oferta añadida a favoritos
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToastDelete" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <img width="20" height="20" src="https://img.icons8.com/color/48/filled-like.png" alt="filled-like"/>
+            <strong class="me-auto">Oferta X</strong>
+            <small>now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            Oferta eliminada de favoritos
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- PLANTILLA DE ESPERA PARA CARGAR LOS DATOS -->
+<ng-template #espera>
+  <div class="contenedorOferta card card-style mb-3 rounded-3">
+
+    <div class="imgOferta" style="background-color: #f1f1f1;">
+      <div class="spinner-border position-absolute top-50 start-50 ruedaCarga" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Contador de días restantes -->
+    <div class="tiempoRestante">Esperando datos...</div>
+  
+    <!-- Texto de la oferta -->
+    <div class="card-body" style="background-color: #f1f1f1;">
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-lg btn-primary botonOferta col-12 col-lg-3"></button>
+      </div>
+    </div>
+  </div>
+</ng-template>

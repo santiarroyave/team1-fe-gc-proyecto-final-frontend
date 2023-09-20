@@ -1,4 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ɵsetAllowDuplicateNgModuleIdsForTest } from '@angular/core';
+import { ActividadCrear } from 'src/app/models/actividades/ActividadCrear';
+import { OfertaCrear } from 'src/app/models/OfertaCrear';
+import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
+import { AlojamientoCrear } from 'src/app/models/alojamientos/AlojamientoCrear';
+import { AlojamientosService } from 'src/app/services/alojamientos.service';
+import { GestorImgService } from 'src/app/services/gestor-img.service';
+import { OfertasService } from 'src/app/services/ofertas.service';
+import { ServiciosAlojamientoService } from 'src/app/services/servicios-alojamiento.service';
+import { Router } from '@angular/router';
+
+declare var bootstrap: any;
+import { GestorImgComponent } from 'src/app/utils/gestor-img/gestor-img.component';
+import { AlojamientoCard } from 'src/app/models/alojamientos/AlojamientoCard';
+
 
 @Component({
   selector: 'app-crear-oferta',
@@ -6,85 +20,185 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./crear-oferta.component.css']
 })
 export class CrearOfertaComponent implements OnInit{
-
+  @ViewChild(GestorImgComponent) galeriaFotos!:GestorImgComponent;
+  alojamientosCompletos: AlojamientoCard[] = [];
   fotos:any = [];
   serviciosAlojamiento:any = [];
-  listaActividades:any = [];
 
-  nombreActividad:string="";
-  descripcionActividad:string="";
-
+  crearOfertaJson:any;
+  
   idAutoIncrementalActividades:number = 0;
   idActividadSeleccionada:number = -1;
-
-  constructor(){ }
   
-  ngOnInit(): void {
-    // Generador de fotos de ejemplo
-    for (let i = 0; i < 7; i++) {
-      this.fotos[i] = "https://concepto.de/wp-content/uploads/2015/03/paisaje-e1549600034372.jpg";
+  fotoActividad: File | null;
+  fotoActividadEdicionMode: boolean;
+
+  busquedaAloj:string;
+  listaAlojBuscador:any[];
+
+  // datos formulario
+  // crearAlojJson:any;
+  alojServiciosIds:number[];
+  actividades:any[];
+
+  // Atributos esenciales del JSON Crear Oferta
+  ofertaTitulo:string;
+  ofertaPrecioDia:number|null;
+  ofertaMaxPersonas:number|null;
+  ofertaFechaInicio:Date|null;
+  ofertaFechaFin:Date|null;
+  ofertaCantidadDisponible:number|null;
+  ofertaDescripcion:string;
+  ofertaUrlFotos:string[];
+  alojamiento:AlojamientoCrear;
+  actividad:ActividadCrear;
+
+
+  constructor(private alojamientosService: AlojamientosService, private serviciosAlojamientoService: ServiciosAlojamientoService, private gestorImgService: GestorImgService, private ofertaService: OfertasService, private router: Router){
+    this.busquedaAloj = "";
+    this.listaAlojBuscador = [];
+    this.alojServiciosIds = [];
+    
+    // Datos formulario
+    this.ofertaTitulo = "";
+    this.ofertaPrecioDia = null;
+    this.ofertaMaxPersonas = null;
+    this.ofertaFechaInicio = null;
+    this.ofertaFechaFin = null;
+    this.ofertaCantidadDisponible = null;
+    this.ofertaDescripcion = "";
+    this.ofertaUrlFotos = [];
+    this.alojamiento = {
+      nombre: "",
+      categoria: "",
+      telefono: "",
+      email: "",
+      pais: "",
+      calle: "",
+      numero: null,
+      codigoPostal: "",
+      provincia: "",
+      localidad: "",
+      imagenes: [],
+      servicios: this.alojServiciosIds
+    }
+    this.actividad = {
+      titulo: "",
+      descripcion: "",
+      pais: "",
+      calle: "",
+      numero: null,
+      codigoPostal: "",
+      provincia: "",
+      localidad: "",
+      imagenes: [],
     }
     
-    // Genera servicios para el alojamiento de ejemplo
-    this.serviciosAlojamiento = ["Wifi", "Lavadora", "Aire acondicionado", "Cocina", "Secadora", "Calefacción", "Zona para trabajar", "Televisión", "Piscina", "Desayuno", "Gimnasio"];
-
-    // Generador de actividades de ejemplo
-    for (let i = 0; i < 5; i++) {
-      this.agregarActividad(`Actividad ${i}`, "Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title and make up the bulk of the card's content.", "https://www.portaventuraworld.com/blog/wp-content/uploads/2023/05/Paw-World-1200x600-1.jpg");
-    }
-
+    // Otros datos 
+    this.fotoActividad = null;
+    this.fotoActividadEdicionMode = false;
+    this.actividades = [];
   }
+  
+  ngOnInit(): void {
+    // Importa los servicios disponibles en la BBDD
+    this.serviciosAlojamientoService.getAllServicios().subscribe(result => {
+      this.serviciosAlojamiento = result;
 
-  // Recoge los datos del formulario y los envia a la funcion que los agrega y resetea el formulario
-  btnAddActividad(){
-    this.agregarActividad(this.nombreActividad, this.descripcionActividad, "");
+      // Añade clave select y los establece como desactivados
+      for (let i = 0; i < this.serviciosAlojamiento.length; i++) {
+        this.serviciosAlojamiento[i].select = false;
+      }
+    });
+
+    this.alojamientosService.getAllAlojamientos().subscribe(response => {
+      this.alojamientosCompletos = response;
+      console.log(this.alojamientosCompletos);
+    });
   }
 
   // Añade una actividad a la lista de actividades
-  agregarActividad(titulo:string, descripcion:string, imagen:string){
+  agregarActividad(){
+    // Notas:
+    // - Si se crea una nueva actividad es obligatorio poner foto.
+    // - Si se edita la actividad y se actualiza la foto, se almacena y se obiene una url nueva. Sino no y solo se actualizarian los datos.
+    // - Se han clonado los datos en las variables temp, porque si la variable apunta a la misma dirección en vez de clonarse, los datos se resetearian antes de obtener la url de la foto
+    let tempActividad:ActividadCrear = { ...this.actividad };
+    let tempIdActividadSeleccionada = this.idActividadSeleccionada;
 
-    
-    // Nueva actividad: si no hay un ID seleccionada se usa el ID auto incremental
-    // Editar actividad: si hay un ID seleccionada se usa ese id
-    if(this.idActividadSeleccionada == -1){
-      this.idAutoIncrementalActividades += 1;
-      this.idActividadSeleccionada = this.idAutoIncrementalActividades;
-      
-      // Añade nuevas actividades a la lista
-      this.listaActividades.unshift({
-        id: this.idActividadSeleccionada,
-        titulo: titulo,
-        descripcion: descripcion,
-        imagen: imagen
-      });
-      
-    }else{
-      // Edita los datos de la Actividad seleccionada
-      this.listaActividades.splice(this.idActividadSeleccionada, 1, {
-        id: this.idActividadSeleccionada,
-        titulo: titulo,
-        descripcion: descripcion,
-        imagen: imagen
-      });
+    // NUEVA ACTIVIDAD: si no hay un ID seleccionada se usa el ID auto incremental
+    if(tempIdActividadSeleccionada == -1){
+      // Guardar y obtener url de la foto
+      if (this.fotoActividad != null) {
+        this.idAutoIncrementalActividades += 1;
 
+        this.gestorImgService.uploadImage(this.fotoActividad, "actividades")
+          .then(result => {
+            // Ejecuta el código después de tener la URL
+            // Añade nuevas actividades a la lista
+            // -----------------------------------------
+            tempActividad.imagenes[0] = result;
+            this.actividades.unshift(tempActividad);
+            // -----------------------------------------
+          })
+          .catch(error => console.log(error));
+      }else{
+        alert("Falta añadir foto a la actividad");
+        return;
+      }
     }
-
+    // EDITAR ACTIVIDAD: si hay un ID seleccionada se usa ese id
+    else{
+      // Si se ha actualizado la foto se guarda y se obtiene nueva URL
+      if (this.fotoActividadEdicionMode == true && this.fotoActividad != null) {
+        // Guardar y obtener url de la foto
+        this.gestorImgService.uploadImage(this.fotoActividad, "actividades")
+        .then(result => {
+          // Ejecuta el código después de tener la URL
+          // Actualiza con la nueva foto
+          // -----------------------------------------
+          tempActividad.imagenes[0] = result;
+          this.actividades.splice(tempIdActividadSeleccionada, 1, tempActividad);
+          // -----------------------------------------
+        })
+        .catch(error => {
+          console.log(error);
+          alert("Error al cargar la foto");
+        }); 
+        
+      }else{
+        this.actividades.splice(tempIdActividadSeleccionada, 1, tempActividad);
+      }
+    }
     // Resetea el formulario y lo deja vacio
-    this.nombreActividad="";
-    this.descripcionActividad="";
+    this.actividad = {
+      titulo: "",
+      descripcion: "",
+      pais: "",
+      calle: "",
+      numero: 0,
+      codigoPostal: "",
+      provincia: "",
+      localidad: "",
+      imagenes: [],
+    }
+    this.fotoActividad = null;
+    this.fotoActividadEdicionMode = false;
     this.idActividadSeleccionada = -1;
   }
 
-  editarActividad(id:number){
+  editarActividad(titulo:string){
     // 1. Encuentra su posición dentro de la lista
-    let posicion = this.listaActividades.findIndex((busqueda:any) => busqueda.id == id);
+    let posicion = this.actividades.findIndex((actividad:any) => actividad.titulo == titulo);
 
     // 2. Muestra los datos en el formulario y guarda el ID
     if(posicion != -1){
-      this.nombreActividad = this.listaActividades[posicion].titulo;
-      this.descripcionActividad = this.listaActividades[posicion].descripcion;
+      this.actividad = { ...this.actividades[posicion] };
       this.idActividadSeleccionada = posicion;
     }
+
+    // 3. Activar el modo edicion de fotografia
+    this.fotoActividadEdicionMode = true;
 
     // Funcionalidad para hacer scroll automático hasta la zona de edición
     let elemento = document.getElementById("crearActividad");
@@ -93,16 +207,163 @@ export class CrearOfertaComponent implements OnInit{
     }
   }
 
-  borrarActividad(id:number){
+  borrarActividad(titulo:string){
     // 1. Encuentra su posición dentro de la lista
-    let posicion = this.listaActividades.findIndex((busqueda:any) => busqueda.id == id);
+    let posicion = this.actividades.findIndex((actividad:any) => actividad.titulo == titulo);
 
     // 2. Borra la actividad
-    this.listaActividades.splice(posicion, 1);
+    this.actividades.splice(posicion, 1);
   }
+  
+  crearOferta(){
+    // Recoge las IDs de los servicios y los almacena en el array necesario
+    this.guardarIdsServiciosAloj();
+
+    if (this.galeriaFotos){
+      this.galeriaFotos.uploadImages()
+      .then((urls) => {
+        // Agrega las URLs creadas a la lista de URLs
+        for (let i = 0; i < urls.length; i++) {
+          this.ofertaUrlFotos.push(urls[i]);
+        }
+        console.log(urls);
+
+        // ###############################################
+        // Aqui se ejecutará el codigo para guardar la oferta en BBDD
+        // Porque tiene que esperarse a tener las URLs
+        // ###############################################
+        this.crearJson();
+        this.ofertaUrlFotos = [];
+
+        // Redirige despues de crear la oferta
+        this.router.navigate(["/home"]);
+
+      })
+      .catch((error) => {
+        // Maneja cualquier error que pueda ocurrir durante la carga de imágenes
+        console.error('Error al cargar imágenes:', error);
+      });
+    }
+  }
+
+  crearJson(){
+    // Crea el JSON
+    const crearOfertaJson: OfertaCrear = {
+      titulo: this.ofertaTitulo,
+      precioDia: this.ofertaPrecioDia,
+      maxPersonas: this.ofertaMaxPersonas,
+      fechaInicio: this.ofertaFechaInicio,
+      fechaFin: this.ofertaFechaFin,
+      ofertasDisponibles: this.ofertaCantidadDisponible,
+      descripcion: this.ofertaDescripcion,
+      urlFotos: this.ofertaUrlFotos,
+      alojamiento: this.alojamiento,
+      actividades: this.actividades
+    };
+    
+    // Asigna JSON a variable de pruebas
+    this.crearOfertaJson = crearOfertaJson;
+    
+    // Hace el POST
+    this.ofertaService.createOferta(crearOfertaJson);
+  }
+    
+  guardarIdsServiciosAloj(){
+    // Este método guarda las ID de los servicios seleccionados (true) en la lista de IDs (this.alojServiciosIds) para adjuntarlo en el JSON
+    // Se usa en el método de crear oferta.
+
+    // Resetea las ID de la lista
+    this.alojServiciosIds = [];
+    // Añade las ID seleccionadas
+    for(let servicio of this.serviciosAlojamiento){
+      if(servicio.select == true){
+        this.alojServiciosIds.push(servicio.id);
+        this.alojamiento.servicios.push(servicio.id);
+      }
+    }
+  }
+
+  seleccionarServiciosAlojAgenda(ids:number[]){
+    // Este  método obtiene las IDs de los servicios del alojamiento de la agenda y los selecciona para que se vean en el Checkbox
+    for(let servicio of this.serviciosAlojamiento){
+      if(ids.includes(servicio.id)){
+        servicio.select = true;
+      }
+    }
+  }
+
+  uploadImagesLocalActividad($event:any){
+    this.fotoActividad = $event.target.files[0];
+  }
+
+  buscarAloj(){
+    this.alojamientosService.getAlojamientoByName(this.busquedaAloj).subscribe(result => {
+
+      // Resetea los datos
+      this.listaAlojBuscador = []
+
+      // Añade 3 resultados al buscador
+      let alojamiento;
+      let contador = 0;
+      for (let i = 0; i < result.length; i++) {
+        alojamiento = {
+          id: result[i].id,
+          nombre: result[i].nombre,
+          localidad: result[i].direccion.localidad,
+          provincia: result[i].direccion.provincia,
+          calle: result[i].direccion.calle,
+          numero: result[i].direccion.numero,
+          cp: result[i].direccion.codigoPostal,
+          tel: result[i].telefono,
+          email: result[i].email
+        }
+        this.listaAlojBuscador.push(alojamiento);
+
+        // Escapa cuando llega a los 3 resultados
+        contador ++;
+        if (contador >= 3) {
+          break;
+        }
+      }
+    });
+  }
+
+  seleccionarAloj(id:number){
+    // Llamar al servicio buscar por id
+
+    // Almacenar datos en las variables de alojamiento
+    this.alojamiento = {
+      nombre: "Hotel palace",
+      categoria: "3",
+      telefono: "977494753",
+      email: "hotelpalace@hotelp.com",
+      pais: "España",
+      calle: "Calle Real",
+      numero: 123,
+      codigoPostal: "45683",
+      provincia: "Tarragona",
+      localidad: "Salou",
+      imagenes: [],
+      servicios: [1, 4, 6]
+    }
+
+    // Servicios de ejemplo
+    this.seleccionarServiciosAlojAgenda(this.alojamiento.servicios);
+  }
+
+  validarInputNumero(event: any){
+    let valorIntroducido = event.target.value;
+
+    // Verifica que el valor introducido sea un numero
+    if (!isNaN(parseInt(valorIntroducido))) {
+      event.target.classList.remove('input-invalido');
+    } else {
+      event.target.classList.add('input-invalido');
+    }
+  }
+
+  // Notas:
+  // - Falta implementar para que no deje crear la oferta si hay nulos.
+  //Hay que mirarlo porque primero obtiene las URL, luego crea el JSON y luego lo verifica para saber si hace el POST o no, pero se tendria que validar antes de generar las URL para que no de problemas.
+  // - Falta que la agenda haga las busquedas
 }
-
-
-// ¿Cómo funcionan las ID de las actividades?
-// Estas id se usan de manera local para editar las actividades, si se obtuvieran actividades de la base de datos, esas id no se usarian aqui.
-// Al crear la oferta se guardan las actividades en la base de datos, el id auto incremental lo pone la propia base de datos.

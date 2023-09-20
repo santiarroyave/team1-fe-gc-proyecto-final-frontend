@@ -1,26 +1,53 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Oferta } from '../models/Oferta';
-import { environment } from 'src/environments/environments.prod';
+import { FiltrosResponse } from '../models/FiltrosResponse';
+import { Alojamiento } from '../models/Alojamiento';
+import { ServiciosAlojamientos } from '../models/ServiciosAlojamientos';
+import { Favorito } from '../models/Favorito';
+import { OfertaFiltros } from '../models/OfertaFiltros';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
-  baseUrl: string = "api/";
+  baseUrl: string = environment.url+"api/";
+
+  private ofertasFiltradas$ = new BehaviorSubject<any[]>([]);
+
+  private ofertasAllParaFiltrar: any[] = [];
 
   constructor(private http:HttpClient) { }
 
-  getAllOfertas():Observable<any>{
-    return this.http.get<any>(this.baseUrl+"Ofertas");
+  actualizarOfertasFiltradas(ofertasFiltradas: any[]): void {
+    this.ofertasFiltradas$.next(ofertasFiltradas);
   }
 
-  // createOferta(oferta:Oferta):Observable<any>{
-  //   return this.http.post<Oferta>(this.baseUrl+"Ofertas",oferta);
-  // }
+  getOfertasFiltradas$(): Observable<any[]> {
+    return this.ofertasFiltradas$;
+  }
 
-  getBuscarOfertas(nombre:string, fecha_ini:string, fecha_fin:string, num_personas:number):Observable<any>{
-    return this.http.get<any>(`${this.baseUrl}Ofertas/Buscar?nombre=${nombre}&fecha_inicio=${fecha_ini}&fecha_fin=${fecha_fin}&num_personas=${num_personas}`);
+  getAllOfertasParaFiltrar(): any[] {
+    return this.ofertasAllParaFiltrar;
+  }
+
+  setOfertasAllParaFiltrar(ofertasAll: any[]): void {
+    this.ofertasAllParaFiltrar = ofertasAll;
+  }
+
+
+  getBuscarOfertas(ubicacion:string, fecha_ini:string, fecha_fin:string, num_personas:number):Observable<OfertaFiltros[]>{
+    return this.http.get<OfertaFiltros[]>(`${this.baseUrl}Ofertas/Buscar?ubicacion=${ubicacion}&fecha_inicio=${fecha_ini}&fecha_fin=${fecha_fin}&num_personas=${num_personas}`);
+  }
+
+  getDataFiltros():Observable<FiltrosResponse>{
+    return this.http.get<FiltrosResponse>(this.baseUrl+'Ofertas/Filtros');
+  }
+
+  getFavoritosByUserId(id_user:number): Observable<Favorito[]>{
+    return this.http.get<Favorito[]>(this.baseUrl+'Favoritoes/IdUsuario/'+id_user);
   }
 }

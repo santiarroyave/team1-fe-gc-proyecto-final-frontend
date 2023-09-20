@@ -45,7 +45,13 @@ import { ReservaItemComponent } from './components/reservas/reserva-item/reserva
 import { ReservaDetalleComponent } from './components/reservas/reserva-detalle/reserva-detalle.component';
 import { MenuComponent } from './components/admin/menu/menu.component';
 import { MenuPerfilComponent } from './utils/menu-perfil/menu-perfil.component';
+import { GestorImgComponent } from './utils/gestor-img/gestor-img.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 import { authInterceptorProviders } from './helpers/auth.interceptor';
+import { SpinnerTarjetaComponent } from './utils/spinner-tarjeta/spinner-tarjeta.component';
+import { FavoritosCardComponent } from './components/favoritos/favoritos-card/favoritos-card.component';
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -94,7 +100,10 @@ export const MY_DATE_FORMATS = {
     ReservaItemComponent,
     ReservaDetalleComponent,
     MenuComponent,
-    MenuPerfilComponent
+    MenuPerfilComponent,
+    GestorImgComponent,
+    SpinnerTarjetaComponent,
+    FavoritosCardComponent
   ],
   imports: [
     BrowserModule,
@@ -108,6 +117,8 @@ export const MY_DATE_FORMATS = {
     MatNativeDateModule,
     MatFormFieldModule,
     MatButtonModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideStorage(() => getStorage())
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },

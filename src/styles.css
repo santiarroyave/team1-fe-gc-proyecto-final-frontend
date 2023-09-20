@@ -129,6 +129,58 @@ hr{
 .sombraHover:hover{
     box-shadow: .2em .2em .7em rgba(0, 0, 0, 0.15);
 }
+
+/* Cambia el color de los checks */
+.form-check-input:checked{
+    background-color: var(--turquesa-brillante);
+    border-color: var(--turquesa-brillante);
+}
+
+.input-invalido{
+	border-color: var(--naranja-aventura-3);
+    box-shadow: inset 0 0 0.5em var(--naranja-aventura-2);
+}
+.input-invalido:focus{
+	border-color: var(--naranja-aventura-3) !important;
+	box-shadow: 0 0 0 .15rem var(--naranja-aventura-2) !important;
+}
+input:focus, textarea:focus{
+	border-color: var(--turquesa-brillante) !important;
+	box-shadow: 0 0 0 .15rem var(--turquesa-brillante-2) !important;
+}
+
+/* Diseño de skeleton */
+.skeleton {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	z-index: -1;
+    
+    background: linear-gradient(60deg, #eee 25%, var(--turquesa-brillante) 40%, var(--turquesa-brillante) 60%, #eee 75%);
+    opacity: 50%;
+    background-size: 250% 100%;
+    animation: loading 2s infinite linear;
+}
+@keyframes loading {
+    0% {
+        background-position: -250% 0;
+    }
+    100% {
+        background-position: 250% 0;
+    }
+}
+
+/* Cambia color de los links de bootstrap */
+.btn-link{
+    color: var(--turquesa-brillante);
+}
+.btn-link:active, .btn-link:focus-visible, .btn-link:visited, .btn-link:hover{
+    color: var(--turquesa-brillante-1);
+}
+
 /* ------------------------------------------------------------------------------------------------------------------------- */
 /* Animaciones */
 /* ------------------------------------------------------------------------------------------------------------------------- */

@@ -1,3 +1,10 @@
 export interface Servicio{
-    Nombre:string
+    [x: string]: any
+    select: boolean
+    nombre:string
+}
+
+export interface ServicioIdName{
+    id:number,
+    nombre:string
 }

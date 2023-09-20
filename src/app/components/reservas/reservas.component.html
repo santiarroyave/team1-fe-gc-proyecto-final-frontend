@@ -7,8 +7,8 @@
             <div>
                 <h1>Mis reservas</h1>
                 <hr>
-                <div *ngFor="let reserva of listaReservas">
-                    <app-reserva-item [reserva]="reserva"></app-reserva-item>
+                <div *ngFor="let reserva of reservas">
+                    <app-reserva-item [reserva]="reserva" (click)="redirectToDetalle(reserva.idReserva)"></app-reserva-item>
                 </div>
             </div>
         </div>

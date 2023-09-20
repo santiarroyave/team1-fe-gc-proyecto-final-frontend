@@ -1,0 +1,47 @@
+#galeriaContainer{
+    background-color: #fff;
+}
+
+.rojo{
+    background-color: #f00;
+}
+
+
+/* Galeria de fotos */
+#galeriaContainer .galeriaFotos{}
+
+#galeriaContainer .foto{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#galeriaContainer .fotoPrincipal{
+    width: 100%;
+    height: 15em;
+    background-color: #ececec;
+}
+
+#galeriaContainer .carrusel{
+    width: 100%;
+}
+
+#galeriaContainer .fotoExtra{
+    height: 5em;
+    aspect-ratio: 16/9;
+}
+
+#galeriaContainer .borrarFoto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: rgba(0,0,0,0.3);
+    font-size: 1.5em;
+
+    opacity: 0;
+}
+#galeriaContainer .borrarFoto:hover{
+    opacity: 1;
+    cursor: pointer;
+}

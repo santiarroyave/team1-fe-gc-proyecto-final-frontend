@@ -1,9 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OfertaCompleta } from 'src/app/models/OfertaCompleta';
 import { OfertasService } from 'src/app/services/ofertas.service';
-
-declare var bootstrap: any;
 
 @Component({
   selector: 'app-paso-uno',
@@ -15,7 +14,7 @@ export class PasoUnoComponent implements OnInit {
   toastLiveExampleRef!: ElementRef<HTMLElement>;
 
   num_personas: number = 2;
-  oferta: any = {};
+  ofertaCompleta!: OfertaCompleta;
 
   precio_noche: number | any;
   precio_persona: number | any;
@@ -25,10 +24,14 @@ export class PasoUnoComponent implements OnInit {
   ts_max: number | any;
   max: Date | any;
   min: Date = new Date(this.today);
-  noches:number = 1;
+  noches: number = 1;
   campaignOne: FormGroup | any;
 
-  constructor(private route: ActivatedRoute, private ofertasService: OfertasService, private router: Router){}
+  constructor(
+    private route: ActivatedRoute,
+    private ofertasService: OfertasService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.ts_max = this.today.setMonth(this.today.getMonth() + 2);
@@ -37,14 +40,18 @@ export class PasoUnoComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       const elementId: number = Number(params['id']);
-      this.oferta = this.ofertasService.getOfertaById(elementId);
+      this.ofertasService.getOfertaById(elementId).subscribe((res) => {
+        console.log(res);
+        
+        this.ofertaCompleta = res;
+        this.precio_noche = this.ofertaCompleta.oferta.precio;
+        this.precio_persona = this.precio_noche / this.num_personas;
+      });
     });
-    this.precio_noche = this.oferta.precio;
-    this.precio_persona = this.precio_noche/this.num_personas;
     let date1 = new Date();
     let date2 = date1.setDate(date1.getDate() + this.noches);
     date1 = new Date(date2);
-    
+
     this.campaignOne = new FormGroup({
       start: new FormControl(
         new Date(this.year, this.month, this.today.getDate())
@@ -53,20 +60,11 @@ export class PasoUnoComponent implements OnInit {
     });
   }
 
-  toastTrigger(): void {
-    const toastLiveExample = document.getElementById('liveToast');
-    const toastBootstrap = new bootstrap.Toast(toastLiveExample);
-    toastBootstrap.show();
-  }
-
-  calcularNoches():void {
-    this.noches = Number(this.campaignOne.value.end?.getDate()) - Number(this.campaignOne.value.start?.getDate());
-    this.precio_persona = (this.precio_noche*this.noches)/this.num_personas;
-  }
-
-  actualizarOferta():void {
-    this.ofertasService.oferta = this.precio_noche*this.noches;
-    this.router.navigate([`/paso-2/${this.oferta.id}`]);
+  calcularNoches(): void {
+    this.noches =
+      Number(this.campaignOne.value.end?.getDate()) -
+      Number(this.campaignOne.value.start?.getDate());
+    this.precio_persona = (this.precio_noche * this.noches) / this.num_personas;
   }
 
   increasePersonCount() {
@@ -81,5 +79,27 @@ export class PasoUnoComponent implements OnInit {
       this.num_personas--;
       this.calcularNoches();
     }
+  }
+
+  pasoDos(): void {
+    const startDate = new Date(this.campaignOne.value.start)
+    const sdDay = String(startDate.getDate()).padStart(2, '0');
+    const sdMonth = String(startDate.getMonth() + 1).padStart(2, '0'); // El mes comienza en 0, así que le sumamos 1;
+    const sdYear = startDate.getFullYear();
+    const start = `${sdYear}-${sdMonth}-${sdDay}`;
+    const endDate = new Date(this.campaignOne.value.end)
+    const endDay = String(endDate.getDate()).padStart(2, '0');
+    const endMonth = String(endDate.getMonth() + 1).padStart(2, '0'); // El mes comienza en 0, así que le sumamos 1;
+    const endYear = endDate.getFullYear();
+    const end = `${endYear}-${endMonth}-${endDay}`;
+    
+    this.router.navigate([`/paso-2/${this.ofertaCompleta.oferta.id}`], {
+      queryParams: {
+        fechaInicio: start,
+        fechaFin: end,
+        estado: 'Activa',
+        precio: (this.noches*this.precio_noche).toString()
+      },
+    });
   }
 }

@@ -1,5 +1,6 @@
 export interface Nivel{
-    Nombre:string,
-    Ventajas:string,
-    ExperienciaMinima:number
+    id:number,
+    nombre:string,
+    ventajas:string,
+    experienciaMinima:number
 }

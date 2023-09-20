@@ -7,10 +7,11 @@
             <div>
                 <h1>Actividades</h1>
                 <div class="d-flex mt-3 mb-3">
-                    <button type="button" class="btn btn-primary" routerLink="/admin/crear-actividad">Crear actividad</button>
+                    <button type="button" class="btn btn-primary btn-lg botonAzul" routerLink="/admin/crear-actividad">Crear actividad</button>
                 </div>
                 
-                <app-actividad-item [listaActividades]="actividades"></app-actividad-item>
+                <app-actividad-item [listaActividades]="actividades" *ngIf="actividades"></app-actividad-item>
+                <app-spinner-tarjeta *ngIf="!actividades"></app-spinner-tarjeta>
             </div> 
         </div>
     </div>

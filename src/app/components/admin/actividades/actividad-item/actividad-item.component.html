@@ -1,9 +1,13 @@
-<div *ngFor="let actividad of listaActividades" class="card card-style mb-3" id="{{actividad.id}}">
-    <img src="{{actividad.imagen}}" class="card-img-top img-style img-size" alt="...">
-    <div class="card-body">
-        <h5 class="card-title">{{actividad.titulo}}</h5>
-        <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-danger" routerLink="/admin/editar-actividad/{{actividad.id}}">Editar</button>
+<div *ngFor="let actividad of listaActividades" class="card card-style mb-3 tarjeta sombraHover" id="{{actividad.id}}" routerLink="/admin/editar-actividad/{{actividad.id}}">
+    <img src="{{actividad.fotoPortada}}" class="card-img-top img-style imagenActiv" alt=" ">
+    <div class="card-body row">
+        <div class="col-12 col-md-10">
+            <h5 class="card-title">{{actividad.titulo}}</h5>
+            <p>{{actividad.descripcion}}</p>
+            <p class="initialism text-secondary"><i class="bi bi-geo-alt-fill me-1"></i> {{actividad.localidad}}, {{actividad.pais}}</p>
+        </div>
+        <div class="col-12 col-md-2 d-flex align-items-end d-grid">
+            <button type="button" class="btn btn-danger botonNaranja col-12" routerLink="/admin/editar-actividad/{{actividad.id}}">Editar</button>
         </div>
     </div>
 </div>
