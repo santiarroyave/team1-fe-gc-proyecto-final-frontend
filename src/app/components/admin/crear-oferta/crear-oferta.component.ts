@@ -297,21 +297,35 @@ export class CrearOfertaComponent implements OnInit{
   }
 
   buscarAloj(){
-    // Añade 3 alojamientos de ejemplo
-    let alojamiento = {
-      id: 45,
-      nombre: "Hotel palace",
-      localidad: "Salou",
-      provincia: "Tarragona",
-      calle: "Calle Real",
-      numero: "123",
-      cp: "45683",
-      tel: "977494753",
-      email: "hotelpalace@hotelp.com"
-    };
-    for (let i = 0; i < 3; i++) {
-      this.listaAlojBuscador.push(alojamiento);      
-    }
+    this.alojamientosService.getAlojamientoByName(this.busquedaAloj).subscribe(result => {
+
+      // Resetea los datos
+      this.listaAlojBuscador = []
+
+      // Añade 3 resultados al buscador
+      let alojamiento;
+      let contador = 0;
+      for (let i = 0; i < result.length; i++) {
+        alojamiento = {
+          id: result[i].id,
+          nombre: result[i].nombre,
+          localidad: result[i].direccion.localidad,
+          provincia: result[i].direccion.provincia,
+          calle: result[i].direccion.calle,
+          numero: result[i].direccion.numero,
+          cp: result[i].direccion.codigoPostal,
+          tel: result[i].telefono,
+          email: result[i].email
+        }
+        this.listaAlojBuscador.push(alojamiento);
+
+        // Escapa cuando llega a los 3 resultados
+        contador ++;
+        if (contador >= 3) {
+          break;
+        }
+      }
+    });
   }
 
   seleccionarAloj(id:number){

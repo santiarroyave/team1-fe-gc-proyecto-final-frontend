@@ -7,6 +7,7 @@ import { AlojamientoCompleto } from '../models/alojamientos/AlojamientoCompleto'
 import { redis_v1 } from 'googleapis';
 import { AlojamientoCard } from '../models/alojamientos/AlojamientoCard';
 import { environment } from 'src/environments/environment';
+import { AlojamientoAgenda } from '../models/alojamientos/AlojamiengoAgenda';
 
 
 @Injectable({
@@ -63,5 +64,9 @@ export class AlojamientosService {
         throw error;
       }
     );
+  }
+
+  getAlojamientoByName(name:string): Observable<AlojamientoAgenda[]>{
+    return this.http.get<AlojamientoAgenda[]>(this.baseUrl + "/agenda/" + name);
   }
 }
