@@ -1,6 +1,5 @@
 import { Oferta } from './Oferta';
 import { Imagen } from './Imagen';
-import { ServicioIdName } from './Servicio';
 import { ActividadCompleta } from "./actividades/ActividadCompleta"
 import { AlojamientoCompleto } from "./alojamientos/AlojamientoCompleto"
 

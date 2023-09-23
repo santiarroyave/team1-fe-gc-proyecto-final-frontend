@@ -1,5 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { Nivel } from 'src/app/models/Nivel';
 import { RecompensasService } from 'src/app/services/recompensas.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
@@ -17,7 +16,6 @@ export class RecompensasComponent {
 
   constructor(
     private tokenStorageService: TokenStorageService,
-    private recompensasService: RecompensasService
   ) {}
 
   // Escucha el evento 'resize' en la ventana del navegador (host).

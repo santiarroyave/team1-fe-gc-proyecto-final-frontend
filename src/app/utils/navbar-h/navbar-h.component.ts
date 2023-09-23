@@ -1,8 +1,6 @@
 import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
-import { fakeAsync } from '@angular/core/testing';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({

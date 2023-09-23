@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReservasOfertas } from 'src/app/models/ReservasOfertas';
-import { OfertasService } from 'src/app/services/ofertas.service';
 import { ReservasService } from 'src/app/services/reservas.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 

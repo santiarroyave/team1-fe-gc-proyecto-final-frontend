@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ActividadCrear } from '../../../../models/actividades/ActividadCrear';
 import { ActividadesService } from 'src/app/services/actividades.service';
 import { ActividadCompleta } from 'src/app/models/actividades/ActividadCompleta';
 

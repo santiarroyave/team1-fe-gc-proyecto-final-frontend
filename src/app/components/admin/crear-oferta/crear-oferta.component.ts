@@ -1,7 +1,6 @@
-import { Component, OnInit, HostListener, ViewChild, ɵsetAllowDuplicateNgModuleIdsForTest } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActividadCrear } from 'src/app/models/actividades/ActividadCrear';
 import { OfertaCrear } from 'src/app/models/OfertaCrear';
-import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
 import { AlojamientoCrear } from 'src/app/models/alojamientos/AlojamientoCrear';
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
 import { GestorImgService } from 'src/app/services/gestor-img.service';

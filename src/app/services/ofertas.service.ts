@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Oferta } from '../models/Oferta';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { OfertaCrear } from '../models/OfertaCrear';
 import { OfertaCompleta } from '../models/OfertaCompleta';
 import { OfertaFiltros } from '../models/OfertaFiltros';
