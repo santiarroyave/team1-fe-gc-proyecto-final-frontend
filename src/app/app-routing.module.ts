@@ -20,6 +20,7 @@ import { PasoDosComponent } from './components/pasarela-pago/paso-dos/paso-dos.c
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { RecompensasComponent } from './components/recompensas/recompensas.component';
 import { ReservaDetalleComponent } from './components/reservas/reserva-detalle/reserva-detalle.component';
+import { authAdminGuard, authUserGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
@@ -27,24 +28,24 @@ const routes: Routes = [
   {path:"register", component: RegisterComponent},
   {path:"home", component: HomeComponent},
   {path:"about", component: AboutComponent},
-  {path:"perfil", component: PerfilComponent},
+  {path:"perfil", component: PerfilComponent, canActivate: [authUserGuard]},
   {path:"oferta/:id", component: OfertaDetalleComponent},
-  {path:"favoritos", component: FavoritosComponent},
-  {path:"favoritos/:id", component: OfertaDetalleComponent},
-  {path:"reservas", component: ReservasComponent},
-  {path:"recompensas", component: RecompensasComponent},
-  {path:"reservas/:id", component: ReservaDetalleComponent},
+  {path:"favoritos", component: FavoritosComponent, canActivate: [authUserGuard]},
+  {path:"favoritos/:id", component: OfertaDetalleComponent, canActivate: [authUserGuard]},
+  {path:"reservas", component: ReservasComponent, canActivate: [authUserGuard]},
+  {path:"recompensas", component: RecompensasComponent, canActivate: [authUserGuard]},
+  {path:"reservas/:id", component: ReservaDetalleComponent, canActivate: [authUserGuard]},
   {path:"paso-1/:id", component:PasoUnoComponent},
   {path:"paso-2/:id", component:PasoDosComponent},
   {path:"", redirectTo:"/home", pathMatch:"full"},
   // ADMIN
-  {path:"admin/crear-oferta", component: CrearOfertaComponent},
-  {path:"admin/hoteles", component: HotelesComponent},
-  {path:"admin/crear-hotel", component: CrearHotelComponent},
-  {path:"admin/editar-hotel/:id", component: EditarHotelComponent},
-  {path:"admin/actividades", component: ActividadesComponent},
-  {path:"admin/crear-actividad", component: CrearActividadComponent},
-  {path:"admin/editar-actividad/:id", component: EditarActividadComponent},
+  {path:"admin/crear-oferta", component: CrearOfertaComponent, canActivate: [authAdminGuard]},
+  {path:"admin/hoteles", component: HotelesComponent, canActivate: [authAdminGuard]},
+  {path:"admin/crear-hotel", component: CrearHotelComponent, canActivate: [authAdminGuard]},
+  {path:"admin/editar-hotel/:id", component: EditarHotelComponent, canActivate: [authAdminGuard]},
+  {path:"admin/actividades", component: ActividadesComponent, canActivate: [authAdminGuard]},
+  {path:"admin/crear-actividad", component: CrearActividadComponent, canActivate: [authAdminGuard]},
+  {path:"admin/editar-actividad/:id", component: EditarActividadComponent, canActivate: [authAdminGuard]},
   //Not Found
   {path:"**", component: PageNotFoundComponent},
 

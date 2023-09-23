@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Oferta } from '../models/Oferta';
 import { FiltrosResponse } from '../models/FiltrosResponse';
-import { Alojamiento } from '../models/Alojamiento';
-import { ServiciosAlojamientos } from '../models/ServiciosAlojamientos';
 import { Favorito } from '../models/Favorito';
 import { OfertaFiltros } from '../models/OfertaFiltros';
 import { environment } from 'src/environments/environment';

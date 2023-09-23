@@ -1,10 +1,10 @@
 <div class="contenedorReserva card card-style mb-3 rounded-3" *ngIf="reserva != null; else espera">
-    <div class="row g-0" routerLink="/reservas/{{reserva.id}}" (click)="onDetalle()">
+    <div class="row g-0" routerLink="/reservas/{{reserva.id}}">
         <div class="col-md-4">
             <!-- Foto de la oferta -->
             <img src="{{reserva.imagenOferta}}" class="card-img-top img-style-square" alt="...">
         </div>
-    
+
         <div class="col-md-6">
             <!-- Texto de la oferta -->
             <div class="card-body">
@@ -18,7 +18,7 @@
             <p class="textoPrecio">{{getPrice(reserva)}}€</p>
         </div>
     </div>
-</div>
+</div> 
 
 
 

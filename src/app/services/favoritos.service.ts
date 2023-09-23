@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable} from 'rxjs';
 import { Favorito } from '../models/Favorito';
-import { Oferta } from '../models/Oferta';
 import { Imagen } from '../models/Imagen';
 import { OfertasImagenes } from '../models/OfertasImagenes';
 import { OfertaCard } from '../models/OfertaCard';

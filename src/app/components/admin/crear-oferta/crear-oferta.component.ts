@@ -1,12 +1,12 @@
-import { Component, OnInit, HostListener, ViewChild, ɵsetAllowDuplicateNgModuleIdsForTest } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActividadCrear } from 'src/app/models/actividades/ActividadCrear';
 import { OfertaCrear } from 'src/app/models/OfertaCrear';
-import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
 import { AlojamientoCrear } from 'src/app/models/alojamientos/AlojamientoCrear';
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
 import { GestorImgService } from 'src/app/services/gestor-img.service';
 import { OfertasService } from 'src/app/services/ofertas.service';
 import { ServiciosAlojamientoService } from 'src/app/services/servicios-alojamiento.service';
+import { Router } from '@angular/router';
 
 declare var bootstrap: any;
 import { GestorImgComponent } from 'src/app/utils/gestor-img/gestor-img.component';
@@ -53,7 +53,7 @@ export class CrearOfertaComponent implements OnInit{
   actividad:ActividadCrear;
 
 
-  constructor(private alojamientosService: AlojamientosService, private serviciosAlojamientoService: ServiciosAlojamientoService, private gestorImgService: GestorImgService, private ofertaService: OfertasService){
+  constructor(private alojamientosService: AlojamientosService, private serviciosAlojamientoService: ServiciosAlojamientoService, private gestorImgService: GestorImgService, private ofertaService: OfertasService, private router: Router){
     this.busquedaAloj = "";
     this.listaAlojBuscador = [];
     this.alojServiciosIds = [];
@@ -234,6 +234,9 @@ export class CrearOfertaComponent implements OnInit{
         this.crearJson();
         this.ofertaUrlFotos = [];
 
+        // Redirige despues de crear la oferta
+        this.router.navigate(["/home"]);
+
       })
       .catch((error) => {
         // Maneja cualquier error que pueda ocurrir durante la carga de imágenes
@@ -274,6 +277,7 @@ export class CrearOfertaComponent implements OnInit{
     for(let servicio of this.serviciosAlojamiento){
       if(servicio.select == true){
         this.alojServiciosIds.push(servicio.id);
+        this.alojamiento.servicios.push(servicio.id);
       }
     }
   }
@@ -292,21 +296,35 @@ export class CrearOfertaComponent implements OnInit{
   }
 
   buscarAloj(){
-    // Añade 3 alojamientos de ejemplo
-    let alojamiento = {
-      id: 45,
-      nombre: "Hotel palace",
-      localidad: "Salou",
-      provincia: "Tarragona",
-      calle: "Calle Real",
-      numero: "123",
-      cp: "45683",
-      tel: "977494753",
-      email: "hotelpalace@hotelp.com"
-    };
-    for (let i = 0; i < 3; i++) {
-      this.listaAlojBuscador.push(alojamiento);      
-    }
+    this.alojamientosService.getAlojamientoByName(this.busquedaAloj).subscribe(result => {
+
+      // Resetea los datos
+      this.listaAlojBuscador = []
+
+      // Añade 3 resultados al buscador
+      let alojamiento;
+      let contador = 0;
+      for (let i = 0; i < result.length; i++) {
+        alojamiento = {
+          id: result[i].id,
+          nombre: result[i].nombre,
+          localidad: result[i].direccion.localidad,
+          provincia: result[i].direccion.provincia,
+          calle: result[i].direccion.calle,
+          numero: result[i].direccion.numero,
+          cp: result[i].direccion.codigoPostal,
+          tel: result[i].telefono,
+          email: result[i].email
+        }
+        this.listaAlojBuscador.push(alojamiento);
+
+        // Escapa cuando llega a los 3 resultados
+        contador ++;
+        if (contador >= 3) {
+          break;
+        }
+      }
+    });
   }
 
   seleccionarAloj(id:number){

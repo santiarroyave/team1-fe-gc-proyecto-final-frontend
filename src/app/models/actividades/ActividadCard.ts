@@ -1,5 +1,3 @@
-
-
 export interface ActividadCard{
     id: number,
     titulo:string,

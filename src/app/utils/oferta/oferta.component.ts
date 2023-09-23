@@ -1,9 +1,8 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Favorito } from 'src/app/models/Favorito';
 import { OfertaFiltros } from 'src/app/models/OfertaFiltros';
 import { FavoritosService } from 'src/app/services/favoritos.service';
 import { HomeService } from 'src/app/services/home.service';
-import { OfertasService } from 'src/app/services/ofertas.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({

@@ -52,9 +52,9 @@
                                 <div>
                                     <i class="bi bi-gift-fill" style="color: var(--turquesa-brillante-0);"></i>
                                 </div>
-                                <div class="progress barra-progreso" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                    <div class="progress-bar" style="width: 25%">25%</div>
-                                </div>
+                                <div class="progress barra-progreso" role="progressbar" aria-label="recompensas" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" #miElemento style="width: 0%;">{{porcentage_exp}}%</div>
+                                  </div>
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" routerLink="/reservas" routerLinkActive="active">Mis reservas</a></li>

@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Imagen } from 'src/app/models/Imagen';
 import { OfertaCard } from 'src/app/models/OfertaCard';
-import { OfertasImagenes } from 'src/app/models/OfertasImagenes';
 import { FavoritosService } from 'src/app/services/favoritos.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
