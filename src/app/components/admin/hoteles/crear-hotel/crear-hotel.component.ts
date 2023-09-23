@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Servicio, ServicioIdName } from 'src/app/models/Servicio';
+import { ServicioIdName } from 'src/app/models/Servicio';
 import { AlojamientoCrear } from 'src/app/models/alojamientos/AlojamientoCrear';
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
 import { ServiciosAlojamientoService } from 'src/app/services/servicios-alojamiento.service';

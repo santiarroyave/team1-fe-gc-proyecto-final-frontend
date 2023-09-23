@@ -1,5 +1,4 @@
 import { Component, OnInit, HostListener, Input } from '@angular/core';
-import { Favorito } from 'src/app/models/Favorito';
 import { FiltrosResponse } from 'src/app/models/FiltrosResponse';
 import { OfertaFiltros } from 'src/app/models/OfertaFiltros';
 import { AuthService } from 'src/app/services/auth.service';

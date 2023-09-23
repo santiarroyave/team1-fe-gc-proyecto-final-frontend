@@ -5,16 +5,17 @@ import { OfertasService } from 'src/app/services/ofertas.service';
 @Component({
   selector: 'app-reserva-detalle',
   templateUrl: './reserva-detalle.component.html',
-  styleUrls: ['./reserva-detalle.component.css']
+  styleUrls: ['./reserva-detalle.component.css'],
 })
 export class ReservaDetalleComponent {
-reserva: any = {};
-id: number = 0;
+  reserva: any = {};
+  id: number = 0;
 
-constructor(private ofertaService: OfertasService, private route: ActivatedRoute) { 
-  this.route.params.subscribe(params => {
-    this.id = params['id'];
-  });
-  //this.reserva= this.ofertaService.getReservaById(this.id);
-}
+  constructor(
+    private route: ActivatedRoute
+  ) {
+    this.route.params.subscribe((params) => {
+      this.id = params['id'];
+    });
+  }
 }

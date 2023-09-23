@@ -30,7 +30,6 @@ import { CrearHotelComponent } from './components/admin/hoteles/crear-hotel/crea
 import { CrearActividadComponent } from './components/admin/actividades/crear-actividad/crear-actividad.component';
 import { EditarActividadComponent } from './components/admin/actividades/editar-actividad/editar-actividad.component';
 import { EditarHotelComponent } from './components/admin/hoteles/editar-hotel/editar-hotel.component';
-import { ActividadesListaComponent } from './utils/actividades-lista/actividades-lista.component';
 import { PasoUnoComponent } from './components/pasarela-pago/paso-uno/paso-uno.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PasoDosComponent } from './components/pasarela-pago/paso-dos/paso-dos.component';
@@ -87,7 +86,6 @@ export const MY_DATE_FORMATS = {
     CrearActividadComponent,
     EditarActividadComponent,
     EditarHotelComponent,
-    ActividadesListaComponent,
     PasoUnoComponent,
     PasoDosComponent,
     LoginComponent,

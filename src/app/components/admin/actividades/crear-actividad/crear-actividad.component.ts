@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, tap } from 'rxjs';
 import { ActividadesService } from 'src/app/services/actividades.service';
 import { ActividadCrear } from '../../../../models/actividades/ActividadCrear';
 
