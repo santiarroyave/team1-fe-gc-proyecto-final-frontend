@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AlojamientoCard } from 'src/app/models/alojamientos/AlojamientoCard';
-import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
 
 @Component({
   selector: 'app-hotel-item',

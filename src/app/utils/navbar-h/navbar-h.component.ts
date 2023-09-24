@@ -1,8 +1,6 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
-import { fakeAsync } from '@angular/core/testing';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -13,9 +11,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavbarHComponent implements OnInit{
   // Ruta actual
   rutaActual:any;
-
+  porcentage_exp = 0;
   admin = false;
   user = false;
+  @ViewChild('miElemento') elemento!: ElementRef;
 
   // Alterna entre navbar fixed o no en funcion de si estas arriba de la pagina o no
   @HostListener("window:scroll", [])
@@ -31,6 +30,9 @@ export class NavbarHComponent implements OnInit{
       if(this.authService.isLoggedIn){
         this.user = this.authService.isLoggedIn;
         this.admin = this.authService.showAdminBoard;
+        let experiencia_usuario = this.tokenStorageService.getUser().experiencia;
+        this.porcentage_exp = Math.floor((experiencia_usuario * 100) / 3000);
+        this.elemento.nativeElement.style.width = this.porcentage_exp.toString() + '%';
       }
   }
 

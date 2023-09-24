@@ -13,7 +13,6 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private admin: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
 

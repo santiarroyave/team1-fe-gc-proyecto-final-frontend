@@ -2,14 +2,14 @@
     <div class="row g-0" routerLink="/reservas/{{reserva.id}}">
         <div class="col-md-4">
             <!-- Foto de la oferta -->
-            <img src="{{reserva.imagen}}" class="card-img-top img-style-square" alt="...">
+            <img src="{{reserva.imagenOferta}}" class="card-img-top img-style-square" alt="...">
         </div>
-    
+
         <div class="col-md-6">
             <!-- Texto de la oferta -->
             <div class="card-body">
-                <h3 class="card-title">{{reserva.titulo}}</h3>
-                <p class="card-text">{{reserva.fechaIni}} - {{reserva.fechaFinal}} <strong>|</strong> {{reserva.direccion.localidad}}</p>
+                <h5 class="card-title">{{reserva.tituloOferta}}</h5>
+                <p class="card-text">{{reserva.fechaIni}} - {{reserva.fechaFinal}} <strong>|</strong> {{reserva.direccion.localidad}}, {{reserva.direccion.pais}}</p>
                 <p class="card-text"></p>
                 <p class="card-text">{{reserva.estado}}</p>
             </div>
@@ -18,7 +18,7 @@
             <p class="textoPrecio">{{getPrice(reserva)}}€</p>
         </div>
     </div>
-</div>
+</div> 
 
 
 

@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import db from '../../assets/db.json'
 import { AlojamientoCrear } from '../models/alojamientos/AlojamientoCrear';
 import { AlojamientoCompleto } from '../models/alojamientos/AlojamientoCompleto';
-import { redis_v1 } from 'googleapis';
 import { AlojamientoCard } from '../models/alojamientos/AlojamientoCard';
 import { environment } from 'src/environments/environment';
 import { AlojamientoAgenda } from '../models/alojamientos/AlojamiengoAgenda';
@@ -60,7 +58,7 @@ export class AlojamientosService {
         console.log(alojamiento);
       },
       (error) => {
-        console.error("Ha habido un errooooooooor aaaaaaaaaaaaaahhhhh" + error);
+        console.error("Ha habido un error" + error);
         throw error;
       }
     );

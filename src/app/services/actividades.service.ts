@@ -63,7 +63,7 @@ export class ActividadesService {
         console.log(actividad);
       },
       (error) => {
-        console.error("Ha habido un errooooooooor aaaaaaaaaaaaaahhhhh" + error);
+        console.error("Ha habido un error" + error);
         throw error;
       }
     );

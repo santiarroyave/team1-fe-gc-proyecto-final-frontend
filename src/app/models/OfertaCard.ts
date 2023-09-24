@@ -5,5 +5,6 @@ export interface OfertaCard {
     maxPersonas:number,
     fechaFin:string,
     descripcion:string,
+    ofertasDisponibles: number,
     fotoPortada:string
 }

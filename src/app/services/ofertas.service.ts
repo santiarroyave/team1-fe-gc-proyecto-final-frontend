@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Oferta } from '../models/Oferta';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { OfertaCrear } from '../models/OfertaCrear';
 import { OfertaCompleta } from '../models/OfertaCompleta';
 import { OfertaFiltros } from '../models/OfertaFiltros';
@@ -54,6 +54,11 @@ export class OfertasService {
   
   getOfertaCompletaById(id:number): Observable<OfertaCompleta>{
     return this.http.get<OfertaCompleta>(this.baseUrl + "/" + id);
+  }
+
+  // endppoint para modiciar el atributo numOfertasDisponibles en especial
+  updateOferta(oferta: Oferta): Observable<any> {
+    return this.http.put<OfertaCompleta>(`${this.baseUrl}/${oferta.id}`, oferta);
   }
 }
 

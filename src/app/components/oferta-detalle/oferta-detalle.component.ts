@@ -2,8 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OfertasService } from 'src/app/services/ofertas.service';
 
-declare var bootstrap: any;
-
 @Component({
   selector: 'app-oferta-detalle',
   templateUrl: './oferta-detalle.component.html',

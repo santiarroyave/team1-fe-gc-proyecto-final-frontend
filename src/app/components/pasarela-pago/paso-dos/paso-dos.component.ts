@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Oferta } from 'src/app/models/Oferta';
+import { OfertaCompleta } from 'src/app/models/OfertaCompleta';
 import { Reserva } from 'src/app/models/Reserva';
 import { Usuario } from 'src/app/models/Usuario';
 import { OfertasService } from 'src/app/services/ofertas.service';
@@ -12,7 +14,40 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
   styleUrls: ['./paso-dos.component.css']
 })
 export class PasoDosComponent {
-  oferta: any;
+  oferta: OfertaCompleta = {
+    oferta: {
+      id: 0,
+      titulo: '',
+      precio: 0,
+      maxPersonas: 0,
+      fechaInicio: '',
+      fechaFin: '',
+      ofertasDisponibles: 0,
+      descripcion: '',
+      idAlojamiento: 0
+    },
+    alojamiento: {
+      id: 0,
+      nombre: '',
+      direccion: {
+        id: 0,
+        pais: '',
+        calle: '',
+        numero: 0,
+        codigoPostal: '',
+        provincia: '',
+        localidad: ''
+      },
+      imagenes: [],
+      categoria: 0,
+      telefono: '',
+      email: '',
+      servicios: []
+    },
+    actividades: [],
+    imagenes: []
+  };
+
   precio: any;
   reserva: Reserva ={
     idOferta:0,
@@ -63,6 +98,8 @@ export class PasoDosComponent {
       this.tokenService.saveUser(user);
       const updatedUser:Usuario = this.tokenService.getUser();
       this.reservasService.updateUserExperience(updatedUser).subscribe();
+      this.oferta.oferta.ofertasDisponibles = this.oferta.oferta.ofertasDisponibles - 1;
+      this.ofertasService.updateOferta(this.oferta.oferta).subscribe();  
       this.router.navigate(['/reservas']);
     });
   }
