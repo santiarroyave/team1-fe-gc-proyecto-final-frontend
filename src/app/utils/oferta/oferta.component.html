@@ -1,5 +1,8 @@
 <div class="contenedorOferta card card-style mb-3 rounded-3" *ngFor="let oferta of ofertas">
-  
+  <div *ngIf="!calcularTiempoRestante(oferta.oferta.fechaFin).caducada && oferta.oferta.ofertasDisponibles >= 1">
+
+
+  </div>
   <!-- Botón de favorito -->
   <div class="favs position-absolute top-0 end-0" (click)="favorito(oferta)">
     <i class="bi bi-heart" *ngIf="!oferta.favorito"></i>
@@ -11,7 +14,7 @@
     <img src={{oferta.oferta.fotoPortada}} class="imgOferta card-img-top img-style" alt="...">
   
     <!-- Contador de días restantes -->
-    <div id="tiempoRestante" class="tiempoRestante" [ngClass]="{ 'caducada': calcularTiempoRestante(oferta.oferta.fechaFin).caducada }">
+    <div id="tiempoRestante" class="tiempoRestante">
       <p><i class="bi bi-stopwatch"></i>{{calcularTiempoRestante(oferta.oferta.fechaFin).texto}}</p>
     </div>
   
