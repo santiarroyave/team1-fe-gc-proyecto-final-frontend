@@ -1,6 +1,6 @@
 {
     "/api/*":{
-        "target":"https://vivaviajes-api-production.up.railway.app",
+        "target":"https://vivaviajes-production.up.railway.app",
         "secure": false,
         "logLevel": "debug"
     }
