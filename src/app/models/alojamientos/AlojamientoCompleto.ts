@@ -1,5 +1,6 @@
 import { Direccion } from "../Direccion";
 import { Imagen } from "../Imagen";
+import { Servicio } from "../Servicio";
 
 export interface AlojamientoCompleto{
     id: number,
@@ -9,5 +10,5 @@ export interface AlojamientoCompleto{
     email: string,
     direccion: Direccion,
     imagenes: Imagen[],
-    servicios: number[]
+    servicios: Servicio[]
 }

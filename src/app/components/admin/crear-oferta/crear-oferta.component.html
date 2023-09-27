@@ -87,13 +87,14 @@
                                         <!-- BOTON BUSCAR -->
                                         <button type="button" class="btn btn-primary botonAzul" (click)="buscarAloj()">Buscar</button>
                                         
-                                        <div *ngFor="let alojamiento of listaAlojBuscador">
+                                        <div *ngFor="let alojamientoAgenda of alojamientosAgenda">
                                             <hr>
-                                            <div class="fichaAlojBuscador p-2" (click)="seleccionarAloj(alojamiento.id)" data-bs-dismiss="modal">
-                                                <h5>{{alojamiento.nombre}}</h5>
-                                                <p><i class="bi bi-globe-americas"></i> {{alojamiento.localidad}} - {{alojamiento.provincia}}</p>
-                                                <p><i class="bi bi-geo-alt-fill"></i> {{alojamiento.calle}} | <b>CP:</b> {{alojamiento.cp}} | <i class="bi bi-telephone-fill"></i> {{alojamiento.tel}}</p>
-                                                <p><i class="bi bi-envelope-fill"></i> {{alojamiento.email}}</p>
+                                            <div class="fichaAlojBuscador p-2" (click)="seleccionarAloj(alojamientoAgenda.id)" data-bs-dismiss="modal">
+
+                                                <h5>{{alojamientoAgenda.nombre}}</h5>
+                                                <p><i class="bi bi-globe-americas"></i> {{alojamientoAgenda.direccion.localidad}} - {{alojamientoAgenda.direccion.provincia}}</p>
+                                                <p><i class="bi bi-geo-alt-fill"></i> {{alojamientoAgenda.direccion.calle}} | <b>CP:</b> {{alojamientoAgenda.direccion.codigoPostal}} | <i class="bi bi-telephone-fill"></i> {{alojamientoAgenda.telefono}}</p>
+                                                <p><i class="bi bi-envelope-fill"></i> {{alojamientoAgenda.email}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -106,52 +107,52 @@
 
                     <!-- Nombre -->
                     <label class="form-label">Nombre</label>
-                    <input class="form-control" type="text" [(ngModel)]="alojamiento.nombre">
+                    <input id="nombre" class="form-control" type="text" [(ngModel)]="alojamiento.nombre">
                     
                     <!-- País -->
                     <label class="form-label">País</label>
-                    <input class="form-control" type="text" [(ngModel)]="alojamiento.pais">
+                    <input id="pais" class="form-control" type="text" [(ngModel)]="alojamiento.pais">
 
                     <!-- Dirección y Numero -->
                     <div class="d-flex gap-2">
                         <label class="form-label w-75">Dirección
-                            <input class="form-control" type="text" [(ngModel)]="alojamiento.calle">
+                            <input id="calle" class="form-control" type="text" [(ngModel)]="alojamiento.calle">
                         </label>
 
                         <label class="form-label w-25">Nº
-                            <input class="form-control" type="number" [(ngModel)]="alojamiento.numero" (input)="validarInputNumero($event)">
+                            <input id="numero" class="form-control" type="number" [(ngModel)]="alojamiento.numero" (input)="validarInputNumero($event)">
                         </label>
                     </div>
 
                     <!-- C.P. y Provincia -->
                     <div class="d-flex gap-2">
                         <label class="form-label w-25">C.P.
-                            <input class="form-control" type="text" [(ngModel)]="alojamiento.codigoPostal">
+                            <input id="codigoPostal" class="form-control" type="text" [(ngModel)]="alojamiento.codigoPostal">
                         </label>
 
                         <label class="form-label w-75">Provincia
-                            <input class="form-control" type="text" [(ngModel)]="alojamiento.provincia">
+                            <input id="provincia" class="form-control" type="text" [(ngModel)]="alojamiento.provincia">
                         </label>
                     </div>
 
                     <!-- Localidad -->
                     <label class="form-label">Localidad</label>
-                    <input class="form-control" type="text" [(ngModel)]="alojamiento.localidad">
+                    <input id="localidad" class="form-control" type="text" [(ngModel)]="alojamiento.localidad">
 
                     <!-- Wen y Telefono -->
                     <div class="d-flex gap-2">
                         <label class="form-label w-75">Email
-                            <input class="form-control" type="email" [(ngModel)]="alojamiento.email">
+                            <input id="email" class="form-control" type="email" [(ngModel)]="alojamiento.email">
                         </label>
 
                         <label class="form-label w-25">Telefono
-                            <input class="form-control" type="text" [(ngModel)]="alojamiento.telefono">
+                            <input id="telefono" class="form-control" type="text" [(ngModel)]="alojamiento.telefono">
                         </label>
                     </div>
 
                     <!-- Categoría -->
                     <label class="form-label">Categoría</label>
-                    <select class="form-select" aria-label="Default select example" [(ngModel)]="alojamiento.categoria">
+                    <select id="categoria" class="form-select" aria-label="Default select example" [(ngModel)]="alojamiento.categoria">
                         <option selected default disabled>Elegir categoría</option>
                         <option value="5">★★★★★</option>
                         <option value="4">★★★★</option>
@@ -160,6 +161,7 @@
                         <option value="1">★</option>
                         <option value="0">Apartamentos y cámpings</option>
                     </select>
+                    <button class="mt-4 btn btn-warning" *ngIf="mostrarBotonResetAlojamiento" (click)="resetFormulario()">Deseleccionar Alojamiento</button>
                 </div>
 
                 <!-- SERVICIOS ALOJAMIENTOS -->
