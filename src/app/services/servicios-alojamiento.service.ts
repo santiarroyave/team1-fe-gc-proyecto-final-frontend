@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ServicioIdName } from '../models/Servicio';
+import { Servicio} from '../models/Servicio';
 import { environment } from 'src/environments/environment';
 
 
@@ -14,7 +14,7 @@ export class ServiciosAlojamientoService {
 
   constructor(private http: HttpClient) { }
 
-  getAllServicios(): Observable<ServicioIdName[]>{
-    return this.http.get<ServicioIdName[]>(this.baseUrl);
+  getAllServicios(): Observable<Servicio[]>{
+    return this.http.get<Servicio[]>(this.baseUrl);
   }
 }
