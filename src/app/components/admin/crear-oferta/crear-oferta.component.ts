@@ -8,9 +8,13 @@ import { OfertasService } from 'src/app/services/ofertas.service';
 import { ServiciosAlojamientoService } from 'src/app/services/servicios-alojamiento.service';
 import { Router } from '@angular/router';
 
-declare var bootstrap: any;
 import { GestorImgComponent } from 'src/app/utils/gestor-img/gestor-img.component';
 import { AlojamientoCard } from 'src/app/models/alojamientos/AlojamientoCard';
+import { AlojamientoCompleto } from 'src/app/models/alojamientos/AlojamientoCompleto';
+import { Servicio, ServicioCelda } from 'src/app/models/Servicio';
+import { AlojamientoAgenda } from 'src/app/models/alojamientos/AlojamiengoAgenda';
+import { map } from 'rxjs';
+import { OfertaCrearAlojamientoAgenda } from 'src/app/models/OfertaCrearAlojamientoAgenda';
 
 
 @Component({
@@ -23,8 +27,6 @@ export class CrearOfertaComponent implements OnInit{
   alojamientosCompletos: AlojamientoCard[] = [];
   fotos:any = [];
   serviciosAlojamiento:any = [];
-
-  crearOfertaJson:any;
   
   idAutoIncrementalActividades:number = 0;
   idActividadSeleccionada:number = -1;
@@ -37,8 +39,9 @@ export class CrearOfertaComponent implements OnInit{
 
   // datos formulario
   // crearAlojJson:any;
-  alojServiciosIds:number[];
-  actividades:any[];
+  alojServiciosIds:number[]; 
+  actividad:ActividadCrear;
+  
 
   // Atributos esenciales del JSON Crear Oferta
   ofertaTitulo:string;
@@ -50,10 +53,40 @@ export class CrearOfertaComponent implements OnInit{
   ofertaDescripcion:string;
   ofertaUrlFotos:string[];
   alojamiento:AlojamientoCrear;
-  actividad:ActividadCrear;
+  actividades:ActividadCrear[];
 
+  alojamientoCompleto: AlojamientoCompleto =  {
+    id: 0,
+    nombre: "",
+    categoria: 0,
+    telefono: "",
+    email: "",
+    direccion: {
+        id: 0,
+        pais: "",
+        calle: "",
+        numero: 0,
+        codigoPostal: "",
+        provincia: "",
+        localidad: ""
+    },
+    imagenes: [],
+    servicios: []
+  };
+
+  alojamientosAgenda: AlojamientoAgenda[] = [];
+
+  // true si se ha creado un alojamiento nuevo. Lo usaremos para llamar a un endpoint enviando solo el id del alojamiento existente, o creando un alojamiento nuevo.
+  alojamientoNuevo: boolean; 
+  alojamientoExistenteID: number; //donde guardamos el id del alojamiento seleccionado en la agenda por el ususario
+
+  mostrarBotonResetAlojamiento: boolean;
 
   constructor(private alojamientosService: AlojamientosService, private serviciosAlojamientoService: ServiciosAlojamientoService, private gestorImgService: GestorImgService, private ofertaService: OfertasService, private router: Router){
+    this.alojamientoNuevo = true;
+    this.mostrarBotonResetAlojamiento = false;
+    this.alojamientoExistenteID = 0;
+    
     this.busquedaAloj = "";
     this.listaAlojBuscador = [];
     this.alojServiciosIds = [];
@@ -69,7 +102,7 @@ export class CrearOfertaComponent implements OnInit{
     this.ofertaUrlFotos = [];
     this.alojamiento = {
       nombre: "",
-      categoria: "",
+      categoria: 0,
       telefono: "",
       email: "",
       pais: "",
@@ -101,18 +134,16 @@ export class CrearOfertaComponent implements OnInit{
   
   ngOnInit(): void {
     // Importa los servicios disponibles en la BBDD
-    this.serviciosAlojamientoService.getAllServicios().subscribe(result => {
+    this.serviciosAlojamientoService.getAllServicios().pipe(
+      map((servicios: Servicio[]) => {
+        // Mapear los servicios a ServicioCelda y establecer select en false
+        return servicios.map(servicio => ({
+          ...servicio,
+          select: false
+        })) as ServicioCelda[];
+      })
+    ).subscribe(result => {
       this.serviciosAlojamiento = result;
-
-      // Añade clave select y los establece como desactivados
-      for (let i = 0; i < this.serviciosAlojamiento.length; i++) {
-        this.serviciosAlojamiento[i].select = false;
-      }
-    });
-
-    this.alojamientosService.getAllAlojamientos().subscribe(response => {
-      this.alojamientosCompletos = response;
-      console.log(this.alojamientosCompletos);
     });
   }
 
@@ -226,12 +257,17 @@ export class CrearOfertaComponent implements OnInit{
           this.ofertaUrlFotos.push(urls[i]);
         }
         console.log(urls);
+        
+        if (this.alojamientoNuevo){
+          this.subirOfertaBDD();
+        } 
+        else if (!this.alojamientoNuevo){
+          if (this.alojamientoExistenteID != 0)
+            this.subirOfertaBDDAlojamientoExist()
+          else
+            console.log("Error con el alojamiento seleccionado en la agenda");
+        }
 
-        // ###############################################
-        // Aqui se ejecutará el codigo para guardar la oferta en BBDD
-        // Porque tiene que esperarse a tener las URLs
-        // ###############################################
-        this.crearJson();
         this.ofertaUrlFotos = [];
 
         // Redirige despues de crear la oferta
@@ -245,9 +281,9 @@ export class CrearOfertaComponent implements OnInit{
     }
   }
 
-  crearJson(){
-    // Crea el JSON
-    const crearOfertaJson: OfertaCrear = {
+  subirOfertaBDD(){
+    // montamos el objeto
+    const oferta: OfertaCrear = {
       titulo: this.ofertaTitulo,
       precioDia: this.ofertaPrecioDia,
       maxPersonas: this.ofertaMaxPersonas,
@@ -260,11 +296,27 @@ export class CrearOfertaComponent implements OnInit{
       actividades: this.actividades
     };
     
-    // Asigna JSON a variable de pruebas
-    this.crearOfertaJson = crearOfertaJson;
-    
     // Hace el POST
-    this.ofertaService.createOferta(crearOfertaJson);
+    this.ofertaService.createOferta(oferta);
+  }
+
+  subirOfertaBDDAlojamientoExist(){
+    const oferta: OfertaCrearAlojamientoAgenda = {
+      titulo: this.ofertaTitulo,
+      precioDia: this.ofertaPrecioDia,
+      maxPersonas: this.ofertaMaxPersonas,
+      fechaInicio: this.ofertaFechaInicio,
+      fechaFin: this.ofertaFechaFin,
+      ofertasDisponibles: this.ofertaCantidadDisponible,
+      descripcion: this.ofertaDescripcion,
+      urlFotos: this.ofertaUrlFotos,
+      alojamientoId: this.alojamientoExistenteID,
+      actividades: this.actividades
+    };
+
+    console.log(oferta);
+
+    this.ofertaService.createOfertaAlojamientoExistente(oferta);
   }
     
   guardarIdsServiciosAloj(){
@@ -282,72 +334,118 @@ export class CrearOfertaComponent implements OnInit{
     }
   }
 
-  seleccionarServiciosAlojAgenda(ids:number[]){
-    // Este  método obtiene las IDs de los servicios del alojamiento de la agenda y los selecciona para que se vean en el Checkbox
-    for(let servicio of this.serviciosAlojamiento){
-      if(ids.includes(servicio.id)){
-        servicio.select = true;
+  // funcion para activar las celdas de los servicios caundo seleccionamos un alojamiento en la agenda
+  seleccionarServiciosAlojAgenda(servicios: Servicio[]) {
+    // comprovamos que hay servicios, si no los hay pondremos todo en false directamente
+    if (servicios && servicios.length > 0) {
+      for (const servicioAloj of this.serviciosAlojamiento) {
+        // si encuentra el servicio, activa la celda
+        if (servicios.find(servicio => servicio.id === servicioAloj.id)) {
+          servicioAloj.select = true;
+        } else {
+          servicioAloj.select = false;
+        }
       }
+    } else {
+      this.serviciosAlojamiento.forEach((servicioAloj: { select: boolean; }) => servicioAloj.select = false);
     }
   }
+  
 
   uploadImagesLocalActividad($event:any){
     this.fotoActividad = $event.target.files[0];
   }
 
+  // funcion que llama al servicio de buscar alojamientos por nombre
   buscarAloj(){
     this.alojamientosService.getAlojamientoByName(this.busquedaAloj).subscribe(result => {
-
-      // Resetea los datos
-      this.listaAlojBuscador = []
-
-      // Añade 3 resultados al buscador
-      let alojamiento;
-      let contador = 0;
-      for (let i = 0; i < result.length; i++) {
-        alojamiento = {
-          id: result[i].id,
-          nombre: result[i].nombre,
-          localidad: result[i].direccion.localidad,
-          provincia: result[i].direccion.provincia,
-          calle: result[i].direccion.calle,
-          numero: result[i].direccion.numero,
-          cp: result[i].direccion.codigoPostal,
-          tel: result[i].telefono,
-          email: result[i].email
-        }
-        this.listaAlojBuscador.push(alojamiento);
-
-        // Escapa cuando llega a los 3 resultados
-        contador ++;
-        if (contador >= 3) {
-          break;
-        }
-      }
+      this.alojamientosAgenda = result;
     });
   }
 
+  // funcion que activamos al pulsar un alojamiento de la agenda. Mediante su id, buscamos el alojamiento y autorellenamos los campos del formulario
   seleccionarAloj(id:number){
-    // Llamar al servicio buscar por id
-
     // Almacenar datos en las variables de alojamiento
-    this.alojamiento = {
-      nombre: "Hotel palace",
-      categoria: "3",
-      telefono: "977494753",
-      email: "hotelpalace@hotelp.com",
-      pais: "España",
-      calle: "Calle Real",
-      numero: 123,
-      codigoPostal: "45683",
-      provincia: "Tarragona",
-      localidad: "Salou",
-      imagenes: [],
-      servicios: [1, 4, 6]
-    }
+    this.alojamientosService.getAlojamientoById(id).subscribe(
+      (response) => {
+        this.alojamientoCompleto = response;
 
-    // Servicios de ejemplo
-    this.seleccionarServiciosAlojAgenda(this.alojamiento.servicios);
+        this.seleccionarServiciosAlojAgenda(this.alojamientoCompleto.servicios);
+
+        // Assigna los datos al formulario
+        this.alojamiento.nombre = this.alojamientoCompleto.nombre;
+        this.alojamiento.categoria = this.alojamientoCompleto.categoria;
+        this.alojamiento.telefono = this.alojamientoCompleto.telefono;
+        this.alojamiento.email = this.alojamientoCompleto.email;
+        this.alojamiento.pais = this.alojamientoCompleto.direccion.pais;
+        this.alojamiento.calle = this.alojamientoCompleto.direccion.calle;
+        this.alojamiento.numero = this.alojamientoCompleto.direccion.numero;
+        this.alojamiento.codigoPostal = this.alojamientoCompleto.direccion.codigoPostal;
+        this.alojamiento.provincia = this.alojamientoCompleto.direccion.provincia;
+        this.alojamiento.localidad = this.alojamientoCompleto.direccion.localidad;
+        this.alojamiento.servicios = this.alojamientoCompleto.servicios.map(servicio => servicio['id']);
+
+        // update de la variable que nos indica si el alojamiento es nuevo o no a FALSE
+        this.alojamientoNuevo = false;
+        this.alojamientoExistenteID = this.alojamientoCompleto.id;
+        this.bloqueoCamposAlojamiento(true);
+        this.mostrarBotonResetFormularioAlojamiento();
+      },
+      (error) => {
+        console.error("Ha habido un error" + error);
+        throw error;
+      }
+    );
+  }
+
+  bloqueoCamposAlojamiento(bloquear:boolean){
+    const nombreInput = document.getElementById('nombre') as HTMLInputElement;
+    const paisInput = document.getElementById('pais') as HTMLInputElement;
+    const calleInput = document.getElementById('calle') as HTMLInputElement;
+    const numeroInput = document.getElementById('numero') as HTMLInputElement;
+    const codigoPostalInput = document.getElementById('codigoPostal') as HTMLInputElement;
+    const provinciaInput = document.getElementById('provincia') as HTMLInputElement;
+    const localidadInput = document.getElementById('localidad') as HTMLInputElement;
+    const emailInput = document.getElementById('email') as HTMLInputElement;
+    const telefonoInput = document.getElementById('telefono') as HTMLInputElement;
+    const categoriaInput = document.getElementById('categoria') as HTMLInputElement;
+
+    nombreInput.disabled = bloquear;
+    paisInput.disabled = bloquear;
+    calleInput.disabled = bloquear;
+    numeroInput.disabled = bloquear;
+    codigoPostalInput.disabled = bloquear;
+    provinciaInput.disabled = bloquear;
+    localidadInput.disabled = bloquear;
+    emailInput.disabled = bloquear;
+    telefonoInput.disabled = bloquear;
+    categoriaInput.disabled = bloquear;
+  }
+
+  mostrarBotonResetFormularioAlojamiento(){
+    this.mostrarBotonResetAlojamiento = true;
+  }
+
+  resetFormulario(){
+    this.alojamiento.nombre = "";
+    this.alojamiento.categoria = 0;
+    this.alojamiento.telefono = "";
+    this.alojamiento.email = "";
+    this.alojamiento.pais = "";
+    this.alojamiento.calle = "";
+    this.alojamiento.numero = null;
+    this.alojamiento.codigoPostal = "";
+    this.alojamiento.provincia = "";
+    this.alojamiento.localidad = "";
+    this.serviciosAlojamiento.forEach((servicioAloj: { select: boolean; }) => servicioAloj.select = false);
+
+    //desbloqueamos los campos del formulario del alojamiento
+    this.bloqueoCamposAlojamiento(false);
+    // update de la variable que nos indica si el alojamiento es nuevo o no a TRUE porque ahora el usuario puede introducir un formulario nuevo
+    this.alojamientoNuevo = true;
+    this.alojamientoExistenteID = 0; //Aunque no haría falta, reasignamos el id del alojamiento a 0 para deseleccionar el antiguo. No haría falta porque si alojamientoNuevo es false se ejecuto otro endpoint que no necesita esta variables, pero por seguridad lo desassignamos igualemnte
+    // ocultamos el botón de reset
+    this.mostrarBotonResetAlojamiento = false;
   }
 
   validarInputNumero(event: any){

@@ -6,6 +6,7 @@ import { OfertaCrear } from '../models/OfertaCrear';
 import { OfertaCompleta } from '../models/OfertaCompleta';
 import { OfertaFiltros } from '../models/OfertaFiltros';
 import { environment } from 'src/environments/environment';
+import { OfertaCrearAlojamientoAgenda } from '../models/OfertaCrearAlojamientoAgenda';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,11 @@ export class OfertasService {
     );
   }
 
+  // Se pueden crear 4 tipos de ofertas:
+  
+  //oferta con nuevo alojamiento y nueva actividad
   createOferta(oferta: OfertaCrear){
+    console.log(oferta);
     this.http.post<OfertaCrear>(this.baseUrl, oferta).subscribe(
       () => {
         console.log('Oferta subida correctamente');
@@ -46,6 +51,24 @@ export class OfertasService {
       }
     );
   }
+
+  // oferta con alojamiento existente y nueva actividad
+  createOfertaAlojamientoExistente(oferta: OfertaCrearAlojamientoAgenda){
+    console.log(oferta);
+    this.http.post<OfertaCrear>(this.baseUrl + "/SinAlojamiento", oferta).subscribe(
+      () => {
+        console.log('Oferta subida correctamente');
+        console.log(oferta);
+      },
+      (error) => {
+        console.error("Ha habido un error al subir la oferta" + error);
+        throw error;
+      }
+    );
+  }
+
+  // oferta con actividades existentes y nuevo alojamiento //PROXIMAMENTE
+  // oferta con actividades y alojamientos existentes //PROXIMAMENTE
 
 
   getOfertaCardFiltros(): Observable<OfertaFiltros[]>{

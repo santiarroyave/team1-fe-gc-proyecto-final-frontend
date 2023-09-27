@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ServicioIdName } from 'src/app/models/Servicio';
+import { Servicio } from 'src/app/models/Servicio';
 import { AlojamientoCrear } from 'src/app/models/alojamientos/AlojamientoCrear';
 import { AlojamientosService } from 'src/app/services/alojamientos.service';
 import { ServiciosAlojamientoService } from 'src/app/services/servicios-alojamiento.service';
@@ -13,12 +13,12 @@ import { GestorImgComponent } from 'src/app/utils/gestor-img/gestor-img.componen
 })
 export class CrearHotelComponent {
   @ViewChild(GestorImgComponent) galeriaFotos!:GestorImgComponent;
-  serviciosAll: ServicioIdName[] = [];
+  serviciosAll: Servicio[] = [];
   serviciosSelect: any = [];
 
   //atributos del formulario. (Modelo: alojamientoCrear)
   nombre: string = '';
-  categoria: string = '';
+  categoria: number = 0;
   telefono: string = '';
   email: string = '';
   pais: string = '';

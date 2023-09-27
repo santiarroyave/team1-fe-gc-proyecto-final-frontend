@@ -1,10 +1,10 @@
-export interface Servicio{
+export interface ServicioCelda{
     [x: string]: any
     select: boolean
     nombre:string
 }
 
-export interface ServicioIdName{
+export interface Servicio{
     id:number,
     nombre:string
 }

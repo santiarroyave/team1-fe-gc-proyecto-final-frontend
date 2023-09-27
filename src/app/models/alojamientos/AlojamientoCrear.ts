@@ -1,6 +1,6 @@
 export interface AlojamientoCrear{
     nombre:string,
-    categoria:string,
+    categoria:number,
     telefono:string,
     email:string,
     pais: string,
