@@ -69,7 +69,7 @@ export class PasoUnoComponent implements OnInit {
   }
 
   increasePersonCount() {
-    if (this.num_personas < 18) {
+    if (this.num_personas < this.ofertaCompleta.oferta.maxPersonas) {
       this.num_personas++;
       this.calcularNoches();
     }
