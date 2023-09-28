@@ -1,6 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FiltrosResponse } from 'src/app/models/FiltrosResponse';
-import { Oferta } from 'src/app/models/Oferta';
+import { Component } from '@angular/core';
 import { OfertaFiltros } from 'src/app/models/OfertaFiltros';
 import { HomeService } from 'src/app/services/home.service';
 
@@ -9,7 +7,7 @@ import { HomeService } from 'src/app/services/home.service';
   templateUrl: './navbar-v.component.html',
   styleUrls: ['./navbar-v.component.css'],
 })
-export class NavbarVComponent implements OnInit {
+export class NavbarVComponent {
   // ATRIBUTOS
   ofertas: any[] = [];
 
@@ -83,14 +81,7 @@ export class NavbarVComponent implements OnInit {
   ];
   filter_cat: number[] = [];
 
-  constructor(private homeService: HomeService) {
-    
-      
-    
-  }
-
-  ngOnInit(): void {
-  }
+  constructor(private homeService: HomeService) {}
 
   actualizarFiltroAlojamiento(indice: number) {
     this.categorias_alojamiento[indice] = !this.categorias_alojamiento[indice];

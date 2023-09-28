@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Favorito } from 'src/app/models/Favorito';
 import { OfertaFiltros } from 'src/app/models/OfertaFiltros';
 import { FavoritosService } from 'src/app/services/favoritos.service';
@@ -14,28 +15,32 @@ export class OfertaComponent implements OnInit{
   
   ofertas:OfertaFiltros[] = [];
 
-  constructor(private tokenStorageService: TokenStorageService, private favoritosService: FavoritosService, private homeService: HomeService){ };
+  constructor(private router: Router, private tokenStorageService: TokenStorageService, private favoritosService: FavoritosService, private homeService: HomeService){ };
   
   // Obtiene la información de la oferta haciendo una llamada al servidor por IP
   ngOnInit(): void {
-      this.homeService.getOfertasFiltradas$().subscribe(ofertas => {
+    this.homeService.getOfertasFiltradas$().subscribe(ofertas => {
       this.ofertas = ofertas;
     });
   }
   
   favorito(oferta:any){
     const id_user = this.tokenStorageService.getUser().id;
-    const id_oferta = oferta.oferta.id;
-    if (!oferta.favorito){
-      oferta.favorito = true;
-      const fav:Favorito = {
-        idOferta: id_oferta,
-        idUsuario: id_user
+    //
+    if(!id_user) this.router.navigate(['/login']);
+    else{
+      const id_oferta = oferta.oferta.id;
+      if (!oferta.favorito){
+        oferta.favorito = true;
+        const fav:Favorito = {
+          idOferta: id_oferta,
+          idUsuario: id_user
+        }
+        this.favoritosService.createFavorito(fav).subscribe();
+      }else{
+        oferta.favorito = false;
+        this.favoritosService.deleteFavorito(id_user,id_oferta).subscribe();
       }
-      this.favoritosService.createFavorito(fav).subscribe();
-    }else{
-      oferta.favorito = false;
-      this.favoritosService.deleteFavorito(id_user,id_oferta).subscribe();
     }
   }
   

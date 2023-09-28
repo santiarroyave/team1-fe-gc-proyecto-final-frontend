@@ -49,8 +49,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // Obtiene todas las ofertas del servicio
     const user = this.tokenStorageService.getUser();
-    
-
+    //
     this.ofertaService.getOfertaCardFiltros().subscribe((response) => {
       this.ofertas = response.map((item: OfertaFiltros) => {
         return {
