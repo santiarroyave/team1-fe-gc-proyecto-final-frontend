@@ -22,8 +22,8 @@ export class PasoUnoComponent implements OnInit {
   month: number = this.today.getMonth();
   year: number = this.today.getFullYear();
   ts_max: number | any;
-  max: Date | any;
-  min: Date = new Date(this.today);
+  max!: Date;
+  min!: Date;
   noches: number = 1;
   campaignOne: FormGroup | any;
 
@@ -34,10 +34,6 @@ export class PasoUnoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.ts_max = this.today.setMonth(this.today.getMonth() + 2);
-    //this.ts_max = this.today.setDate(0);
-    this.max = new Date(this.ts_max);
-
     this.route.params.subscribe((params) => {
       const elementId: number = Number(params['id']);
       this.ofertasService.getOfertaById(elementId).subscribe((res) => {
@@ -46,12 +42,15 @@ export class PasoUnoComponent implements OnInit {
         this.ofertaCompleta = res;
         this.precio_noche = this.ofertaCompleta.oferta.precio;
         this.precio_persona = this.precio_noche / this.num_personas;
+        this.max = new Date(this.ofertaCompleta.oferta.fechaFin);
+        let fechaInicio = new Date(this.ofertaCompleta.oferta.fechaInicio);        
+        if(fechaInicio < this.today) this.min = this.today;
+        else this.min = new Date(this.ofertaCompleta.oferta.fechaInicio);
       });
     });
     let date1 = new Date();
     let date2 = date1.setDate(date1.getDate() + this.noches);
     date1 = new Date(date2);
-
     this.campaignOne = new FormGroup({
       start: new FormControl(
         new Date(this.year, this.month, this.today.getDate())
@@ -61,9 +60,11 @@ export class PasoUnoComponent implements OnInit {
   }
 
   calcularNoches(): void {
-    this.noches =
-      Number(this.campaignOne.value.end?.getDate()) -
-      Number(this.campaignOne.value.start?.getDate());
+    const difMilisegundos =
+      this.campaignOne.value.end.getTime() -
+      this.campaignOne.value.start.getTime();
+    this.noches = difMilisegundos / (24 * 60 * 60 * 1000);
+    console.log(this.noches);
     this.precio_persona = (this.precio_noche * this.noches) / this.num_personas;
   }
 

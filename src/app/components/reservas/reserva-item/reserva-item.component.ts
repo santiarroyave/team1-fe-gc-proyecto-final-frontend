@@ -18,7 +18,8 @@ export class ReservaItemComponent {
     let precio_total = 0;
     const fFinal:Date = new Date(reserva.fechaFinal);
     const fIni:Date = new Date(reserva.fechaIni);
-    const total_noches = fFinal.getDate() - fIni.getDate();    
+    const difMilisegundos = fFinal.getTime() - fIni.getTime();
+    const total_noches = difMilisegundos / (24 * 60 * 60 * 1000);
     precio_total = reserva.precioOferta * total_noches;
     return precio_total;
   }

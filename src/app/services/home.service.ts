@@ -14,7 +14,6 @@ export class HomeService {
   baseUrl: string = environment.url+"api/";
 
   private ofertasFiltradas$ = new BehaviorSubject<any[]>([]);
-
   private ofertasAllParaFiltrar: any[] = [];
 
   constructor(private http:HttpClient) { }

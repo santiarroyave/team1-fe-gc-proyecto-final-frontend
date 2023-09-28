@@ -22,7 +22,6 @@ export class ReservasComponent implements OnInit{
         this.reservasService.getReservasByUserId(this.id_user).subscribe( res => {
           this.reservas = res;
           console.log(res);
-          
         });
       }
   }

@@ -21,16 +21,18 @@ export class ReservasService {
     return this.http.get<Reserva[]>(this.baseUrl);
   }
 
-  getReservaById(id:number): Observable<GetReserva>{
-    return this.http.get<GetReserva>(this.baseUrl + "/" + id).pipe(
+  getReservaById(id:number): Observable<ReservasOfertas>{
+    return this.http.get<ReservasOfertas>(this.baseUrl + "/" + id).pipe(
       map((response) => {
-        const reserva: GetReserva = {
-          id: response.id,
-          idOferta: response.idOferta,
-          idUsuario:response.idUsuario,
-          fechaInicio:response.fechaInicio,
-          fechaFin:response.fechaFin,
-          estado:response.estado
+        const reserva: ReservasOfertas = {
+          tituloOferta: response.tituloOferta,
+          idReserva: response.idReserva,
+          fechaIni: response.fechaIni,
+          fechaFinal: response.fechaFinal,
+          direccion: response.direccion,
+          estado: response.estado,
+          precioOferta: response.precioOferta,
+          imagenOferta: response.imagenOferta
         };
         return reserva;
       })

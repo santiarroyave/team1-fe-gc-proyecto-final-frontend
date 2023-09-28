@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 import { Favorito } from 'src/app/models/Favorito';
 import { OfertaFiltros } from 'src/app/models/OfertaFiltros';
 import { FavoritosService } from 'src/app/services/favoritos.service';
@@ -21,6 +22,10 @@ export class OfertaComponent implements OnInit{
   ngOnInit(): void {
     this.homeService.getOfertasFiltradas$().subscribe(ofertas => {
       this.ofertas = ofertas;
+      console.log("Ofertas en componente ofertas-card");
+      
+      console.log(ofertas);
+      
     });
   }
   
