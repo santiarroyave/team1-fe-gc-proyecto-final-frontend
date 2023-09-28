@@ -7,9 +7,9 @@
         </div>
         <div class="col-md-6 texto my-3">
             <!-- Detalles de la reserva -->
-            <h2 class="mb-3">{{reserva.titulo}}</h2>
-            <p><strong>Ubicación:</strong> {{reserva.ubicacion}}</p>
-            <p><strong>Fechas:</strong> {{reserva.fecha_inicio_reserva}} - {{reserva.fecha_fin_reserva}}</p>
+            <h2 class="mb-3">{{reserva.tituloOferta}}</h2>
+            <p><strong>Ubicación:</strong> {{reserva.direccion.localidad}}</p>
+            <p><strong>Fechas:</strong> de {{reserva.fechaIni}} hasta {{reserva.fechaFinal}}</p>
             <p><strong>Número de viajeros:</strong> 2</p>
             <p class="textoCargosAdicionales"> Cargos adicionales <br>
                 El precio que aparece abajo puede incluir cargos según la ocupación máxima. Puede incluir los impuestos locales o los cargos que haya configurado el alojamiento.
@@ -21,13 +21,13 @@
             <div *ngIf="reserva.estado !== 'Cancelada'; else reservaCancelada">
                 <div class="d-flex justify-content-between">
                     <p>Esta reserva está <strong>{{reserva.estado}}</strong> </p>
-                    <p class="precio"><strong>Total:</strong> {{reserva.precio*reserva.numero_personas}} €</p>
+                    <p class="precio"><strong>Total:</strong> {{precio_total | number: '1.2-2' }} €</p>
                 </div>
             </div>
             <ng-template #reservaCancelada>
                 <div class="d-flex justify-content-between">
                     <p>Esta reserva está <strong>{{reserva.estado}}</strong> </p>
-                    <p class="precio text-decoration-line-through"><strong>Total:</strong> {{reserva.precio*reserva.numero_personas}} €</p>
+                    <p class="precio text-decoration-line-through"><strong>Total:</strong> {{precio_total | number: '1.2-2' }} €</p>
                 </div>
             </ng-template>
             

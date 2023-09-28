@@ -76,31 +76,35 @@ export class PasoDosComponent {
   }
 
   pagar(){
-    this.reservasService.createReserva(this.reserva).subscribe(()=>{},()=>{},
-    ()=>{
-      let user:Usuario = this.tokenService.getUser();
-      user.experiencia = Math.floor(user.experiencia + this.precio * 0.1);       
-
-      switch(true){
-        case user.experiencia >= 500: 
-          user.idNivel = 2;
-          user.nivel = 'Oro'
-          break;
-        case user.experiencia >= 1500:
-          user.idNivel = 3;
-          user.nivel = 'Platino'
-          break;
-        case user.experiencia >= 3000:
-          user.idNivel = 4;
-          user.nivel = 'Diamente'
-          break;
-      }
-      this.tokenService.saveUser(user);
-      const updatedUser:Usuario = this.tokenService.getUser();
-      this.reservasService.updateUserExperience(updatedUser).subscribe();
-      this.oferta.oferta.ofertasDisponibles = this.oferta.oferta.ofertasDisponibles - 1;
-      this.ofertasService.updateOferta(this.oferta.oferta).subscribe();  
-      this.router.navigate(['/reservas']);
-    });
+    let user:Usuario = this.tokenService.getUser();
+    //    
+    if(!user.id) this.router.navigate(['/login']);
+    else{
+      this.reservasService.createReserva(this.reserva).subscribe(()=>{},()=>{},
+      ()=>{
+        user.experiencia = Math.floor(user.experiencia + this.precio * 0.1);       
+  
+        switch(true){
+          case user.experiencia >= 500: 
+            user.idNivel = 2;
+            user.nivel = 'Oro'
+            break;
+          case user.experiencia >= 1500:
+            user.idNivel = 3;
+            user.nivel = 'Platino'
+            break;
+          case user.experiencia >= 3000:
+            user.idNivel = 4;
+            user.nivel = 'Diamante'
+            break;
+        }
+        this.tokenService.saveUser(user);
+        const updatedUser:Usuario = this.tokenService.getUser();
+        this.reservasService.updateUserExperience(updatedUser).subscribe();
+        this.oferta.oferta.ofertasDisponibles = this.oferta.oferta.ofertasDisponibles - 1;
+        this.ofertasService.updateOferta(this.oferta.oferta).subscribe();  
+        this.router.navigate(['/reservas']);
+      });
+    }
   }
 }
